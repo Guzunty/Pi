@@ -1,9 +1,7 @@
-<html><body>
-<pre>
  
 cpldfit:  version P.40xd                            Xilinx Inc.
                                   Fitter Report
-Design Name: gz_16o8i                            Date:  1- 4-2013,  8:29PM
+Design Name: gz_16o8i                            Date:  1- 5-2013, 11:42AM
 Device Used: XC9572XL-5-PC44
 Fitting Status: Successful
 
@@ -460,9 +458,3 @@ Global Set/Reset Optimization               : OFF
 Global Ouput Enable Optimization            : OFF
 Input Limit                                 : 54
 Pterm Limit                                 : 25
-</pre>
-<form><span class="pgRef"><table width="90%" align="center"><tr>
-<td align="left"><input type="button" onclick="javascript:parent.leftnav.showTop()" onmouseover="window.status='goto top of page'; return true;" onmouseout="window.status=''" value="back to top"></td>
-<td align="right"><input type="button" onclick="window.print()" onmouseover="window.status='print page'; return true;" onmouseout="window.status=''" value="print page"></td>
-</tr></table></span></form>
-</body></html>
