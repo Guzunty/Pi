@@ -1,0 +1,117 @@
+<html><head><link type='text/css' href='style.css' rel='stylesheet'></head><body class='pgBgnd'>
+<h3 align='center'>Equations</h3>
+<table width='90%' align='center' border='1' cellpadding='0' cellspacing='0'>
+<tr><td>
+</td></tr><tr><td>
+********** Mapped Logic **********
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+FTCPE_bit_cnt0: FTCPE port map (bit_cnt(0),'1',NOT sclk,'0',sel);
+</td></tr><tr><td>
+FTCPE_bit_cnt1: FTCPE port map (bit_cnt(1),bit_cnt(0),NOT sclk,'0',sel);
+</td></tr><tr><td>
+FTCPE_bit_cnt2: FTCPE port map (bit_cnt(2),bit_cnt_T(2),NOT sclk,'0',sel);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bit_cnt_T(2) <= (NOT bit_cnt(1) AND NOT bit_cnt(0));
+</td></tr><tr><td>
+FTCPE_hi_byte: FTCPE port map (hi_byte,'1',NOT sclk,sel,'0',hi_byte_CE);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hi_byte_CE <= (NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0));
+</td></tr><tr><td>
+</td></tr><tr><td>
+miso_I <= ((bit_cnt(2) AND bit_cnt(1) AND NOT bit_cnt(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	inputs(6))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT bit_cnt(2) AND bit_cnt(1) AND NOT bit_cnt(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	inputs(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	inputs(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	inputs(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (bit_cnt(2) AND bit_cnt(1) AND bit_cnt(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	inputs(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (bit_cnt(2) AND NOT bit_cnt(1) AND bit_cnt(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	inputs(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT bit_cnt(2) AND bit_cnt(1) AND bit_cnt(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	inputs(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT bit_cnt(2) AND NOT bit_cnt(1) AND bit_cnt(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	inputs(1)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;miso <= miso_I when miso_OE = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;miso_OE <= NOT sel;
+</td></tr><tr><td>
+FDCPE_outputs0: FDCPE port map (outputs(0),mosi,sclk,'0','0',outputs_CE(0));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(0) <= (NOT sel AND NOT hi_byte AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs1: FDCPE port map (outputs(1),mosi,sclk,'0','0',outputs_CE(1));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(1) <= (NOT sel AND NOT hi_byte AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs2: FDCPE port map (outputs(2),mosi,sclk,'0','0',outputs_CE(2));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(2) <= (NOT sel AND NOT hi_byte AND NOT bit_cnt(2) AND bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs3: FDCPE port map (outputs(3),mosi,sclk,'0','0',outputs_CE(3));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(3) <= (NOT sel AND NOT hi_byte AND NOT bit_cnt(2) AND bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs4: FDCPE port map (outputs(4),mosi,sclk,'0','0',outputs_CE(4));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(4) <= (NOT sel AND NOT hi_byte AND bit_cnt(2) AND NOT bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs5: FDCPE port map (outputs(5),mosi,sclk,'0','0',outputs_CE(5));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(5) <= (NOT sel AND NOT hi_byte AND bit_cnt(2) AND NOT bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs6: FDCPE port map (outputs(6),mosi,sclk,'0','0',outputs_CE(6));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(6) <= (NOT sel AND NOT hi_byte AND bit_cnt(2) AND bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs7: FDCPE port map (outputs(7),mosi,sclk,'0','0',outputs_CE(7));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(7) <= (NOT sel AND NOT hi_byte AND bit_cnt(2) AND bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs8: FDCPE port map (outputs(8),mosi,sclk,'0','0',outputs_CE(8));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(8) <= (NOT sel AND hi_byte AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs9: FDCPE port map (outputs(9),mosi,sclk,'0','0',outputs_CE(9));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(9) <= (NOT sel AND hi_byte AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs10: FDCPE port map (outputs(10),mosi,sclk,'0','0',outputs_CE(10));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(10) <= (NOT sel AND hi_byte AND NOT bit_cnt(2) AND bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs11: FDCPE port map (outputs(11),mosi,sclk,'0','0',outputs_CE(11));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(11) <= (NOT sel AND hi_byte AND NOT bit_cnt(2) AND bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs12: FDCPE port map (outputs(12),mosi,sclk,'0','0',outputs_CE(12));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(12) <= (NOT sel AND hi_byte AND bit_cnt(2) AND NOT bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs13: FDCPE port map (outputs(13),mosi,sclk,'0','0',outputs_CE(13));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(13) <= (NOT sel AND hi_byte AND bit_cnt(2) AND NOT bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs14: FDCPE port map (outputs(14),mosi,sclk,'0','0',outputs_CE(14));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(14) <= (NOT sel AND hi_byte AND bit_cnt(2) AND bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT bit_cnt(0));
+</td></tr><tr><td>
+FDCPE_outputs15: FDCPE port map (outputs(15),mosi,sclk,'0','0',outputs_CE(15));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs_CE(15) <= (NOT sel AND hi_byte AND bit_cnt(2) AND bit_cnt(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	bit_cnt(0));
+</td></tr><tr><td>
+Register Legend:
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FDCPE (Q,D,C,CLR,PRE,CE); 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FTCPE (Q,D,C,CLR,PRE,CE); 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LDCP  (Q,D,G,CLR,PRE); 
+</td></tr><tr><td>
+</td></tr>
+</table>
+<form><span class="pgRef"><table width="90%" align="center"><tr>
+<td align="left"><input type="button" onclick="javascript:parent.leftnav.showTop()" onmouseover="window.status='goto top of page'; return true;" onmouseout="window.status=''" value="back to top"></td>
+<td align="right"><input type="button" onclick="window.print()" onmouseover="window.status='print page'; return true;" onmouseout="window.status=''" value="print page"></td>
+</tr></table></span></form>
+</body></html>
