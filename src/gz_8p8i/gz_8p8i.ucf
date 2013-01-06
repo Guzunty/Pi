@@ -18,3 +18,4 @@ NET "inputs<4>"   LOC = "P25";
 NET "inputs<5>"   LOC = "P26";
 NET "inputs<6>"   LOC = FB1_11;
 NET "inputs<7>"   LOC = FB1_14;
+NET "clk" BUFG="CLK";
