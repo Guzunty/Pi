@@ -1,0 +1,8 @@
+NET "p_mosi" LOC = FB4_14;
+NET "p_miso" LOC = FB4_17;
+NET "p_sclk" LOC = FB4_11;
+NET "p_sel"  LOC = FB4_15;
+NET "miso" LOC = FB3_5;
+NET "mosi" LOC = FB3_8;
+NET "sclk" LOC = FB3_9;
+NET "rst"  LOC = FB3_11;
