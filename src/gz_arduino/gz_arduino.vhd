@@ -34,9 +34,20 @@ end gz_arduino;
 architecture RTL of gz_arduino is
 
 begin
-  sclk  <= p_sclk;
-  mosi  <= p_mosi;
-  p_miso <= miso;
+  process (p_sel) is
+  begin
+    if (p_sel = '0') then
+      sclk  <= p_sclk;
+      mosi  <= p_mosi;
+      p_miso <= miso;
+	 else
+      sclk  <= 'Z';
+      mosi  <= 'Z';
+      p_miso <= 'Z';
+	 end if;
+  end process;
+  
   rst   <= p_sel;
+
 end RTL;
 
