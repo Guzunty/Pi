@@ -2,7 +2,7 @@
 -- Company:        Guzunty
 -- Engineer:       campbellsan
 -- 
--- Create Date:    21:45:54 12/31/2012 
+-- Create Date:    09:55:31 01/10/2013 
 -- Design Name:    gz_arduino
 -- Module Name:    gz_arduino - RTL 
 -- Project Name:   Guzunty PI SB Aurduino interface
@@ -12,7 +12,7 @@
 --                 Arduino ICSP socket.
 -- Dependencies:   None.
 --
--- Revision: 0.01
+-- Revision:       1.0 
 -- Revision 0.01 - File Created
 -- Additional Comments: 
 --
@@ -28,13 +28,17 @@ entity gz_arduino is
            p_miso : out  STD_LOGIC;
            miso : in  STD_LOGIC;
            p_sel : in  STD_LOGIC;
-           rst : out  STD_LOGIC);
+           rst : out  STD_LOGIC;
+           p_tx : in  STD_LOGIC;
+           tx : in  STD_LOGIC;
+           p_rx : out  STD_LOGIC;
+           rx : out  STD_LOGIC);
 end gz_arduino;
 
 architecture RTL of gz_arduino is
 
 begin
-  process (p_sel) is
+  process (p_sel, p_sclk, p_mosi, miso) is
   begin
     if (p_sel = '0') then
       sclk  <= p_sclk;
@@ -46,8 +50,9 @@ begin
       p_miso <= 'Z';
 	 end if;
   end process;
-  
+  -- concurrent assignments  
   rst   <= p_sel;
-
+  rx    <= p_tx ;
+  p_rx  <= tx ;
 end RTL;
 

@@ -6,3 +6,7 @@ NET "miso" LOC = FB3_5;
 NET "mosi" LOC = FB3_8;
 NET "sclk" LOC = FB3_9;
 NET "rst"  LOC = FB3_11;
+NET "p_tx" LOC = FB3_14
+NET "p_rx" LOC = FB3_15
+NET "tx" LOC = FB3_2
+NET "rx" LOC = FB2_17
