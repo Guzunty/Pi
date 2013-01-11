@@ -1,0 +1,4 @@
+NET "miso" LOC = "P34";
+NET "mosi" LOC = "P29";
+NET "sclk" LOC = "P28";
+NET "sel"  LOC = "P33";
