@@ -39,7 +39,7 @@ entity gz_24o1I is
 			  p_input : out  STD_LOGIC);
 end gz_24o1I;
 
-architecture Behavioral of gz_24o1I is
+architecture RTL of gz_24o1I is
 signal bit_cnt: natural range 0 to 7 := 7;
 begin
   process (sclk, sel) is
@@ -69,7 +69,7 @@ begin
 			   byte_cnt := byte_cnt + 1;
 			 end if;
 		  else
-          next_bit := next_bit - 1;
+          next_bit := bit_cnt - 1;
 		  end if;
 		  bit_cnt <= next_bit;
       end if;
@@ -79,7 +79,7 @@ begin
     end if;
   end process;
 	
-  process (sel, bit_cnt) is
+  process (sel) is
   begin
 	 if (sel = '0') then
 	   miso <= '0';
@@ -90,5 +90,5 @@ begin
 
   p_input <= input;
 
-end Behavioral;
+end RTL;
 
