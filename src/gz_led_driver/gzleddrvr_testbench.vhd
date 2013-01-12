@@ -36,7 +36,7 @@ ARCHITECTURE behavior OF gzleddrvr_testbench IS
            sclk : in  STD_LOGIC;
            sel : in  STD_LOGIC;
            clk : in  STD_LOGIC;
-			  digit_enas : out  std_logic_vector (3 downto 0);
+			  digit_enas : inout  std_logic_vector (3 downto 0);
 			  segments: out std_logic_vector (6 downto 0);
 			  inputs : in std_logic_vector (5 downto 0));
 	END COMPONENT;
@@ -122,8 +122,8 @@ BEGIN
              X"c5",X"2f",X"ca",X"af",X"1a",X"f0",X"7e",X"12");
         variable fifo_head : integer range 0 to fifo_memory_size-1;
 		  variable test_digits : digit_memory_type :=
-		      (X"5b",X"3f",X"06",X"4f");
-		  variable digit_head : integer range 0 to digit_memory_size-1;
+		      (X"a4",X"c0",X"f9",X"b0");
+		  variable digit_head : integer range 0 to digit_memory_size-1 := digit_memory_size-1;
     begin
         -- synchronous rst_i
         wait until rst = '1';
