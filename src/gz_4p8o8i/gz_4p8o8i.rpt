@@ -1,0 +1,850 @@
+ 
+cpldfit:  version P.40xd                            Xilinx Inc.
+                                  Fitter Report
+Design Name: gz_4p8o8i                           Date:  1-14-2013,  2:21PM
+Device Used: XC9572XL-5-PC44
+Fitting Status: Successful
+
+*************************  Mapped Resource Summary  **************************
+
+Macrocells     Product Terms    Function Block   Registers      Pins           
+Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
+64 /72  ( 89%) 231 /360  ( 64%) 98 /216 ( 45%)   59 /72  ( 82%) 25 /34  ( 74%)
+
+** Function Block Resources **
+
+Function    Mcells      FB Inps     Pterms      IO          
+Block       Used/Tot    Used/Tot    Used/Tot    Used/Tot    
+FB1          18/18*      22/54       50/90       9/ 9*
+FB2          17/18       26/54       66/90       6/ 9
+FB3          11/18       32/54       55/90       4/ 9
+FB4          18/18*      18/54       60/90       6/ 7
+             -----       -----       -----      -----    
+             64/72       98/216     231/360     25/34 
+
+* - Resource is exhausted
+
+** Global Control Resources **
+
+Signal 'clk' mapped onto global clock net GCK1.
+Global output enable net(s) unused.
+Global set/reset net(s) unused.
+
+** Pin Resources **
+
+Signal Type    Required     Mapped  |  Pin Type            Used    Total 
+------------------------------------|------------------------------------
+Input         :   11          11    |  I/O              :    22      28
+Output        :   13          13    |  GCK/IO           :     3       3
+Bidirectional :    0           0    |  GTS/IO           :     0       2
+GCK           :    1           1    |  GSR/IO           :     0       1
+GTS           :    0           0    |
+GSR           :    0           0    |
+                 ----        ----
+        Total     25          25
+
+** Power Data **
+
+There are 64 macrocells in high performance mode (MCHP).
+There are 0 macrocells in low power mode (MCLP).
+End of Mapped Resource Summary
+**************************  Errors and Warnings  ***************************
+
+WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
+   use the default filename of 'gz_4p8o8i.ise'.
+*************************  Summary of Mapped Logic  ************************
+
+** 13 Outputs **
+
+Signal              Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
+Name                Pts   Inps          No.  Type    Use     Mode Rate State
+pwms<0>             2     9     FB1_2   1    I/O     O       STD  FAST RESET
+pwms<1>             2     9     FB1_5   2    I/O     O       STD  FAST RESET
+pwms<2>             2     9     FB1_6   3    I/O     O       STD  FAST RESET
+pwms<3>             2     9     FB1_8   4    I/O     O       STD  FAST RESET
+outputs<0>          3     10    FB1_15  8    I/O     O       STD  FAST RESET
+outputs<1>          3     10    FB1_17  9    I/O     O       STD  FAST RESET
+outputs<2>          3     10    FB2_2   35   I/O     O       STD  FAST RESET
+outputs<3>          3     10    FB2_5   36   I/O     O       STD  FAST RESET
+outputs<4>          3     10    FB2_6   37   I/O     O       STD  FAST RESET
+outputs<5>          3     10    FB2_8   38   I/O     O       STD  FAST RESET
+outputs<6>          3     10    FB2_15  43   I/O     O       STD  FAST RESET
+outputs<7>          3     10    FB2_17  44   I/O     O       STD  FAST RESET
+miso                9     12    FB4_17  34   I/O     O       STD  FAST 
+
+** 51 Buried Nodes **
+
+Signal              Total Total Loc     Pwr  Reg Init
+Name                Pts   Inps          Mode State
+pwm_counters<1><3>  3     10    FB1_1   STD  RESET
+pwm_counters<1><2>  3     10    FB1_3   STD  RESET
+pwm_counters<1><1>  3     10    FB1_4   STD  RESET
+pwm_counters<1><0>  3     10    FB1_7   STD  RESET
+pwm_counters<0><7>  3     10    FB1_9   STD  RESET
+pwm_counters<0><6>  3     10    FB1_10  STD  RESET
+pwm_counters<0><5>  3     10    FB1_11  STD  RESET
+pwm_counters<0><4>  3     10    FB1_12  STD  RESET
+pwm_counters<0><3>  3     10    FB1_13  STD  RESET
+pwm_counters<0><2>  3     10    FB1_14  STD  RESET
+pwm_counters<0><1>  3     10    FB1_16  STD  RESET
+pwm_counters<0><0>  3     10    FB1_18  STD  RESET
+$OpTx$INV$10__$INT  16    16    FB2_1   STD  
+bit_cnt<0>          2     2     FB2_3   STD  SET
+pwm_counters<3><7>  3     10    FB2_4   STD  RESET
+pwm_counters<3><6>  3     10    FB2_7   STD  RESET
+pwm_counters<3><5>  3     10    FB2_9   STD  RESET
+loading_val         3     5     FB2_10  STD  RESET
+bit_cnt<2>          3     4     FB2_11  STD  SET
+bit_cnt<1>          3     3     FB2_12  STD  SET
+pwm_selector<2>     4     7     FB2_13  STD  RESET
+pwm_selector<1>     4     7     FB2_14  STD  RESET
+pwm_selector<0>     4     7     FB2_16  STD  RESET
+$OpTx$INV$11__$INT  16    16    FB3_1   STD  
+$OpTx$INV$9__$INT   16    16    FB3_5   STD  
+main_counter<0>     0     0     FB3_7   STD  RESET
+main_counter<1>     1     1     FB3_8   STD  RESET
+main_counter<2>     1     2     FB3_9   STD  RESET
+main_counter<3>     1     3     FB3_10  STD  RESET
+main_counter<4>     1     4     FB3_11  STD  RESET
+main_counter<5>     1     5     FB3_12  STD  RESET
+main_counter<6>     1     6     FB3_13  STD  RESET
+main_counter<7>     1     7     FB3_14  STD  RESET
+$OpTx$INV$12__$INT  16    16    FB3_16  STD  
+pwm_counters<3><4>  3     10    FB4_1   STD  RESET
+pwm_counters<3><3>  3     10    FB4_2   STD  RESET
+pwm_counters<3><2>  3     10    FB4_3   STD  RESET
+pwm_counters<3><1>  3     10    FB4_4   STD  RESET
+pwm_counters<3><0>  3     10    FB4_5   STD  RESET
+pwm_counters<2><7>  3     10    FB4_6   STD  RESET
+
+Signal              Total Total Loc     Pwr  Reg Init
+Name                Pts   Inps          Mode State
+pwm_counters<2><6>  3     10    FB4_7   STD  RESET
+pwm_counters<2><5>  3     10    FB4_8   STD  RESET
+pwm_counters<2><4>  3     10    FB4_9   STD  RESET
+pwm_counters<2><3>  3     10    FB4_10  STD  RESET
+pwm_counters<2><2>  3     10    FB4_11  STD  RESET
+pwm_counters<2><1>  3     10    FB4_12  STD  RESET
+pwm_counters<2><0>  3     10    FB4_13  STD  RESET
+pwm_counters<1><7>  3     10    FB4_14  STD  RESET
+pwm_counters<1><6>  3     10    FB4_15  STD  RESET
+pwm_counters<1><5>  3     10    FB4_16  STD  RESET
+pwm_counters<1><4>  3     10    FB4_18  STD  RESET
+
+** 12 Inputs **
+
+Signal              Loc     Pin  Pin     Pin     
+Name                        No.  Type    Use     
+clk                 FB1_9   5~   GCK/I/O GCK
+inputs<6>           FB1_11  6~   GCK/I/O I
+inputs<7>           FB1_14  7~   GCK/I/O I
+inputs<0>           FB3_14  19   I/O     I
+inputs<1>           FB3_15  20   I/O     I
+inputs<2>           FB3_16  24   I/O     I
+inputs<3>           FB3_17  22   I/O     I
+inputs<4>           FB4_2   25   I/O     I
+inputs<5>           FB4_5   26   I/O     I
+sclk                FB4_11  28   I/O     I
+mosi                FB4_14  29   I/O     I
+sel                 FB4_15  33   I/O     I
+
+Legend:
+Pin No. - ~ - User Assigned
+**************************  Function Block Details  ************************
+Legend:
+Total Pt     - Total product terms used by the macrocell signal
+Imp Pt       - Product terms imported from other macrocells
+Exp Pt       - Product terms exported to other macrocells
+               in direction shown
+Unused Pt    - Unused local product terms remaining in macrocell
+Loc          - Location where logic was mapped in device
+Pin Type/Use - I  - Input             GCK - Global Clock
+               O  - Output            GTS - Global Output Enable
+              (b) - Buried macrocell  GSR - Global Set/Reset
+X            - Signal used as input to the macrocell logic.
+Pin No.      - ~  - User Assigned
+*********************************** FB1  ***********************************
+Number of function block inputs used/remaining:               22/32
+Number of signals used by logic mapping into function block:  22
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+pwm_counters<1><3>    3       0     0   2     FB1_1         (b)     (b)
+pwms<0>               2       0     0   3     FB1_2   1     I/O     O
+pwm_counters<1><2>    3       0     0   2     FB1_3         (b)     (b)
+pwm_counters<1><1>    3       0     0   2     FB1_4         (b)     (b)
+pwms<1>               2       0     0   3     FB1_5   2     I/O     O
+pwms<2>               2       0     0   3     FB1_6   3     I/O     O
+pwm_counters<1><0>    3       0     0   2     FB1_7         (b)     (b)
+pwms<3>               2       0     0   3     FB1_8   4     I/O     O
+pwm_counters<0><7>    3       0     0   2     FB1_9   5     GCK/I/O GCK
+pwm_counters<0><6>    3       0     0   2     FB1_10        (b)     (b)
+pwm_counters<0><5>    3       0     0   2     FB1_11  6     GCK/I/O I
+pwm_counters<0><4>    3       0     0   2     FB1_12        (b)     (b)
+pwm_counters<0><3>    3       0     0   2     FB1_13        (b)     (b)
+pwm_counters<0><2>    3       0     0   2     FB1_14  7     GCK/I/O I
+outputs<0>            3       0     0   2     FB1_15  8     I/O     O
+pwm_counters<0><1>    3       0     0   2     FB1_16        (b)     (b)
+outputs<1>            3       0     0   2     FB1_17  9     I/O     O
+pwm_counters<0><0>    3       0     0   2     FB1_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: $OpTx$INV$10__$INT   9: main_counter<0>   16: main_counter<7> 
+  2: $OpTx$INV$11__$INT  10: main_counter<1>   17: mosi 
+  3: $OpTx$INV$12__$INT  11: main_counter<2>   18: pwm_selector<0> 
+  4: $OpTx$INV$9__$INT   12: main_counter<3>   19: pwm_selector<1> 
+  5: bit_cnt<0>          13: main_counter<4>   20: pwm_selector<2> 
+  6: bit_cnt<1>          14: main_counter<5>   21: sclk 
+  7: bit_cnt<2>          15: main_counter<6>   22: sel 
+  8: loading_val        
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+pwm_counters<1><3>   ....XXXX........XXXXXX.................. 10
+pwms<0>              ...X....XXXXXXXX........................ 9
+pwm_counters<1><2>   ....XXXX........XXXXXX.................. 10
+pwm_counters<1><1>   ....XXXX........XXXXXX.................. 10
+pwms<1>              X.......XXXXXXXX........................ 9
+pwms<2>              .X......XXXXXXXX........................ 9
+pwm_counters<1><0>   ....XXXX........XXXXXX.................. 10
+pwms<3>              ..X.....XXXXXXXX........................ 9
+pwm_counters<0><7>   ....XXXX........XXXXXX.................. 10
+pwm_counters<0><6>   ....XXXX........XXXXXX.................. 10
+pwm_counters<0><5>   ....XXXX........XXXXXX.................. 10
+pwm_counters<0><4>   ....XXXX........XXXXXX.................. 10
+pwm_counters<0><3>   ....XXXX........XXXXXX.................. 10
+pwm_counters<0><2>   ....XXXX........XXXXXX.................. 10
+outputs<0>           ....XXXX........XXXXXX.................. 10
+pwm_counters<0><1>   ....XXXX........XXXXXX.................. 10
+outputs<1>           ....XXXX........XXXXXX.................. 10
+pwm_counters<0><0>   ....XXXX........XXXXXX.................. 10
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB2  ***********************************
+Number of function block inputs used/remaining:               26/28
+Number of signals used by logic mapping into function block:  26
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+$OpTx$INV$10__$INT   16      11<-   0   0     FB2_1         (b)     (b)
+outputs<2>            3       1<- /\3   0     FB2_2   35    I/O     O
+bit_cnt<0>            2       0   /\1   2     FB2_3         (b)     (b)
+pwm_counters<3><7>    3       0     0   2     FB2_4         (b)     (b)
+outputs<3>            3       0     0   2     FB2_5   36    I/O     O
+outputs<4>            3       0     0   2     FB2_6   37    I/O     O
+pwm_counters<3><6>    3       0     0   2     FB2_7         (b)     (b)
+outputs<5>            3       0     0   2     FB2_8   38    I/O     O
+pwm_counters<3><5>    3       0     0   2     FB2_9   39    GSR/I/O (b)
+loading_val           3       0     0   2     FB2_10        (b)     (b)
+bit_cnt<2>            3       0     0   2     FB2_11  40    GTS/I/O (b)
+bit_cnt<1>            3       0     0   2     FB2_12        (b)     (b)
+pwm_selector<2>       4       0     0   1     FB2_13        (b)     (b)
+pwm_selector<1>       4       0     0   1     FB2_14  42    GTS/I/O (b)
+outputs<6>            3       0     0   2     FB2_15  43    I/O     O
+pwm_selector<0>       4       0   \/1   0     FB2_16        (b)     (b)
+outputs<7>            3       1<- \/3   0     FB2_17  44    I/O     O
+(unused)              0       0   \/5   0     FB2_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: bit_cnt<0>        10: main_counter<5>     19: pwm_counters<1><5> 
+  2: bit_cnt<1>        11: main_counter<6>     20: pwm_counters<1><6> 
+  3: bit_cnt<2>        12: main_counter<7>     21: pwm_counters<1><7> 
+  4: loading_val       13: mosi                22: pwm_selector<0> 
+  5: main_counter<0>   14: pwm_counters<1><0>  23: pwm_selector<1> 
+  6: main_counter<1>   15: pwm_counters<1><1>  24: pwm_selector<2> 
+  7: main_counter<2>   16: pwm_counters<1><2>  25: sclk 
+  8: main_counter<3>   17: pwm_counters<1><3>  26: sel 
+  9: main_counter<4>   18: pwm_counters<1><4> 
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+$OpTx$INV$10__$INT   ....XXXXXXXX.XXXXXXXX................... 16
+outputs<2>           XXXX........X........XXXXX.............. 10
+bit_cnt<0>           ........................XX.............. 2
+pwm_counters<3><7>   XXXX........X........XXXXX.............. 10
+outputs<3>           XXXX........X........XXXXX.............. 10
+outputs<4>           XXXX........X........XXXXX.............. 10
+pwm_counters<3><6>   XXXX........X........XXXXX.............. 10
+outputs<5>           XXXX........X........XXXXX.............. 10
+pwm_counters<3><5>   XXXX........X........XXXXX.............. 10
+loading_val          XXX.....................XX.............. 5
+bit_cnt<2>           XX......................XX.............. 4
+bit_cnt<1>           X.......................XX.............. 3
+pwm_selector<2>      XXXX........X...........XX.............. 7
+pwm_selector<1>      XXXX........X...........XX.............. 7
+outputs<6>           XXXX........X........XXXXX.............. 10
+pwm_selector<0>      XXXX........X...........XX.............. 7
+outputs<7>           XXXX........X........XXXXX.............. 10
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB3  ***********************************
+Number of function block inputs used/remaining:               32/22
+Number of signals used by logic mapping into function block:  32
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+$OpTx$INV$11__$INT   16      11<-   0   0     FB3_1         (b)     (b)
+(unused)              0       0   /\5   0     FB3_2   11    I/O     (b)
+(unused)              0       0   /\1   4     FB3_3         (b)     (b)
+(unused)              0       0   \/5   0     FB3_4         (b)     (b)
+$OpTx$INV$9__$INT    16      11<-   0   0     FB3_5   12    I/O     (b)
+(unused)              0       0   /\5   0     FB3_6         (b)     (b)
+main_counter<0>       0       0   /\1   4     FB3_7         (b)     (b)
+main_counter<1>       1       0     0   4     FB3_8   13    I/O     (b)
+main_counter<2>       1       0     0   4     FB3_9   14    I/O     (b)
+main_counter<3>       1       0     0   4     FB3_10        (b)     (b)
+main_counter<4>       1       0     0   4     FB3_11  18    I/O     (b)
+main_counter<5>       1       0     0   4     FB3_12        (b)     (b)
+main_counter<6>       1       0     0   4     FB3_13        (b)     (b)
+main_counter<7>       1       0   \/1   3     FB3_14  19    I/O     I
+(unused)              0       0   \/5   0     FB3_15  20    I/O     I
+$OpTx$INV$12__$INT   16      11<-   0   0     FB3_16  24    I/O     I
+(unused)              0       0   /\5   0     FB3_17  22    I/O     I
+(unused)              0       0   \/5   0     FB3_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: main_counter<0>     12: pwm_counters<0><3>  23: pwm_counters<2><6> 
+  2: main_counter<1>     13: pwm_counters<0><4>  24: pwm_counters<2><7> 
+  3: main_counter<2>     14: pwm_counters<0><5>  25: pwm_counters<3><0> 
+  4: main_counter<3>     15: pwm_counters<0><6>  26: pwm_counters<3><1> 
+  5: main_counter<4>     16: pwm_counters<0><7>  27: pwm_counters<3><2> 
+  6: main_counter<5>     17: pwm_counters<2><0>  28: pwm_counters<3><3> 
+  7: main_counter<6>     18: pwm_counters<2><1>  29: pwm_counters<3><4> 
+  8: main_counter<7>     19: pwm_counters<2><2>  30: pwm_counters<3><5> 
+  9: pwm_counters<0><0>  20: pwm_counters<2><3>  31: pwm_counters<3><6> 
+ 10: pwm_counters<0><1>  21: pwm_counters<2><4>  32: pwm_counters<3><7> 
+ 11: pwm_counters<0><2>  22: pwm_counters<2><5> 
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+$OpTx$INV$11__$INT   XXXXXXXX........XXXXXXXX................ 16
+$OpTx$INV$9__$INT    XXXXXXXXXXXXXXXX........................ 16
+main_counter<0>      ........................................ 0
+main_counter<1>      X....................................... 1
+main_counter<2>      XX...................................... 2
+main_counter<3>      XXX..................................... 3
+main_counter<4>      XXXX.................................... 4
+main_counter<5>      XXXXX................................... 5
+main_counter<6>      XXXXXX.................................. 6
+main_counter<7>      XXXXXXX................................. 7
+$OpTx$INV$12__$INT   XXXXXXXX................XXXXXXXX........ 16
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB4  ***********************************
+Number of function block inputs used/remaining:               18/36
+Number of signals used by logic mapping into function block:  18
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+pwm_counters<3><4>    3       0     0   2     FB4_1         (b)     (b)
+pwm_counters<3><3>    3       0     0   2     FB4_2   25    I/O     I
+pwm_counters<3><2>    3       0     0   2     FB4_3         (b)     (b)
+pwm_counters<3><1>    3       0     0   2     FB4_4         (b)     (b)
+pwm_counters<3><0>    3       0     0   2     FB4_5   26    I/O     I
+pwm_counters<2><7>    3       0     0   2     FB4_6         (b)     (b)
+pwm_counters<2><6>    3       0     0   2     FB4_7         (b)     (b)
+pwm_counters<2><5>    3       0     0   2     FB4_8   27    I/O     (b)
+pwm_counters<2><4>    3       0     0   2     FB4_9         (b)     (b)
+pwm_counters<2><3>    3       0     0   2     FB4_10        (b)     (b)
+pwm_counters<2><2>    3       0     0   2     FB4_11  28    I/O     I
+pwm_counters<2><1>    3       0     0   2     FB4_12        (b)     (b)
+pwm_counters<2><0>    3       0     0   2     FB4_13        (b)     (b)
+pwm_counters<1><7>    3       0     0   2     FB4_14  29    I/O     I
+pwm_counters<1><6>    3       0     0   2     FB4_15  33    I/O     I
+pwm_counters<1><5>    3       0   \/2   0     FB4_16        (b)     (b)
+miso                  9       4<-   0   0     FB4_17  34    I/O     O
+pwm_counters<1><4>    3       0   /\2   0     FB4_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: bit_cnt<0>         7: inputs<3>         13: mosi 
+  2: bit_cnt<1>         8: inputs<4>         14: pwm_selector<0> 
+  3: bit_cnt<2>         9: inputs<5>         15: pwm_selector<1> 
+  4: inputs<0>         10: inputs<6>         16: pwm_selector<2> 
+  5: inputs<1>         11: inputs<7>         17: sclk 
+  6: inputs<2>         12: loading_val       18: sel 
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+pwm_counters<3><4>   XXX........XXXXXXX...................... 10
+pwm_counters<3><3>   XXX........XXXXXXX...................... 10
+pwm_counters<3><2>   XXX........XXXXXXX...................... 10
+pwm_counters<3><1>   XXX........XXXXXXX...................... 10
+pwm_counters<3><0>   XXX........XXXXXXX...................... 10
+pwm_counters<2><7>   XXX........XXXXXXX...................... 10
+pwm_counters<2><6>   XXX........XXXXXXX...................... 10
+pwm_counters<2><5>   XXX........XXXXXXX...................... 10
+pwm_counters<2><4>   XXX........XXXXXXX...................... 10
+pwm_counters<2><3>   XXX........XXXXXXX...................... 10
+pwm_counters<2><2>   XXX........XXXXXXX...................... 10
+pwm_counters<2><1>   XXX........XXXXXXX...................... 10
+pwm_counters<2><0>   XXX........XXXXXXX...................... 10
+pwm_counters<1><7>   XXX........XXXXXXX...................... 10
+pwm_counters<1><6>   XXX........XXXXXXX...................... 10
+pwm_counters<1><5>   XXX........XXXXXXX...................... 10
+miso                 XXXXXXXXXXX......X...................... 12
+pwm_counters<1><4>   XXX........XXXXXXX...................... 10
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*******************************  Equations  ********************************
+
+********** Mapped Logic **********
+
+
+$OpTx$INV$10__$INT <= ((pwm_counters(1)(2) AND NOT main_counter(2))
+	OR (NOT pwm_counters(1)(2) AND main_counter(2))
+	OR (NOT pwm_counters(1)(4) AND main_counter(4))
+	OR (outputs_7.EXP)
+	OR (pwm_counters(1)(3) AND NOT main_counter(3))
+	OR (NOT pwm_counters(1)(3) AND main_counter(3))
+	OR (pwm_counters(1)(6) AND NOT main_counter(6))
+	OR (pwm_counters(1)(7) AND NOT main_counter(7))
+	OR (NOT pwm_counters(1)(7) AND main_counter(7))
+	OR (pwm_counters(1)(1) AND NOT main_counter(1))
+	OR (NOT pwm_counters(1)(1) AND main_counter(1))
+	OR (pwm_counters(1)(5) AND NOT main_counter(5))
+	OR (NOT pwm_counters(1)(5) AND main_counter(5))
+	OR (NOT pwm_counters(1)(6) AND main_counter(6)));
+
+
+$OpTx$INV$11__$INT <= ((EXP8_.EXP)
+	OR (pwm_counters(2)(0) AND NOT main_counter(0))
+	OR (NOT pwm_counters(2)(0) AND main_counter(0))
+	OR (pwm_counters(2)(2) AND NOT main_counter(2))
+	OR (NOT pwm_counters(2)(2) AND main_counter(2))
+	OR (NOT pwm_counters(2)(4) AND main_counter(4))
+	OR (pwm_counters(2)(5) AND NOT main_counter(5))
+	OR (pwm_counters(2)(6) AND NOT main_counter(6))
+	OR (NOT pwm_counters(2)(6) AND main_counter(6))
+	OR (pwm_counters(2)(7) AND NOT main_counter(7))
+	OR (NOT pwm_counters(2)(7) AND main_counter(7))
+	OR (pwm_counters(2)(1) AND NOT main_counter(1))
+	OR (NOT pwm_counters(2)(1) AND main_counter(1))
+	OR (pwm_counters(2)(3) AND NOT main_counter(3))
+	OR (NOT pwm_counters(2)(3) AND main_counter(3))
+	OR (NOT pwm_counters(2)(5) AND main_counter(5)));
+
+
+$OpTx$INV$12__$INT <= ((main_counter(7).EXP)
+	OR (pwm_counters(3)(5) AND NOT main_counter(5))
+	OR (pwm_counters(3)(6) AND NOT main_counter(6))
+	OR (NOT pwm_counters(3)(6) AND main_counter(6))
+	OR (pwm_counters(3)(7) AND NOT main_counter(7))
+	OR (NOT pwm_counters(3)(7) AND main_counter(7))
+	OR (pwm_counters(3)(0) AND NOT main_counter(0))
+	OR (NOT pwm_counters(3)(0) AND main_counter(0))
+	OR (NOT pwm_counters(3)(2) AND main_counter(2))
+	OR (pwm_counters(3)(4) AND NOT main_counter(4))
+	OR (NOT pwm_counters(3)(4) AND main_counter(4))
+	OR (pwm_counters(3)(1) AND NOT main_counter(1))
+	OR (NOT pwm_counters(3)(1) AND main_counter(1))
+	OR (pwm_counters(3)(3) AND NOT main_counter(3))
+	OR (NOT pwm_counters(3)(3) AND main_counter(3))
+	OR (NOT pwm_counters(3)(5) AND main_counter(5)));
+
+
+$OpTx$INV$9__$INT <= ((pwm_counters(0)(1) AND NOT main_counter(1))
+	OR (NOT pwm_counters(0)(1) AND main_counter(1))
+	OR (pwm_counters(0)(5) AND NOT main_counter(5))
+	OR (NOT pwm_counters(0)(5) AND main_counter(5))
+	OR (pwm_counters(0)(6) AND NOT main_counter(6))
+	OR (main_counter(0).EXP)
+	OR (pwm_counters(0)(0) AND NOT main_counter(0))
+	OR (NOT pwm_counters(0)(0) AND main_counter(0))
+	OR (NOT pwm_counters(0)(2) AND main_counter(2))
+	OR (pwm_counters(0)(4) AND NOT main_counter(4))
+	OR (NOT pwm_counters(0)(4) AND main_counter(4))
+	OR (pwm_counters(0)(3) AND NOT main_counter(3))
+	OR (NOT pwm_counters(0)(3) AND main_counter(3))
+	OR (NOT pwm_counters(0)(6) AND main_counter(6))
+	OR (pwm_counters(0)(7) AND NOT main_counter(7))
+	OR (NOT pwm_counters(0)(7) AND main_counter(7)));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FTCPE_bit_cnt0: FTCPE port map (bit_cnt(0),'1',NOT sclk,'0',sel);
+
+FTCPE_bit_cnt1: FTCPE port map (bit_cnt(1),bit_cnt(0),NOT sclk,'0',sel);
+
+FTCPE_bit_cnt2: FTCPE port map (bit_cnt(2),bit_cnt_T(2),NOT sclk,'0',sel);
+bit_cnt_T(2) <= (NOT bit_cnt(0) AND NOT bit_cnt(1));
+
+FTCPE_loading_val: FTCPE port map (loading_val,'1',NOT sclk,sel,'0',loading_val_CE);
+loading_val_CE <= (NOT bit_cnt(0) AND NOT bit_cnt(2) AND NOT bit_cnt(1));
+
+FTCPE_main_counter0: FTCPE port map (main_counter(0),'1',clk,'0','0');
+
+FTCPE_main_counter1: FTCPE port map (main_counter(1),main_counter(0),clk,'0','0');
+
+FTCPE_main_counter2: FTCPE port map (main_counter(2),main_counter_T(2),clk,'0','0');
+main_counter_T(2) <= (main_counter(0) AND main_counter(1));
+
+FTCPE_main_counter3: FTCPE port map (main_counter(3),main_counter_T(3),clk,'0','0');
+main_counter_T(3) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2));
+
+FTCPE_main_counter4: FTCPE port map (main_counter(4),main_counter_T(4),clk,'0','0');
+main_counter_T(4) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2) AND main_counter(3));
+
+FTCPE_main_counter5: FTCPE port map (main_counter(5),main_counter_T(5),clk,'0','0');
+main_counter_T(5) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2) AND main_counter(3) AND main_counter(4));
+
+FTCPE_main_counter6: FTCPE port map (main_counter(6),main_counter_T(6),clk,'0','0');
+main_counter_T(6) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2) AND main_counter(3) AND main_counter(4) AND 
+	main_counter(5));
+
+FTCPE_main_counter7: FTCPE port map (main_counter(7),main_counter_T(7),clk,'0','0');
+main_counter_T(7) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2) AND main_counter(3) AND main_counter(4) AND 
+	main_counter(5) AND main_counter(6));
+
+
+miso_I <= ((bit_cnt(0) AND bit_cnt(2) AND NOT bit_cnt(1) AND 
+	inputs(5))
+	OR (bit_cnt(0) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+	inputs(1))
+	OR (bit_cnt(0) AND bit_cnt(2) AND bit_cnt(1) AND 
+	inputs(7))
+	OR (bit_cnt(0) AND NOT bit_cnt(2) AND bit_cnt(1) AND 
+	inputs(3))
+	OR (NOT bit_cnt(0) AND bit_cnt(2) AND bit_cnt(1) AND 
+	inputs(6))
+	OR (NOT bit_cnt(0) AND bit_cnt(2) AND NOT bit_cnt(1) AND 
+	inputs(4))
+	OR (NOT bit_cnt(0) AND NOT bit_cnt(2) AND bit_cnt(1) AND 
+	inputs(2))
+	OR (NOT bit_cnt(0) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+	inputs(0)));
+miso <= miso_I when miso_OE = '1' else 'Z';
+miso_OE <= NOT sel;
+
+FDCPE_outputs0: FDCPE port map (outputs(0),mosi,sclk,'0','0',outputs_CE(0));
+outputs_CE(0) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_outputs1: FDCPE port map (outputs(1),mosi,sclk,'0','0',outputs_CE(1));
+outputs_CE(1) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_outputs2: FDCPE port map (outputs(2),mosi,sclk,'0','0',outputs_CE(2));
+outputs_CE(2) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_outputs3: FDCPE port map (outputs(3),mosi,sclk,'0','0',outputs_CE(3));
+outputs_CE(3) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_outputs4: FDCPE port map (outputs(4),mosi,sclk,'0','0',outputs_CE(4));
+outputs_CE(4) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_outputs5: FDCPE port map (outputs(5),mosi,sclk,'0','0',outputs_CE(5));
+outputs_CE(5) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_outputs6: FDCPE port map (outputs(6),mosi,sclk,'0','0',outputs_CE(6));
+outputs_CE(6) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_outputs7: FDCPE port map (outputs(7),mosi,sclk,'0','0',outputs_CE(7));
+outputs_CE(7) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters03: FDCPE port map (pwm_counters(0)(3),mosi,sclk,'0','0',pwm_counters_CE(0)(3));
+pwm_counters_CE(0)(3) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters02: FDCPE port map (pwm_counters(0)(2),mosi,sclk,'0','0',pwm_counters_CE(0)(2));
+pwm_counters_CE(0)(2) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters04: FDCPE port map (pwm_counters(0)(4),mosi,sclk,'0','0',pwm_counters_CE(0)(4));
+pwm_counters_CE(0)(4) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters07: FDCPE port map (pwm_counters(0)(7),mosi,sclk,'0','0',pwm_counters_CE(0)(7));
+pwm_counters_CE(0)(7) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters00: FDCPE port map (pwm_counters(0)(0),mosi,sclk,'0','0',pwm_counters_CE(0)(0));
+pwm_counters_CE(0)(0) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters06: FDCPE port map (pwm_counters(0)(6),mosi,sclk,'0','0',pwm_counters_CE(0)(6));
+pwm_counters_CE(0)(6) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters01: FDCPE port map (pwm_counters(0)(1),mosi,sclk,'0','0',pwm_counters_CE(0)(1));
+pwm_counters_CE(0)(1) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters05: FDCPE port map (pwm_counters(0)(5),mosi,sclk,'0','0',pwm_counters_CE(0)(5));
+pwm_counters_CE(0)(5) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters14: FDCPE port map (pwm_counters(1)(4),mosi,sclk,'0','0',pwm_counters_CE(1)(4));
+pwm_counters_CE(1)(4) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters13: FDCPE port map (pwm_counters(1)(3),mosi,sclk,'0','0',pwm_counters_CE(1)(3));
+pwm_counters_CE(1)(3) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters12: FDCPE port map (pwm_counters(1)(2),mosi,sclk,'0','0',pwm_counters_CE(1)(2));
+pwm_counters_CE(1)(2) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters11: FDCPE port map (pwm_counters(1)(1),mosi,sclk,'0','0',pwm_counters_CE(1)(1));
+pwm_counters_CE(1)(1) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters15: FDCPE port map (pwm_counters(1)(5),mosi,sclk,'0','0',pwm_counters_CE(1)(5));
+pwm_counters_CE(1)(5) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters17: FDCPE port map (pwm_counters(1)(7),mosi,sclk,'0','0',pwm_counters_CE(1)(7));
+pwm_counters_CE(1)(7) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters16: FDCPE port map (pwm_counters(1)(6),mosi,sclk,'0','0',pwm_counters_CE(1)(6));
+pwm_counters_CE(1)(6) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters10: FDCPE port map (pwm_counters(1)(0),mosi,sclk,'0','0',pwm_counters_CE(1)(0));
+pwm_counters_CE(1)(0) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	NOT pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters27: FDCPE port map (pwm_counters(2)(7),mosi,sclk,'0','0',pwm_counters_CE(2)(7));
+pwm_counters_CE(2)(7) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters20: FDCPE port map (pwm_counters(2)(0),mosi,sclk,'0','0',pwm_counters_CE(2)(0));
+pwm_counters_CE(2)(0) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters21: FDCPE port map (pwm_counters(2)(1),mosi,sclk,'0','0',pwm_counters_CE(2)(1));
+pwm_counters_CE(2)(1) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters22: FDCPE port map (pwm_counters(2)(2),mosi,sclk,'0','0',pwm_counters_CE(2)(2));
+pwm_counters_CE(2)(2) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters24: FDCPE port map (pwm_counters(2)(4),mosi,sclk,'0','0',pwm_counters_CE(2)(4));
+pwm_counters_CE(2)(4) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters25: FDCPE port map (pwm_counters(2)(5),mosi,sclk,'0','0',pwm_counters_CE(2)(5));
+pwm_counters_CE(2)(5) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters26: FDCPE port map (pwm_counters(2)(6),mosi,sclk,'0','0',pwm_counters_CE(2)(6));
+pwm_counters_CE(2)(6) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters23: FDCPE port map (pwm_counters(2)(3),mosi,sclk,'0','0',pwm_counters_CE(2)(3));
+pwm_counters_CE(2)(3) <= (NOT sel AND loading_val AND NOT pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters32: FDCPE port map (pwm_counters(3)(2),mosi,sclk,'0','0',pwm_counters_CE(3)(2));
+pwm_counters_CE(3)(2) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters33: FDCPE port map (pwm_counters(3)(3),mosi,sclk,'0','0',pwm_counters_CE(3)(3));
+pwm_counters_CE(3)(3) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters30: FDCPE port map (pwm_counters(3)(0),mosi,sclk,'0','0',pwm_counters_CE(3)(0));
+pwm_counters_CE(3)(0) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters31: FDCPE port map (pwm_counters(3)(1),mosi,sclk,'0','0',pwm_counters_CE(3)(1));
+pwm_counters_CE(3)(1) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters35: FDCPE port map (pwm_counters(3)(5),mosi,sclk,'0','0',pwm_counters_CE(3)(5));
+pwm_counters_CE(3)(5) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_counters36: FDCPE port map (pwm_counters(3)(6),mosi,sclk,'0','0',pwm_counters_CE(3)(6));
+pwm_counters_CE(3)(6) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters37: FDCPE port map (pwm_counters(3)(7),mosi,sclk,'0','0',pwm_counters_CE(3)(7));
+pwm_counters_CE(3)(7) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND bit_cnt(0) AND bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwm_counters34: FDCPE port map (pwm_counters(3)(4),mosi,sclk,'0','0',pwm_counters_CE(3)(4));
+pwm_counters_CE(3)(4) <= (NOT sel AND loading_val AND pwm_selector(0) AND 
+	pwm_selector(1) AND NOT pwm_selector(2) AND NOT bit_cnt(0) AND bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_selector0: FDCPE port map (pwm_selector(0),mosi,sclk,sel,'0',pwm_selector_CE(0));
+pwm_selector_CE(0) <= (NOT loading_val AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_selector1: FDCPE port map (pwm_selector(1),mosi,sclk,sel,'0',pwm_selector_CE(1));
+pwm_selector_CE(1) <= (NOT loading_val AND bit_cnt(0) AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1));
+
+FDCPE_pwm_selector2: FDCPE port map (pwm_selector(2),mosi,sclk,sel,'0',pwm_selector_CE(2));
+pwm_selector_CE(2) <= (NOT loading_val AND NOT bit_cnt(0) AND NOT bit_cnt(2) AND 
+	bit_cnt(1));
+
+FDCPE_pwms0: FDCPE port map (pwms(0),'1',clk,NOT $OpTx$INV$9__$INT,'0',pwms_CE(0));
+pwms_CE(0) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2) AND main_counter(3) AND main_counter(4) AND 
+	main_counter(5) AND main_counter(6) AND main_counter(7));
+
+FDCPE_pwms1: FDCPE port map (pwms(1),'1',clk,NOT $OpTx$INV$10__$INT,'0',pwms_CE(1));
+pwms_CE(1) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2) AND main_counter(3) AND main_counter(4) AND 
+	main_counter(5) AND main_counter(6) AND main_counter(7));
+
+FDCPE_pwms2: FDCPE port map (pwms(2),'1',clk,NOT $OpTx$INV$11__$INT,'0',pwms_CE(2));
+pwms_CE(2) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2) AND main_counter(3) AND main_counter(4) AND 
+	main_counter(5) AND main_counter(6) AND main_counter(7));
+
+FDCPE_pwms3: FDCPE port map (pwms(3),'1',clk,NOT $OpTx$INV$12__$INT,'0',pwms_CE(3));
+pwms_CE(3) <= (main_counter(0) AND main_counter(1) AND 
+	main_counter(2) AND main_counter(3) AND main_counter(4) AND 
+	main_counter(5) AND main_counter(6) AND main_counter(7));
+
+Register Legend:
+ FDCPE (Q,D,C,CLR,PRE,CE); 
+ FTCPE (Q,D,C,CLR,PRE,CE); 
+ LDCP  (Q,D,G,CLR,PRE); 
+
+******************************  Device Pin Out *****************************
+
+Device : XC9572XL-5-PC44
+
+
+   --------------------------------  
+  /6  5  4  3  2  1  44 43 42 41 40 \
+ | 7                             39 | 
+ | 8                             38 | 
+ | 9                             37 | 
+ | 10                            36 | 
+ | 11        XC9572XL-5-PC44     35 | 
+ | 12                            34 | 
+ | 13                            33 | 
+ | 14                            32 | 
+ | 15                            31 | 
+ | 16                            30 | 
+ | 17                            29 | 
+ \ 18 19 20 21 22 23 24 25 26 27 28 /
+   --------------------------------  
+
+
+Pin Signal                         Pin Signal                        
+No. Name                           No. Name                          
+  1 pwms<0>                          23 GND                           
+  2 pwms<1>                          24 inputs<2>                     
+  3 pwms<2>                          25 inputs<4>                     
+  4 pwms<3>                          26 inputs<5>                     
+  5 clk                              27 KPR                           
+  6 inputs<6>                        28 sclk                          
+  7 inputs<7>                        29 mosi                          
+  8 outputs<0>                       30 TDO                           
+  9 outputs<1>                       31 GND                           
+ 10 GND                              32 VCC                           
+ 11 KPR                              33 sel                           
+ 12 KPR                              34 miso                          
+ 13 KPR                              35 outputs<2>                    
+ 14 KPR                              36 outputs<3>                    
+ 15 TDI                              37 outputs<4>                    
+ 16 TMS                              38 outputs<5>                    
+ 17 TCK                              39 KPR                           
+ 18 KPR                              40 KPR                           
+ 19 inputs<0>                        41 VCC                           
+ 20 inputs<1>                        42 KPR                           
+ 21 VCC                              43 outputs<6>                    
+ 22 inputs<3>                        44 outputs<7>                    
+
+
+Legend :  NC  = Not Connected, unbonded pin
+         PGND = Unused I/O configured as additional Ground pin
+         TIE  = Unused I/O floating -- must tie to VCC, GND or other signal
+         KPR  = Unused I/O with weak keeper (leave unconnected)
+         VCC  = Dedicated Power Pin
+         GND  = Dedicated Ground Pin
+         TDI  = Test Data In, JTAG pin
+         TDO  = Test Data Out, JTAG pin
+         TCK  = Test Clock, JTAG pin
+         TMS  = Test Mode Select, JTAG pin
+  PROHIBITED  = User reserved pin
+****************************  Compiler Options  ****************************
+
+Following is a list of all global compiler options used by the fitter run.
+
+Device(s) Specified                         : xc9572xl-5-PC44
+Optimization Method                         : SPEED
+Multi-Level Logic Optimization              : ON
+Ignore Timing Specifications                : OFF
+Default Register Power Up Value             : LOW
+Keep User Location Constraints              : ON
+What-You-See-Is-What-You-Get                : OFF
+Exhaustive Fitting                          : OFF
+Keep Unused Inputs                          : OFF
+Slew Rate                                   : FAST
+Power Mode                                  : STD
+Ground on Unused IOs                        : OFF
+Set I/O Pin Termination                     : KEEPER
+Global Clock Optimization                   : OFF
+Global Set/Reset Optimization               : OFF
+Global Ouput Enable Optimization            : OFF
+Input Limit                                 : 54
+Pterm Limit                                 : 25
