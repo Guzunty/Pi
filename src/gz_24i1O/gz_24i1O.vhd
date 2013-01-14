@@ -37,7 +37,6 @@ signal byte_cnt: std_logic_vector(1 downto 0) := "00";
 begin
   process (sclk, sel) is
     variable next_bit: std_logic_vector(2 downto 0);
-	 variable pwm_selector: std_logic_vector(2 downto 0);
   begin
 	 if (sel = '0') then
 		if (falling_edge(sclk)) then
