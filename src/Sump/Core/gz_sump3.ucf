@@ -1,0 +1,6 @@
+NET "mode_setup" LOC = "P34";
+NET "mode_run" LOC = "P29";
+NET "mode_read" LOC = "P28";
+NET "clock_mode"  LOC = "P33";
+NET "pic_clock" LOC = FB1_9;
+NET "osc_clock" LOC = FB1_11;

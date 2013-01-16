@@ -1,0 +1,933 @@
+ 
+cpldfit:  version P.40xd                            Xilinx Inc.
+                                  Fitter Report
+Design Name: sram_counter                        Date:  1-10-2013, 10:33AM
+Device Used: XC9572XL-5-PC44
+Fitting Status: Successful
+
+*************************  Mapped Resource Summary  **************************
+
+Macrocells     Product Terms    Function Block   Registers      Pins           
+Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
+69 /72  ( 96%) 241 /360  ( 67%) 155/216 ( 72%)   65 /72  ( 90%) 32 /34  ( 94%)
+
+** Function Block Resources **
+
+Function    Mcells      FB Inps     Pterms      IO          
+Block       Used/Tot    Used/Tot    Used/Tot    Used/Tot    
+FB1          18/18*      48/54       67/90       7/ 9
+FB2          17/18       25/54       51/90       9/ 9*
+FB3          18/18*      34/54       51/90       9/ 9*
+FB4          16/18       48/54       72/90       7/ 7*
+             -----       -----       -----      -----    
+             69/72      155/216     241/360     32/34 
+
+* - Resource is exhausted
+
+** Global Control Resources **
+
+Global clock net(s) unused.
+Global output enable net(s) unused.
+Global set/reset net(s) unused.
+
+** Pin Resources **
+
+Signal Type    Required     Mapped  |  Pin Type            Used    Total 
+------------------------------------|------------------------------------
+Input         :   13          13    |  I/O              :    27      28
+Output        :   18          18    |  GCK/IO           :     2       3
+Bidirectional :    1           1    |  GTS/IO           :     2       2
+GCK           :    0           0    |  GSR/IO           :     1       1
+GTS           :    0           0    |
+GSR           :    0           0    |
+                 ----        ----
+        Total     32          32
+
+** Power Data **
+
+There are 69 macrocells in high performance mode (MCHP).
+There are 0 macrocells in low power mode (MCLP).
+End of Mapped Resource Summary
+**************************  Errors and Warnings  ***************************
+
+WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
+   use the default filename of 'sram_counter.ise'.
+*************************  Summary of Mapped Logic  ************************
+
+** 19 Outputs **
+
+Signal                            Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
+Name                              Pts   Inps          No.  Type    Use     Mode Rate State
+done                              3     19    FB1_2   1    I/O     O       STD  FAST RESET
+sram_address<10>                  3     18    FB1_6   3    I/O     O       STD  FAST RESET
+sram_address<11>                  3     19    FB1_15  8    I/O     O       STD  FAST RESET
+sram_address<1>                   3     9     FB2_2   35   I/O     O       STD  FAST RESET
+sram_address<2>                   3     10    FB2_5   36   I/O     O       STD  FAST RESET
+sram_address<3>                   3     11    FB2_6   37   I/O     O       STD  FAST RESET
+sram_address<4>                   3     12    FB2_9   39   GSR/I/O O       STD  FAST RESET
+sram_address<5>                   3     13    FB2_11  40   GTS/I/O O       STD  FAST RESET
+sram_address<6>                   3     14    FB2_14  42   GTS/I/O O       STD  FAST RESET
+sram_address<7>                   3     15    FB2_15  43   I/O     O       STD  FAST RESET
+sram_address<8>                   3     16    FB2_17  44   I/O     O       STD  FAST RESET
+sram_address<0>                   3     8     FB3_2   11   I/O     O       STD  FAST RESET
+sram_address<9>                   3     17    FB3_8   13   I/O     O       STD  FAST RESET
+sram_clock                        2     4     FB3_11  18   I/O     O       STD  FAST 
+sram_oe                           2     4     FB3_15  20   I/O     O       STD  FAST 
+sram_address<12>                  3     20    FB4_2   25   I/O     O       STD  FAST RESET
+sram_address<13>                  3     21    FB4_5   26   I/O     O       STD  FAST RESET
+sram_address<14>                  3     22    FB4_8   27   I/O     O       STD  FAST RESET
+mode_run                          11    15    FB4_14  29   I/O     I/O     STD  FAST RESET
+
+** 50 Buried Nodes **
+
+Signal                            Total Total Loc     Pwr  Reg Init
+Name                              Pts   Inps          Mode State
+bit_cnt<2>                        3     7     FB1_1   STD  RESET
+bit_cnt<1>                        3     6     FB1_3   STD  RESET
+sample_counter<9>                 4     14    FB1_4   STD  RESET
+sample_counter<8>                 4     13    FB1_5   STD  RESET
+sample_counter<7>                 4     12    FB1_7   STD  RESET
+sample_counter<6>                 4     11    FB1_8   STD  RESET
+sample_counter<5>                 4     10    FB1_9   STD  RESET
+sample_counter<4>                 4     9     FB1_10  STD  RESET
+sample_counter<3>                 4     8     FB1_11  STD  SET
+sample_counter<2>                 4     7     FB1_12  STD  SET
+sample_counter<14>                4     19    FB1_13  STD  RESET
+sample_counter<13>                4     18    FB1_14  STD  RESET
+sample_counter<12>                4     17    FB1_16  STD  RESET
+sample_counter<11>                4     16    FB1_17  STD  RESET
+sample_counter<10>                4     15    FB1_18  STD  RESET
+setup_reg<9>                      3     3     FB2_3   STD  RESET
+setup_reg<8>                      3     3     FB2_4   STD  RESET
+setup_reg<7>                      3     3     FB2_7   STD  RESET
+setup_reg<6>                      3     3     FB2_8   STD  RESET
+setup_reg<5>                      3     3     FB2_10  STD  RESET
+setup_reg<4>                      3     3     FB2_12  STD  RESET
+setup_reg<3>                      3     3     FB2_13  STD  RESET
+setup_reg<2>                      3     3     FB2_16  STD  RESET
+setup_reg<28>                     3     3     FB2_18  STD  RESET
+trigger_match/trigger_match_CLKF  2     3     FB3_1   STD  
+setup_reg<27>                     3     3     FB3_3   STD  RESET
+setup_reg<26>                     3     3     FB3_4   STD  RESET
+setup_reg<25>                     3     3     FB3_5   STD  RESET
+setup_reg<24>                     3     3     FB3_6   STD  RESET
+setup_reg<23>                     3     3     FB3_7   STD  RESET
+setup_reg<22>                     3     3     FB3_9   STD  RESET
+setup_reg<21>                     3     3     FB3_10  STD  RESET
+setup_reg<20>                     3     3     FB3_12  STD  RESET
+setup_reg<19>                     3     3     FB3_13  STD  RESET
+setup_reg<18>                     3     3     FB3_14  STD  RESET
+setup_reg<17>                     3     3     FB3_16  STD  RESET
+sample_counter<1>                 3     5     FB3_17  STD  SET
+sample_counter<0>                 3     4     FB3_18  STD  SET
+setup_reg<1>                      3     3     FB4_3   STD  RESET
+setup_reg<16>                     3     3     FB4_4   STD  RESET
+
+Signal                            Total Total Loc     Pwr  Reg Init
+Name                              Pts   Inps          Mode State
+setup_reg<15>                     3     3     FB4_6   STD  RESET
+setup_reg<14>                     3     3     FB4_7   STD  RESET
+setup_reg<13>                     3     3     FB4_9   STD  RESET
+setup_reg<12>                     3     3     FB4_10  STD  RESET
+setup_reg<11>                     3     3     FB4_11  STD  RESET
+setup_reg<10>                     3     3     FB4_12  STD  RESET
+setup_reg<0>                      3     3     FB4_13  STD  RESET
+bit_cnt<0>                        3     5     FB4_15  STD  RESET
+trigger_match                     3     4     FB4_16  STD  RESET
+$OpTx$INV$466                     19    29    FB4_18  STD  
+
+** 13 Inputs **
+
+Signal                            Loc     Pin  Pin     Pin     
+Name                                      No.  Type    Use     
+pins<1>                           FB1_5   2    I/O     I
+pins<3>                           FB1_8   4    I/O     I
+pic_clock                         FB1_9   5~   GCK/I/O I
+osc_clock                         FB1_11  6~   GCK/I/O I
+pins<0>                           FB2_8   38   I/O     I
+pins<7>                           FB3_5   12   I/O     I
+pins<6>                           FB3_9   14   I/O     I
+pins<5>                           FB3_14  19   I/O     I
+pins<2>                           FB3_16  24   I/O     I
+pins<4>                           FB3_17  22   I/O     I
+mode_read                         FB4_11  28   I/O     I
+clock_mode                        FB4_15  33   I/O     I
+mode_setup                        FB4_17  34   I/O     I
+
+Legend:
+Pin No. - ~ - User Assigned
+**************************  Function Block Details  ************************
+Legend:
+Total Pt     - Total product terms used by the macrocell signal
+Imp Pt       - Product terms imported from other macrocells
+Exp Pt       - Product terms exported to other macrocells
+               in direction shown
+Unused Pt    - Unused local product terms remaining in macrocell
+Loc          - Location where logic was mapped in device
+Pin Type/Use - I  - Input             GCK - Global Clock
+               O  - Output            GTS - Global Output Enable
+              (b) - Buried macrocell  GSR - Global Set/Reset
+X            - Signal used as input to the macrocell logic.
+Pin No.      - ~  - User Assigned
+*********************************** FB1  ***********************************
+Number of function block inputs used/remaining:               48/6
+Number of signals used by logic mapping into function block:  48
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+bit_cnt<2>            3       0     0   2     FB1_1         (b)     (b)
+done                  3       0     0   2     FB1_2   1     I/O     O
+bit_cnt<1>            3       0     0   2     FB1_3         (b)     (b)
+sample_counter<9>     4       0     0   1     FB1_4         (b)     (b)
+sample_counter<8>     4       0     0   1     FB1_5   2     I/O     I
+sram_address<10>      3       0     0   2     FB1_6   3     I/O     O
+sample_counter<7>     4       0     0   1     FB1_7         (b)     (b)
+sample_counter<6>     4       0     0   1     FB1_8   4     I/O     I
+sample_counter<5>     4       0     0   1     FB1_9   5     GCK/I/O I
+sample_counter<4>     4       0     0   1     FB1_10        (b)     (b)
+sample_counter<3>     4       0     0   1     FB1_11  6     GCK/I/O I
+sample_counter<2>     4       0     0   1     FB1_12        (b)     (b)
+sample_counter<14>    4       0     0   1     FB1_13        (b)     (b)
+sample_counter<13>    4       0     0   1     FB1_14  7     GCK/I/O (b)
+sram_address<11>      3       0     0   2     FB1_15  8     I/O     O
+sample_counter<12>    4       0     0   1     FB1_16        (b)     (b)
+sample_counter<11>    4       0     0   1     FB1_17  9     I/O     (b)
+sample_counter<10>    4       0     0   1     FB1_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: $OpTx$INV$466       17: sample_counter<3>  33: setup_reg<25> 
+  2: mode_run.PIN        18: sample_counter<4>  34: setup_reg<26> 
+  3: bit_cnt<0>          19: sample_counter<5>  35: setup_reg<27> 
+  4: bit_cnt<1>          20: sample_counter<6>  36: setup_reg<28> 
+  5: bit_cnt<2>          21: sample_counter<7>  37: sram_address<0> 
+  6: done                22: sample_counter<8>  38: sram_address<10> 
+  7: mode_read           23: sample_counter<9>  39: sram_address<1> 
+  8: mode_setup          24: setup_reg<16>      40: sram_address<2> 
+  9: sample_counter<0>   25: setup_reg<17>      41: sram_address<3> 
+ 10: sample_counter<10>  26: setup_reg<18>      42: sram_address<4> 
+ 11: sample_counter<11>  27: setup_reg<19>      43: sram_address<5> 
+ 12: sample_counter<12>  28: setup_reg<20>      44: sram_address<6> 
+ 13: sample_counter<13>  29: setup_reg<21>      45: sram_address<7> 
+ 14: sample_counter<14>  30: setup_reg<22>      46: sram_address<8> 
+ 15: sample_counter<1>   31: setup_reg<23>      47: sram_address<9> 
+ 16: sample_counter<2>   32: setup_reg<24>      48: trigger_match/trigger_match_CLKF 
+
+Signal                        1         2         3         4         5 FB
+Name                0----+----0----+----0----+----0----+----0----+----0 Inputs
+bit_cnt<2>           .XXXX.XX.......................................X.. 7
+done                 XX...X..XXXXXXXXXXXXXXX........................X.. 19
+bit_cnt<1>           .XXX..XX.......................................X.. 6
+sample_counter<9>    XX......X.....XXXXXXXXX.......X................X.. 14
+sample_counter<8>    XX......X.....XXXXXXXX.......X.................X.. 13
+sram_address<10>     .XXXXXXX............................X.XXXXXXXXXX.. 18
+sample_counter<7>    XX......X.....XXXXXXX.......X..................X.. 12
+sample_counter<6>    XX......X.....XXXXXX.......X...................X.. 11
+sample_counter<5>    XX......X.....XXXXX.......X....................X.. 10
+sample_counter<4>    XX......X.....XXXX.......X.....................X.. 9
+sample_counter<3>    XX......X.....XXX.......X......................X.. 8
+sample_counter<2>    XX......X.....XX.......X.......................X.. 7
+sample_counter<14>   XX......XXXXXXXXXXXXXXX............X...........X.. 19
+sample_counter<13>   XX......XXXXX.XXXXXXXXX...........X............X.. 18
+sram_address<11>     .XXXXXXX............................XXXXXXXXXXXX.. 19
+sample_counter<12>   XX......XXXX..XXXXXXXXX..........X.............X.. 17
+sample_counter<11>   XX......XXX...XXXXXXXXX.........X..............X.. 16
+sample_counter<10>   XX......XX....XXXXXXXXX........X...............X.. 15
+                    0----+----1----+----2----+----3----+----4----+----5
+                              0         0         0         0         0
+*********************************** FB2  ***********************************
+Number of function block inputs used/remaining:               25/29
+Number of signals used by logic mapping into function block:  25
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB2_1         (b)     
+sram_address<1>       3       0     0   2     FB2_2   35    I/O     O
+setup_reg<9>          3       0     0   2     FB2_3         (b)     (b)
+setup_reg<8>          3       0     0   2     FB2_4         (b)     (b)
+sram_address<2>       3       0     0   2     FB2_5   36    I/O     O
+sram_address<3>       3       0     0   2     FB2_6   37    I/O     O
+setup_reg<7>          3       0     0   2     FB2_7         (b)     (b)
+setup_reg<6>          3       0     0   2     FB2_8   38    I/O     I
+sram_address<4>       3       0     0   2     FB2_9   39    GSR/I/O O
+setup_reg<5>          3       0     0   2     FB2_10        (b)     (b)
+sram_address<5>       3       0     0   2     FB2_11  40    GTS/I/O O
+setup_reg<4>          3       0     0   2     FB2_12        (b)     (b)
+setup_reg<3>          3       0     0   2     FB2_13        (b)     (b)
+sram_address<6>       3       0     0   2     FB2_14  42    GTS/I/O O
+sram_address<7>       3       0     0   2     FB2_15  43    I/O     O
+setup_reg<2>          3       0     0   2     FB2_16        (b)     (b)
+sram_address<8>       3       0     0   2     FB2_17  44    I/O     O
+setup_reg<28>         3       0     0   2     FB2_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: mode_run.PIN      10: setup_reg<2>      18: sram_address<1> 
+  2: bit_cnt<0>        11: setup_reg<3>      19: sram_address<2> 
+  3: bit_cnt<1>        12: setup_reg<4>      20: sram_address<3> 
+  4: bit_cnt<2>        13: setup_reg<5>      21: sram_address<4> 
+  5: done              14: setup_reg<6>      22: sram_address<5> 
+  6: mode_read         15: setup_reg<7>      23: sram_address<6> 
+  7: mode_setup        16: setup_reg<8>      24: sram_address<7> 
+  8: setup_reg<1>      17: sram_address<0>   25: trigger_match/trigger_match_CLKF 
+  9: setup_reg<27>    
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+sram_address<1>      XXXXXXX.........X.......X............... 9
+setup_reg<9>         ......X........X........X............... 3
+setup_reg<8>         ......X.......X.........X............... 3
+sram_address<2>      XXXXXXX.........XX......X............... 10
+sram_address<3>      XXXXXXX.........XXX.....X............... 11
+setup_reg<7>         ......X......X..........X............... 3
+setup_reg<6>         ......X.....X...........X............... 3
+sram_address<4>      XXXXXXX.........XXXX....X............... 12
+setup_reg<5>         ......X....X............X............... 3
+sram_address<5>      XXXXXXX.........XXXXX...X............... 13
+setup_reg<4>         ......X...X.............X............... 3
+setup_reg<3>         ......X..X..............X............... 3
+sram_address<6>      XXXXXXX.........XXXXXX..X............... 14
+sram_address<7>      XXXXXXX.........XXXXXXX.X............... 15
+setup_reg<2>         ......XX................X............... 3
+sram_address<8>      XXXXXXX.........XXXXXXXXX............... 16
+setup_reg<28>        ......X.X...............X............... 3
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB3  ***********************************
+Number of function block inputs used/remaining:               34/20
+Number of signals used by logic mapping into function block:  34
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+trigger_match/trigger_match_CLKF
+                      2       0     0   3     FB3_1         (b)     (b)
+sram_address<0>       3       0     0   2     FB3_2   11    I/O     O
+setup_reg<27>         3       0     0   2     FB3_3         (b)     (b)
+setup_reg<26>         3       0     0   2     FB3_4         (b)     (b)
+setup_reg<25>         3       0     0   2     FB3_5   12    I/O     I
+setup_reg<24>         3       0     0   2     FB3_6         (b)     (b)
+setup_reg<23>         3       0     0   2     FB3_7         (b)     (b)
+sram_address<9>       3       0     0   2     FB3_8   13    I/O     O
+setup_reg<22>         3       0     0   2     FB3_9   14    I/O     I
+setup_reg<21>         3       0     0   2     FB3_10        (b)     (b)
+sram_clock            2       0     0   3     FB3_11  18    I/O     O
+setup_reg<20>         3       0     0   2     FB3_12        (b)     (b)
+setup_reg<19>         3       0     0   2     FB3_13        (b)     (b)
+setup_reg<18>         3       0     0   2     FB3_14  19    I/O     I
+sram_oe               2       0     0   3     FB3_15  20    I/O     O
+setup_reg<17>         3       0     0   2     FB3_16  24    I/O     I
+sample_counter<1>     3       0     0   2     FB3_17  22    I/O     I
+sample_counter<0>     3       0     0   2     FB3_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: $OpTx$INV$466      13: sample_counter<1>  24: setup_reg<26> 
+  2: mode_run.PIN       14: setup_reg<16>      25: sram_address<0> 
+  3: bit_cnt<0>         15: setup_reg<17>      26: sram_address<1> 
+  4: bit_cnt<1>         16: setup_reg<18>      27: sram_address<2> 
+  5: bit_cnt<2>         17: setup_reg<19>      28: sram_address<3> 
+  6: clock_mode         18: setup_reg<20>      29: sram_address<4> 
+  7: done               19: setup_reg<21>      30: sram_address<5> 
+  8: mode_read          20: setup_reg<22>      31: sram_address<6> 
+  9: mode_setup         21: setup_reg<23>      32: sram_address<7> 
+ 10: osc_clock          22: setup_reg<24>      33: sram_address<8> 
+ 11: pic_clock          23: setup_reg<25>      34: trigger_match/trigger_match_CLKF 
+ 12: sample_counter<0> 
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+trigger_match/trigger_match_CLKF 
+                     .....X...XX............................. 3
+sram_address<0>      .XXXX.XXX........................X...... 8
+setup_reg<27>        ........X..............X.........X...... 3
+setup_reg<26>        ........X.............X..........X...... 3
+setup_reg<25>        ........X............X...........X...... 3
+setup_reg<24>        ........X...........X............X...... 3
+setup_reg<23>        ........X..........X.............X...... 3
+sram_address<9>      .XXXX.XXX...............XXXXXXXXXX...... 17
+setup_reg<22>        ........X.........X..............X...... 3
+setup_reg<21>        ........X........X...............X...... 3
+sram_clock           .....XX..XX............................. 4
+setup_reg<20>        ........X.......X................X...... 3
+setup_reg<19>        ........X......X.................X...... 3
+setup_reg<18>        ........X.....X..................X...... 3
+sram_oe              .....X.X.XX............................. 4
+setup_reg<17>        ........X....X...................X...... 3
+sample_counter<1>    XX.........XX....................X...... 5
+sample_counter<0>    XX.........X.....................X...... 4
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB4  ***********************************
+Number of function block inputs used/remaining:               48/6
+Number of signals used by logic mapping into function block:  48
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0   /\5   0     FB4_1         (b)     (b)
+sram_address<12>      3       2<- /\4   0     FB4_2   25    I/O     O
+setup_reg<1>          3       0   /\2   0     FB4_3         (b)     (b)
+setup_reg<16>         3       0     0   2     FB4_4         (b)     (b)
+sram_address<13>      3       0     0   2     FB4_5   26    I/O     O
+setup_reg<15>         3       0     0   2     FB4_6         (b)     (b)
+setup_reg<14>         3       0     0   2     FB4_7         (b)     (b)
+sram_address<14>      3       0     0   2     FB4_8   27    I/O     O
+setup_reg<13>         3       0     0   2     FB4_9         (b)     (b)
+setup_reg<12>         3       0     0   2     FB4_10        (b)     (b)
+setup_reg<11>         3       0     0   2     FB4_11  28    I/O     I
+setup_reg<10>         3       0     0   2     FB4_12        (b)     (b)
+setup_reg<0>          3       0   \/2   0     FB4_13        (b)     (b)
+mode_run             11       6<-   0   0     FB4_14  29    I/O     I/O
+bit_cnt<0>            3       2<- /\4   0     FB4_15  33    I/O     I
+trigger_match         3       0   /\2   0     FB4_16        (b)     (b)
+(unused)              0       0   \/5   0     FB4_17  34    I/O     I
+$OpTx$INV$466        19      14<-   0   0     FB4_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: $OpTx$INV$466     17: setup_reg<0>      33: sram_address<0> 
+  2: mode_run.PIN      18: setup_reg<10>     34: sram_address<10> 
+  3: bit_cnt<0>        19: setup_reg<11>     35: sram_address<11> 
+  4: bit_cnt<1>        20: setup_reg<12>     36: sram_address<12> 
+  5: bit_cnt<2>        21: setup_reg<13>     37: sram_address<13> 
+  6: done              22: setup_reg<14>     38: sram_address<1> 
+  7: mode_read         23: setup_reg<15>     39: sram_address<2> 
+  8: mode_setup        24: setup_reg<1>      40: sram_address<3> 
+  9: pins<0>           25: setup_reg<2>      41: sram_address<4> 
+ 10: pins<1>           26: setup_reg<3>      42: sram_address<5> 
+ 11: pins<2>           27: setup_reg<4>      43: sram_address<6> 
+ 12: pins<3>           28: setup_reg<5>      44: sram_address<7> 
+ 13: pins<4>           29: setup_reg<6>      45: sram_address<8> 
+ 14: pins<5>           30: setup_reg<7>      46: sram_address<9> 
+ 15: pins<6>           31: setup_reg<8>      47: trigger_match 
+ 16: pins<7>           32: setup_reg<9>      48: trigger_match/trigger_match_CLKF 
+
+Signal                        1         2         3         4         5 FB
+Name                0----+----0----+----0----+----0----+----0----+----0 Inputs
+sram_address<12>     .XXXXXXX........................XXX..XXXXXXXXX.X.. 20
+setup_reg<1>         .......X........X..............................X.. 3
+setup_reg<16>        .......X..............X........................X.. 3
+sram_address<13>     .XXXXXXX........................XXXX.XXXXXXXXX.X.. 21
+setup_reg<15>        .......X.............X.........................X.. 3
+setup_reg<14>        .......X............X..........................X.. 3
+sram_address<14>     .XXXXXXX........................XXXXXXXXXXXXXX.X.. 22
+setup_reg<13>        .......X...........X...........................X.. 3
+setup_reg<12>        .......X..........X............................X.. 3
+setup_reg<11>        .......X.........X.............................X.. 3
+setup_reg<10>        .......X.......................X...............X.. 3
+setup_reg<0>         ......XX.......................................X.. 3
+mode_run             .XXXX.XXXXXXXXXX...............................X.. 15
+bit_cnt<0>           .XX...XX.......................................X.. 5
+trigger_match        XX............................................XX.. 4
+$OpTx$INV$466        .X...XXXXXXXXXXXXXXXXXXXXXXXXXXX..............X... 29
+                    0----+----1----+----2----+----3----+----4----+----5
+                              0         0         0         0         0
+*******************************  Equations  ********************************
+
+********** Mapped Logic **********
+
+
+$OpTx$INV$466 <= ((mode_setup)
+	OR (sram_address_12.EXP)
+	OR (NOT mode_run.PIN AND setup_reg(0) AND setup_reg(8) AND 
+	NOT trigger_match AND NOT pins(0))
+	OR (NOT mode_run.PIN AND NOT setup_reg(0) AND setup_reg(8) AND 
+	NOT trigger_match AND pins(0))
+	OR (NOT mode_run.PIN AND setup_reg(11) AND setup_reg(3) AND 
+	NOT trigger_match AND NOT pins(3))
+	OR (NOT mode_run.PIN AND setup_reg(1) AND setup_reg(9) AND 
+	NOT trigger_match AND NOT pins(1))
+	OR (NOT mode_run.PIN AND NOT setup_reg(1) AND setup_reg(9) AND 
+	NOT trigger_match AND pins(1))
+	OR (NOT mode_run.PIN AND setup_reg(10) AND setup_reg(2) AND 
+	NOT trigger_match AND NOT pins(2))
+	OR (NOT mode_run.PIN AND setup_reg(10) AND NOT setup_reg(2) AND 
+	NOT trigger_match AND pins(2))
+	OR (NOT mode_run.PIN AND setup_reg(11) AND NOT setup_reg(3) AND 
+	NOT trigger_match AND pins(3))
+	OR (NOT mode_run.PIN AND setup_reg(12) AND setup_reg(4) AND 
+	NOT trigger_match AND NOT pins(4))
+	OR (NOT mode_run.PIN AND setup_reg(12) AND NOT setup_reg(4) AND 
+	NOT trigger_match AND pins(4))
+	OR (mode_read AND NOT mode_run.PIN)
+	OR (NOT mode_run.PIN AND done)
+	OR (NOT mode_run.PIN AND setup_reg(15) AND setup_reg(7) AND 
+	NOT trigger_match AND NOT pins(7))
+	OR (NOT mode_run.PIN AND setup_reg(15) AND NOT setup_reg(7) AND 
+	NOT trigger_match AND pins(7)));
+
+
+
+
+
+FTCPE_bit_cnt0: FTCPE port map (bit_cnt(0),bit_cnt_T(0),trigger_match/trigger_match_CLKF,'0','0');
+bit_cnt_T(0) <= ((mode_read AND NOT mode_setup AND NOT mode_run.PIN)
+	OR (NOT mode_setup AND mode_run.PIN AND NOT bit_cnt(0)));
+
+FTCPE_bit_cnt1: FTCPE port map (bit_cnt(1),bit_cnt_T(1),trigger_match/trigger_match_CLKF,'0','0');
+bit_cnt_T(1) <= ((NOT mode_setup AND mode_run.PIN AND NOT bit_cnt(1))
+	OR (mode_read AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT bit_cnt(0)));
+
+FTCPE_bit_cnt2: FTCPE port map (bit_cnt(2),bit_cnt_T(2),trigger_match/trigger_match_CLKF,'0','0');
+bit_cnt_T(2) <= ((NOT mode_setup AND mode_run.PIN AND NOT bit_cnt(2))
+	OR (mode_read AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_done: FTCPE port map (done,done_T,trigger_match/trigger_match_CLKF,'0','0');
+done_T <= ((mode_run.PIN AND done AND NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(10) AND NOT sample_counter(11) AND NOT sample_counter(12) AND 
+	NOT sample_counter(13) AND NOT sample_counter(14) AND NOT sample_counter(1) AND 
+	NOT sample_counter(2) AND NOT sample_counter(3) AND NOT sample_counter(4) AND 
+	NOT sample_counter(5) AND NOT sample_counter(6) AND NOT sample_counter(7) AND 
+	NOT sample_counter(8) AND NOT sample_counter(9) AND NOT $OpTx$INV$466));
+
+FDCPE_mode_run: FDCPE port map (mode_run_I,mode_run,trigger_match/trigger_match_CLKF,'0','0',mode_run_CE);
+mode_run <= ((bit_cnt(2) AND bit_cnt(1) AND bit_cnt(0) AND pins(7))
+	OR (NOT bit_cnt(2) AND bit_cnt(1) AND bit_cnt(0) AND pins(3))
+	OR (bit_cnt(2) AND bit_cnt(1) AND NOT bit_cnt(0) AND pins(6))
+	OR (bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0) AND pins(4))
+	OR (NOT bit_cnt(2) AND bit_cnt(1) AND NOT bit_cnt(0) AND pins(2))
+	OR (NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0) AND pins(0))
+	OR (bit_cnt(2) AND NOT bit_cnt(1) AND bit_cnt(0) AND pins(5))
+	OR (NOT bit_cnt(2) AND NOT bit_cnt(1) AND bit_cnt(0) AND pins(1)));
+mode_run_CE <= (mode_read AND NOT mode_setup AND NOT mode_run.PIN);
+mode_run <= mode_run_I when mode_run_OE = '1' else 'Z';
+mode_run_OE <= mode_read;
+
+FDCPE_sample_counter0: FDCPE port map (sample_counter(0),sample_counter_D(0),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_D(0) <= ((sample_counter(0) AND $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter1: FTCPE port map (sample_counter(1),sample_counter_T(1),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(1) <= ((mode_run.PIN AND sample_counter(1) AND NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter2: FTCPE port map (sample_counter(2),sample_counter_T(2),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(2) <= ((mode_run.PIN AND sample_counter(2) AND NOT setup_reg(16) AND 
+	NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(2) AND setup_reg(16) AND 
+	NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter3: FTCPE port map (sample_counter(3),sample_counter_T(3),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(3) <= ((mode_run.PIN AND sample_counter(3) AND NOT setup_reg(17) AND 
+	NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(3) AND setup_reg(17) AND 
+	NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter4: FTCPE port map (sample_counter(4),sample_counter_T(4),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(4) <= ((mode_run.PIN AND sample_counter(4) AND NOT setup_reg(18) AND 
+	NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(4) AND setup_reg(18) AND 
+	NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT sample_counter(3) AND 
+	NOT $OpTx$INV$466));
+
+FTCPE_sample_counter5: FTCPE port map (sample_counter(5),sample_counter_T(5),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(5) <= ((mode_run.PIN AND sample_counter(5) AND NOT setup_reg(19) AND 
+	NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(5) AND setup_reg(19) AND 
+	NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT sample_counter(3) AND 
+	NOT sample_counter(4) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter6: FTCPE port map (sample_counter(6),sample_counter_T(6),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(6) <= ((mode_run.PIN AND sample_counter(6) AND NOT setup_reg(20) AND 
+	NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(6) AND setup_reg(20) AND 
+	NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT sample_counter(3) AND 
+	NOT sample_counter(4) AND NOT sample_counter(5) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter7: FTCPE port map (sample_counter(7),sample_counter_T(7),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(7) <= ((mode_run.PIN AND sample_counter(7) AND NOT setup_reg(21) AND 
+	NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(7) AND setup_reg(21) AND 
+	NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT sample_counter(3) AND 
+	NOT sample_counter(4) AND NOT sample_counter(5) AND NOT sample_counter(6) AND 
+	NOT $OpTx$INV$466));
+
+FTCPE_sample_counter8: FTCPE port map (sample_counter(8),sample_counter_T(8),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(8) <= ((mode_run.PIN AND sample_counter(8) AND NOT setup_reg(22) AND 
+	NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(8) AND setup_reg(22) AND 
+	NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT sample_counter(3) AND 
+	NOT sample_counter(4) AND NOT sample_counter(5) AND NOT sample_counter(6) AND 
+	NOT sample_counter(7) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter9: FTCPE port map (sample_counter(9),sample_counter_T(9),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(9) <= ((mode_run.PIN AND sample_counter(9) AND NOT setup_reg(23) AND 
+	NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(9) AND setup_reg(23) AND 
+	NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT sample_counter(3) AND 
+	NOT sample_counter(4) AND NOT sample_counter(5) AND NOT sample_counter(6) AND 
+	NOT sample_counter(7) AND NOT sample_counter(8) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter10: FTCPE port map (sample_counter(10),sample_counter_T(10),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(10) <= ((mode_run.PIN AND sample_counter(10) AND 
+	NOT setup_reg(24) AND NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(10) AND 
+	setup_reg(24) AND NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT sample_counter(3) AND 
+	NOT sample_counter(4) AND NOT sample_counter(5) AND NOT sample_counter(6) AND 
+	NOT sample_counter(7) AND NOT sample_counter(8) AND NOT sample_counter(9) AND 
+	NOT $OpTx$INV$466));
+
+FTCPE_sample_counter11: FTCPE port map (sample_counter(11),sample_counter_T(11),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(11) <= ((mode_run.PIN AND sample_counter(11) AND 
+	NOT setup_reg(25) AND NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(11) AND 
+	setup_reg(25) AND NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(10) AND NOT sample_counter(1) AND NOT sample_counter(2) AND 
+	NOT sample_counter(3) AND NOT sample_counter(4) AND NOT sample_counter(5) AND 
+	NOT sample_counter(6) AND NOT sample_counter(7) AND NOT sample_counter(8) AND 
+	NOT sample_counter(9) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter12: FTCPE port map (sample_counter(12),sample_counter_T(12),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(12) <= ((mode_run.PIN AND sample_counter(12) AND 
+	NOT setup_reg(26) AND NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(12) AND 
+	setup_reg(26) AND NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(10) AND NOT sample_counter(11) AND NOT sample_counter(1) AND 
+	NOT sample_counter(2) AND NOT sample_counter(3) AND NOT sample_counter(4) AND 
+	NOT sample_counter(5) AND NOT sample_counter(6) AND NOT sample_counter(7) AND 
+	NOT sample_counter(8) AND NOT sample_counter(9) AND NOT $OpTx$INV$466));
+
+FTCPE_sample_counter13: FTCPE port map (sample_counter(13),sample_counter_T(13),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(13) <= ((mode_run.PIN AND sample_counter(13) AND 
+	NOT setup_reg(27) AND NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(13) AND 
+	setup_reg(27) AND NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(10) AND NOT sample_counter(11) AND NOT sample_counter(12) AND 
+	NOT sample_counter(1) AND NOT sample_counter(2) AND NOT sample_counter(3) AND 
+	NOT sample_counter(4) AND NOT sample_counter(5) AND NOT sample_counter(6) AND 
+	NOT sample_counter(7) AND NOT sample_counter(8) AND NOT sample_counter(9) AND 
+	NOT $OpTx$INV$466));
+
+FTCPE_sample_counter14: FTCPE port map (sample_counter(14),sample_counter_T(14),trigger_match/trigger_match_CLKF,'0','0');
+sample_counter_T(14) <= ((mode_run.PIN AND sample_counter(14) AND 
+	NOT setup_reg(28) AND NOT $OpTx$INV$466)
+	OR (mode_run.PIN AND NOT sample_counter(14) AND 
+	setup_reg(28) AND NOT $OpTx$INV$466)
+	OR (NOT mode_run.PIN AND NOT sample_counter(0) AND 
+	NOT sample_counter(10) AND NOT sample_counter(11) AND NOT sample_counter(12) AND 
+	NOT sample_counter(13) AND NOT sample_counter(1) AND NOT sample_counter(2) AND 
+	NOT sample_counter(3) AND NOT sample_counter(4) AND NOT sample_counter(5) AND 
+	NOT sample_counter(6) AND NOT sample_counter(7) AND NOT sample_counter(8) AND 
+	NOT sample_counter(9) AND NOT $OpTx$INV$466));
+
+FDCPE_setup_reg0: FDCPE port map (setup_reg(0),mode_read,trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg1: FDCPE port map (setup_reg(1),setup_reg(0),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg2: FDCPE port map (setup_reg(2),setup_reg(1),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg3: FDCPE port map (setup_reg(3),setup_reg(2),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg4: FDCPE port map (setup_reg(4),setup_reg(3),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg5: FDCPE port map (setup_reg(5),setup_reg(4),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg6: FDCPE port map (setup_reg(6),setup_reg(5),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg7: FDCPE port map (setup_reg(7),setup_reg(6),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg8: FDCPE port map (setup_reg(8),setup_reg(7),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg9: FDCPE port map (setup_reg(9),setup_reg(8),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg10: FDCPE port map (setup_reg(10),setup_reg(9),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg11: FDCPE port map (setup_reg(11),setup_reg(10),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg12: FDCPE port map (setup_reg(12),setup_reg(11),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg13: FDCPE port map (setup_reg(13),setup_reg(12),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg14: FDCPE port map (setup_reg(14),setup_reg(13),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg15: FDCPE port map (setup_reg(15),setup_reg(14),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg16: FDCPE port map (setup_reg(16),setup_reg(15),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg17: FDCPE port map (setup_reg(17),setup_reg(16),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg18: FDCPE port map (setup_reg(18),setup_reg(17),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg19: FDCPE port map (setup_reg(19),setup_reg(18),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg20: FDCPE port map (setup_reg(20),setup_reg(19),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg21: FDCPE port map (setup_reg(21),setup_reg(20),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg22: FDCPE port map (setup_reg(22),setup_reg(21),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg23: FDCPE port map (setup_reg(23),setup_reg(22),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg24: FDCPE port map (setup_reg(24),setup_reg(23),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg25: FDCPE port map (setup_reg(25),setup_reg(24),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg26: FDCPE port map (setup_reg(26),setup_reg(25),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg27: FDCPE port map (setup_reg(27),setup_reg(26),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FDCPE_setup_reg28: FDCPE port map (setup_reg(28),setup_reg(27),trigger_match/trigger_match_CLKF,'0','0',mode_setup);
+
+FTCPE_sram_address0: FTCPE port map (sram_address(0),sram_address_T(0),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(0) <= ((NOT mode_read AND NOT mode_setup AND NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address1: FTCPE port map (sram_address(1),sram_address_T(1),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(1) <= ((NOT mode_read AND sram_address(0) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address2: FTCPE port map (sram_address(2),sram_address_T(2),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(2) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	NOT mode_setup AND NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT mode_setup AND NOT mode_run.PIN AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+	NOT bit_cnt(0)));
+
+FTCPE_sram_address3: FTCPE port map (sram_address(3),sram_address_T(3),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(3) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(2) AND NOT mode_setup AND NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(2) AND NOT mode_setup AND NOT mode_run.PIN AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address4: FTCPE port map (sram_address(4),sram_address_T(4),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(4) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(2) AND sram_address(3) AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(2) AND NOT sram_address(3) AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address5: FTCPE port map (sram_address(5),sram_address_T(5),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(5) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(2) AND sram_address(3) AND sram_address(4) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(2) AND NOT sram_address(3) AND NOT sram_address(4) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address6: FTCPE port map (sram_address(6),sram_address_T(6),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(6) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(2) AND sram_address(3) AND sram_address(4) AND 
+	sram_address(5) AND NOT mode_setup AND NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(2) AND NOT sram_address(3) AND NOT sram_address(4) AND 
+	NOT sram_address(5) AND NOT mode_setup AND NOT mode_run.PIN AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address7: FTCPE port map (sram_address(7),sram_address_T(7),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(7) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(2) AND sram_address(3) AND sram_address(4) AND 
+	sram_address(5) AND sram_address(6) AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(2) AND NOT sram_address(3) AND NOT sram_address(4) AND 
+	NOT sram_address(5) AND NOT sram_address(6) AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address8: FTCPE port map (sram_address(8),sram_address_T(8),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(8) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(2) AND sram_address(3) AND sram_address(4) AND 
+	sram_address(5) AND sram_address(6) AND sram_address(7) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(2) AND NOT sram_address(3) AND NOT sram_address(4) AND 
+	NOT sram_address(5) AND NOT sram_address(6) AND NOT sram_address(7) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address9: FTCPE port map (sram_address(9),sram_address_T(9),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(9) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(2) AND sram_address(3) AND sram_address(4) AND 
+	sram_address(5) AND sram_address(6) AND sram_address(7) AND 
+	sram_address(8) AND NOT mode_setup AND NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(2) AND NOT sram_address(3) AND NOT sram_address(4) AND 
+	NOT sram_address(5) AND NOT sram_address(6) AND NOT sram_address(7) AND 
+	NOT sram_address(8) AND NOT mode_setup AND NOT mode_run.PIN AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address10: FTCPE port map (sram_address(10),sram_address_T(10),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(10) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(2) AND sram_address(3) AND sram_address(4) AND 
+	sram_address(5) AND sram_address(6) AND sram_address(7) AND 
+	sram_address(8) AND sram_address(9) AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(2) AND NOT sram_address(3) AND NOT sram_address(4) AND 
+	NOT sram_address(5) AND NOT sram_address(6) AND NOT sram_address(7) AND 
+	NOT sram_address(8) AND NOT sram_address(9) AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address11: FTCPE port map (sram_address(11),sram_address_T(11),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(11) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(10) AND sram_address(2) AND sram_address(3) AND 
+	sram_address(4) AND sram_address(5) AND sram_address(6) AND 
+	sram_address(7) AND sram_address(8) AND sram_address(9) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(10) AND NOT sram_address(2) AND NOT sram_address(3) AND 
+	NOT sram_address(4) AND NOT sram_address(5) AND NOT sram_address(6) AND 
+	NOT sram_address(7) AND NOT sram_address(8) AND NOT sram_address(9) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address12: FTCPE port map (sram_address(12),sram_address_T(12),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(12) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(10) AND sram_address(11) AND sram_address(2) AND 
+	sram_address(3) AND sram_address(4) AND sram_address(5) AND 
+	sram_address(6) AND sram_address(7) AND sram_address(8) AND 
+	sram_address(9) AND NOT mode_setup AND NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(10) AND NOT sram_address(11) AND NOT sram_address(2) AND 
+	NOT sram_address(3) AND NOT sram_address(4) AND NOT sram_address(5) AND 
+	NOT sram_address(6) AND NOT sram_address(7) AND NOT sram_address(8) AND 
+	NOT sram_address(9) AND NOT mode_setup AND NOT mode_run.PIN AND NOT bit_cnt(2) AND 
+	NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address13: FTCPE port map (sram_address(13),sram_address_T(13),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(13) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(10) AND sram_address(11) AND sram_address(12) AND 
+	sram_address(2) AND sram_address(3) AND sram_address(4) AND 
+	sram_address(5) AND sram_address(6) AND sram_address(7) AND 
+	sram_address(8) AND sram_address(9) AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(10) AND NOT sram_address(11) AND NOT sram_address(12) AND 
+	NOT sram_address(2) AND NOT sram_address(3) AND NOT sram_address(4) AND 
+	NOT sram_address(5) AND NOT sram_address(6) AND NOT sram_address(7) AND 
+	NOT sram_address(8) AND NOT sram_address(9) AND NOT mode_setup AND NOT mode_run.PIN AND 
+	NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+FTCPE_sram_address14: FTCPE port map (sram_address(14),sram_address_T(14),trigger_match/trigger_match_CLKF,'0','0');
+sram_address_T(14) <= ((NOT mode_read AND sram_address(0) AND sram_address(1) AND 
+	sram_address(10) AND sram_address(11) AND sram_address(12) AND 
+	sram_address(13) AND sram_address(2) AND sram_address(3) AND 
+	sram_address(4) AND sram_address(5) AND sram_address(6) AND 
+	sram_address(7) AND sram_address(8) AND sram_address(9) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT done)
+	OR (mode_read AND NOT sram_address(0) AND NOT sram_address(1) AND 
+	NOT sram_address(10) AND NOT sram_address(11) AND NOT sram_address(12) AND 
+	NOT sram_address(13) AND NOT sram_address(2) AND NOT sram_address(3) AND 
+	NOT sram_address(4) AND NOT sram_address(5) AND NOT sram_address(6) AND 
+	NOT sram_address(7) AND NOT sram_address(8) AND NOT sram_address(9) AND NOT mode_setup AND 
+	NOT mode_run.PIN AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0)));
+
+
+sram_clock <= ((osc_clock AND clock_mode AND NOT done)
+	OR (NOT clock_mode AND pic_clock AND NOT done));
+
+
+sram_oe <= ((mode_read AND osc_clock AND clock_mode)
+	OR (mode_read AND NOT clock_mode AND pic_clock));
+
+FDCPE_trigger_match: FDCPE port map (trigger_match,trigger_match_D,trigger_match/trigger_match_CLKF,'0','0');
+trigger_match_D <= ((NOT mode_run.PIN AND NOT $OpTx$INV$466)
+	OR (trigger_match AND $OpTx$INV$466));
+
+
+trigger_match/trigger_match_CLKF <= ((osc_clock AND clock_mode)
+	OR (NOT clock_mode AND pic_clock));
+
+Register Legend:
+ FDCPE (Q,D,C,CLR,PRE,CE); 
+ FTCPE (Q,D,C,CLR,PRE,CE); 
+ LDCP  (Q,D,G,CLR,PRE); 
+
+******************************  Device Pin Out *****************************
+
+Device : XC9572XL-5-PC44
+
+
+   --------------------------------  
+  /6  5  4  3  2  1  44 43 42 41 40 \
+ | 7                             39 | 
+ | 8                             38 | 
+ | 9                             37 | 
+ | 10                            36 | 
+ | 11        XC9572XL-5-PC44     35 | 
+ | 12                            34 | 
+ | 13                            33 | 
+ | 14                            32 | 
+ | 15                            31 | 
+ | 16                            30 | 
+ | 17                            29 | 
+ \ 18 19 20 21 22 23 24 25 26 27 28 /
+   --------------------------------  
+
+
+Pin Signal                         Pin Signal                        
+No. Name                           No. Name                          
+  1 done                             23 GND                           
+  2 pins<1>                          24 pins<2>                       
+  3 sram_address<10>                 25 sram_address<12>              
+  4 pins<3>                          26 sram_address<13>              
+  5 pic_clock                        27 sram_address<14>              
+  6 osc_clock                        28 mode_read                     
+  7 KPR                              29 mode_run                      
+  8 sram_address<11>                 30 TDO                           
+  9 KPR                              31 GND                           
+ 10 GND                              32 VCC                           
+ 11 sram_address<0>                  33 clock_mode                    
+ 12 pins<7>                          34 mode_setup                    
+ 13 sram_address<9>                  35 sram_address<1>               
+ 14 pins<6>                          36 sram_address<2>               
+ 15 TDI                              37 sram_address<3>               
+ 16 TMS                              38 pins<0>                       
+ 17 TCK                              39 sram_address<4>               
+ 18 sram_clock                       40 sram_address<5>               
+ 19 pins<5>                          41 VCC                           
+ 20 sram_oe                          42 sram_address<6>               
+ 21 VCC                              43 sram_address<7>               
+ 22 pins<4>                          44 sram_address<8>               
+
+
+Legend :  NC  = Not Connected, unbonded pin
+         PGND = Unused I/O configured as additional Ground pin
+         TIE  = Unused I/O floating -- must tie to VCC, GND or other signal
+         KPR  = Unused I/O with weak keeper (leave unconnected)
+         VCC  = Dedicated Power Pin
+         GND  = Dedicated Ground Pin
+         TDI  = Test Data In, JTAG pin
+         TDO  = Test Data Out, JTAG pin
+         TCK  = Test Clock, JTAG pin
+         TMS  = Test Mode Select, JTAG pin
+  PROHIBITED  = User reserved pin
+****************************  Compiler Options  ****************************
+
+Following is a list of all global compiler options used by the fitter run.
+
+Device(s) Specified                         : xc9572xl-5-PC44
+Optimization Method                         : SPEED
+Multi-Level Logic Optimization              : ON
+Ignore Timing Specifications                : OFF
+Default Register Power Up Value             : LOW
+Keep User Location Constraints              : ON
+What-You-See-Is-What-You-Get                : OFF
+Exhaustive Fitting                          : OFF
+Keep Unused Inputs                          : OFF
+Slew Rate                                   : FAST
+Power Mode                                  : STD
+Ground on Unused IOs                        : OFF
+Set I/O Pin Termination                     : KEEPER
+Global Clock Optimization                   : ON
+Global Set/Reset Optimization               : OFF
+Global Ouput Enable Optimization            : OFF
+Input Limit                                 : 54
+Pterm Limit                                 : 25
