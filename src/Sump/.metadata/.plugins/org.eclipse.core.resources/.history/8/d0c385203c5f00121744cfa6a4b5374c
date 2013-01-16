@@ -1,0 +1,19 @@
+package org.sump.analyzer;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+public class GPIOInputStream extends InputStream {
+
+	@Override
+	public int read() throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void privateWrite(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
