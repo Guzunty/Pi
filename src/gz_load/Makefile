@@ -14,7 +14,7 @@ SRC	=	lenval.c micro.c ports.c
 
 OBJ	=	lenval.o micro.o ports.o
 
-BIN	=	../gz_load
+BIN	=	./gz_load
 
 all: $(BIN)
 
