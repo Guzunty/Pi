@@ -22,11 +22,15 @@
 #ifndef GZ_SPI_H
 #define GZ_SPI_H
 
+#define byte unsigned char
+
 #include<bcm2835.h>
 
 int gz_spi_set(int bit_to_set);
 int gz_spi_reset(int bit_to_reset);
-int gz_spi_write(unsigned short int to_write);
-unsigned short gz_spi_read();
+int gz_spi_write(byte* to_write);
+void gz_spi_read(byte* result);
+void gz_spi_set_width(int new_width);
+void gz_spi_close();
 
 #endif // GZ_SPI_H
