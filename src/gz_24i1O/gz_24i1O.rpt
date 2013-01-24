@@ -1,7 +1,7 @@
  
 cpldfit:  version P.40xd                            Xilinx Inc.
                                   Fitter Report
-Design Name: gz_24i1O                            Date:  1- 9-2013, 10:24AM
+Design Name: gz_24i1O                            Date:  1-24-2013,  2:54PM
 Device Used: XC9572XL-5-PC44
 Fitting Status: Successful
 
@@ -15,8 +15,8 @@ Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot
 
 Function    Mcells      FB Inps     Pterms      IO          
 Block       Used/Tot    Used/Tot    Used/Tot    Used/Tot    
-FB1           2/18       30/54       49/90       8/ 9
-FB2           0/18        0/54        0/90       7/ 9
+FB1           2/18       30/54       49/90       9/ 9*
+FB2           0/18        0/54        0/90       6/ 9
 FB3           1/18        1/54        1/90       9/ 9*
 FB4           7/18       10/54       23/90       5/ 7
              -----       -----       -----      -----    
@@ -35,9 +35,9 @@ Global set/reset net(s) unused.
 Signal Type    Required     Mapped  |  Pin Type            Used    Total 
 ------------------------------------|------------------------------------
 Input         :   27          27    |  I/O              :    26      28
-Output        :    2           2    |  GCK/IO           :     2       3
+Output        :    2           2    |  GCK/IO           :     3       3
 Bidirectional :    0           0    |  GTS/IO           :     0       2
-GCK           :    0           0    |  GSR/IO           :     1       1
+GCK           :    0           0    |  GSR/IO           :     0       1
 GTS           :    0           0    |
 GSR           :    0           0    |
                  ----        ----
@@ -52,8 +52,6 @@ End of Mapped Resource Summary
 
 WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
    use the default filename of 'gz_24i1O.ise'.
-WARNING:Cpld:1007 - Removing unused input(s) 'mosi'.  The input(s) are unused
-   after optimization. Please verify functionality via simulation.
 *************************  Summary of Mapped Logic  ************************
 
 ** 2 Outputs **
@@ -84,6 +82,7 @@ inputs<0>                             FB1_2   1    I/O     I
 inputs<1>                             FB1_5   2    I/O     I
 inputs<2>                             FB1_6   3    I/O     I
 inputs<3>                             FB1_8   4    I/O     I
+p_out                                 FB1_9   5~   GCK/I/O I
 inputs<22>                            FB1_11  6~   GCK/I/O I
 inputs<23>                            FB1_14  7~   GCK/I/O I
 inputs<4>                             FB1_15  8    I/O     I
@@ -92,7 +91,6 @@ inputs<6>                             FB2_2   35   I/O     I
 inputs<7>                             FB2_5   36   I/O     I
 inputs<8>                             FB2_6   37   I/O     I
 inputs<9>                             FB2_8   38   I/O     I
-p_out                                 FB2_9   39   GSR/I/O I
 inputs<10>                            FB2_15  43   I/O     I
 inputs<11>                            FB2_17  44   I/O     I
 inputs<12>                            FB3_2   11   I/O     I
@@ -137,7 +135,7 @@ miso_mux0003/miso_mux0003_RSTF__$INT
 (unused)              0       0     0   5     FB1_6   3     I/O     I
 (unused)              0       0     0   5     FB1_7         (b)     
 (unused)              0       0     0   5     FB1_8   4     I/O     I
-(unused)              0       0     0   5     FB1_9   5     GCK/I/O 
+(unused)              0       0     0   5     FB1_9   5     GCK/I/O I
 (unused)              0       0     0   5     FB1_10        (b)     
 (unused)              0       0     0   5     FB1_11  6     GCK/I/O I
 (unused)              0       0     0   5     FB1_12        (b)     
@@ -182,7 +180,7 @@ Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB2_6   37    I/O     I
 (unused)              0       0     0   5     FB2_7         (b)     
 (unused)              0       0     0   5     FB2_8   38    I/O     I
-(unused)              0       0     0   5     FB2_9   39    GSR/I/O I
+(unused)              0       0     0   5     FB2_9   39    GSR/I/O 
 (unused)              0       0     0   5     FB2_10        (b)     
 (unused)              0       0     0   5     FB2_11  40    GTS/I/O 
 (unused)              0       0     0   5     FB2_12        (b)     
@@ -409,7 +407,7 @@ No. Name                           No. Name
   2 inputs<1>                        24 inputs<18>                    
   3 inputs<2>                        25 inputs<20>                    
   4 inputs<3>                        26 inputs<21>                    
-  5 KPR                              27 KPR                           
+  5 p_out                            27 KPR                           
   6 inputs<22>                       28 sclk                          
   7 inputs<23>                       29 KPR                           
   8 inputs<4>                        30 TDO                           
@@ -421,7 +419,7 @@ No. Name                           No. Name
  14 inputs<15>                       36 inputs<7>                     
  15 TDI                              37 inputs<8>                     
  16 TMS                              38 inputs<9>                     
- 17 TCK                              39 p_out                         
+ 17 TCK                              39 KPR                           
  18 output                           40 KPR                           
  19 inputs<16>                       41 VCC                           
  20 inputs<17>                       42 KPR                           

@@ -1,7 +1,7 @@
 NET "miso" LOC = "P34";
-NET "mosi" LOC = "P29";
 NET "sclk" LOC = "P28";
 NET "sel"  LOC = "P33";
+NET "p_out" LOC = FB1_9;
 NET "inputs<0>" LOC = "P1";
 NET "inputs<1>" LOC = "P2";
 NET "inputs<2>" LOC = "P3";
