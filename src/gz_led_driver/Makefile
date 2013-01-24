@@ -1,6 +1,6 @@
 #
 # Makefile:
-#       gz_led_dem0 - Guzunty test program
+#       gz_led_demo - Guzunty test program
 #
 #	 Copyright (c) 2013 campbellsan
 ########################################################################
@@ -10,7 +10,7 @@
 #    published by the Free Software Foundation, either version 3 of the
 #    License, or (at your option) any later version.
 #
-#    wiringPi is distributed in the hope that it will be useful,
+#    Guzunty is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU Lesser General Public License for more details.
