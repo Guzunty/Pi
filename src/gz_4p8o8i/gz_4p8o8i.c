@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
   nodelay(stdscr, 1);               // don't wait for key presses
   noecho();                         // don't echo key presses
   gz_spi_set_width(2);              // Pass blocks of 2 bytes on SPI
-  gz_clock_ena(GZ_CLK_5MHz, 0x02);  // not the slowest clock we got
+  gz_clock_ena(GZ_CLK_5MHz, 0x02);  // 2.5 MHz
   erase();
   outputs_off();
   printw("Modulating PWMs.\n");
