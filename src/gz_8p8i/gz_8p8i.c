@@ -44,7 +44,7 @@ void exercise_pwms() {
   for(i = 0; i < 8; i++) {
     payload[0] = i;
     payload[1] = 0x1f - values[i];
-    if (values[i] > 0) {
+    if (values[i] > 1) {
       values[i] -= 2;
     }
     else {
