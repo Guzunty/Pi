@@ -18,126 +18,112 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * This program demonstrates the 8 way 6 bit pwm plus six input Guzunty
- * core.
+ * This program demonstrates the 8 way 5 bit pwm plus eight input
+ * Guzunty core.
  * 
  */
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <linux/spi/spidev.h>
-#include <sys/mman.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <unistd.h>
+#include <time.h>
 #include <ncurses.h>
+#include <gz_spi.h>
+#include <gz_clk.h>
 
-// SPI config definitions
-#define SPI_MODE              SPI_MODE_0
-#define SPI_BITS_PER_WORD     8
-#define SPI_MAX_SPEED         1000000       // 1 Mhz
+unsigned char reg = 4;
+char dir = 1;
+unsigned char values[8] = {0,0,0,0,0,0,0,0};
 
-int spi_fd;                                 // file descriptor
+void exercise_pwms() {
+  unsigned char payload[2];
 
-void transfer(unsigned char* data, 
-               int delay)
-{
-    struct spi_ioc_transfer spi;
- 
-    unsigned char outbuf[2];
-    unsigned char inbuf[2];
-
-    outbuf[0] = data[0];
-    outbuf[1] = data[1];
-    spi.tx_buf        = (unsigned long)outbuf;
-    spi.rx_buf        = (unsigned long)&inbuf;
-    spi.len           = 2;
-    spi.delay_usecs   = delay;
-    spi.speed_hz      = SPI_MAX_SPEED;
-    spi.bits_per_word = SPI_BITS_PER_WORD;
-
-    if(ioctl (spi_fd, SPI_IOC_MESSAGE(1), &spi) < 0){
-        printf("ERROR while sending\n");
-    }
-}
-
-/*spi_open
-*      - Open the given SPI channel and configure it.
-*      - there are normally two SPI devices on your PI:
-*        /dev/spidev0.0: activates the CS0 pin during transfer
-*        /dev/spidev0.1: activates the CS1 pin during transfer
-*
-*/
-int spi_open(char* dev)
-{
-  int _mode  = SPI_MODE;
-  int _bpw   = SPI_BITS_PER_WORD;
-  int _speed = SPI_MAX_SPEED;
-
-  if((spi_fd = open(dev, O_RDWR)) < 0){
-    printf("error opening %s\n",dev);
-    return -1;
+  reg += dir;
+  if (reg == 7 || reg == 0) {
+    dir = -dir;
   }
-
-  if (ioctl (spi_fd, SPI_IOC_WR_MODE, &_mode) < 0) 
-      return -1 ;
-  if (ioctl (spi_fd, SPI_IOC_RD_MODE, &_mode) < 0) 
-      return -1 ;
-
-  if (ioctl (spi_fd, SPI_IOC_WR_BITS_PER_WORD, &_bpw) < 0) 
-      return -1 ;
-  if (ioctl (spi_fd, SPI_IOC_RD_BITS_PER_WORD, &_bpw) < 0) 
-      return -1 ;
-
-  if (ioctl (spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &_speed)   < 0) 
-      return -1 ;
-  if (ioctl (spi_fd, SPI_IOC_RD_MAX_SPEED_HZ, &_speed)   < 0) 
-      return -1 ;
-
-  return 0;
-
+  values[reg] = 0x1f;
+  int i;
+  for(i = 0; i < 8; i++) {
+    payload[0] = i;
+    payload[1] = 0x1f - values[i];
+    if (values[i] > 0) {
+      values[i] -= 2;
+    }
+    else {
+      values[i] = 0;
+    }
+    gz_spi_write(payload);
+  }
+  usleep(100000);
 }
 
-unsigned char intensity[256];
+void display_inputs() {
+  int row, col;
+  unsigned char inputs[2];
+  getmaxyx(stdscr, row, col);   /* get the screen boundaries */
+  int center_x = col / 2;
+  int center_y = row / 2;
+  int start_y = center_y - 2;
+  int start_x = center_x - 8;
+  mvprintw(start_y, center_x - 8, "Input bit status");
+  start_y++;
+  mvprintw(start_y, start_x, "7 6 5 4 3 2 1 0");
+  gz_spi_read(inputs);
+  unsigned char mask = 0x01;
+  int i = 0;
+  for (; i < 8; i++) {
+    int cur_byte = 0;
+    if (i > 7) {
+      cur_byte = 1;
+    }
+    if (inputs[cur_byte] & mask) {
+      mvprintw(center_y, start_x + 14 - (2 * i), "1");
+    }
+    else {
+      mvprintw(center_y, start_x + 14 - (2 * i), "0");
+    }
+    mask = mask << 1;
+    if (i == 7) {
+      mask = 0x01;
+    }
+  }
+}
 
 int main(int argc, char* argv[])
 {
-    unsigned char payload[2];
-    unsigned char reg = 4;
-    char dir = 1;
-    unsigned char values[8] = {0,0,0,0,0,0,0,0};
+  initscr();                        // initialize ncurses display
+  nodelay(stdscr, 1);               // don't wait for key presses
+  noecho();                         // don't echo key presses
+  erase();
+  gz_spi_set_width(2);              // Pass blocks of 2 bytes on SPI
+  gz_clock_ena(GZ_CLK_5MHz, 0x02);  // 2.5 Mhz
 
-    if(spi_open("/dev/spidev0.0") < 0){
-        printf("spi_open failed\n");
-        return -1;
+  int key = 0;
+  printw("Modulating PWMs.\n");
+  printw("Press 'n' for next test, any other key to stop.\n");
+  while (1) {
+    exercise_pwms();
+    key = getch();
+    if (key != -1) {
+      break;
     }
-
-    int i = 0;
-    while (1) {
-	  reg += dir;
-      if (reg == 7 || reg == 0) {
-		  dir = -dir;
-      } 
-      values[reg] = 0x7;
-      
-      for(i = 0; i < 8; i++) {
-        payload[0] = i;
-        payload[1] = values[i];
-        if (values[i] > 0) {
-          values[i]--;
-        }
-        transfer(payload,0);
+  }
+  if (key == 'n') {
+    erase();
+    curs_set(0);                     // Hide the cursor
+    printw("Reading inputs.\n");
+    printw("Press any key to stop.\n");
+    while(1) {
+      display_inputs();
+      key = getch();
+      if (key != -1) {
+        break;
       }
-      usleep(50000);
-      if (getch() != 0) {
-		  break;
-	  }
     }
-    // close SPI channel
-    close(spi_fd);
-
-    return 0;
+    move(getcury(stdscr) + 1 ,0);
+    curs_set(1);
+    refresh();
+  }
+  gz_spi_close();                   // close SPI channel
+  erase();
+  reset_shell_mode();               // turn off ncurses
+  return 0;
 }
