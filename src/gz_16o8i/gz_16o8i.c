@@ -126,10 +126,11 @@ int main(int argc, char* argv[])
 		  break;
 	    }
 	  }
+	  move(getcury(stdscr) + 1 ,0);
 	  curs_set(1);
+	  refresh();
 	}
     gz_spi_close();                   // close SPI channel
-	erase();
     reset_shell_mode();               // turn off ncurses
     return 0;
 }
