@@ -34,10 +34,10 @@ unsigned char values[4] = {0xf0,0xc0,0x80,0x40};
 int val_dir[4] = {1,1,1,1};
 
 void outputs_off() {
-	unsigned char payload[2];
-	payload[0] = 4;
-	payload[1] = 0xff;
-	gz_spi_write(payload);
+  unsigned char payload[2];
+  payload[0] = 4;
+  payload[1] = 0xff;
+  gz_spi_write(payload);
 }
 
 void exercise_pwms() {
@@ -46,9 +46,9 @@ void exercise_pwms() {
   
   for(i = 0; i < 4; i++) {
     values[i] += val_dir[i];
-	if (values[i] == 0xfe || values[i] == 0x01) {
+  if (values[i] == 0xfe || values[i] == 0x01) {
       val_dir[i] = -val_dir[i];
-	}
+  }
     payload[0] = i;
     payload[1] = values[i];
     gz_spi_write(payload);
@@ -70,7 +70,7 @@ void exercise_outputs(unsigned char a, unsigned char b) {
 void display_inputs() {
   int row, col;
   unsigned char inputs[2];
-  getmaxyx(stdscr, row, col);		/* get the screen boundaries */
+  getmaxyx(stdscr, row, col);   /* get the screen boundaries */
   int center_x = col / 2;
   int center_y = row / 2;
   int start_y = center_y - 2;
@@ -82,98 +82,98 @@ void display_inputs() {
   unsigned char mask = 0x01;
   int i = 0;
   for (; i < 8; i++) {
-	  int cur_byte = 0;
-	  if (i > 7) {
-		  cur_byte = 1;
-	  }
-	  if (inputs[cur_byte] & mask) {
-		  mvprintw(center_y, start_x + 30 - (2 * i), "1");
-	  }
-	  else {
-		  mvprintw(center_y, start_x + 30 - (2 * i), "0");
-	  }
-	  mask = mask << 1;
-	  if (i == 7) {
-		  mask = 0x01;
-	  }
+    int cur_byte = 0;
+    if (i > 7) {
+      cur_byte = 1;
+    }
+    if (inputs[cur_byte] & mask) {
+      mvprintw(center_y, start_x + 30 - (2 * i), "1");
+    }
+    else {
+      mvprintw(center_y, start_x + 30 - (2 * i), "0");
+    }
+    mask = mask << 1;
+    if (i == 7) {
+      mask = 0x01;
+    }
   }
 }
 
 int main(int argc, char* argv[])
 {
-    initscr();                        // initialize ncurses display
-    nodelay(stdscr, 1);               // don't wait for key presses
-    noecho();                         // don't echo key presses
-    gz_spi_set_width(2);              // Pass blocks of 2 bytes on SPI
-    gz_clock_ena(GZ_CLK_5MHz, 0x02);  // not the slowest clock we got
+  initscr();                        // initialize ncurses display
+  nodelay(stdscr, 1);               // don't wait for key presses
+  noecho();                         // don't echo key presses
+  gz_spi_set_width(2);              // Pass blocks of 2 bytes on SPI
+  gz_clock_ena(GZ_CLK_5MHz, 0x02);  // not the slowest clock we got
+  erase();
+  outputs_off();
+  printw("Modulating PWMs.\n");
+  printw("Press 'n' for next test, any other key to stop.\n");
+  int key = 0;
+  while(1) {
+    exercise_pwms();
+    key = getch();
+    if (key != -1) {
+      break;
+    }
+  }
+  printw("Toggling all outputs.\n");
+  printw("Press 'n' for next test, any other key to stop.\n");
+  while(1) {
+    exercise_outputs(0xff, 0x00);
+    key = getch();
+    if (key != -1) {
+      break;
+    }
+  }
+  if (key == 'n') {
     erase();
-    outputs_off();
-    printw("Modulating PWMs.\n");
-	printw("Press 'n' for next test, any other key to stop.\n");
-	int key = 0;
+    printw("Toggling alternate outputs.\n");
+    printw("Press 'n' for next test, any other key to stop.\n");
     while(1) {
-	  exercise_pwms();
+      exercise_outputs(0xaa, 0x55);
       key = getch();
       if (key != -1) {
-		  break;
-	  }
-	}
-    printw("Toggling all outputs.\n");
-	printw("Press 'n' for next test, any other key to stop.\n");
+        break;
+      }
+    }
+  }
+  if (key == 'n') {
+    erase();
+    printw("Walking outputs.\n");
+    printw("Press 'n' for next test, any other key to stop.\n");
+    unsigned char current = 0xfe;
     while(1) {
-	  exercise_outputs(0xff, 0x00);
+      exercise_outputs(current, (current << 1) | 0x01);
+      current = (current << 2) | 0x03;
+      if (current == 0xff) {
+        current = 0xfe;
+      }
       key = getch();
       if (key != -1) {
-		  break;
-	  }
-	}
-	if (key == 'n') {
-	  erase();
-      printw("Toggling alternate outputs.\n");
-	  printw("Press 'n' for next test, any other key to stop.\n");
-      while(1) {
-		exercise_outputs(0xaa, 0x55);
-        key = getch();
-        if (key != -1) {
-		  break;
-	    }
-	  }
-	}
-	if (key == 'n') {
-	  erase();
-      printw("Walking outputs.\n");
-	  printw("Press 'n' for next test, any other key to stop.\n");
-	  unsigned char current = 0xfe;
-      while(1) {
-		exercise_outputs(current, (current << 1) | 0x01);
-		current = (current << 2) | 0x03;
-		if (current == 0xff) {
-			current = 0xfe;
-	    }
-        key = getch();
-        if (key != -1) {
-		  break;
-	    }
-	  }
-	}
-	if (key == 'n') {
-	  erase();
-	  curs_set(0);                     // Hide the cursor
-      printw("Reading inputs.\n");
-	  printw("Press any key to stop.\n");
-      while(1) {
-		display_inputs();
-        key = getch();
-        if (key != -1) {
-		  break;
-	    }
-	  }
-	  move(getcury(stdscr) + 1 ,0);
-	  curs_set(1);
-	  refresh();
-	}
-    gz_spi_close();                   // close SPI channel
-	erase();
-    reset_shell_mode();               // turn off ncurses
-    return 0;
+        break;
+      }
+    }
+  }
+  if (key == 'n') {
+    erase();
+    curs_set(0);                     // Hide the cursor
+    printw("Reading inputs.\n");
+    printw("Press any key to stop.\n");
+    while(1) {
+      display_inputs();
+      key = getch();
+      if (key != -1) {
+        break;
+      }
+    }
+    move(getcury(stdscr) + 1 ,0);
+    curs_set(1);
+    refresh();
+  }
+  gz_spi_close();                   // close SPI channel
+  erase();
+  reset_shell_mode();               // turn off ncurses
+  return 0;
 }
