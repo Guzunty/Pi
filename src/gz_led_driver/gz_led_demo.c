@@ -19,7 +19,9 @@
  * MA 02110-1301, USA.
  * 
  * This program implements a digital clock displayed on a 4 digit
- * 7 segment LED.
+ * 7 segment LED. It also incorporates a font for sevent segment
+ * displays, so that messages can be displayed. Toggle between the
+ * clock and message with the 'c' and 'm' keys.
  * 
  */
 
