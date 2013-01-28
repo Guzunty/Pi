@@ -27,9 +27,9 @@
 
 int main(int argc, char* argv[])
 {
-	char aChar;
-	
-    gz_clock_ena(GZ_CLK_5MHz, 0xfff); // Turn on the slowest clock we can
+  char aChar;
+  
+    gz_clock_ena(GZ_CLK_5MHz, 0x07f); // Turn on a slow clock
     printf("\nPress any key to stop test.");
     scanf("%c", &aChar);
     gz_clock_dis();
