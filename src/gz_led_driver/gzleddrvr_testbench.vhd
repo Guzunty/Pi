@@ -38,7 +38,7 @@ ARCHITECTURE behavior OF gzleddrvr_testbench IS
            clk : in  STD_LOGIC;
 			  digit_enas : inout  std_logic_vector (3 downto 0);
 			  segments: out std_logic_vector (6 downto 0);
-			  inputs : in std_logic_vector (5 downto 0));
+			  inputs : in std_logic_vector (7 downto 0));
 	END COMPONENT;
    for Inst_gzleddrvr: gzleddrvr use entity work.gzleddrvr;
 
@@ -85,7 +85,7 @@ BEGIN
            sclk => spi_sck,
            sel => spi_ssel,
            clk => s_clk,
-			  inputs => m_inputs (5 downto 0));
+			  inputs => m_inputs (7 downto 0));
 
     --=========================================================
     -- Clock generator processes
