@@ -20,6 +20,8 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 #  
+# You need to have built and installed the GZ Guzunty Python extension
+# module in gzlib using: "sudo python setup.py install"
 #  
 
 import GZ
