@@ -47,7 +47,7 @@ def display_inputs():
   stdscr.addstr(start_y, center_x - 8, "Input bit status")
   start_y += 1
   stdscr.addstr(start_y, start_x, "F E D C B A 9 8 7 6 5 4 3 2 1 0")
-  inputs = GZ.spi_read()
+  inputs = int(GZ.spi_read())
   mask = 0x01
   for i in range(8):
     if (inputs & mask):

@@ -84,7 +84,7 @@ static PyObject* spi_read(PyObject* self, PyObject* args)
 {
   long read = 0;
   PyErr_Clear();
-  gz_spi_write((unsigned char*)&read);
+  gz_spi_read((unsigned char*)&read);
   return Py_BuildValue("l", read);
 }
 
