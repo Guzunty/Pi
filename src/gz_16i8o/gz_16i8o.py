@@ -29,7 +29,6 @@
 import curses
 import GZ
 import time
-import bitarray
 
 def exercise_outputs(a, b):
   GZ.spi_write(a & 0xffff)            # pass output bytes to SPI
