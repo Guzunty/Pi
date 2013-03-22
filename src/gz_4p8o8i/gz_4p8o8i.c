@@ -118,13 +118,15 @@ int main(int argc, char* argv[])
       break;
     }
   }
-  printw("Toggling all outputs.\n");
-  printw("Press 'n' for next test, any other key to stop.\n");
-  while(1) {
-    exercise_outputs(0xff, 0x00);
-    key = getch();
-    if (key != -1) {
-      break;
+  if (key == 'n') {
+    printw("Toggling all outputs.\n");
+    printw("Press 'n' for next test, any other key to stop.\n");
+    while(1) {
+      exercise_outputs(0xff, 0x00);
+      key = getch();
+      if (key != -1) {
+        break;
+      }
     }
   }
   if (key == 'n') {
