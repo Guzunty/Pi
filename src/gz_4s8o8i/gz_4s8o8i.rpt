@@ -1,0 +1,956 @@
+ 
+cpldfit:  version P.40xd                            Xilinx Inc.
+                                  No Fit Report
+Design Name: gz_4s8o8i                           Date:  3-25-2013, 10:26AM
+Device Used: XC9572XL-5-PC44
+Fitting Status: Placement Failed
+
+**************************  Errors and Warnings  ***************************
+
+WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
+   use the default filename of 'gz_4s8o8i.ise'.
+ERROR:Cpld:892 - Cannot place signal bit_cnt<1>. Consider reducing the
+   collapsing input limit or the product term limit to prevent the fitter from
+   creating high input and/or high product term functions.
+ERROR:Cpld:868 - Cannot fit the design into any of the specified devices with
+   the selected implementation options.
+*************************  Mapped Resource Summary  **************************
+
+Macrocells     Product Terms    Function Block   Registers      Pins           
+Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
+67 /72  ( 93%) 241 /360  ( 67%) 102/216 ( 47%)   60 /72  ( 83%) 25 /34  ( 74%)
+
+** Function Block Resources **
+
+Function    Mcells      FB Inps     Pterms      IO          
+Block       Used/Tot    Used/Tot    Used/Tot    Used/Tot    
+FB1          18/18*      27/54       44/90       9/ 9*
+FB2          18/18*      10/54       57/90       6/ 9
+FB3          13/18       47/54       80/90       4/ 9
+FB4          18/18*      18/54       60/90       6/ 7
+             -----       -----       -----      -----    
+             67/72      102/216     241/360     25/34 
+
+* - Resource is exhausted
+
+** Global Control Resources **
+
+Global clock net(s) unused.
+Global output enable net(s) unused.
+Global set/reset net(s) unused.
+
+** Pin Resources **
+
+Signal Type    Required     Mapped  |  Pin Type            Used    Total 
+------------------------------------|------------------------------------
+Input         :   11          11    |  I/O              :    22      28
+Output        :   13          13    |  GCK/IO           :     3       3
+Bidirectional :    0           0    |  GTS/IO           :     0       2
+GCK           :    1           1    |  GSR/IO           :     0       1
+GTS           :    0           0    |
+GSR           :    0           0    |
+                 ----        ----
+        Total     25          25
+
+** Power Data **
+
+There are 69 macrocells in high performance mode (MCHP).
+There are 0 macrocells in low power mode (MCLP).
+End of Mapped Resource Summary
+*************************  Summary of Mapped Logic  ************************
+
+** 13 Outputs **
+
+Signal                                                                    Total Total Loc     Pin  Pin     Pin     
+Name                                                                      Pts   Inps          No.  Type    Use     
+pwms<0>                                                                   2     12    FB1_2   1    I/O     O       
+pwms<1>                                                                   2     12    FB1_5   2    I/O     O       
+pwms<2>                                                                   2     12    FB1_6   3    I/O     O       
+pwms<3>                                                                   2     12    FB1_8   4    I/O     O       
+outputs<0>                                                                3     10    FB1_15  8    I/O     O       
+outputs<1>                                                                3     10    FB1_17  9    I/O     O       
+outputs<2>                                                                3     10    FB2_2   35   I/O     O       
+outputs<3>                                                                3     10    FB2_5   36   I/O     O       
+outputs<4>                                                                3     10    FB2_6   37   I/O     O       
+outputs<5>                                                                3     10    FB2_8   38   I/O     O       
+outputs<6>                                                                3     10    FB2_15  43   I/O     O       
+outputs<7>                                                                3     10    FB2_17  44   I/O     O       
+miso                                                                      9     12    FB4_17  34   I/O     O       
+
+** 54 Buried Nodes **
+
+Signal                                                                    Total Total Loc     
+Name                                                                      Pts   Inps          
+main_counter_mux0001<9>                                                   2     12    FB1_1   
+main_counter_mux0001<8>                                                   2     12    FB1_3   
+main_counter_mux0001<7>                                                   2     12    FB1_4   
+main_counter_mux0001<6>                                                   2     12    FB1_7   
+main_counter_mux0001<5>                                                   2     12    FB1_9   
+main_counter_mux0001<10>                                                  2     12    FB1_10  
+pwm_counters<0><5>                                                        3     10    FB1_11  
+pwm_counters<0><4>                                                        3     10    FB1_12  
+pwm_counters<0><3>                                                        3     10    FB1_13  
+pwm_counters<0><2>                                                        3     10    FB1_14  
+pwm_counters<0><1>                                                        3     10    FB1_16  
+pwm_counters<0><0>                                                        3     10    FB1_18  
+pwm_counters<3><7>                                                        3     10    FB2_1   
+pwm_counters<3><6>                                                        3     10    FB2_3   
+pwm_counters<3><5>                                                        3     10    FB2_4   
+pwm_counters<3><4>                                                        3     10    FB2_7   
+pwm_counters<3><3>                                                        3     10    FB2_9   
+pwm_counters<3><2>                                                        3     10    FB2_10  
+pwm_counters<3><1>                                                        3     10    FB2_11  
+pwm_counters<3><0>                                                        3     10    FB2_12  
+pwm_counters<2><7>                                                        3     10    FB2_13  
+pwm_selector<2>                                                           4     7     FB2_14  
+pwm_selector<1>                                                           4     7     FB2_16  
+pwm_selector<0>                                                           4     7     FB2_18  
+main_counter_mux0001<2>                                                   1     2     FB3_1   
+main_counter_mux0001<1>                                                   1     1     FB3_2   
+pwms_0/pwms_0_RSTF                                                        17    17    FB3_3   
+Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2  1     5     FB3_5   
+loading_val                                                               3     5     FB3_6   
+bit_cnt<2>                                                                3     4     FB3_7   
+pwms_2/pwms_2_RSTF                                                        17    17    FB3_9   
+Madd_main_counter_add0000__and0007/Madd_main_counter_add0000__and0007_D2  1     5     FB3_10  
+pwms_3/pwms_3_RSTF                                                        17    17    FB3_13  
+main_counter_mux0001<4>                                                   1     4     FB3_14  
+main_counter_mux0001<3>                                                   1     3     FB3_15  
+main_counter_mux0001<0>                                                   0     0     FB3_16  
+pwms_1/pwms_1_RSTF                                                        17    17    FB3_18  
+pwm_counters<2><6>                                                        3     10    FB4_1   
+pwm_counters<2><5>                                                        3     10    FB4_2   
+pwm_counters<2><4>                                                        3     10    FB4_3   
+
+Signal                                                                    Total Total Loc     
+Name                                                                      Pts   Inps          
+pwm_counters<2><3>                                                        3     10    FB4_4   
+pwm_counters<2><2>                                                        3     10    FB4_5   
+pwm_counters<2><1>                                                        3     10    FB4_6   
+pwm_counters<2><0>                                                        3     10    FB4_7   
+pwm_counters<1><7>                                                        3     10    FB4_8   
+pwm_counters<1><6>                                                        3     10    FB4_9   
+pwm_counters<1><5>                                                        3     10    FB4_10  
+pwm_counters<1><4>                                                        3     10    FB4_11  
+pwm_counters<1><3>                                                        3     10    FB4_12  
+pwm_counters<1><2>                                                        3     10    FB4_13  
+pwm_counters<1><1>                                                        3     10    FB4_14  
+pwm_counters<1><0>                                                        3     10    FB4_15  
+pwm_counters<0><7>                                                        3     10    FB4_16  
+pwm_counters<0><6>                                                        3     10    FB4_18  
+
+** 12 Inputs **
+
+Signal                                                                    Loc     Pin  Pin     Pin     
+Name                                                                              No.  Type    Use     
+clk                                                                       FB1_9   5~   GCK/I/O GCK
+inputs<6>                                                                 FB1_11  6~   GCK/I/O I
+inputs<7>                                                                 FB1_14  7~   GCK/I/O I
+inputs<0>                                                                 FB3_14  19   I/O     I
+inputs<1>                                                                 FB3_15  20   I/O     I
+inputs<2>                                                                 FB3_16  24   I/O     I
+inputs<3>                                                                 FB3_17  22   I/O     I
+inputs<4>                                                                 FB4_2   25   I/O     I
+inputs<5>                                                                 FB4_5   26   I/O     I
+sclk                                                                      FB4_11  28   I/O     I
+mosi                                                                      FB4_14  29   I/O     I
+sel                                                                       FB4_15  33   I/O     I
+
+Legend:
+Pin No. - ~ - User Assigned
+*************************  Summary of UnMapped Logic  ************************
+
+** 2 Buried Nodes **
+
+Signal                                                                    Total Total User
+Name                                                                      Pts   Inps  Assignment
+bit_cnt<0>                                                                2     2     
+bit_cnt<1>                                                                3     3     
+
+**************************  Function Block Details  ************************
+Legend:
+Total Pt     - Total product terms used by the macrocell signal
+Imp Pt       - Product terms imported from other macrocells
+Exp Pt       - Product terms exported to other macrocells
+               in direction shown
+Unused Pt    - Unused local product terms remaining in macrocell
+Loc          - Location where logic was mapped in device
+Pin Type/Use - I  - Input             GCK - Global Clock
+               O  - Output            GTS - Global Output Enable
+              (b) - Buried macrocell  GSR - Global Set/Reset
+X            - Signal used as input to the macrocell logic.
+Pin No.      - ~  - User Assigned
+*********************************** FB1  ***********************************
+Number of function block inputs used/remaining:               27/27
+Number of signals used by logic mapping into function block:  27
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+main_counter_mux0001<9>
+                      2       0     0   3     FB1_1         (b)     (b)
+pwms<0>               2       0     0   3     FB1_2   1     I/O     O
+main_counter_mux0001<8>
+                      2       0     0   3     FB1_3         (b)     (b)
+main_counter_mux0001<7>
+                      2       0     0   3     FB1_4         (b)     (b)
+pwms<1>               2       0     0   3     FB1_5   2     I/O     O
+pwms<2>               2       0     0   3     FB1_6   3     I/O     O
+main_counter_mux0001<6>
+                      2       0     0   3     FB1_7         (b)     (b)
+pwms<3>               2       0     0   3     FB1_8   4     I/O     O
+main_counter_mux0001<5>
+                      2       0     0   3     FB1_9   5     GCK/I/O GCK
+main_counter_mux0001<10>
+                      2       0     0   3     FB1_10        (b)     (b)
+pwm_counters<0><5>    3       0     0   2     FB1_11  6     GCK/I/O I
+pwm_counters<0><4>    3       0     0   2     FB1_12        (b)     (b)
+pwm_counters<0><3>    3       0     0   2     FB1_13        (b)     (b)
+pwm_counters<0><2>    3       0     0   2     FB1_14  7     GCK/I/O I
+outputs<0>            3       0     0   2     FB1_15  8     I/O     O
+pwm_counters<0><1>    3       0     0   2     FB1_16        (b)     (b)
+outputs<1>            3       0     0   2     FB1_17  9     I/O     O
+pwm_counters<0><0>    3       0     0   2     FB1_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2  10: main_counter_mux0001<2>  19: pwm_selector<0> 
+  2: Madd_main_counter_add0000__and0007/Madd_main_counter_add0000__and0007_D2  11: main_counter_mux0001<3>  20: pwm_selector<1> 
+  3: bit_cnt<0>                                                                12: main_counter_mux0001<4>  21: pwm_selector<2> 
+  4: bit_cnt<1>                                                                13: main_counter_mux0001<5>  22: pwms_0/pwms_0_RSTF 
+  5: bit_cnt<2>                                                                14: main_counter_mux0001<6>  23: pwms_1/pwms_1_RSTF 
+  6: loading_val                                                               15: main_counter_mux0001<7>  24: pwms_2/pwms_2_RSTF 
+  7: main_counter_mux0001<0>                                                   16: main_counter_mux0001<8>  25: pwms_3/pwms_3_RSTF 
+  8: main_counter_mux0001<10>                                                  17: main_counter_mux0001<9>  26: sclk 
+  9: main_counter_mux0001<1>                                                   18: mosi                     27: sel 
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+main_counter_mux0001<9> 
+                     .X....XXXXXXXXXXX....................... 12
+pwms<0>              ......XXXXXXXXXXX....X.................. 12
+main_counter_mux0001<8> 
+                     X.....XXXXXXXXXXX....................... 12
+main_counter_mux0001<7> 
+                     X.....XXXXXXXXXXX....................... 12
+pwms<1>              ......XXXXXXXXXXX.....X................. 12
+pwms<2>              ......XXXXXXXXXXX......X................ 12
+main_counter_mux0001<6> 
+                     X.....XXXXXXXXXXX....................... 12
+pwms<3>              ......XXXXXXXXXXX.......X............... 12
+main_counter_mux0001<5> 
+                     X.....XXXXXXXXXXX....................... 12
+main_counter_mux0001<10> 
+                     .X....XXXXXXXXXXX....................... 12
+pwm_counters<0><5>   ..XXXX...........XXXX....XX............. 10
+pwm_counters<0><4>   ..XXXX...........XXXX....XX............. 10
+pwm_counters<0><3>   ..XXXX...........XXXX....XX............. 10
+pwm_counters<0><2>   ..XXXX...........XXXX....XX............. 10
+outputs<0>           ..XXXX...........XXXX....XX............. 10
+pwm_counters<0><1>   ..XXXX...........XXXX....XX............. 10
+outputs<1>           ..XXXX...........XXXX....XX............. 10
+pwm_counters<0><0>   ..XXXX...........XXXX....XX............. 10
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB2  ***********************************
+Number of function block inputs used/remaining:               10/44
+Number of signals used by logic mapping into function block:  10
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+pwm_counters<3><7>    3       0     0   2     FB2_1         (b)     (b)
+outputs<2>            3       0     0   2     FB2_2   35    I/O     O
+pwm_counters<3><6>    3       0     0   2     FB2_3         (b)     (b)
+pwm_counters<3><5>    3       0     0   2     FB2_4         (b)     (b)
+outputs<3>            3       0     0   2     FB2_5   36    I/O     O
+outputs<4>            3       0     0   2     FB2_6   37    I/O     O
+pwm_counters<3><4>    3       0     0   2     FB2_7         (b)     (b)
+outputs<5>            3       0     0   2     FB2_8   38    I/O     O
+pwm_counters<3><3>    3       0     0   2     FB2_9   39    GSR/I/O (b)
+pwm_counters<3><2>    3       0     0   2     FB2_10        (b)     (b)
+pwm_counters<3><1>    3       0     0   2     FB2_11  40    GTS/I/O (b)
+pwm_counters<3><0>    3       0     0   2     FB2_12        (b)     (b)
+pwm_counters<2><7>    3       0     0   2     FB2_13        (b)     (b)
+pwm_selector<2>       4       0     0   1     FB2_14  42    GTS/I/O (b)
+outputs<6>            3       0     0   2     FB2_15  43    I/O     O
+pwm_selector<1>       4       0     0   1     FB2_16        (b)     (b)
+outputs<7>            3       0     0   2     FB2_17  44    I/O     O
+pwm_selector<0>       4       0     0   1     FB2_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: bit_cnt<0>         5: mosi               8: pwm_selector<2> 
+  2: bit_cnt<1>         6: pwm_selector<0>    9: sclk 
+  3: bit_cnt<2>         7: pwm_selector<1>   10: sel 
+  4: loading_val      
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+pwm_counters<3><7>   XXXXXXXXXX.............................. 10
+outputs<2>           XXXXXXXXXX.............................. 10
+pwm_counters<3><6>   XXXXXXXXXX.............................. 10
+pwm_counters<3><5>   XXXXXXXXXX.............................. 10
+outputs<3>           XXXXXXXXXX.............................. 10
+outputs<4>           XXXXXXXXXX.............................. 10
+pwm_counters<3><4>   XXXXXXXXXX.............................. 10
+outputs<5>           XXXXXXXXXX.............................. 10
+pwm_counters<3><3>   XXXXXXXXXX.............................. 10
+pwm_counters<3><2>   XXXXXXXXXX.............................. 10
+pwm_counters<3><1>   XXXXXXXXXX.............................. 10
+pwm_counters<3><0>   XXXXXXXXXX.............................. 10
+pwm_counters<2><7>   XXXXXXXXXX.............................. 10
+pwm_selector<2>      XXXXX...XX.............................. 7
+outputs<6>           XXXXXXXXXX.............................. 10
+pwm_selector<1>      XXXXX...XX.............................. 7
+outputs<7>           XXXXXXXXXX.............................. 10
+pwm_selector<0>      XXXXX...XX.............................. 7
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB3  ***********************************
+Number of function block inputs used/remaining:               47/7
+Number of signals used by logic mapping into function block:  47
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+main_counter_mux0001<2>
+                      1       0   /\4   0     FB3_1         (b)     (b)
+main_counter_mux0001<1>
+                      1       0   \/4   0     FB3_2   11    I/O     (b)
+pwms_0/pwms_0_RSTF   17      12<-   0   0     FB3_3         (b)     (b)
+(unused)              0       0   /\5   0     FB3_4         (b)     (b)
+Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2
+                      1       0   /\3   1     FB3_5   12    I/O     (b)
+loading_val           3       0   \/1   1     FB3_6         (b)     (b)
+bit_cnt<2>            3       1<- \/3   0     FB3_7         (b)     (b)
+(unused)              0       0   \/5   0     FB3_8   13    I/O     (b)
+pwms_2/pwms_2_RSTF   17      12<-   0   0     FB3_9   14    I/O     (b)
+Madd_main_counter_add0000__and0007/Madd_main_counter_add0000__and0007_D2
+                      1       0   /\4   0     FB3_10        (b)     (b)
+(unused)              0       0   \/2   3     FB3_11  18    I/O     (b)
+(unused)              0       0   \/5   0     FB3_12        (b)     (b)
+pwms_3/pwms_3_RSTF   17      12<-   0   0     FB3_13        (b)     (b)
+main_counter_mux0001<4>
+                      1       1<- /\5   0     FB3_14  19    I/O     I
+main_counter_mux0001<3>
+                      1       0   /\1   3     FB3_15  20    I/O     I
+main_counter_mux0001<0>
+                      0       0   \/3   2     FB3_16  24    I/O     I
+(unused)              0       0   \/5   0     FB3_17  22    I/O     I
+pwms_1/pwms_1_RSTF   17      12<-   0   0     FB3_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2  17: pwm_counters<0><3>  33: pwm_counters<2><3> 
+  2: bit_cnt<0>                                                                18: pwm_counters<0><4>  34: pwm_counters<2><4> 
+  3: bit_cnt<1>                                                                19: pwm_counters<0><5>  35: pwm_counters<2><5> 
+  4: bit_cnt<2>                                                                20: pwm_counters<0><6>  36: pwm_counters<2><6> 
+  5: main_counter_mux0001<0>                                                   21: pwm_counters<0><7>  37: pwm_counters<2><7> 
+  6: main_counter_mux0001<1>                                                   22: pwm_counters<1><0>  38: pwm_counters<3><0> 
+  7: main_counter_mux0001<2>                                                   23: pwm_counters<1><1>  39: pwm_counters<3><1> 
+  8: main_counter_mux0001<3>                                                   24: pwm_counters<1><2>  40: pwm_counters<3><2> 
+  9: main_counter_mux0001<4>                                                   25: pwm_counters<1><3>  41: pwm_counters<3><3> 
+ 10: main_counter_mux0001<5>                                                   26: pwm_counters<1><4>  42: pwm_counters<3><4> 
+ 11: main_counter_mux0001<6>                                                   27: pwm_counters<1><5>  43: pwm_counters<3><5> 
+ 12: main_counter_mux0001<7>                                                   28: pwm_counters<1><6>  44: pwm_counters<3><6> 
+ 13: main_counter_mux0001<8>                                                   29: pwm_counters<1><7>  45: pwm_counters<3><7> 
+ 14: pwm_counters<0><0>                                                        30: pwm_counters<2><0>  46: sclk 
+ 15: pwm_counters<0><1>                                                        31: pwm_counters<2><1>  47: sel 
+ 16: pwm_counters<0><2>                                                        32: pwm_counters<2><2> 
+
+Signal                        1         2         3         4         5 FB
+Name                0----+----0----+----0----+----0----+----0----+----0 Inputs
+main_counter_mux0001<2> 
+                     ....XX............................................ 2
+main_counter_mux0001<1> 
+                     ....X............................................. 1
+pwms_0/pwms_0_RSTF   ....XXXXXXXXXXXXXXXXX............................. 17
+Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2 
+                     ....XXXXX......................................... 5
+loading_val          .XXX.........................................XX... 5
+bit_cnt<2>           .XX..........................................XX... 4
+pwms_2/pwms_2_RSTF   ....XXXXXXXXX................XXXXXXXX............. 17
+Madd_main_counter_add0000__and0007/Madd_main_counter_add0000__and0007_D2 
+                     X........XXXX..................................... 5
+pwms_3/pwms_3_RSTF   ....XXXXXXXXX........................XXXXXXXX..... 17
+main_counter_mux0001<4> 
+                     ....XXXX.......................................... 4
+main_counter_mux0001<3> 
+                     ....XXX........................................... 3
+main_counter_mux0001<0> 
+                     .................................................. 0
+pwms_1/pwms_1_RSTF   ....XXXXXXXXX........XXXXXXXX..................... 17
+                    0----+----1----+----2----+----3----+----4----+----5
+                              0         0         0         0         0
+*********************************** FB4  ***********************************
+Number of function block inputs used/remaining:               18/36
+Number of signals used by logic mapping into function block:  18
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+pwm_counters<2><6>    3       0     0   2     FB4_1         (b)     (b)
+pwm_counters<2><5>    3       0     0   2     FB4_2   25    I/O     I
+pwm_counters<2><4>    3       0     0   2     FB4_3         (b)     (b)
+pwm_counters<2><3>    3       0     0   2     FB4_4         (b)     (b)
+pwm_counters<2><2>    3       0     0   2     FB4_5   26    I/O     I
+pwm_counters<2><1>    3       0     0   2     FB4_6         (b)     (b)
+pwm_counters<2><0>    3       0     0   2     FB4_7         (b)     (b)
+pwm_counters<1><7>    3       0     0   2     FB4_8   27    I/O     (b)
+pwm_counters<1><6>    3       0     0   2     FB4_9         (b)     (b)
+pwm_counters<1><5>    3       0     0   2     FB4_10        (b)     (b)
+pwm_counters<1><4>    3       0     0   2     FB4_11  28    I/O     I
+pwm_counters<1><3>    3       0     0   2     FB4_12        (b)     (b)
+pwm_counters<1><2>    3       0     0   2     FB4_13        (b)     (b)
+pwm_counters<1><1>    3       0     0   2     FB4_14  29    I/O     I
+pwm_counters<1><0>    3       0     0   2     FB4_15  33    I/O     I
+pwm_counters<0><7>    3       0   \/2   0     FB4_16        (b)     (b)
+miso                  9       4<-   0   0     FB4_17  34    I/O     O
+pwm_counters<0><6>    3       0   /\2   0     FB4_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: bit_cnt<0>         7: inputs<3>         13: mosi 
+  2: bit_cnt<1>         8: inputs<4>         14: pwm_selector<0> 
+  3: bit_cnt<2>         9: inputs<5>         15: pwm_selector<1> 
+  4: inputs<0>         10: inputs<6>         16: pwm_selector<2> 
+  5: inputs<1>         11: inputs<7>         17: sclk 
+  6: inputs<2>         12: loading_val       18: sel 
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+pwm_counters<2><6>   XXX........XXXXXXX...................... 10
+pwm_counters<2><5>   XXX........XXXXXXX...................... 10
+pwm_counters<2><4>   XXX........XXXXXXX...................... 10
+pwm_counters<2><3>   XXX........XXXXXXX...................... 10
+pwm_counters<2><2>   XXX........XXXXXXX...................... 10
+pwm_counters<2><1>   XXX........XXXXXXX...................... 10
+pwm_counters<2><0>   XXX........XXXXXXX...................... 10
+pwm_counters<1><7>   XXX........XXXXXXX...................... 10
+pwm_counters<1><6>   XXX........XXXXXXX...................... 10
+pwm_counters<1><5>   XXX........XXXXXXX...................... 10
+pwm_counters<1><4>   XXX........XXXXXXX...................... 10
+pwm_counters<1><3>   XXX........XXXXXXX...................... 10
+pwm_counters<1><2>   XXX........XXXXXXX...................... 10
+pwm_counters<1><1>   XXX........XXXXXXX...................... 10
+pwm_counters<1><0>   XXX........XXXXXXX...................... 10
+pwm_counters<0><7>   XXX........XXXXXXX...................... 10
+miso                 XXXXXXXXXXX......X...................... 12
+pwm_counters<0><6>   XXX........XXXXXXX...................... 10
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*******************************  Equations  ********************************
+
+********** Mapped Logic **********
+
+Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2 = main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4>;    
+
+Madd_main_counter_add0000__and0007/Madd_main_counter_add0000__and0007_D2 = main_counter_mux0001<5> & main_counter_mux0001<6> & 
+	main_counter_mux0001<7> & main_counter_mux0001<8> & 
+	Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2;    
+
+bit_cnt<2>.T = ;Imported pterms FB3_6
+	  !bit_cnt<1> & !bit_cnt<0>;
+   bit_cnt<2>.CLK = !sclk;
+   bit_cnt<2>.AP = sel;    
+
+loading_val.T = Vcc;
+   loading_val.CLK = !sclk;
+   loading_val.AR = sel;
+   loading_val.CE = !bit_cnt<2> & !bit_cnt<1> & !bit_cnt<0>;    
+
+main_counter_mux0001<0>.T = Vcc;
+   main_counter_mux0001<0>.CLK = clk;	// GCK    
+
+main_counter_mux0001<1>.T = main_counter_mux0001<0>;
+   main_counter_mux0001<1>.CLK = clk;	// GCK    
+
+main_counter_mux0001<2>.T = main_counter_mux0001<0> & main_counter_mux0001<1>;
+   main_counter_mux0001<2>.CLK = clk;	// GCK    
+
+main_counter_mux0001<3>.T = main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2>;
+   main_counter_mux0001<3>.CLK = clk;	// GCK    
+
+main_counter_mux0001<4>.T = ;Imported pterms FB3_15
+	  main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3>;
+   main_counter_mux0001<4>.CLK = clk;	// GCK    
+
+main_counter_mux0001<5>.T = 
+	Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2
+	# main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;
+   main_counter_mux0001<5>.CLK = clk;	// GCK    
+
+main_counter_mux0001<6>.T = main_counter_mux0001<5> & 
+	Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2
+	# main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;
+   main_counter_mux0001<6>.CLK = clk;	// GCK    
+
+main_counter_mux0001<7>.T = main_counter_mux0001<5> & main_counter_mux0001<6> & 
+	Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2
+	# main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;
+   main_counter_mux0001<7>.CLK = clk;	// GCK    
+
+main_counter_mux0001<8>.T = main_counter_mux0001<5> & main_counter_mux0001<6> & 
+	main_counter_mux0001<7> & 
+	Madd_main_counter_add0000__and0003/Madd_main_counter_add0000__and0003_D2
+	# main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;
+   main_counter_mux0001<8>.CLK = clk;	// GCK    
+
+main_counter_mux0001<9>.T = 
+	Madd_main_counter_add0000__and0007/Madd_main_counter_add0000__and0007_D2
+	# main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;
+   main_counter_mux0001<9>.CLK = clk;	// GCK    
+
+main_counter_mux0001<10>.T = main_counter_mux0001<9> & 
+	Madd_main_counter_add0000__and0007/Madd_main_counter_add0000__and0007_D2
+	# main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;
+   main_counter_mux0001<10>.CLK = clk;	// GCK    
+
+miso = bit_cnt<2> & bit_cnt<1> & !bit_cnt<0> & 
+	inputs<6>
+	# bit_cnt<2> & !bit_cnt<1> & bit_cnt<0> & 
+	inputs<5>
+	# !bit_cnt<2> & bit_cnt<1> & !bit_cnt<0> & 
+	inputs<2>
+	# !bit_cnt<2> & !bit_cnt<1> & bit_cnt<0> & 
+	inputs<1>
+;Imported pterms FB4_16
+	# bit_cnt<2> & bit_cnt<1> & bit_cnt<0> & 
+	inputs<7>
+	# !bit_cnt<2> & bit_cnt<1> & bit_cnt<0> & 
+	inputs<3>
+;Imported pterms FB4_18
+	# bit_cnt<2> & !bit_cnt<1> & !bit_cnt<0> & 
+	inputs<4>
+	# !bit_cnt<2> & !bit_cnt<1> & !bit_cnt<0> & 
+	inputs<0>;
+   miso.OE = !sel;    
+
+outputs<0>.D = mosi;
+   outputs<0>.CLK = sclk;
+   outputs<0>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+outputs<1>.D = mosi;
+   outputs<1>.CLK = sclk;
+   outputs<1>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+outputs<2>.D = mosi;
+   outputs<2>.CLK = sclk;
+   outputs<2>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+outputs<3>.D = mosi;
+   outputs<3>.CLK = sclk;
+   outputs<3>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+outputs<4>.D = mosi;
+   outputs<4>.CLK = sclk;
+   outputs<4>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+outputs<5>.D = mosi;
+   outputs<5>.CLK = sclk;
+   outputs<5>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+outputs<6>.D = mosi;
+   outputs<6>.CLK = sclk;
+   outputs<6>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+outputs<7>.D = mosi;
+   outputs<7>.CLK = sclk;
+   outputs<7>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<0><4>.D = mosi;
+   pwm_counters<0><4>.CLK = sclk;
+   pwm_counters<0><4>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<0><5>.D = mosi;
+   pwm_counters<0><5>.CLK = sclk;
+   pwm_counters<0><5>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<0><6>.D = mosi;
+   pwm_counters<0><6>.CLK = sclk;
+   pwm_counters<0><6>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<0><7>.D = mosi;
+   pwm_counters<0><7>.CLK = sclk;
+   pwm_counters<0><7>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<0><3>.D = mosi;
+   pwm_counters<0><3>.CLK = sclk;
+   pwm_counters<0><3>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<0><1>.D = mosi;
+   pwm_counters<0><1>.CLK = sclk;
+   pwm_counters<0><1>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<0><0>.D = mosi;
+   pwm_counters<0><0>.CLK = sclk;
+   pwm_counters<0><0>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<0><2>.D = mosi;
+   pwm_counters<0><2>.CLK = sclk;
+   pwm_counters<0><2>.CE = !sel & loading_val & !pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<1><0>.D = mosi;
+   pwm_counters<1><0>.CLK = sclk;
+   pwm_counters<1><0>.CE = !sel & loading_val & pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<1><3>.D = mosi;
+   pwm_counters<1><3>.CLK = sclk;
+   pwm_counters<1><3>.CE = !sel & loading_val & pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<1><4>.D = mosi;
+   pwm_counters<1><4>.CLK = sclk;
+   pwm_counters<1><4>.CE = !sel & loading_val & pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<1><5>.D = mosi;
+   pwm_counters<1><5>.CLK = sclk;
+   pwm_counters<1><5>.CE = !sel & loading_val & pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<1><6>.D = mosi;
+   pwm_counters<1><6>.CLK = sclk;
+   pwm_counters<1><6>.CE = !sel & loading_val & pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<1><1>.D = mosi;
+   pwm_counters<1><1>.CLK = sclk;
+   pwm_counters<1><1>.CE = !sel & loading_val & pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<1><2>.D = mosi;
+   pwm_counters<1><2>.CLK = sclk;
+   pwm_counters<1><2>.CE = !sel & loading_val & pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<1><7>.D = mosi;
+   pwm_counters<1><7>.CLK = sclk;
+   pwm_counters<1><7>.CE = !sel & loading_val & pwm_selector<0> & 
+	!pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<2><5>.D = mosi;
+   pwm_counters<2><5>.CLK = sclk;
+   pwm_counters<2><5>.CE = !sel & loading_val & !pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<2><6>.D = mosi;
+   pwm_counters<2><6>.CLK = sclk;
+   pwm_counters<2><6>.CE = !sel & loading_val & !pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<2><4>.D = mosi;
+   pwm_counters<2><4>.CLK = sclk;
+   pwm_counters<2><4>.CE = !sel & loading_val & !pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<2><7>.D = mosi;
+   pwm_counters<2><7>.CLK = sclk;
+   pwm_counters<2><7>.CE = !sel & loading_val & !pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<2><0>.D = mosi;
+   pwm_counters<2><0>.CLK = sclk;
+   pwm_counters<2><0>.CE = !sel & loading_val & !pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<2><3>.D = mosi;
+   pwm_counters<2><3>.CLK = sclk;
+   pwm_counters<2><3>.CE = !sel & loading_val & !pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<2><2>.D = mosi;
+   pwm_counters<2><2>.CLK = sclk;
+   pwm_counters<2><2>.CE = !sel & loading_val & !pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<2><1>.D = mosi;
+   pwm_counters<2><1>.CLK = sclk;
+   pwm_counters<2><1>.CE = !sel & loading_val & !pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<3><5>.D = mosi;
+   pwm_counters<3><5>.CLK = sclk;
+   pwm_counters<3><5>.CE = !sel & loading_val & pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<3><7>.D = mosi;
+   pwm_counters<3><7>.CLK = sclk;
+   pwm_counters<3><7>.CE = !sel & loading_val & pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<3><0>.D = mosi;
+   pwm_counters<3><0>.CLK = sclk;
+   pwm_counters<3><0>.CE = !sel & loading_val & pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<3><1>.D = mosi;
+   pwm_counters<3><1>.CLK = sclk;
+   pwm_counters<3><1>.CE = !sel & loading_val & pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<3><2>.D = mosi;
+   pwm_counters<3><2>.CLK = sclk;
+   pwm_counters<3><2>.CE = !sel & loading_val & pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<3><3>.D = mosi;
+   pwm_counters<3><3>.CLK = sclk;
+   pwm_counters<3><3>.CE = !sel & loading_val & pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & !bit_cnt<2> & bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_counters<3><4>.D = mosi;
+   pwm_counters<3><4>.CLK = sclk;
+   pwm_counters<3><4>.CE = !sel & loading_val & pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_counters<3><6>.D = mosi;
+   pwm_counters<3><6>.CLK = sclk;
+   pwm_counters<3><6>.CE = !sel & loading_val & pwm_selector<0> & 
+	pwm_selector<1> & !pwm_selector<2> & bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_selector<0>.D = mosi;
+   pwm_selector<0>.CLK = sclk;
+   pwm_selector<0>.AR = sel;
+   pwm_selector<0>.CE = !loading_val & !bit_cnt<2> & !bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwm_selector<1>.D = mosi;
+   pwm_selector<1>.CLK = sclk;
+   pwm_selector<1>.AR = sel;
+   pwm_selector<1>.CE = !loading_val & !bit_cnt<2> & !bit_cnt<1> & 
+	bit_cnt<0>;    
+
+pwm_selector<2>.D = mosi;
+   pwm_selector<2>.CLK = sclk;
+   pwm_selector<2>.AR = sel;
+   pwm_selector<2>.CE = !loading_val & !bit_cnt<2> & bit_cnt<1> & 
+	!bit_cnt<0>;    
+
+pwms<0>.D = Vcc;
+   pwms<0>.CLK = clk;	// GCK
+   pwms<0>.AR = !pwms_0/pwms_0_RSTF;
+   pwms<0>.CE = main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;    
+
+pwms<1>.D = Vcc;
+   pwms<1>.CLK = clk;	// GCK
+   pwms<1>.AR = !pwms_1/pwms_1_RSTF;
+   pwms<1>.CE = main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;    
+
+pwms<2>.D = Vcc;
+   pwms<2>.CLK = clk;	// GCK
+   pwms<2>.AR = !pwms_2/pwms_2_RSTF;
+   pwms<2>.CE = main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;    
+
+pwms<3>.D = Vcc;
+   pwms<3>.CLK = clk;	// GCK
+   pwms<3>.AR = !pwms_3/pwms_3_RSTF;
+   pwms<3>.CE = main_counter_mux0001<0> & main_counter_mux0001<1> & 
+	main_counter_mux0001<2> & main_counter_mux0001<3> & main_counter_mux0001<4> & 
+	main_counter_mux0001<5> & main_counter_mux0001<6> & main_counter_mux0001<7> & 
+	main_counter_mux0001<8> & main_counter_mux0001<9> & 
+	main_counter_mux0001<10>;    
+
+pwms_0/pwms_0_RSTF = !main_counter_mux0001<8>
+	# pwm_counters<0><0> & !main_counter_mux0001<0>
+	# !pwm_counters<0><0> & main_counter_mux0001<0>
+	# pwm_counters<0><1> & !main_counter_mux0001<1>
+	# !pwm_counters<0><1> & main_counter_mux0001<1>
+;Imported pterms FB3_2
+	# pwm_counters<0><2> & !main_counter_mux0001<2>
+	# !pwm_counters<0><2> & main_counter_mux0001<2>
+	# pwm_counters<0><3> & !main_counter_mux0001<3>
+	# !pwm_counters<0><3> & main_counter_mux0001<3>
+;Imported pterms FB3_4
+	# pwm_counters<0><5> & !main_counter_mux0001<5>
+	# !pwm_counters<0><5> & main_counter_mux0001<5>
+	# pwm_counters<0><6> & !main_counter_mux0001<6>
+	# !pwm_counters<0><6> & main_counter_mux0001<6>
+	# !pwm_counters<0><7> & main_counter_mux0001<7>
+;Imported pterms FB3_5
+	# pwm_counters<0><4> & !main_counter_mux0001<4>
+	# !pwm_counters<0><4> & main_counter_mux0001<4>
+	# pwm_counters<0><7> & !main_counter_mux0001<7>;    
+
+pwms_1/pwms_1_RSTF = !main_counter_mux0001<8>
+	# pwm_counters<1><0> & !main_counter_mux0001<0>
+	# !pwm_counters<1><0> & main_counter_mux0001<0>
+	# pwm_counters<1><1> & !main_counter_mux0001<1>
+	# !pwm_counters<1><1> & main_counter_mux0001<1>
+;Imported pterms FB3_1
+	# !pwm_counters<1><5> & main_counter_mux0001<5>
+	# pwm_counters<1><6> & !main_counter_mux0001<6>
+	# pwm_counters<1><7> & !main_counter_mux0001<7>
+	# !pwm_counters<1><7> & main_counter_mux0001<7>
+;Imported pterms FB3_17
+	# pwm_counters<1><2> & !main_counter_mux0001<2>
+	# !pwm_counters<1><2> & main_counter_mux0001<2>
+	# pwm_counters<1><3> & !main_counter_mux0001<3>
+	# !pwm_counters<1><3> & main_counter_mux0001<3>
+	# !pwm_counters<1><6> & main_counter_mux0001<6>
+;Imported pterms FB3_16
+	# pwm_counters<1><4> & !main_counter_mux0001<4>
+	# !pwm_counters<1><4> & main_counter_mux0001<4>
+	# pwm_counters<1><5> & !main_counter_mux0001<5>;    
+
+pwms_2/pwms_2_RSTF = !main_counter_mux0001<8>
+	# pwm_counters<2><0> & !main_counter_mux0001<0>
+	# !pwm_counters<2><0> & main_counter_mux0001<0>
+	# pwm_counters<2><1> & !main_counter_mux0001<1>
+	# !pwm_counters<2><1> & main_counter_mux0001<1>
+;Imported pterms FB3_8
+	# pwm_counters<2><2> & !main_counter_mux0001<2>
+	# !pwm_counters<2><2> & main_counter_mux0001<2>
+	# pwm_counters<2><3> & !main_counter_mux0001<3>
+	# !pwm_counters<2><3> & main_counter_mux0001<3>
+	# !pwm_counters<2><5> & main_counter_mux0001<5>
+;Imported pterms FB3_7
+	# pwm_counters<2><4> & !main_counter_mux0001<4>
+	# !pwm_counters<2><4> & main_counter_mux0001<4>
+	# pwm_counters<2><7> & !main_counter_mux0001<7>
+;Imported pterms FB3_10
+	# pwm_counters<2><5> & !main_counter_mux0001<5>
+	# pwm_counters<2><6> & !main_counter_mux0001<6>
+	# !pwm_counters<2><6> & main_counter_mux0001<6>
+	# !pwm_counters<2><7> & main_counter_mux0001<7>;    
+
+pwms_3/pwms_3_RSTF = !main_counter_mux0001<8>
+	# pwm_counters<3><0> & !main_counter_mux0001<0>
+	# !pwm_counters<3><0> & main_counter_mux0001<0>
+	# pwm_counters<3><7> & !main_counter_mux0001<7>
+	# !pwm_counters<3><7> & main_counter_mux0001<7>
+;Imported pterms FB3_12
+	# pwm_counters<3><1> & !main_counter_mux0001<1>
+	# !pwm_counters<3><1> & main_counter_mux0001<1>
+	# pwm_counters<3><2> & !main_counter_mux0001<2>
+	# !pwm_counters<3><2> & main_counter_mux0001<2>
+	# !pwm_counters<3><3> & main_counter_mux0001<3>
+;Imported pterms FB3_11
+	# pwm_counters<3><4> & !main_counter_mux0001<4>
+	# !pwm_counters<3><4> & main_counter_mux0001<4>
+;Imported pterms FB3_14
+	# pwm_counters<3><3> & !main_counter_mux0001<3>
+	# pwm_counters<3><5> & !main_counter_mux0001<5>
+	# !pwm_counters<3><5> & main_counter_mux0001<5>
+	# pwm_counters<3><6> & !main_counter_mux0001<6>
+	# !pwm_counters<3><6> & main_counter_mux0001<6>;    
+
+********** UnMapped Logic **********
+
+** Buried Nodes **
+
+bit_cnt<0>.T = Vcc;
+   bit_cnt<0>.CLK = !sclk;
+   bit_cnt<0>.AP = sel;    
+
+!bit_cnt<1>.T = bit_cnt<0>;
+   bit_cnt<1>.CLK = !sclk;
+   bit_cnt<1>.AP = sel;    
+
+****************************  Compiler Options  ****************************
+
+Following is a list of all global compiler options used by the fitter run.
+
+Device(s) Specified                         : xc9572xl-5-PC44
+Optimization Method                         : DENSITY
+Multi-Level Logic Optimization              : ON
+Ignore Timing Specifications                : OFF
+Default Register Power Up Value             : LOW
+Keep User Location Constraints              : ON
+What-You-See-Is-What-You-Get                : OFF
+Exhaustive Fitting                          : OFF
+Keep Unused Inputs                          : OFF
+Slew Rate                                   : FAST
+Power Mode                                  : STD
+Ground on Unused IOs                        : OFF
+Set I/O Pin Termination                     : KEEPER
+Global Clock Optimization                   : OFF
+Global Set/Reset Optimization               : OFF
+Global Ouput Enable Optimization            : OFF
+Input Limit                                 : 54
+Pterm Limit                                 : 90
