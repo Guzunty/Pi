@@ -1,0 +1,8 @@
+NET "miso" LOC = "P34";
+#NET "mosi" LOC = "P29"; Input not used
+NET "sclk" LOC = "P28";
+NET "sel"  LOC = "P33";
+NET "ppm_int_req" LOC = "P25";
+NET "ppm_in" LOC = "P1";
+NET "ppm_clk" BUFG="CLK";
+PROHIBIT=P29;
