@@ -89,7 +89,7 @@ extern const char* xsvf_pzErrorName[];
 void portsInitialize()
 {
   if (!bcm2835_init()) {
-	printf("Error initializing IO. Consider using sudo.\n");
+	printf("\nError initializing IO. Consider using sudo.\n");
 	exit(1);
   }
   bcm2835_gpio_fsel(JTAG_TDI, BCM2835_GPIO_FSEL_OUTP);
@@ -197,7 +197,7 @@ unsigned char readTDOBit()
 
 void output_error(int error_code) {
 
-	printf(xsvf_pzErrorName[error_code]);
+	printf("\n%s\n",xsvf_pzErrorName[error_code]);
 
 }
 

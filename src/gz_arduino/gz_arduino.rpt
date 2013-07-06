@@ -1,7 +1,7 @@
  
 cpldfit:  version P.40xd                            Xilinx Inc.
                                   Fitter Report
-Design Name: gz_arduino                          Date:  1-10-2013, 10:18AM
+Design Name: gz_arduino                          Date:  1-10-2013,  9:51AM
 Device Used: XC9572XL-5-PC44
 Fitting Status: Successful
 
@@ -9,43 +9,43 @@ Fitting Status: Successful
 
 Macrocells     Product Terms    Function Block   Registers      Pins           
 Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
-6  /72  (  8%) 6   /360  (  2%) 6  /216 (  3%)   0  /72  (  0%) 12 /34  ( 35%)
+4  /72  (  6%) 4   /360  (  1%) 4  /216 (  2%)   0  /72  (  0%) 8  /34  ( 24%)
 
 ** Function Block Resources **
 
 Function    Mcells      FB Inps     Pterms      IO          
 Block       Used/Tot    Used/Tot    Used/Tot    Used/Tot    
-FB1           2/18        2/54        2/90       2/ 9
-FB2           1/18        1/54        1/90       4/ 9
-FB3           2/18        2/54        2/90       2/ 9
+FB1           0/18        0/54        0/90       0/ 9
+FB2           0/18        0/54        0/90       0/ 9
+FB3           3/18        3/54        3/90       4/ 9
 FB4           1/18        1/54        1/90       4/ 7
              -----       -----       -----      -----    
-              6/72        6/216       6/360     12/34 
+              4/72        4/216       4/360      8/34 
 
 * - Resource is exhausted
 
 ** Global Control Resources **
 
 Global clock net(s) unused.
-Signal 'p_sel' mapped onto global output enable net GTS2.
+Global output enable net(s) unused.
 Global set/reset net(s) unused.
 
 ** Pin Resources **
 
 Signal Type    Required     Mapped  |  Pin Type            Used    Total 
 ------------------------------------|------------------------------------
-Input         :    5           5    |  I/O              :    10      28
-Output        :    6           6    |  GCK/IO           :     0       3
-Bidirectional :    0           0    |  GTS/IO           :     1       2
-GCK           :    0           0    |  GSR/IO           :     1       1
-GTS           :    1           1    |
+Input         :    4           4    |  I/O              :     8      28
+Output        :    4           4    |  GCK/IO           :     0       3
+Bidirectional :    0           0    |  GTS/IO           :     0       2
+GCK           :    0           0    |  GSR/IO           :     0       1
+GTS           :    0           0    |
 GSR           :    0           0    |
                  ----        ----
-        Total     12          12
+        Total      8           8
 
 ** Power Data **
 
-There are 6 macrocells in high performance mode (MCHP).
+There are 4 macrocells in high performance mode (MCHP).
 There are 0 macrocells in low power mode (MCLP).
 End of Mapped Resource Summary
 **************************  Errors and Warnings  ***************************
@@ -54,27 +54,23 @@ WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
    use the default filename of 'gz_arduino.ise'.
 *************************  Summary of Mapped Logic  ************************
 
-** 6 Outputs **
+** 4 Outputs **
 
 Signal              Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
 Name                Pts   Inps          No.  Type    Use     Mode Rate State
-sclk                1     1     FB1_2   1    I/O     O       STD  FAST 
-rst                 1     1     FB1_8   4    I/O     O       STD  FAST 
-rx                  1     1     FB2_2   35   I/O     O       STD  FAST 
-p_miso              1     1     FB3_2   11   I/O     O       STD  FAST 
-p_rx                1     1     FB3_14  19   I/O     O       STD  FAST 
-mosi                1     1     FB4_2   25   I/O     O       STD  FAST 
+mosi                1     1     FB3_8   13~  I/O     O       STD  FAST 
+sclk                1     1     FB3_9   14~  I/O     O       STD  FAST 
+rst                 1     1     FB3_11  18~  I/O     O       STD  FAST 
+p_miso              1     1     FB4_17  34~  I/O     O       STD  FAST 
 
-** 6 Inputs **
+** 4 Inputs **
 
 Signal              Loc     Pin  Pin     Pin     
 Name                        No.  Type    Use     
-p_mosi              FB2_6   37   I/O     I
-p_sclk              FB2_9   39   GSR/I/O I
-p_sel               FB2_11  40~  GTS/I/O GTS/I
-tx                  FB4_11  28   I/O     I
-p_tx                FB4_14  29   I/O     I
-miso                FB4_17  34   I/O     I
+miso                FB3_5   12~  I/O     I
+p_sclk              FB4_11  28~  I/O     I
+p_mosi              FB4_14  29~  I/O     I
+p_sel               FB4_15  33~  I/O     I
 
 Legend:
 Pin No. - ~ - User Assigned
@@ -92,18 +88,18 @@ Pin Type/Use - I  - Input             GCK - Global Clock
 X            - Signal used as input to the macrocell logic.
 Pin No.      - ~  - User Assigned
 *********************************** FB1  ***********************************
-Number of function block inputs used/remaining:               2/52
-Number of signals used by logic mapping into function block:  2
+Number of function block inputs used/remaining:               0/54
+Number of signals used by logic mapping into function block:  0
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB1_1         (b)     
-sclk                  1       0     0   4     FB1_2   1     I/O     O
+(unused)              0       0     0   5     FB1_2   1     I/O     
 (unused)              0       0     0   5     FB1_3         (b)     
 (unused)              0       0     0   5     FB1_4         (b)     
 (unused)              0       0     0   5     FB1_5   2     I/O     
 (unused)              0       0     0   5     FB1_6   3     I/O     
 (unused)              0       0     0   5     FB1_7         (b)     
-rst                   1       0     0   4     FB1_8   4     I/O     O
+(unused)              0       0     0   5     FB1_8   4     I/O     
 (unused)              0       0     0   5     FB1_9   5     GCK/I/O 
 (unused)              0       0     0   5     FB1_10        (b)     
 (unused)              0       0     0   5     FB1_11  6     GCK/I/O 
@@ -114,32 +110,22 @@ rst                   1       0     0   4     FB1_8   4     I/O     O
 (unused)              0       0     0   5     FB1_16        (b)     
 (unused)              0       0     0   5     FB1_17  9     I/O     
 (unused)              0       0     0   5     FB1_18        (b)     
-
-Signals Used by Logic in Function Block
-  1: p_sclk             2: p_sel            
-
-Signal                        1         2         3         4 FB
-Name                0----+----0----+----0----+----0----+----0 Inputs
-sclk                 X....................................... 1
-rst                  .X...................................... 1
-                    0----+----1----+----2----+----3----+----4
-                              0         0         0         0
 *********************************** FB2  ***********************************
-Number of function block inputs used/remaining:               1/53
-Number of signals used by logic mapping into function block:  1
+Number of function block inputs used/remaining:               0/54
+Number of signals used by logic mapping into function block:  0
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB2_1         (b)     
-rx                    1       0     0   4     FB2_2   35    I/O     O
+(unused)              0       0     0   5     FB2_2   35    I/O     
 (unused)              0       0     0   5     FB2_3         (b)     
 (unused)              0       0     0   5     FB2_4         (b)     
 (unused)              0       0     0   5     FB2_5   36    I/O     
-(unused)              0       0     0   5     FB2_6   37    I/O     I
+(unused)              0       0     0   5     FB2_6   37    I/O     
 (unused)              0       0     0   5     FB2_7         (b)     
 (unused)              0       0     0   5     FB2_8   38    I/O     
-(unused)              0       0     0   5     FB2_9   39    GSR/I/O I
+(unused)              0       0     0   5     FB2_9   39    GSR/I/O 
 (unused)              0       0     0   5     FB2_10        (b)     
-(unused)              0       0     0   5     FB2_11  40    GTS/I/O GTS/I
+(unused)              0       0     0   5     FB2_11  40    GTS/I/O 
 (unused)              0       0     0   5     FB2_12        (b)     
 (unused)              0       0     0   5     FB2_13        (b)     
 (unused)              0       0     0   5     FB2_14  42    GTS/I/O 
@@ -147,46 +133,38 @@ rx                    1       0     0   4     FB2_2   35    I/O     O
 (unused)              0       0     0   5     FB2_16        (b)     
 (unused)              0       0     0   5     FB2_17  44    I/O     
 (unused)              0       0     0   5     FB2_18        (b)     
-
-Signals Used by Logic in Function Block
-  1: p_tx             
-
-Signal                        1         2         3         4 FB
-Name                0----+----0----+----0----+----0----+----0 Inputs
-rx                   X....................................... 1
-                    0----+----1----+----2----+----3----+----4
-                              0         0         0         0
 *********************************** FB3  ***********************************
-Number of function block inputs used/remaining:               2/52
-Number of signals used by logic mapping into function block:  2
+Number of function block inputs used/remaining:               3/51
+Number of signals used by logic mapping into function block:  3
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB3_1         (b)     
-p_miso                1       0     0   4     FB3_2   11    I/O     O
+(unused)              0       0     0   5     FB3_2   11    I/O     
 (unused)              0       0     0   5     FB3_3         (b)     
 (unused)              0       0     0   5     FB3_4         (b)     
-(unused)              0       0     0   5     FB3_5   12    I/O     
+(unused)              0       0     0   5     FB3_5   12    I/O     I
 (unused)              0       0     0   5     FB3_6         (b)     
 (unused)              0       0     0   5     FB3_7         (b)     
-(unused)              0       0     0   5     FB3_8   13    I/O     
-(unused)              0       0     0   5     FB3_9   14    I/O     
+mosi                  1       0     0   4     FB3_8   13~   I/O     O
+sclk                  1       0     0   4     FB3_9   14~   I/O     O
 (unused)              0       0     0   5     FB3_10        (b)     
-(unused)              0       0     0   5     FB3_11  18    I/O     
+rst                   1       0     0   4     FB3_11  18~   I/O     O
 (unused)              0       0     0   5     FB3_12        (b)     
 (unused)              0       0     0   5     FB3_13        (b)     
-p_rx                  1       0     0   4     FB3_14  19    I/O     O
+(unused)              0       0     0   5     FB3_14  19    I/O     
 (unused)              0       0     0   5     FB3_15  20    I/O     
 (unused)              0       0     0   5     FB3_16  24    I/O     
 (unused)              0       0     0   5     FB3_17  22    I/O     
 (unused)              0       0     0   5     FB3_18        (b)     
 
 Signals Used by Logic in Function Block
-  1: miso               2: tx               
+  1: p_mosi             2: p_sel              3: p_sclk 
 
 Signal                        1         2         3         4 FB
 Name                0----+----0----+----0----+----0----+----0 Inputs
-p_miso               X....................................... 1
-p_rx                 .X...................................... 1
+mosi                 X....................................... 1
+sclk                 ..X..................................... 1
+rst                  .X...................................... 1
                     0----+----1----+----2----+----3----+----4
                               0         0         0         0
 *********************************** FB4  ***********************************
@@ -195,7 +173,7 @@ Number of signals used by logic mapping into function block:  1
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB4_1         (b)     
-mosi                  1       0     0   4     FB4_2   25    I/O     O
+(unused)              0       0     0   5     FB4_2   25    I/O     
 (unused)              0       0     0   5     FB4_3         (b)     
 (unused)              0       0     0   5     FB4_4         (b)     
 (unused)              0       0     0   5     FB4_5   26    I/O     
@@ -208,17 +186,17 @@ mosi                  1       0     0   4     FB4_2   25    I/O     O
 (unused)              0       0     0   5     FB4_12        (b)     
 (unused)              0       0     0   5     FB4_13        (b)     
 (unused)              0       0     0   5     FB4_14  29    I/O     I
-(unused)              0       0     0   5     FB4_15  33    I/O     
+(unused)              0       0     0   5     FB4_15  33    I/O     I
 (unused)              0       0     0   5     FB4_16        (b)     
-(unused)              0       0     0   5     FB4_17  34    I/O     I
+p_miso                1       0     0   4     FB4_17  34~   I/O     O
 (unused)              0       0     0   5     FB4_18        (b)     
 
 Signals Used by Logic in Function Block
-  1: p_mosi           
+  1: miso             
 
 Signal                        1         2         3         4 FB
 Name                0----+----0----+----0----+----0----+----0 Inputs
-mosi                 X....................................... 1
+p_miso               X....................................... 1
                     0----+----1----+----2----+----3----+----4
                               0         0         0         0
 *******************************  Equations  ********************************
@@ -226,25 +204,16 @@ mosi                 X....................................... 1
 ********** Mapped Logic **********
 
 
-mosi_I <= p_mosi;
-mosi <= mosi_I when p_sel = '1' else 'Z';
+mosi <= p_mosi;
 
 
-p_miso_I <= miso;
-p_miso <= p_miso_I when p_sel = '1' else 'Z';
-
-
-p_rx <= tx;
+p_miso <= miso;
 
 
 rst <= p_sel;
 
 
-rx <= p_tx;
-
-
-sclk_I <= p_sclk;
-sclk <= sclk_I when p_sel = '1' else 'Z';
+sclk <= p_sclk;
 
 Register Legend:
  FDCPE (Q,D,C,CLR,PRE,CE); 
@@ -275,25 +244,25 @@ Device : XC9572XL-5-PC44
 
 Pin Signal                         Pin Signal                        
 No. Name                           No. Name                          
-  1 sclk                             23 GND                           
+  1 KPR                              23 GND                           
   2 KPR                              24 KPR                           
-  3 KPR                              25 mosi                          
-  4 rst                              26 KPR                           
+  3 KPR                              25 KPR                           
+  4 KPR                              26 KPR                           
   5 KPR                              27 KPR                           
-  6 KPR                              28 tx                            
-  7 KPR                              29 p_tx                          
+  6 KPR                              28 p_sclk                        
+  7 KPR                              29 p_mosi                        
   8 KPR                              30 TDO                           
   9 KPR                              31 GND                           
  10 GND                              32 VCC                           
- 11 p_miso                           33 KPR                           
- 12 KPR                              34 miso                          
- 13 KPR                              35 rx                            
- 14 KPR                              36 KPR                           
- 15 TDI                              37 p_mosi                        
+ 11 KPR                              33 p_sel                         
+ 12 miso                             34 p_miso                        
+ 13 mosi                             35 KPR                           
+ 14 sclk                             36 KPR                           
+ 15 TDI                              37 KPR                           
  16 TMS                              38 KPR                           
- 17 TCK                              39 p_sclk                        
- 18 KPR                              40 p_sel                         
- 19 p_rx                             41 VCC                           
+ 17 TCK                              39 KPR                           
+ 18 rst                              40 KPR                           
+ 19 KPR                              41 VCC                           
  20 KPR                              42 KPR                           
  21 VCC                              43 KPR                           
  22 KPR                              44 KPR                           
@@ -316,11 +285,11 @@ Following is a list of all global compiler options used by the fitter run.
 
 Device(s) Specified                         : xc9572xl-5-PC44
 Optimization Method                         : SPEED
-Multi-Level Logic Optimization              : ON
+Multi-Level Logic Optimization              : OFF
 Ignore Timing Specifications                : OFF
 Default Register Power Up Value             : LOW
 Keep User Location Constraints              : ON
-What-You-See-Is-What-You-Get                : OFF
+What-You-See-Is-What-You-Get                : ON
 Exhaustive Fitting                          : OFF
 Keep Unused Inputs                          : OFF
 Slew Rate                                   : FAST

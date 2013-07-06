@@ -37,6 +37,9 @@
 *                         XC18V00/XCF00 support.  Only change is in PORTS.C
 *                         waitTime() function for implementations that do NOT
 *                         pulse TCK during the waitTime.
+*                         
+*      gz_load  rev 2     Add progress indicator
+*                         and command line option -p to suppress indicator
 *****************************************************************************/
 
 /*============================================================================
@@ -66,6 +69,7 @@
 ============================================================================*/
 
 #define XSVF_VERSION    "5.01"
+#define GZ_LOAD_VERSION "2"
 
 /*****************************************************************************
 * Define:       XSVF_SUPPORT_COMPRESSION
@@ -348,6 +352,10 @@ int xsvfDoXWAIT( SXsvfInfo* pXsvfInfo );
     };
 #endif  /* DEBUG_MODE */
 
+#define ProgressIndicator "Progress indicator: |"
+   int     gbShowProgressIndicator = 1;
+   int     gbJustCountCommands = 0;
+
 #ifdef DEBUG_MODE
     FILE* in;   /* Legacy DEBUG_MODE file pointer */
     int xsvf_iDebugLevel;
@@ -437,6 +445,7 @@ short xsvfGetAsNumBytes( long lNumBits )
 *****************************************************************************/
 void xsvfTmsTransition( short sTms )
 {
+    if (gbJustCountCommands) return;	
     setPort( TMS, sTms );
     setPort( TCK, 0 );
     setPort( TCK, 1 );
@@ -462,6 +471,8 @@ int xsvfGotoTapState( unsigned char*   pucTapState,
     int iErrorCode;
 
     iErrorCode  = XSVF_ERROR_NONE;
+    if (gbJustCountCommands) return(0);
+
     if ( ucTargetState == XTAPSTATE_RESET )
     {
         /* If RESET, always perform TMS reset sequence to reset/sync TAPs */
@@ -685,6 +696,8 @@ void xsvfShiftOnly( long    lNumBits,
     unsigned char   ucTdoBit;
     int             i;
 
+    if (gbJustCountCommands) return;
+
     /* assert( ( ( lNumBits + 7 ) / 8 ) == plvTdi->len ); */
 
     /* Initialize TDO storage len == TDI len */
@@ -776,6 +789,8 @@ int xsvfShift( unsigned char*   pucTapState,
     int             iMismatch;
     unsigned char   ucRepeat;
     int             iExitShift;
+
+    if (gbJustCountCommands) return (0);
 
     iErrorCode  = XSVF_ERROR_NONE;
     iMismatch   = 0;
@@ -1013,11 +1028,12 @@ void xsvfDoSDRMasking( lenVal*  plvTdi,
 *****************************************************************************/
 int xsvfDoIllegalCmd( SXsvfInfo* pXsvfInfo )
 {
-    XSVFDBG_PRINTF2( 0, "ERROR:  Encountered unsupported command #%d (%s)\n",
+    XSVFDBG_PRINTF2( 0, "\nERROR:  Encountered unsupported command #%d (%s)\n",
                      ((unsigned int)(pXsvfInfo->ucCommand)),
                      ((pXsvfInfo->ucCommand < XLASTCMD)
                       ? (xsvf_pzCommandName[pXsvfInfo->ucCommand])
                       : "Unknown") );
+    printf("Check the filespec and that the filetype is .xsvf\n");
     pXsvfInfo->iErrorCode   = XSVF_ERROR_ILLEGALCMD;
     return( pXsvfInfo->iErrorCode );
 }
@@ -1045,6 +1061,9 @@ int xsvfDoXCOMPLETE( SXsvfInfo* pXsvfInfo )
 int xsvfDoXTDOMASK( SXsvfInfo* pXsvfInfo )
 {
     readVal( &(pXsvfInfo->lvTdoMask), pXsvfInfo->sShiftLengthBytes );
+
+    if (gbJustCountCommands) return (0);
+
     XSVFDBG_PRINTF( 4, "    TDO Mask     = ");
     XSVFDBG_PRINTLENVAL( 4, &(pXsvfInfo->lvTdoMask) );
     XSVFDBG_PRINTF( 4, "\n");
@@ -1080,6 +1099,8 @@ int xsvfDoXSIR( SXsvfInfo* pXsvfInfo )
     {
         /* Get and store instruction to shift in */
         readVal( &(pXsvfInfo->lvTdi), xsvfGetAsNumBytes( ucShiftIrBits ) );
+
+        if (gbJustCountCommands) return (0);
 
         /* Shift the data */
         iErrorCode  = xsvfShift( &(pXsvfInfo->ucTapState), XTAPSTATE_SHIFTIR,
@@ -1126,6 +1147,8 @@ int xsvfDoXSIR2( SXsvfInfo* pXsvfInfo )
         /* Get and store instruction to shift in */
         readVal( &(pXsvfInfo->lvTdi), xsvfGetAsNumBytes( lShiftIrBits ) );
 
+    if (gbJustCountCommands) return (0);
+
         /* Shift the data */
         iErrorCode  = xsvfShift( &(pXsvfInfo->ucTapState), XTAPSTATE_SHIFTIR,
                                  lShiftIrBits, &(pXsvfInfo->lvTdi),
@@ -1155,6 +1178,9 @@ int xsvfDoXSDR( SXsvfInfo* pXsvfInfo )
 {
     int iErrorCode;
     readVal( &(pXsvfInfo->lvTdi), pXsvfInfo->sShiftLengthBytes );
+
+    if (gbJustCountCommands) return (0);
+
     /* use TDOExpected from last XSDRTDO instruction */
     iErrorCode  = xsvfShift( &(pXsvfInfo->ucTapState), XTAPSTATE_SHIFTDR,
                              pXsvfInfo->lShiftLengthBits, &(pXsvfInfo->lvTdi),
@@ -1179,6 +1205,9 @@ int xsvfDoXSDR( SXsvfInfo* pXsvfInfo )
 int xsvfDoXRUNTEST( SXsvfInfo* pXsvfInfo )
 {
     readVal( &(pXsvfInfo->lvTdi), 4 );
+
+    if (gbJustCountCommands) return (0);
+
     pXsvfInfo->lRunTestTime = value( &(pXsvfInfo->lvTdi) );
     XSVFDBG_PRINTF1( 3, "   XRUNTEST = %ld\n", pXsvfInfo->lRunTestTime );
     return( XSVF_ERROR_NONE );
@@ -1213,6 +1242,9 @@ int xsvfDoXSDRSIZE( SXsvfInfo* pXsvfInfo )
     readVal( &(pXsvfInfo->lvTdi), 4 );
     pXsvfInfo->lShiftLengthBits = value( &(pXsvfInfo->lvTdi) );
     pXsvfInfo->sShiftLengthBytes= xsvfGetAsNumBytes( pXsvfInfo->lShiftLengthBits );
+
+    if (gbJustCountCommands) return (0);
+
     XSVFDBG_PRINTF1( 3, "   XSDRSIZE = %ld\n", pXsvfInfo->lShiftLengthBits );
     if ( pXsvfInfo->sShiftLengthBytes > MAX_LEN )
     {
@@ -1434,6 +1466,9 @@ int xsvfDoXSTATE( SXsvfInfo* pXsvfInfo )
     unsigned char   ucNextState;
     int             iErrorCode;
     readByte( &ucNextState );
+
+    if (gbJustCountCommands) return (0);
+
     iErrorCode  = xsvfGotoTapState( &(pXsvfInfo->ucTapState), ucNextState );
     if ( iErrorCode != XSVF_ERROR_NONE )
     {
@@ -1458,6 +1493,9 @@ int xsvfDoXENDXR( SXsvfInfo* pXsvfInfo )
 
     iErrorCode  = XSVF_ERROR_NONE;
     readByte( &ucEndState );
+
+    if (gbJustCountCommands) return (0);
+
     if ( ( ucEndState != XENDXR_RUNTEST ) && ( ucEndState != XENDXR_PAUSE ) )
     {
         iErrorCode  = XSVF_ERROR_ILLEGALSTATE;
@@ -1562,6 +1600,9 @@ int xsvfDoXWAIT( SXsvfInfo* pXsvfInfo )
     /* <wait_time> */
     readVal( &(pXsvfInfo->lvTdi), 4 );
     lWaitTime = value( &(pXsvfInfo->lvTdi) );
+
+    if (gbJustCountCommands) return (0);
+
     XSVFDBG_PRINTF2( 3, "   XWAIT:  state = %s; time = %ld\n",
                      xsvf_pzTapState[ ucWaitState ], lWaitTime );
 
@@ -1624,6 +1665,8 @@ int xsvfInitialize( SXsvfInfo* pXsvfInfo )
 * Returns:      int         - 0 = success; otherwise error.
 *****************************************************************************/
 int   cmd;
+int ProgressCount=0;
+
 int xsvfRun( SXsvfInfo* pXsvfInfo )
 {
     /* Process the XSVF commands */
@@ -1635,6 +1678,28 @@ int xsvfRun( SXsvfInfo* pXsvfInfo )
 
         if ( pXsvfInfo->ucCommand < XLASTCMD )
         {
+ 
+    	    if (ProgressCount>200)  // 200 commands gives a good tick rate
+	        {
+               if (gbShowProgressIndicator)  // Only print if required
+               {
+                  if (gbJustCountCommands)
+                  {
+                     putchar('-');// show the progress indicator outline (extent)
+                  }
+                  else
+                  {
+	                 putchar('*');    // fill in the progress indicator 
+	                 fflush(stdout);  // dont buffer this output 
+                  }
+               }
+	           ProgressCount = 0;
+	        }
+	        else 
+	        {
+   	           ProgressCount++;  
+     	    }
+
             /* Execute the command.  Func sets error code. */
             /*XSVFDBG_PRINTF1( 2, "  %s\n",
                              xsvf_pzCommandName[pXsvfInfo->ucCommand] ); */
@@ -1770,8 +1835,10 @@ int xsvfExecute()
     {
         xsvfRun( &xsvfInfo );
     }
+ 
     if ( xsvfInfo.iErrorCode )
     {
+        printf ("\n");
         XSVFDBG_PRINTF1( 0, "%s\n", xsvf_pzErrorName[
                          ( xsvfInfo.iErrorCode < XSVF_ERROR_LAST )
                          ? xsvfInfo.iErrorCode : XSVF_ERROR_UNKNOWN ] );
@@ -1781,7 +1848,15 @@ int xsvfExecute()
     }
     else
     {
-        XSVFDBG_PRINTF( 0, "SUCCESS - Completed XSVF execution.\n" );
+        if (gbJustCountCommands) // end of first phase ..not executed if indicator is suppressed
+        {
+           printf ("|\r");             // back to start of the display line
+           printf (ProgressIndicator); // rewrite the prefix to establish the start of the progress bar
+        }
+        else
+        {
+           XSVFDBG_PRINTF( 0, "\n SUCCESS - Completed XSVF execution.\n" );
+        }
     }
 
     xsvfCleanup( &xsvfInfo );
@@ -1815,7 +1890,7 @@ int main( int iArgc, char** ppzArgv )
     iErrorCode          = XSVF_ERRORCODE( XSVF_ERROR_NONE );
     pzXsvfFileName      = 0;
 
-    printf( "Guzunty loader v%s, portions courtesy Xilinx, Inc.\n", XSVF_VERSION );
+    printf( "Guzunty loader v%s rev %s, portions courtesy Xilinx, Inc.\n", XSVF_VERSION, GZ_LOAD_VERSION );
 
     for ( i = 1; i < iArgc ; ++i )
     {
@@ -1832,6 +1907,11 @@ int main( int iArgc, char** ppzArgv )
                 printf( "Verbose level = %d\n", xsvf_iDebugLevel );
             }
         }
+        else if ( !strcmp( ppzArgv[ i ], "-p" ) )
+        {
+            gbShowProgressIndicator = 0;
+            printf( "Progress Indicator suppressed\n");
+        }
         else
         {
             pzXsvfFileName  = ppzArgv[ i ];
@@ -1841,8 +1921,9 @@ int main( int iArgc, char** ppzArgv )
 
     if ( !pzXsvfFileName )
     {
-        printf( "USAGE:  gz_load [-v level] filename.xsvf\n" );
+        printf( "USAGE:  gz_load [-v level][-p] filename.xsvf\n" );
         printf( "where:  -v level      = verbose, level = 0-4 (default=0)\n" );
+        printf( "        -p            = suppress progress indicator\n"); 
         printf( "        filename.xsvf = the XSVF file to execute.\n" );
     }
     else
@@ -1856,6 +1937,16 @@ int main( int iArgc, char** ppzArgv )
         }
         else
         {
+            if (gbShowProgressIndicator)
+            {
+               /* determine the number of commands in the file */
+               gbJustCountCommands = 1;
+               printf(ProgressIndicator); // Prefix
+               iErrorCode  = xsvfExecute();
+               gbJustCountCommands = 0;
+               fseek(in,0,SEEK_SET);  // rewind the input 
+            }
+                          
             /* Initialize the I/O.  SetPort initializes I/O on first call */
             portsInitialize();
             setPort( TMS, 1 );
