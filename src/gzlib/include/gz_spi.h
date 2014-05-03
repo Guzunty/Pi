@@ -30,6 +30,8 @@ int gz_spi_set(int bit_to_set);
 int gz_spi_reset(int bit_to_reset);
 int gz_spi_write(byte* to_write);
 void gz_spi_read(byte* result);
+int gz_spi_get(int bit_to_read);
+int gz_output_get(int bit_to_read);
 void gz_spi_set_width(int new_width);
 void gz_spi_close();
 

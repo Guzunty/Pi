@@ -88,6 +88,28 @@ static PyObject* spi_read(PyObject* self, PyObject* args)
   return Py_BuildValue("l", read);
 }
 
+static PyObject* spi_get(PyObject* self, PyObject* args)
+{
+  int bit_to_read;
+  if( !(PyArg_ParseTuple(args, "") || PyArg_ParseTuple(args, "i", &bit_to_read))) {
+    return NULL;
+  }
+  PyErr_Clear();
+  int read = gz_spi_get(bit_to_read);
+  return Py_BuildValue("i", read);
+}
+
+static PyObject* output_get(PyObject* self, PyObject* args)
+{
+  int bit_to_read;
+  if( !(PyArg_ParseTuple(args, "") || PyArg_ParseTuple(args, "i", &bit_to_read))) {
+    return NULL;
+  }
+  PyErr_Clear();
+  int read = gz_output_get(bit_to_read);
+  return Py_BuildValue("i", read);
+}
+
 static PyObject* spi_set_width(PyObject* self, PyObject* args)
 {
   int width;
@@ -114,6 +136,8 @@ static PyMethodDef gzMethods[] =
   {"spi_reset", spi_reset, METH_VARARGS, "Resetting output"},
   {"spi_write", spi_write, METH_VARARGS, "Writing SPI output"},
   {"spi_read", spi_read, METH_NOARGS, "Reading SPI input"},
+  {"spi_get", spi_get, METH_VARARGS, "Bitwise SPI read"},
+  {"output_get", output_get, METH_VARARGS, "Bitwise read of SPI output buffer"},
   {"spi_set_width", spi_set_width, METH_VARARGS, "Setting SPI width in bytes"},
   {"spi_close", spi_close, METH_NOARGS, "Closing SPI device"},
   {NULL, NULL, 0, NULL}

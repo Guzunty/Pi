@@ -56,6 +56,21 @@ def display_inputs():
       stdscr.addstr(center_y, start_x + 30 - (2 * i), "0")
     mask = mask << 1
 
+def display_bitwise_inputs():
+  size = stdscr.getmaxyx()            # get the screen boundaries
+  center_x = size[1] / 2
+  center_y = size[0] / 2
+  start_y = center_y - 2
+  start_x = center_x - 16
+  stdscr.addstr(start_y, center_x - 8, "Input bit status")
+  start_y += 1
+  stdscr.addstr(start_y, start_x, "F E D C B A 9 8 7 6 5 4 3 2 1 0")
+  for i in range(8):
+    if (GZ.spi_get(i)):
+      stdscr.addstr(center_y, start_x + 30 - (2 * i), "1")
+    else:
+      stdscr.addstr(center_y, start_x + 30 - (2 * i), "0")
+
 def main():
     global stdscr
     dir(curses)
@@ -97,10 +112,36 @@ def main():
     if (str(unichr(key)) == "n"):
       stdscr.erase()
       curses.curs_set(0)              # Hide the cursor
+      stdscr.addstr("Toggling outputs (Bitwise).\n")
+      stdscr.addstr("Press 'n' for next test, any other key to stop.\n")
+      GZ.spi_write(0x5555)            # Pass set up bytes to SPI
+      while(True):
+        for x in range(0, 15):
+          if (GZ.output_get(x)):
+            GZ.spi_reset(x)
+          else:
+            GZ.spi_set(x)
+        key = stdscr.getch()
+        time.sleep(0.1)
+        if (key != -1):
+          break;
+    if (str(unichr(key)) == "n"):
+      stdscr.erase()
+      curses.curs_set(0)              # Hide the cursor
       stdscr.addstr("Reading inputs.\n")
-      stdscr.addstr("Press any key to stop.\n")
+      stdscr.addstr("Press 'n' for next test, any other key to stop.\n")
       while(True):
         display_inputs()
+        key = stdscr.getch()
+        if (key != -1):
+          break;
+    if (str(unichr(key)) == "n"):
+      stdscr.erase()
+      curses.curs_set(0)              # Hide the cursor
+      stdscr.addstr("Reading bitwise inputs.\n")
+      stdscr.addstr("Press any key to stop.\n")
+      while(True):
+        display_bitwise_inputs()
         key = stdscr.getch()
         if (key != -1):
           break;

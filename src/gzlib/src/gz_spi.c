@@ -97,6 +97,32 @@ void gz_spi_read(byte* result) {
   }
 }
 
+int gz_spi_get(int bit_to_read) {
+  byte* buffer;
+  int byte_cnt = bit_to_read >> 3;
+  if (byte_cnt > width) {
+	printf("Bit %d is out of range.", bit_to_read);
+	exit(-1);
+  }
+  else {
+	buffer = transfer(spi_cache, 0);
+	return 0 == (buffer[byte_cnt] & (1 << (bit_to_read & 0x7))) ? 0 : 1;
+  }
+  return 0;
+}
+
+int gz_output_get(int bit_to_read) {
+  int byte_cnt = bit_to_read >> 3;
+  if (byte_cnt > width) {
+	printf("Bit %d is out of range.", bit_to_read);
+	exit(-1);
+  }
+  else {
+    return 0 == (spi_cache[byte_cnt] & (1 << (bit_to_read & 0x7))) ? 0 : 1;
+  }
+  return 0;
+}
+
 void gz_spi_initialize() {
   spi_open("/dev/spidev0.0");
   initialized = 1;
