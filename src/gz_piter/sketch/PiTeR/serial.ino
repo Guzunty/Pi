@@ -42,7 +42,7 @@ void serialOut_GUI() {
     Serial.print(sensorValue[ACC_Z], DEC);   Serial.print(",");
     Serial.print(sensorValue[GYR_Y], DEC);   Serial.print(",");
    
-    writeWheelData();
+    writeAngleData();
     //loop
     Serial.print(STD_LOOP_TIME, DEC);        Serial.print(",");
     Serial.print(angleCtrl.getIntegratedError(), DEC);            Serial.print(",");
@@ -56,23 +56,25 @@ void serialOut_GUI() {
     Serial.print(rate_R  * 5000, DEC);       Serial.print(",");
     Serial.print((rate_L * 5000) -10.0, DEC); Serial.print(","); // Offset lets us see two values separately
     Serial.print((wheelRate * 5) -20.0, DEC); Serial.print(",");
-    Serial.print((targetWheelRate * 50) -30.0, DEC); Serial.print("\n");
+    Serial.print((targetWheelRate * 50) -30.0, DEC); Serial.print(",");
+    writeWheelData();
+     Serial.print("\n");
   }
 }
 
 void writeWheelData() {
-    Serial.print(wheelCtrl.getPTerm(), DEC); Serial.print(",");
+/*    Serial.print(wheelCtrl.getPTerm(), DEC); Serial.print(",");
     Serial.print(wheelCtrl.getITerm(), DEC); Serial.print(",");
     Serial.print(wheelCtrl.getDTerm(), DEC); Serial.print(",");
     Serial.print(drive, DEC);                Serial.print(",");
     Serial.print(wheelCtrl.getError(), DEC); Serial.print(",");
     Serial.print(setPoint, DEC);             Serial.print(",");
-    
+*/    
     //PID Parameters
     Serial.print(wheelCtrl.getK(), DEC);     Serial.print(",");
     Serial.print(wheelCtrl.getKp(), DEC);    Serial.print(",");
     Serial.print(wheelCtrl.getKi(), DEC);    Serial.print(",");
-    Serial.print(wheelCtrl.getKd(), DEC);    Serial.print(",");
+    Serial.print(wheelCtrl.getKd(), DEC);
 }
 
 void writeAngleData() {
@@ -108,18 +110,31 @@ void serialIn() {
         u.b[1] = Serial.read();
         u.b[0] = Serial.read();
         switch (param) {
-          case 'p':
+          case 'P':
             wheelCtrl.setKp(u.fval);
             break;
-          case 'i':
+          case 'I':
             wheelCtrl.setKi(u.fval);
             wheelCtrl.resetIntegratedError();
             break;
-          case 'd':
+          case 'D':
             wheelCtrl.setKd(u.fval);
             break;
-          case 'k':
+          case 'K':
             wheelCtrl.setK(u.fval);
+            break;
+          case 'p':
+            angleCtrl.setKp(u.fval);
+            break;
+          case 'i':
+            angleCtrl.setKi(u.fval);
+            angleCtrl.resetIntegratedError();
+            break;
+          case 'd':
+            angleCtrl.setKd(u.fval);
+            break;
+          case 'k':
+            angleCtrl.setK(u.fval);
             break;
           case 's':
             basePoint = u.fval;
@@ -193,7 +208,7 @@ void serialOut_runtime() {
     Serial.write(result.out, 2);
   }
   if (throttleLSB == 0) {
-    result.in = int(fusedAngle);
+    result.in = int(wheelRate);
     Serial.write("r:");
     Serial.write(result.out, 2);
   }

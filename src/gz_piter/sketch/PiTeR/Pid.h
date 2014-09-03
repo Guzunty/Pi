@@ -57,12 +57,11 @@ class Pid {
       float rdt = (float)dt / 1000000.0;
       error = targetPosition - currentPosition;
       pTerm = Kp * error;
-      integrated_error += error * rdt * 100;
-      
+      integrated_error += error * rdt * 100.0;
       iTerm = Ki * constrain(integrated_error, -GUARD_GAIN, GUARD_GAIN);
       integrated_error *= 0.9; // Decay integrated error
       integrated_error = constrain(integrated_error, -100.0, 100.0);
-      dTerm = (- Kd * (currentPosition - last_position) / (rdt  * 100));                            
+      dTerm = (- Kd * (currentPosition - last_position) / (rdt  * 100.0));
       last_position = currentPosition;
       float result = K*(pTerm + iTerm + dTerm);
       if (nonlinear) {

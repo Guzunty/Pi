@@ -65,8 +65,8 @@
     return x_angle;
   }
 
-void resetFilter() {
-    x_angle = 0;
+void resetFilter(double startAngle) {
+    x_angle = startAngle;
     x_bias = 0;
     P_00 = 0; P_01 = 0; P_10 = 0; P_11 = 0;	
 }

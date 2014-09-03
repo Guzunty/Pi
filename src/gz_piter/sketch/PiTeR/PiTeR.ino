@@ -56,8 +56,8 @@
 #define   InB_L                 11                            // INB left
 #define   PWM_L                 9                             // PWM left
 
-#define encodPinA_L             2                             // encoder A left
-#define encodPinA_R             3                             // encoder A right
+#define encodPinA_L             2                             // encoder A left  - Interrupt 0
+#define encodPinA_R             3                             // encoder A right - Interrupt 1
 #define encodPinB_L             4                             // encoder B left
 #define encodPinB_R             5                             // encoder B right
 
@@ -81,9 +81,9 @@ unsigned long lastFusionTime = 0;
 unsigned long lastWheelTime = 0;
 unsigned long lastPidTime = 0;
 
-float fusedAngle;                  // angles in QUIDS (360° = 2PI = 1204 QUIDS   <<<
-float ACC_angle;
-float GYRO_rate;
+float fusedAngle = 0.0;          // angles in QUIDS (360° = 2PI = 1204 QUIDS   <<<
+float ACC_angle = 0.0;
+float GYRO_rate = 0.0;
 float setPoint = 0.0;
 float lastSetPoint = 0.0;
 float basePoint = 0.0;
@@ -93,7 +93,7 @@ float motorOffsetL = 1;          // The offset for left motor
 float motorOffsetR = 1;          // The offset for right motor
 float wheelRate = 0.0;
 float targetWheelRate = 0.0;
-float targetTurnRate;
+float targetTurnRate= 0.0;
 int   posnError = 0;
 long  targetPosn = 0;
 
@@ -106,10 +106,12 @@ boolean calibrated = false;
 boolean armed = true;
 
 // *****************  Proportional Integral Derivative  *****************
-//Pid    angleCtrl(1.0, 6.6, 1.9, 5.5, false);             // 7.2v, 124mm wheels, linear response
-//Pid    wheelCtrl(0.3, 4.5, 2.8, 3.5, false);
-Pid    angleCtrl(0.8, 6.6, 1.9, 5.5, false);             // 7.2v, 124mm wheels, linear response
-Pid    wheelCtrl(0.5, 4.5, 3.0, 3.5, false);
+//Pid    angleCtrl(0.75, 6.6, 1.9, 5.5, false);            // 7.4v, 124mm wheels, linear response
+//Pid    wheelCtrl(0.6, 4.5, 3.0, 3.3, false);
+Pid    angleCtrl(0.5, 6.6, 1.9, 5.5, false);              // 11.1v, 124mm wheels, linear response
+Pid    wheelCtrl(0.4, 4.5, 3.0, 3.3, false);
+//Pid    angleCtrl(1.0, 1.6, 0.5, 1.6, false);            // 11.1v, 124mm wheels, linear response
+//Pid    wheelCtrl(0.0, 5.5, 4.0, 3.0, false);
 
 void setup() {
   Serial.begin(115200);
@@ -117,6 +119,7 @@ void setup() {
     pinMode(pin, OUTPUT);                                // set output mode
   }
   TCCR1B = TCCR1B & 0b11111000 | 0x02;                   // Set 3921.16 Hz PWM frequency
+  bitSet(TCCR1B, WGM12);                                 // Set timer 1 to Fast PWM mode (f = 7842.32)
   delay(100);
   MPU6050_setup();  
   calibrated = calibrateSensors();
@@ -141,9 +144,9 @@ void loop() {
   unsigned long time = micros();
   fusedAngle = fuse(ACC_angle, GYRO_rate, getElapsedMicros(time, lastFusionTime));   // calculate Absolute Angle
   lastFusionTime = time;
+  wheelRate = ((rate_R + rate_L) / 2.0) * 1000;
   if (armed) {
     // ************************** Wheel movement *****************************
-    wheelRate = ((rate_R + rate_L) / 2.0) * 1000;
     time = micros();
     setPoint = basePoint - wheelCtrl.updatePid(targetWheelRate, wheelRate, getElapsedMicros(time, lastWheelTime));
     lastWheelTime = time;
@@ -154,10 +157,11 @@ void loop() {
   }
   if (calibrated) {
     if (armed) {
-      if (fusedAngle < (basePoint - 200) || fusedAngle > (basePoint + 200)) {
+      if (fusedAngle < (basePoint - 190) || fusedAngle > (basePoint + 190)) {
         if (motorDisableCount == MOTOR_DISARM_TO) {
           armed = false;                                  // Disable motors if we
           digitalWrite(LED, HIGH);                        // cannot recover.
+          motorDisableCount = 0;
         }
         else {
           motorDisableCount++;
@@ -173,7 +177,10 @@ void loop() {
           armed = true;                                   // Re-enable motors within a narrow band
           angleCtrl.resetIntegratedError();               // of vertical (avoids voltage drop -
           wheelCtrl.resetIntegratedError();               // motors never surge to full)
+          //resetFilter(fusedAngle);
           digitalWrite(LED, LOW);
+          motorEnableCount = 0;
+          drive = 0;
         }
         else {
           motorEnableCount++;
@@ -195,7 +202,7 @@ void loop() {
   serialOut_runtime();
   //serialOut_raw();
   //serialOut_timing();
-  //serialOut_GUI();                                    // Need to use this with ser2net and socat to get data
+  //serialOut_GUI();                                      // Need to use this with ser2net and socat to get data
                                                         // to Processing on a host. See the Guzunty Github article.
 // ************************* Timing ****************************
   time = micros();

@@ -26,6 +26,7 @@
  */
 
 #define GUARD_DRIVE 16
+#define DEAD_BAND 2
 
 int lastTorque = 0;
 
@@ -39,22 +40,23 @@ int driveMotor(int torque)  {
     }
   }
   lastTorque = torque;
-  // PiTeR has a mechanical deadband of about +/- 13. We don't want anything that big
-  // or else the robot will oscillate. We do want a smaller deadband, so we chose 2.
+  // At 7.2 volts, PiTeR has a mechanical deadband of about +/- 13. We don't want anything that
+  // big or else the robot will oscillate. We do want a smaller deadband, so we chose 2.
+  // At 12 volts, there is no measurable deadband.
   float wheelFactor = 1.0;
   int torqueR = torque * motorOffsetR + (targetTurnRate / wheelFactor);
   torqueR = constrain(torqueR, -255, 255);
-  if (torqueR >= 2)  {                                        // drive motor forward
+  if (torqueR >= DEAD_BAND)  {                                        // drive motor forward
     digitalWrite(InA_R, LOW);                        
     digitalWrite(InB_R, HIGH);
   }
-  else if (torqueR <= -2) {                                   // drive motor backward
+  else if (torqueR <= -DEAD_BAND) {                                   // drive motor backward
     digitalWrite(InA_R, HIGH);                       
     digitalWrite(InB_R, LOW);
     torqueR = abs(torqueR);
   }
-  if (torqueR >= 2) {
-    torqueR = map(torqueR,2,255,12,255);
+  if (torqueR >= DEAD_BAND) {
+    //torqueR = map(torqueR,2,255,6,255);
     analogWrite(PWM_R,torqueR);
   }
   else {
@@ -64,17 +66,17 @@ int driveMotor(int torque)  {
   }
   int torqueL = torque * motorOffsetL - (targetTurnRate / wheelFactor);
   torqueL = constrain(torqueL, -255, 255);
-  if (torqueL >= 2)  {                                        // drive motor forward
+  if (torqueL >= DEAD_BAND)  {                                        // drive motor forward
     digitalWrite(InA_L, LOW);                     
     digitalWrite(InB_L, HIGH);
   }
-  else if (torqueL <= -2) {                                   // drive motor backward
+  else if (torqueL <= -DEAD_BAND) {                                   // drive motor backward
     digitalWrite(InA_L, HIGH);                      
     digitalWrite(InB_L, LOW);
     torqueL = abs(torqueL);
   }
-  if (torqueL >= 2) {
-    torqueL = map(torqueL,2,255,12,255);
+  if (torqueL >= DEAD_BAND) {
+    //torqueL = map(torqueL,2,255,6,255);
     analogWrite(PWM_L,torqueL);
   }
   else {    
@@ -110,29 +112,39 @@ volatile unsigned long lastEncoderRDTime = 0;
 volatile unsigned long lastEncoderLDTime = 0;
 volatile int encoderRDir = 1;
 volatile int encoderLDir = 1;
+volatile boolean encoderRSeen = false;
+volatile boolean encoderLSeen = false;
+unsigned long lastEncoderUpdateTime = 0;
 
 void updateEncoders() {
-  rate_R = 0.0;
-  if (lastEncoderRDTime != 0) {
-    rate_R = 1.0 / (float)lastEncoderRDTime;
-    lastEncoderRDTime = 0;
-    if (encoderRDir < 0) {
-      rate_R = -rate_R;
-    }
+  unsigned long time = micros();
+  unsigned long deltaTime = time - lastEncoderUpdateTime;
+  if (encoderRSeen) {
+    encoderRSeen = false;
   }
-  rate_L = 0.0;
-  if (lastEncoderLDTime != 0) {
-    rate_L = 1.0 / (float)lastEncoderLDTime;
-    lastEncoderLDTime = 0;
-    if (encoderLDir < 0) {
-      rate_L = -rate_L;
-    }
+  else {
+    lastEncoderRDTime += deltaTime;
   }
+  rate_R = 1.0 / (float)lastEncoderRDTime;
+  if (encoderRDir < 0) {
+    rate_R = -rate_R;
+  }
+  if (encoderLSeen) {
+    encoderLSeen = false;
+  }
+  else {
+    lastEncoderLDTime += deltaTime;
+  }
+  rate_L = 1.0 / (float)lastEncoderLDTime;
+  if (encoderLDir < 0) {
+    rate_L = -rate_L;
+  }
+  lastEncoderUpdateTime = time;
 }
 
 unsigned long lastEncoderRTime = 0;
 
-void encoderRInterrupt()  {                           // pulse and direction, direct port reading to save cycles
+void encoderRInterrupt()  {
   unsigned long time = micros();
   lastEncoderRDTime = time - lastEncoderRTime;
   encoderRDir = 1;
@@ -148,11 +160,12 @@ void encoderRInterrupt()  {                           // pulse and direction, di
   }
   posn_R += encoderRDir;
   lastEncoderRTime = time;
+  encoderRSeen = true;
 }
 
 unsigned long lastEncoderLTime = 0;
 
-void encoderLInterrupt()  {                           // pulse and direction, direct port reading to save cycles
+void encoderLInterrupt()  {
   unsigned long time = micros();
   lastEncoderLDTime = time - lastEncoderLTime;
   encoderLDir = 1;
@@ -168,4 +181,5 @@ void encoderLInterrupt()  {                           // pulse and direction, di
   }
   posn_L += encoderLDir;
   lastEncoderLTime = time;
+  encoderLSeen = true;
 }
