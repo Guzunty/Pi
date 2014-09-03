@@ -1,23 +1,23 @@
 /*
  * gz_spi.c
- * 
+ *
  * Copyright 2012  campbellsan
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
- * 
+ *
  */
 #include <gz_spi.h>
 #include <linux/spi/spidev.h>
@@ -126,6 +126,16 @@ int gz_output_get(int bit_to_read) {
 void gz_spi_initialize() {
   spi_open("/dev/spidev0.0");
   initialized = 1;
+}
+
+/*
+*     - Open a specific device
+*/
+int gz_spi_open_port(char * port) {
+  int result;
+  result = spi_open(port);
+  initialized = 1;
+  return result;
 }
 
 /*spi_open

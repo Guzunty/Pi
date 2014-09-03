@@ -1,27 +1,27 @@
 /*
  * gz_libpy.c
- * 
+ *
  * Copyright 2013  guzunty
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
- * 
+ *
  * This program provides a Python wrapper for the Guzunty library.
  * To use it,  import it with:
  * import GZ
- * 
+ *
  */
 
 #include <Python.h>
@@ -44,6 +44,17 @@ static PyObject* clock_dis(PyObject* self, PyObject* args)
 {
   PyErr_Clear();
   gz_clock_dis();
+  Py_RETURN_NONE;
+}
+
+static PyObject* spi_open_port(PyObject* self, PyObject* args)
+{
+  char * port;
+  if ( !(PyArg_ParseTuple(args, "") || PyArg_ParseTuple(args, "s", &port))) {
+    return NULL;
+  }
+  PyErr_Clear();
+  gz_spi_open_port(port);
   Py_RETURN_NONE;
 }
 
@@ -140,6 +151,7 @@ static PyMethodDef gzMethods[] =
   {"output_get", output_get, METH_VARARGS, "Bitwise read of SPI output buffer"},
   {"spi_set_width", spi_set_width, METH_VARARGS, "Setting SPI width in bytes"},
   {"spi_close", spi_close, METH_NOARGS, "Closing SPI device"},
+  {"spi_open_port", spi_open_port, METH_VARARGS, "Open alternate SPI dwevice"},
   {NULL, NULL, 0, NULL}
 };
 

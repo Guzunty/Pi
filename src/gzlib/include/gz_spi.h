@@ -34,5 +34,5 @@ int gz_spi_get(int bit_to_read);
 int gz_output_get(int bit_to_read);
 void gz_spi_set_width(int new_width);
 void gz_spi_close();
-
+int gz_spi_open_port(char * port);
 #endif // GZ_SPI_H

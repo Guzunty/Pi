@@ -1,7 +1,7 @@
 #
 #  setup.py
 #  
-#  Copyright 2013  <pi@raspberrypi>
+#  Copyright 2014  Guzunty
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -24,6 +24,6 @@ gz_module = Extension('GZ', sources =  ['gz_libpy.c'],
                             libraries = ['gz', 'bcm2835', 'rt'])
 
 setup (name = 'GZ',
-       version = '1.0',
+       version = '1.1',
        description = 'Support for Guzunty IO board',
        ext_modules = [gz_module])
