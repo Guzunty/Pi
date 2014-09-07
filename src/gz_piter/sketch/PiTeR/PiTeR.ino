@@ -109,9 +109,7 @@ boolean armed = true;
 //Pid    angleCtrl(0.75, 6.6, 1.9, 5.5, false);            // 7.4v, 124mm wheels, linear response
 //Pid    wheelCtrl(0.6, 4.5, 3.0, 3.3, false);
 Pid    angleCtrl(0.5, 6.6, 1.9, 5.5, false);              // 11.1v, 124mm wheels, linear response
-Pid    wheelCtrl(0.4, 4.5, 3.0, 3.3, false);
-//Pid    angleCtrl(1.0, 1.6, 0.5, 1.6, false);            // 11.1v, 124mm wheels, linear response
-//Pid    wheelCtrl(0.0, 5.5, 4.0, 3.0, false);
+Pid    wheelCtrl(0.8, 4.5, 3.0, 2.0, false);
 
 void setup() {
   Serial.begin(115200);
