@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# wii-mote.py
+# PiTeR.py
 # Control PiTeR with a Wii-mote
 #
 # Author: Derek Campbell
