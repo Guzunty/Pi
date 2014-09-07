@@ -29,7 +29,7 @@ def setLEDs(value):
   wii.led = ledValue
 
 parameters = ['k', 'p','i','d','K', 'P','I','D']
-parmDefault = [0.5, 6.6, 1.9, 5.5, 0.45, 4.5, 3.0, 3.0] # Must match default values in arduino.
+parmDefault = [0.5, 6.6, 1.9, 5.5, 0.8, 4.5, 3.0, 2.0] # Must match default values in arduino.
 parmValue = copy.deepcopy(parmDefault)
 
 def decrementParameter():
