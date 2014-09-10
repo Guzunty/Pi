@@ -60,6 +60,18 @@ def writePWM(addr, value):
   value = ((addr & 0x07) << 7) | (value & 0x7f)
   GZ.spi_write(value)
 
+def dumpSettings():
+  output = ""
+  for i in range (0, 8):
+    output = output + parameters[i] + ": " + str(parmValue[i]) + " "
+  print output
+  output = "TWR: " + str(targetWheelRate) + " TTR: " + str(targetTurnRate) + " BSP: " + str(balanceSetPoint)
+  print output
+  output = "MOS: " + str(motorOffset) + " STA: " + str(state) + " CPM: " + str(currentParameter)
+  print output
+  output = "PAN: " + str(headPan) + " TLT: " + str(headTilt)
+  print output
+
 targetWheelRate = 0.0
 targetTurnRate = 121.0
 balanceSetPoint = 0.0
@@ -67,7 +79,7 @@ motorOffset = 0.0
 state = 0
 currentParameter = 0
 
-headPan = 64
+headPan = 32
 headTilt = 64
 
 button_delay = 0.05
@@ -133,7 +145,8 @@ while True:
 
   # If Plus and Minus buttons pressed
   # together then rumble and quit.
-  if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS == 0):  
+  if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS == 0):
+    dumpSettings()
     print '\nClosing connection ...'
     wii.rumble = 1
     time.sleep(0.25)

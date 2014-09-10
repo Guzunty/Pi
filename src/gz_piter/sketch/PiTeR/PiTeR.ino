@@ -106,27 +106,28 @@ boolean calibrated = false;
 boolean armed = true;
 
 // *****************  Proportional Integral Derivative  *****************
-//Pid    angleCtrl(0.75, 6.6, 1.9, 5.5, false);            // 7.4v, 124mm wheels, linear response
+//Pid    angleCtrl(0.75, 6.6, 1.9, 5.5, false);         // 7.4v, 124mm wheels, linear response
 //Pid    wheelCtrl(0.6, 4.5, 3.0, 3.3, false);
-Pid    angleCtrl(0.5, 6.6, 1.9, 5.5, false);              // 11.1v, 124mm wheels, linear response
+Pid    angleCtrl(0.5, 6.6, 1.9, 5.5, false);            // 11.1v, 124mm wheels, linear response
 Pid    wheelCtrl(0.8, 4.5, 3.0, 2.0, false);
 
 void setup() {
   Serial.begin(115200);
   for(int pin=InA_R; pin<=InB_L; pin++) {
-    pinMode(pin, OUTPUT);                                // set output mode
+    pinMode(pin, OUTPUT);                               // set output mode
   }
-  TCCR1B = TCCR1B & 0b11111000 | 0x02;                   // Set 3921.16 Hz PWM frequency
-  bitSet(TCCR1B, WGM12);                                 // Set timer 1 to Fast PWM mode (f = 7842.32)
+  TCCR1B = TCCR1B & 0b11111000 | 0x02;                  // Set 3921.16 Hz PWM frequency
+  bitSet(TCCR1B, WGM12);                                // Set timer 1 to Fast PWM mode (f = 7842.32)
   delay(100);
   MPU6050_setup();  
   calibrated = calibrateSensors();
-  pinMode(LED, OUTPUT);                                  // Set up to post state output
+  pinMode(LED, OUTPUT);                                 // Set up to post state output
   if (!calibrated) {
     digitalWrite(LED, HIGH);
   }
   setupEncoders();
   targetPosn = (posn_L + posn_R);
+  setUpDistanceSensor();
 }
 
 int motorDisableCount = 0;
@@ -136,25 +137,31 @@ void loop() {
   // ********************* Sensor aquisition & filtering *******************
   updateSensors();
   updateEncoders();
-
-  ACC_angle = getAccAngle();                             // in Quids (1024 Quids=360°)
-  GYRO_rate = getGyroRate();                             // in Quids per second
+  
+  ACC_angle = getAccAngle();                            // in Quids (1024 Quids=360°)
+  GYRO_rate = getGyroRate();                            // in Quids per second
   unsigned long time = micros();
   fusedAngle = fuse(ACC_angle, GYRO_rate, getElapsedMicros(time, lastFusionTime));   // calculate Absolute Angle
   lastFusionTime = time;
   wheelRate = ((rate_R + rate_L) / 2.0) * 1000;
-  if (armed) {
-    // ************************** Wheel movement *****************************
-    time = micros();
-    setPoint = basePoint - wheelCtrl.updatePid(targetWheelRate, wheelRate, getElapsedMicros(time, lastWheelTime));
-    lastWheelTime = time;
-    // *********************** PID and motor drive ***************************
-    time = micros();
-    drive = angleCtrl.updatePid(setPoint, fusedAngle,  getElapsedMicros(time, lastPidTime));
-    lastPidTime = time;
-  }
   if (calibrated) {
     if (armed) {
+      // ***************************** Distance ********************************
+      startPing();
+      // ************************** Wheel movement *****************************
+      time = micros();
+      endPing();                                          // End trigger > 10 uS after starting
+      if (getDistance() < 30 && targetWheelRate > 0) {    // Protect robot from collision
+        setPoint = basePoint - wheelCtrl.updatePid(0.0, wheelRate, getElapsedMicros(time, lastWheelTime));
+      }
+      else {                                              // Normal wheel rate control path
+        setPoint = basePoint - wheelCtrl.updatePid(targetWheelRate, wheelRate, getElapsedMicros(time, lastWheelTime));
+      }
+      lastWheelTime = time;
+      // *********************** PID and motor drive ***************************
+      time = micros();
+      drive = angleCtrl.updatePid(setPoint, fusedAngle,  getElapsedMicros(time, lastPidTime));
+      lastPidTime = time;
       if (fusedAngle < (basePoint - 190) || fusedAngle > (basePoint + 190)) {
         if (motorDisableCount == MOTOR_DISARM_TO) {
           armed = false;                                  // Disable motors if we
@@ -175,7 +182,6 @@ void loop() {
           armed = true;                                   // Re-enable motors within a narrow band
           angleCtrl.resetIntegratedError();               // of vertical (avoids voltage drop -
           wheelCtrl.resetIntegratedError();               // motors never surge to full)
-          //resetFilter(fusedAngle);
           digitalWrite(LED, LOW);
           motorEnableCount = 0;
           drive = 0;
@@ -197,11 +203,8 @@ void loop() {
   }
 
 // ************************* Serial ****************************
-  serialOut_runtime();
-  //serialOut_raw();
-  //serialOut_timing();
-  //serialOut_GUI();                                      // Need to use this with ser2net and socat to get data
-                                                        // to Processing on a host. See the Guzunty Github article.
+  serialOut();
+
 // ************************* Timing ****************************
   time = micros();
   lastLoopTime = getElapsedMicros(time, loopStartTime);
