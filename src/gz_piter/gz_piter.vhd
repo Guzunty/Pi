@@ -48,7 +48,7 @@ end gz_piter;
 architecture RTL of gz_piter is
 signal bit_cnt: std_logic_vector(2 downto 0);
 type pwm_counter_t is array (1 downto 0) of std_logic_vector(6 downto 0);
-signal pwm_counters: pwm_counter_t := (others=> (others=> '0'));
+signal pwm_counters: pwm_counter_t := (("1000000"), ("1000000"));
 begin
 
   -- concurrent assignments  
