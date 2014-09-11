@@ -94,14 +94,13 @@ writePWM(1, headTilt)
 print 'Press 1 + 2 on your Wii Remote now ...'
 time.sleep(1)
 
-# Connect to the Wii Remote. If it times out
-# then quit.
-try:
-  wii=cwiid.Wiimote()
-except RuntimeError:
-  print "Error opening wiimote connection"
-  quit()
-
+# Connect to the Wii Remote. If it times out keep trying.
+while True:
+  try:
+    wii=cwiid.Wiimote()
+    break
+  except RuntimeError:
+    time.sleep(1)
 print 'Wii Remote connected...'
 print '2     - Accelerate'
 print '1     - Brake/Reverse'
@@ -122,22 +121,24 @@ except RuntimeError:
   print "Error opening serial port"
   quit()
 
+# Let the user know PiTeR is connected and ready to command
+wii.rumble = 1
+time.sleep(2)
+wii.rumble = 0
+
 while True:
   if (ser.inWaiting() >=4):
     cmd = ser.read(2)
     if (cmd == 'v:'):
       voltage = hex2int(ser.read(2))
-      print ('Voltage: ' + str(voltage[0]))
-      if (voltage <= 760):
-        print("Low voltage: Halting.")
-        os.system("sudo halt")
-        quit()
+      #if (voltage <= 760):               # We'd like to do this
+      #  print("Low voltage: Halting.")   # eventually to protect
+      #  os.system("sudo halt")           # the LiPo.
+      #  quit()
     elif (cmd == 'r:'):
       wheelRate = hex2int(ser.read(2))
-      print( 'Wheel Rate: ' + str(wheelRate[0]))
     elif (cmd == 'd:'):
       distance = hex2int(ser.read(2))
-      print ('Distance: ' + str(distance[0]))
     else:
       ser.flushInput()
 
@@ -152,7 +153,13 @@ while True:
     time.sleep(0.25)
     wii.rumble = 0
     exit(wii)  
-  
+  if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS - cwiid.BTN_A == 0):
+    print '\nHalting ...'
+    wii.rumble = 1
+    time.sleep(0.5)
+    wii.rumble = 0
+    os.system("sudo halt")
+    exit(wii)  
   if (wii.state['acc'][1] != targetTurnRate and state == 0):
     targetTurnRate = wii.state['acc'][1]
     ser.write('t:')
