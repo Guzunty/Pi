@@ -154,6 +154,7 @@ while True:
     wii.rumble = 0
     exit(wii)  
   if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS - cwiid.BTN_A == 0):
+    dumpSettings()
     print '\nHalting ...'
     wii.rumble = 1
     time.sleep(0.5)
