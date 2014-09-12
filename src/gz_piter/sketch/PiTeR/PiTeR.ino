@@ -143,8 +143,8 @@ void loop() {
   unsigned long time = micros();
   fusedAngle = fuse(ACC_angle, GYRO_rate, getElapsedMicros(time, lastFusionTime));   // calculate Absolute Angle
   lastFusionTime = time;
-  wheelRate = ((rate_R + rate_L) / 2.0) * 1000;
-  if (calibrated) {
+  wheelRate = ((rate_R + rate_L) / 2.0) * 1000;         // in interrupts per millisecond
+  if (calibrated) {                                     // 1 interrupt is 1/960 of a revolution
     if (armed) {
       // ***************************** Distance ********************************
       startPing();
