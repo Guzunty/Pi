@@ -11,7 +11,8 @@
 -- Description:    Provides:
 --                 - a programming interface for an Arduino ICSP socket.
 --                 - voltage isolation for two serial ports.
---                 - two 7 bit Servo controllers with SPI interface.
+--                 - two 6 bit Servo controllers with SPI interface.
+--                 - two 8 bit 'true color' PWM sets
 -- Dependencies:   None.
 --
 -- Revision: 0.01
@@ -41,14 +42,18 @@ entity gz_piter is
 			  gpsrx : out STD_LOGIC;
 			  gpstx : in STD_LOGIC;
 			  servos : out  STD_LOGIC_VECTOR (1 downto 0);
+			  pwms : out STD_LOGIC_VECTOR (5 downto 0);
            servo_sel : in  STD_LOGIC;
            servo_clk : in  STD_LOGIC);
+			  
 end gz_piter;
 
 architecture RTL of gz_piter is
-signal bit_cnt: std_logic_vector(2 downto 0);
-type pwm_counter_t is array (1 downto 0) of std_logic_vector(6 downto 0);
-signal pwm_counters: pwm_counter_t := (("1000000"), ("1000000"));
+signal bit_cnt: std_logic_vector(3 downto 0);
+type servo_counter_t is array (1 downto 0) of std_logic_vector(5 downto 0);
+signal servo_counters: servo_counter_t := (("100000"), ("100000"));
+type pwm_counter_t is array (1 downto 0) of std_logic_vector(7 downto 0);
+signal pwm_counters: pwm_counter_t := ((others => '1'), (others => '1'));
 begin
 
   -- concurrent assignments  
@@ -57,7 +62,6 @@ begin
   p_rx  <= tx ;
   p_srx <= gpstx ;     -- GPS Transmit to Pi soft serial RX
   gpsrx <= p_stx ;     -- GPS Receive to Pi soft serial TX
-
   process (p_sel, p_sclk, p_mosi, miso) is
   begin
     if (p_sel = '0') then
@@ -73,17 +77,33 @@ begin
   end process;
 
   process (servo_sel, p_sclk) is
-	 variable pwm_selector: std_logic;
+	 variable reg_selector: std_logic_vector(1 downto 0);
+	 variable bit_num: integer range 0 to 7;
   begin
 	 if (servo_sel = '0') then
 	   if (rising_edge(p_sclk)) then
-	     if (bit_cnt = "111") then -- loading servo selector
-          pwm_selector := p_mosi;
-   	  else                      -- loading servo value;
-			 if (pwm_selector = '0') then
-	         pwm_counters(0)(to_integer(unsigned(bit_cnt))) <= p_mosi;
+	     if (bit_cnt(3) = '1') then -- loading reg selector
+		    if (bit_cnt(0) = '1') then
+            reg_selector(1) := p_mosi;
 			 else
-			   pwm_counters(1)(to_integer(unsigned(bit_cnt))) <= p_mosi;
+			   reg_selector(0) := p_mosi; 
+			 end if;
+   	  else                      -- loading value;
+		    bit_num := to_integer(unsigned(bit_cnt(2 downto 0)));
+			 if(reg_selector(1) = '0') then  -- servo value
+			   if(bit_num < 6) then
+			     if (reg_selector(0) = '0') then
+	             servo_counters(0)(bit_num) <= p_mosi;
+				  else
+				    servo_counters(1)(bit_num) <= p_mosi;
+				  end if;
+				end if;
+			 else                            -- pwm value
+			   if (reg_selector(0) = '0') then
+				  pwm_counters(0)(bit_num) <= p_mosi;
+				else
+				  pwm_counters(1)(bit_num) <= p_mosi;
+				end if;
 			 end if;
 		  end if;
 	   end if;
@@ -92,25 +112,38 @@ begin
       end if;
 		p_miso <= '0';                 -- We currently have nothing to write to SPI
     else
-		pwm_selector := '0';
-	   bit_cnt <= "111";
+		reg_selector := "00";
+	   bit_cnt <= "1111";
 		p_miso <= 'Z';
     end if;
   end process;
 
-  process (servo_clk, pwm_counters) is
-	 variable main_counter: std_logic_vector(9 downto 0):= (others => '0');
+  process (servo_clk, servo_counters) is
+	 variable main_counter: std_logic_vector(10 downto 0):= (others => '0');
   begin
 	 if (rising_edge(servo_clk)) then
 	   main_counter := std_logic_vector(unsigned(main_counter) + 1);
-	   if (main_counter = "0000000000") then
+		if (main_counter = "00000000000") then
 		  servos <= (others => '1');
+		end if;
+	   if (main_counter(3 downto 1) = "000") then
+		  pwms <= (others => '1');
 	   end if;
 	 end if;
     for I in 0 to 1 loop
-      if (main_counter = "001" & pwm_counters(I)) then
+      if (main_counter = "00010" & servo_counters(I)) then
 	     servos(I) <= '0';
 	   end if;
+		-- Colour registers have the format RRRGGGBB
+		if (main_counter(3 downto 1) = pwm_counters(I)(7 downto 5)) then
+		  pwms(I) <= '0';     -- Red
+		end if;
+		if (main_counter(3 downto 1) = pwm_counters(I)(4 downto 2)) then
+		  pwms(I + 2) <= '0'; -- Green
+		end if;
+		if (main_counter(3 downto 2) = pwm_counters(I)(1 downto 0)) then
+		  pwms(I + 4) <= '0'; -- Blue
+		end if;
 	 end loop;
   end process;
 
