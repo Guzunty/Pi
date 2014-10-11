@@ -126,7 +126,7 @@ begin
 		if (main_counter = "00000000000") then
 		  servos <= (others => '1');
 		end if;
-	   if (main_counter(3 downto 1) = "000") then
+	   if (main_counter(6 downto 1) = "000000") then
 		  pwms <= (others => '1');
 	   end if;
 	 end if;
