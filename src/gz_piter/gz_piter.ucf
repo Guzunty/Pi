@@ -16,5 +16,12 @@ NET "servos<0>" LOC = FB1_2;
 NET "servos<1>" LOC = FB1_5;
 NET "gpsrx" LOC = FB1_6;
 NET "gpstx" LOC = FB1_8;
-NET "p_srx" LOC = FB4_2;
-NET "p_stx" LOC = FB1_11;
+NET "p_srx" LOC = FB2_11;
+NET "p_stx" LOC = FB2_14;
+NET "pwms<0>" LOC = FB1_15;
+NET "pwms<2>" LOC = FB1_17;
+NET "pwms<4>" LOC = FB2_2;
+NET "pwms<1>" LOC = FB2_5;
+NET "pwms<3>" LOC = FB2_6;
+NET "pwms<5>" LOC = FB2_8;
+
