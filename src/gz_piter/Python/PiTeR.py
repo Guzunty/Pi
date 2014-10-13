@@ -11,8 +11,10 @@ import serial
 import time
 import struct
 import os
+import sys
 import GZ
 import copy
+import spidev
 
 def float2hex(f):
   return struct.pack('>f', f)
@@ -57,8 +59,11 @@ def displayParameter():
   print output
 
 def writePWM(addr, value):
-  value = ((addr & 0x07) << 7) | (value & 0x7f)
-  GZ.spi_write(value)
+  spi.xfer([addr, value])
+
+def resetLEDs():
+  writePWM(2, 0)
+  writePWM(3, 0)
 
 def dumpSettings():
   output = ""
@@ -79,17 +84,23 @@ motorOffset = 0.0
 state = 0
 currentParameter = 0
 
-headPan = 32
-headTilt = 64
+headPan = 30
+headTilt = 35
+
+angle = 0.0
 
 button_delay = 0.05
 GZ.clock_ena(GZ.GZ_CLK_5MHz, 180)
-GZ.spi_open_port('/dev/spidev0.1')
-GZ.spi_set_width(1)
+spi = spidev.SpiDev()
+spi.open(0,1)
 
 # Centre the servos
 writePWM(0, headPan)
 writePWM(1, headTilt)
+path = os.path.dirname(os.path.realpath(sys.argv[0]))
+f = open(path + '/speech.txt')
+speechList= list(f)
+curUtterance = 0
 
 print 'Press 1 + 2 on your Wii Remote now ...'
 time.sleep(1)
@@ -123,25 +134,40 @@ except RuntimeError:
 
 # Let the user know PiTeR is connected and ready to command
 wii.rumble = 1
-time.sleep(2)
+writePWM(2, 0x25)
+time.sleep(0.25)
+writePWM(2, 0)
+writePWM(3, 0x25)
+time.sleep(0.25)
+writePWM(3, 0)
+time.sleep(1)
 wii.rumble = 0
 
 while True:
-  if (ser.inWaiting() >=4):
+  while (ser.inWaiting() >=4):
     cmd = ser.read(2)
     if (cmd == 'v:'):
       voltage = hex2int(ser.read(2))
-      #if (voltage <= 760):               # We'd like to do this
-      #  print("Low voltage: Halting.")   # eventually to protect
-      #  os.system("sudo halt")           # the LiPo.
-      #  quit()
+      if (voltage[0] <= 740):
+        print("Warning: Low voltage.")   # We'd like to halt
+      #  os.system("sudo halt")          # eventually to protect
+      #  quit()                          # the LiPo.
     elif (cmd == 'r:'):
       wheelRate = hex2int(ser.read(2))
+      #print "Wheel rate: " + str(wheelRate[0])
     elif (cmd == 'd:'):
       distance = hex2int(ser.read(2))
+      #print "Distance: " + str(distance[0])
+    elif (cmd == 'a:'):
+      angle = ((angle + hex2int(ser.read(2))[0]) / 2.0)
+      if (abs(angle) < 20.0):
+        tilt = headTilt - int(angle)
+        if (tilt < 0):
+          tilt = 0
+        writePWM(1, tilt)
     else:
       ser.flushInput()
-
+     
   buttons = wii.state['buttons']
 
   # If Plus and Minus buttons pressed
@@ -152,6 +178,7 @@ while True:
     wii.rumble = 1
     time.sleep(0.25)
     wii.rumble = 0
+    resetLEDs()
     exit(wii)  
   if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS - cwiid.BTN_A == 0):
     dumpSettings()
@@ -159,6 +186,7 @@ while True:
     wii.rumble = 1
     time.sleep(0.5)
     wii.rumble = 0
+    resetLEDs()
     os.system("sudo halt")
     exit(wii)  
   if (wii.state['acc'][1] != targetTurnRate and state == 0):
@@ -187,7 +215,7 @@ while True:
       time.sleep(button_delay * 5)
   if (buttons & cwiid.BTN_RIGHT):
     if (state == 0):
-      if (headTilt < 127):
+      if (headTilt < 63):
         headTilt = headTilt + 1
         writePWM(1, headTilt)
         time.sleep(button_delay/2)
@@ -203,7 +231,7 @@ while True:
       time.sleep(button_delay * 5)
   if (buttons & cwiid.BTN_UP):
     if (state == 0):
-      if (headPan < 127):
+      if (headPan < 63):
         headPan = headPan + 1
         writePWM(0, headPan)
         time.sleep(button_delay/2)
@@ -247,7 +275,6 @@ while True:
       ser.write('w:')
       ser.write(float2hex(targetWheelRate))
       ser.flush()
-      print(targetWheelRate)
     time.sleep(button_delay)
 
   if (buttons & cwiid.BTN_2):
@@ -271,6 +298,11 @@ while True:
     time.sleep(button_delay)          
 
   if (buttons & cwiid.BTN_B):
+    if (curUtterance < len(speechList)):
+      message = 'flite -voice slt -t "' + speechList[curUtterance].replace('\n', '').replace('\r', '') + '"'
+      print(message)
+      os.system(message)
+      curUtterance = curUtterance + 1
     time.sleep(button_delay)          
 
   if (buttons & cwiid.BTN_HOME):
