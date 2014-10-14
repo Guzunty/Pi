@@ -98,6 +98,8 @@ def handleSerial():
         tilt = handleCommand.headTilt - int(handleSerial.angle)
         if (tilt < 0):
           tilt = 0
+        if (tilt > 63):
+          tilt = 63
         writePWM(1, tilt)
     else:
       ser.flushInput()
@@ -109,16 +111,15 @@ CMD_EXIT =     1
 CMD_SHUTDOWN = 2
 CMD_DOWN =     3
 CMD_UP =       4
-CMD_DOWN =     5
-CMD_LEFT =     6
-CMD_RIGHT =    7
-CMD_BRAKE =    8
-CMD_ACCEL =    9
-CMD_CUE =     10
-CMD_AUTO =    11
-CMD_NXTST =   12
-CMD_NEXT =    13
-CMD_PREV =    14
+CMD_LEFT =     5
+CMD_RIGHT =    6
+CMD_BRAKE =    7
+CMD_ACCEL =    8
+CMD_CUE =      9
+CMD_AUTO =    10
+CMD_NXTST =   11
+CMD_NEXT =    12
+CMD_PREV =    13
 
 # States
 ST_DRIVE =     0
@@ -161,6 +162,14 @@ def getCommand():
   return coasting, CMD_NONE
 
 def handleCommand():
+  millis = int(round(time.time() * 1000))
+  elapsed = millis - handleCommand.lastTime
+  for i in range (0, len(handleCommand.throttle)):
+    if (handleCommand.throttle[i] > 0):
+      handleCommand.throttle[i] = handleCommand.throttle[i] - elapsed
+      if (handleCommand.throttle[i] < 0):
+        handleCommand.throttle[i] = 0
+  handleCommand.lastTime = millis
   coasting, command = getCommand()
   if (command == CMD_EXIT):
     dumpSettings()
@@ -181,46 +190,60 @@ def handleCommand():
     os.system("sudo halt")
     exit(wii)  
 
-  if (command == CMD_DOWN):
+  if (command == CMD_DOWN and handleCommand.throttle[CMD_DOWN] == 0):
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headTilt > 0):
         handleCommand.headTilt = handleCommand.headTilt - 1
-        writePWM(1, handleCommand.headTilt)
-        time.sleep(button_delay/2)
+        tilt = handleCommand.headTilt
+        if (abs(handleSerial.angle) < 20.0):
+          tilt = handleCommand.headTilt - int(handleSerial.angle)
+        if (tilt < 0):
+          tilt = 0
+        if (tilt > 63):
+          tilt = 63
+        writePWM(1, tilt)
+        handleCommand.throttle[CMD_DOWN] = 25
     elif (handleCommand.state == ST_BAL):
       handleCommand.balanceSetPoint = handleCommand.balanceSetPoint - 0.1
       ser.write('b:')
       ser.write(float2hex(handleCommand.balanceSetPoint))
       ser.flush()
       print('Pitch: ' + str(handleCommand.balanceSetPoint))
-      time.sleep(button_delay)
+      handleCommand.throttle[CMD_DOWN] = 50
     elif (handleCommand.state == ST_TUNE):
       decrementParameter(handleCommand.currentParameter)
-      time.sleep(button_delay * 5)
+      handleCommand.throttle[CMD_DOWN] = 250
 
-  if (command == CMD_UP):
+  if (command == CMD_UP and handleCommand.throttle[CMD_UP] == 0):
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headTilt < 63):
         handleCommand.headTilt = handleCommand.headTilt + 1
-        writePWM(1, handleCommand.headTilt)
-        time.sleep(button_delay/2)
+        tilt = handleCommand.headTilt
+        if (abs(handleSerial.angle) < 20.0):
+          tilt = handleCommand.headTilt - int(handleSerial.angle)
+        if (tilt < 0):
+          tilt = 0
+        if (tilt > 63):
+          tilt = 63
+        writePWM(1, tilt)
+        handleCommand.throttle[CMD_UP] = 25
     elif (handleCommand.state == ST_BAL):
       handleCommand.balanceSetPoint = handleCommand.balanceSetPoint + 0.1
       ser.write('b:')
       ser.write(float2hex(handleCommand.balanceSetPoint))
       ser.flush()
       print('Pitch: ' + str(handleCommand.balanceSetPoint))
-      time.sleep(button_delay)          
+      handleCommand.throttle[CMD_UP] = 50
     elif (handleCommand.state == ST_TUNE):
       incrementParameter(handleCommand.currentParameter)
-      time.sleep(button_delay * 5)
+      handleCommand.throttle[CMD_UP] = 250
 
-  if (command == CMD_LEFT):
+  if (command == CMD_LEFT and handleCommand.throttle[CMD_LEFT] == 0):
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headPan < 63):
         handleCommand.headPan = handleCommand.headPan + 1
         writePWM(0, handleCommand.headPan)
-        time.sleep(button_delay/2)
+        handleCommand.throttle[CMD_LEFT] = 25
     elif (handleCommand.state == ST_BAL):
       handleCommand.motorOffset = handleCommand.motorOffset + 0.05
       ser.write('l:')
@@ -229,17 +252,17 @@ def handleCommand():
       ser.write(float2hex(1.0 - handleCommand.motorOffset))
       ser.flush()
       print('Yaw: ' + str(handleCommand.motorOffset))
-      time.sleep(button_delay)
+      handleCommand.throttle[CMD_LEFT] = 50
     elif (handleCommand.state == ST_TUNE):
       resetParameter(handleCommand.currentParameter)
-      time.sleep(button_delay * 5)          
+      handleCommand.throttle[CMD_LEFT] = 250
 
-  if (command == CMD_RIGHT):
+  if (command == CMD_RIGHT and handleCommand.throttle[CMD_RIGHT] == 0):
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headPan > 0):
         handleCommand.headPan = handleCommand.headPan - 1
         writePWM(0, handleCommand.headPan)
-        time.sleep(button_delay/2)
+        handleCommand.throttle[CMD_RIGHT] = 25
     elif (handleCommand.state == ST_BAL):
       handleCommand.motorOffset = handleCommand.motorOffset - 0.05
       ser.write('l:')
@@ -248,12 +271,12 @@ def handleCommand():
       ser.write(float2hex(1.0 - handleCommand.motorOffset))
       ser.flush()
       print('Yaw: ' + str(handleCommand.motorOffset))
-      time.sleep(button_delay)  
+      handleCommand.throttle[CMD_RIGHT] = 50
     elif (handleCommand.state == ST_TUNE):
       resetParameter(handleCommand.currentParameter)
-      time.sleep(button_delay * 5)          
+      handleCommand.throttle[CMD_RIGHT] = 250
 
-  if (command == CMD_BRAKE):
+  if (command == CMD_BRAKE and handleCommand.throttle[CMD_BRAKE] == 0):
     if (handleCommand.targetWheelRate > -30.0):
       if (handleCommand.targetWheelRate > 0.1):
         handleCommand.targetWheelRate = handleCommand.targetWheelRate * 0.5
@@ -262,32 +285,32 @@ def handleCommand():
       ser.write('w:')
       ser.write(float2hex(handleCommand.targetWheelRate))
       ser.flush()
-    time.sleep(button_delay)
+    handleCommand.throttle[CMD_BRAKE] = 50
 
-  if (command == CMD_ACCEL):
+  if (command == CMD_ACCEL and handleCommand.throttle[CMD_ACCEL] == 0):
     if (handleCommand.targetWheelRate < 40.0):
       handleCommand.targetWheelRate = handleCommand.targetWheelRate + 1.5
       ser.write('w:')
       ser.write(float2hex(handleCommand.targetWheelRate))
       ser.flush()
-    time.sleep(button_delay)
-          
-  if (command == CMD_AUTO):
+    handleCommand.throttle[CMD_ACCEL] = 50
+
+  if (command == CMD_AUTO and handleCommand.throttle[CMD_AUTO] == 0):
     if (handleCommand.state == ST_DRIVE):
       handleCommand.state = ST_AUTO
     elif (handleCommand.state == ST_AUTO):
       handleCommand.state = ST_DRIVE
-    time.sleep(button_delay)          
+    handleCommand.throttle[CMD_AUTO] = 250
 
-  if (command == CMD_CUE):
-    if (curUtterance < len(speechList)):
-      message = 'flite -voice slt -t "' + speechList[curUtterance].replace('\n', '').replace('\r', '') + '"'
+  if (command == CMD_CUE and handleCommand.throttle[CMD_CUE] == 0):
+    if (handleCommand.curUtterance < len(speechList)):
+      message = 'flite -voice slt -t "' + speechList[handleCommand.curUtterance].replace('\n', '').replace('\r', '') + '"'
       print(message)
       os.system(message)
-      curUtterance = curUtterance + 1
-    time.sleep(button_delay)          
+      handleCommand.curUtterance = handleCommand.curUtterance + 1
+    handleCommand.throttle[CMD_CUE] = 50
 
-  if (command == CMD_NXTST):
+  if (command == CMD_NXTST and handleCommand.throttle[CMD_NXTST] == 0):
     handleCommand.state = handleCommand.state + 1
     if (handleCommand.state == ST_BAL):
       # Turning is disabled in this state, so centre the robot.
@@ -302,24 +325,25 @@ def handleCommand():
       wii.led = 0
       handleCommand.state = ST_DRIVE           
     wii.rumble = 1
-    time.sleep(button_delay * 5)
+    time.sleep(0.25)
     wii.rumble = 0
+    handleCommand.throttle[CMD_NXTST] = 50
     
-  if (command == CMD_PREV):
+  if (command == CMD_PREV and handleCommand.throttle[CMD_PREV] == 0):
     if (handleCommand.state == ST_TUNE):
       handleCommand.currentParameter = handleCommand.currentParameter - 1
       if (handleCommand.currentParameter == -1):
         handleCommand.currentParameter = 7
       setWiiMoteLEDs(handleCommand.currentParameter)
-    time.sleep(button_delay * 5)   
+    handleCommand.throttle[CMD_PREV] = 250
     
-  if (command == CMD_NEXT):
+  if (command == CMD_NEXT and handleCommand.throttle[CMD_NEXT] == 0):
     if (handleCommand.state == ST_TUNE):
       handleCommand.currentParameter = handleCommand.currentParameter + 1
       if (handleCommand.currentParameter == 8):
         handleCommand.currentParameter = 0
       setWiiMoteLEDs(handleCommand.currentParameter)
-    time.sleep(button_delay * 5)
+    handleCommand.throttle[CMD_NEXT] = 250
 
   if (coasting and handleCommand.targetWheelRate != 0.0):
     # Decelerate
@@ -336,10 +360,12 @@ handleCommand.balanceSetPoint = 0.0
 handleCommand.motorOffset = 0.0
 handleCommand.currentParameter = 0
 handleCommand.targetWheelRate = 0.0
+handleCommand.throttle = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+handleCommand.lastTime = 0
+handleCommand.curUtterance = 0
 
 targetTurnRate = 121.0
 
-button_delay = 0.05
 GZ.clock_ena(GZ.GZ_CLK_5MHz, 180)
 spi = spidev.SpiDev()
 spi.open(0,1)
@@ -350,7 +376,6 @@ writePWM(1, handleCommand.headTilt)
 path = os.path.dirname(os.path.realpath(sys.argv[0]))
 f = open(path + '/speech.txt')
 speechList= list(f)
-curUtterance = 0
 
 print 'Press 1 + 2 on your Wii Remote now ...'
 time.sleep(1)
@@ -393,11 +418,7 @@ writePWM(3, 0)
 time.sleep(1)
 wii.rumble = 0
 
-lastTime = 0
 while True:
-  millis = int(round(time.time() * 1000))
-  #print (millis - lastTime) We know this is typically 2-3 mS
-  lastTime = millis
   handleSerial()
   handleCommand()
   if (wii.state['acc'][1] != targetTurnRate and (handleCommand.state == ST_DRIVE or handleCommand.state == ST_AUTO)):
