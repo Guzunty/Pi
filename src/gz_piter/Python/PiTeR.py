@@ -400,7 +400,7 @@ while True:
   lastTime = millis
   handleSerial()
   handleCommand()
-  if (wii.state['acc'][1] != targetTurnRate and (handleCommand.state == ST_DRIVE or handleCommand.state == ST_AUTO):
+  if (wii.state['acc'][1] != targetTurnRate and (handleCommand.state == ST_DRIVE or handleCommand.state == ST_AUTO)):
     targetTurnRate = wii.state['acc'][1]
     ser.write('t:')
     ser.write(float2hex(targetTurnRate - 121.0))
