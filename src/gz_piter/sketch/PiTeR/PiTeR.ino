@@ -34,7 +34,8 @@
  * The second PID controller compares the desired wheel rotation rate with
  * the actual wheel rotation rate as measured by the motor encoders. When
  * standing still, the desired wheel rate is zero. When moving forwards, the
- * desired wheel rate is positive and it is negative when reversing.
+ * desired wheel rate is positive and it is negative when reversing. Its
+ * output is the target angle input to the first PID controller.
  * 
  */
 
@@ -151,8 +152,11 @@ void loop() {
       // ************************** Wheel movement *****************************
       time = micros();
       endPing();                                          // End trigger > 10 uS after starting
-      if (getDistance() < 30 && targetWheelRate > 0) {    // Protect robot from collision
+      if (getDistance() < 15 && targetWheelRate > 0) {    // Protect robot from collision
         setPoint = basePoint - wheelCtrl.updatePid(0.0, wheelRate, getElapsedMicros(time, lastWheelTime));
+      }
+      else if (getDistance() < 20 && targetWheelRate > 0) {    // Slow robot before collision
+        setPoint = basePoint - wheelCtrl.updatePid(targetWheelRate / 2.0, wheelRate, getElapsedMicros(time, lastWheelTime));
       }
       else {                                              // Normal wheel rate control path
         setPoint = basePoint - wheelCtrl.updatePid(targetWheelRate, wheelRate, getElapsedMicros(time, lastWheelTime));
