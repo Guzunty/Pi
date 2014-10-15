@@ -42,10 +42,10 @@ unsigned long pingTime = 0L;
 unsigned long echoTime = 0L;
 
 void startPing() {
-  if (pingThrottle++ > 25) {         // Gives approx. 100ms ping period at 4ms cycle time 
+  if (pingThrottle++ > 25) {              // Gives approx. 100ms ping period at 4ms cycle time 
     digitalWrite(PING, HIGH);
     if (state != 0) {
-      echoTime = ECHO_MAX;            // We never had a return signal, record maximum distance
+      echoTime = ECHO_MAX;                // We never had a return signal, record maximum distance
     }
     state = 1;
     pingThrottle = 0;
@@ -60,16 +60,21 @@ void endPing() {
 }
 
 ISR(PCINT0_vect) {
-  if (state == 2) {                // Rising edge of pin 12
+  if (state == 2) {                       // Rising edge of pin 12
     pingTime = micros();
     state = 3;
   }
-  else {                           // Falling edge of pin 12
+  else {                                  // Falling edge of pin 12
     echoTime = getElapsedMicros(micros(), pingTime);
     state = 0;
   } 
 }
 
+// Very short echo times seem to be associated a lost return
+// We will therefore not accept any value under 10cm
 float getDistance() {
-  return ((float)echoTime) / 58.0; // Result in centimetres
+  if (echoTime > 580) {
+    distance = ((float)echoTime) / 58.0;  // Result in centimetres
+  }
+  return distance; 
 }
