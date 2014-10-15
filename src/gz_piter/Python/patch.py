@@ -1,6 +1,4 @@
 import cv2
-import sys, getopt
-import numpy as np
 
 cap = cv2.VideoCapture(-1)
 
