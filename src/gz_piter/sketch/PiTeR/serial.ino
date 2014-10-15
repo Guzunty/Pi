@@ -126,4 +126,20 @@ void serialOut() {
     Serial.write("r:");
     Serial.write(result.out, 2);
   }
+  unsigned int throttleLSN = throttle & 0x0f;
+  if (throttleLSN == 0) {
+    Serial.write("a:");
+    if (calibrated && armed) {
+      result.in = int(fusedAngle);
+    }
+    else {
+      if (sensorValue[ACC_X] > -256) {
+        result.in = -180;
+      }
+      else {
+        result.in = 180;
+      }
+    }
+    Serial.write(result.out, 2);
+  }
 }
