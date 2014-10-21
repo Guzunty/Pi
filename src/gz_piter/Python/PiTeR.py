@@ -15,6 +15,8 @@ import sys
 import GZ
 import copy
 import spidev
+import scriptPlayer
+import ledController
 
 def float2hex(f):
   return struct.pack('>f', f)
@@ -60,10 +62,6 @@ def displayParameter(currentParameter):
 
 def writePWM(addr, value):
   spi.xfer([addr, value])
-
-def resetLEDs():
-  writePWM(2, 0)
-  writePWM(3, 0)
 
 def dumpSettings():
   output = ""
@@ -120,6 +118,7 @@ CMD_AUTO =    10
 CMD_NXTST =   11
 CMD_NEXT =    12
 CMD_PREV =    13
+CMD_RESTRT =  14
 
 # States
 ST_DRIVE =     0
@@ -134,6 +133,8 @@ def getCommand():
     return coasting, CMD_EXIT
   if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS - cwiid.BTN_A == 0):
     return coasting, CMD_SHUTDOWN
+  if (buttons - cwiid.BTN_PLUS - cwiid.BTN_B == 0):
+    return coasting, CMD_RESTRT
   # These look odd, wii-mote is used on its side, steering wheel style
   if (buttons & cwiid.BTN_LEFT):
     return coasting, CMD_DOWN
@@ -177,7 +178,7 @@ def handleCommand():
     wii.rumble = 1
     time.sleep(0.25)
     wii.rumble = 0
-    resetLEDs()
+    ledCtrl.resetLEDs()
     exit(wii)  
 
   if (command == CMD_SHUTDOWN):
@@ -186,7 +187,7 @@ def handleCommand():
     wii.rumble = 1
     time.sleep(0.5)
     wii.rumble = 0
-    resetLEDs()
+    ledCtrl.resetLEDs()
     os.system("sudo halt")
     exit(wii)  
 
@@ -303,12 +304,12 @@ def handleCommand():
     handleCommand.throttle[CMD_AUTO] = 250
 
   if (command == CMD_CUE and handleCommand.throttle[CMD_CUE] == 0):
-    if (handleCommand.curUtterance < len(speechList)):
-      message = 'flite -voice slt -t "' + speechList[handleCommand.curUtterance].replace('\n', '').replace('\r', '') + '"'
-      print(message)
-      os.system(message)
-      handleCommand.curUtterance = handleCommand.curUtterance + 1
-    handleCommand.throttle[CMD_CUE] = 50
+    actor.cue()
+    handleCommand.throttle[CMD_CUE] = 500
+
+  if (command == CMD_RESTRT and handleCommand.throttle[CMD_CUE] == 0):
+    actor.reset()
+    handleCommand.throttle[CMD_CUE] = 500
 
   if (command == CMD_NXTST and handleCommand.throttle[CMD_NXTST] == 0):
     handleCommand.state = handleCommand.state + 1
@@ -376,6 +377,9 @@ writePWM(1, handleCommand.headTilt)
 path = os.path.dirname(os.path.realpath(sys.argv[0]))
 f = open(path + '/speech.txt')
 speechList= list(f)
+f = open(path + '/script.py')
+ledCtrl = ledController.ledController(spi)
+actor = scriptPlayer.scriptPlayer(f, ledCtrl)
 
 print 'Press 1 + 2 on your Wii Remote now ...'
 time.sleep(1)
@@ -409,16 +413,17 @@ except RuntimeError:
 
 # Let the user know PiTeR is connected and ready to command
 wii.rumble = 1
-writePWM(2, 0x25)
-time.sleep(0.25)
-writePWM(2, 0)
-writePWM(3, 0x25)
-time.sleep(0.25)
-writePWM(3, 0)
 time.sleep(1)
 wii.rumble = 0
 
+ledCtrl.poll()
+ledCtrl.newLEDAction(0, 0x25, 0)
+ledCtrl.newLEDAction(0, 0x00, 250)
+ledCtrl.newLEDAction(1, 0x25, 250)
+ledCtrl.newLEDAction(1, 0x00, 500)
+
 while True:
+  ledCtrl.poll()
   handleSerial()
   handleCommand()
   if (wii.state['acc'][1] != targetTurnRate and (handleCommand.state == ST_DRIVE or handleCommand.state == ST_AUTO)):
