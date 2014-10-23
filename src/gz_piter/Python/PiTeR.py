@@ -1,10 +1,32 @@
 #!/usr/bin/python
 #
 # PiTeR.py
-# Control PiTeR with a Wii-mote
 #
 # Author: Derek Campbell
-# Date  : 30/07/2014
+# Date  : 22/10/2014
+#
+#  Copyright 2014  <guzunty@gmail.com>
+#  
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#  
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#  
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#  MA 02110-1301, USA.
+#  
+# This is the PiTeR avatar main control program
+#
+# Enables control with a Wii remote. See the startup message near 
+# the bottom of the script for button meanings.
+#  
 
 import cwiid
 import serial
@@ -249,7 +271,6 @@ def handleCommand():
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headPan < 63):
         handleCommand.headPan = handleCommand.headPan + 1
-        print("Pan: " + str(handleCommand.headPan))
         writePWM(0, handleCommand.headPan)
         handleCommand.throttle[CMD_LEFT] = 25
     elif (handleCommand.state == ST_BAL):
@@ -269,7 +290,6 @@ def handleCommand():
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headPan > 0):
         handleCommand.headPan = handleCommand.headPan - 1
-        print("Pan: " + str(handleCommand.headPan))
         writePWM(0, handleCommand.headPan)
         handleCommand.throttle[CMD_RIGHT] = 25
     elif (handleCommand.state == ST_BAL):
@@ -414,6 +434,8 @@ print '2     - Accelerate'
 print '1     - Brake/Reverse'
 print 'Tilt  - Steer'
 print 'Cross - Camera Pan/Tilt'
+print 'A     - In Drive mode, enter/exit autonomous mode'
+print 'B     - Cue next script actions'
 print 'Home  - Step through modes:'
 print 'Mode 0 - Drive'
 print 'Mode 1 - Tune balance point and steering. (using cross control)'
