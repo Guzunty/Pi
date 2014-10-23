@@ -25,7 +25,7 @@
 # This is the PiTeR avatar action script
 #
 # It is a python program within a python program. In other words, this 
-# script is executed under the conytrol of the main avatar control
+# script is executed under the control of the main avatar control
 # program, PiTeR.py.
 #
 # We do this so that we can special case the function, 'waitForCue'.
