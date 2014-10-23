@@ -12,11 +12,13 @@ import time
 import struct
 import os
 import sys
+import random
 import GZ
 import copy
 import spidev
 import scriptPlayer
 import ledController
+import faceFinder
 
 def float2hex(f):
   return struct.pack('>f', f)
@@ -179,6 +181,8 @@ def handleCommand():
     time.sleep(0.25)
     wii.rumble = 0
     ledCtrl.resetLEDs()
+    finder.stop()
+    finder.join()
     exit(wii)  
 
   if (command == CMD_SHUTDOWN):
@@ -188,6 +192,8 @@ def handleCommand():
     time.sleep(0.5)
     wii.rumble = 0
     ledCtrl.resetLEDs()
+    finder.stop()
+    finder.join()
     os.system("sudo halt")
     exit(wii)  
 
@@ -243,6 +249,7 @@ def handleCommand():
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headPan < 63):
         handleCommand.headPan = handleCommand.headPan + 1
+        print("Pan: " + str(handleCommand.headPan))
         writePWM(0, handleCommand.headPan)
         handleCommand.throttle[CMD_LEFT] = 25
     elif (handleCommand.state == ST_BAL):
@@ -262,6 +269,7 @@ def handleCommand():
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headPan > 0):
         handleCommand.headPan = handleCommand.headPan - 1
+        print("Pan: " + str(handleCommand.headPan))
         writePWM(0, handleCommand.headPan)
         handleCommand.throttle[CMD_RIGHT] = 25
     elif (handleCommand.state == ST_BAL):
@@ -298,8 +306,16 @@ def handleCommand():
 
   if (command == CMD_AUTO and handleCommand.throttle[CMD_AUTO] == 0):
     if (handleCommand.state == ST_DRIVE):
+      finder.enable()
+      print("Entering Auto mode")
       handleCommand.state = ST_AUTO
     elif (handleCommand.state == ST_AUTO):
+      finder.disable()
+      print("Leaving Auto mode")
+      handleCommand.headTilt = 35
+      writePWM(1, handleCommand.headTilt)
+      handleCommand.headPan = 30
+      writePWM(0, handleCommand.headPan)
       handleCommand.state = ST_DRIVE
     handleCommand.throttle[CMD_AUTO] = 250
 
@@ -380,6 +396,8 @@ speechList= list(f)
 f = open(path + '/script.py')
 ledCtrl = ledController.ledController(spi)
 actor = scriptPlayer.scriptPlayer(f, ledCtrl)
+finder = faceFinder.faceFinder()
+finder.start()
 
 print 'Press 1 + 2 on your Wii Remote now ...'
 time.sleep(1)
@@ -422,6 +440,8 @@ ledCtrl.newLEDAction(0, 0x00, 250)
 ledCtrl.newLEDAction(1, 0x25, 250)
 ledCtrl.newLEDAction(1, 0x00, 500)
 
+os.system("v4l2-ctl -p 4")
+
 while True:
   ledCtrl.poll()
   handleSerial()
@@ -431,3 +451,24 @@ while True:
     ser.write('t:')
     ser.write(float2hex(targetTurnRate - 121.0))
     ser.flush()
+  if (finder.dataReady == True):
+    faces = finder.getFaces()
+    if (len(faces) != 0):
+      face = faces[random.randint(0, len(faces) - 1)]
+      x = face[0] + face[2]/2
+      y = face[1] + face[3]/2
+      if (x > 165 or x < 155):
+        handleCommand.headPan = handleCommand.headPan - int((x - 160.0) / 30.0)
+        if (handleCommand.headPan > 63):
+          handleCommand.headPan = 63
+        if (handleCommand.headPan < 0):
+          handleCommand.headPan = 0
+        handleCommand.headPan = 31 - int(((x - 160)/5.0))
+        writePWM(0, handleCommand.headPan)
+      if (y > 125 or y < 115):
+        handleCommand.headTilt = handleCommand.headTilt + int((y - 120.0) / 15.0)
+        if (handleCommand.headTilt > 63):
+          handleCommand.headTilt = 63
+        if (handleCommand.headTilt < 0):
+          handleCommand.headTilt = 0
+        writePWM(1, handleCommand.headTilt)
