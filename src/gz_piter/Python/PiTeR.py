@@ -41,6 +41,7 @@ import spidev
 import scriptPlayer
 import ledController
 import faceFinder
+import moveController
 
 def float2hex(f):
   return struct.pack('>f', f)
@@ -205,6 +206,10 @@ def handleCommand():
     ledCtrl.resetLEDs()
     finder.stop()
     finder.join()
+    ledCtrl.stop()
+    ledCtrl.join()
+    moveCtrl.stop()
+    moveCtrl.join()
     exit(wii)  
 
   if (command == CMD_SHUTDOWN):
@@ -216,6 +221,10 @@ def handleCommand():
     ledCtrl.resetLEDs()
     finder.stop()
     finder.join()
+    ledCtrl.stop()
+    ledCtrl.join()
+    moveCtrl.stop()
+    moveCtrl.join()
     os.system("sudo halt")
     exit(wii)  
 
@@ -410,12 +419,24 @@ spi.open(0,1)
 # Centre the servos
 writePWM(0, handleCommand.headPan)
 writePWM(1, handleCommand.headTilt)
-path = os.path.dirname(os.path.realpath(sys.argv[0]))
-f = open(path + '/speech.txt')
-speechList= list(f)
-f = open(path + '/script.py')
+
+# Initialise the serial port
+try:
+  ser = serial.Serial('/dev/ttyAMA0', 115200, timeout=1)
+  ser.open()
+except RuntimeError:
+  print "Error opening serial port"
+  quit()
+
 ledCtrl = ledController.ledController(spi)
-actor = scriptPlayer.scriptPlayer(f, ledCtrl)
+ledCtrl.start()
+moveCtrl = moveController.moveController(ser)
+moveCtrl.start()
+
+path = os.path.dirname(os.path.realpath(sys.argv[0]))
+f = open(path + '/script.py')
+actor = scriptPlayer.scriptPlayer(f, ledCtrl, moveCtrl)
+
 finder = faceFinder.faceFinder()
 finder.start()
 
@@ -444,19 +465,11 @@ print 'Press PLUS and MINUS together to disconnect and quit.\n'
 
 wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
 
-try:
-  ser = serial.Serial('/dev/ttyAMA0', 115200, timeout=1)
-  ser.open()
-except RuntimeError:
-  print "Error opening serial port"
-  quit()
-
 # Let the user know PiTeR is connected and ready to command
 wii.rumble = 1
 time.sleep(1)
 wii.rumble = 0
 
-ledCtrl.poll()
 ledCtrl.newLEDAction(0, 0x25, 0)
 ledCtrl.newLEDAction(0, 0x00, 250)
 ledCtrl.newLEDAction(1, 0x25, 250)
@@ -465,7 +478,6 @@ ledCtrl.newLEDAction(1, 0x00, 500)
 os.system("v4l2-ctl -p 4")
 
 while True:
-  ledCtrl.poll()
   handleSerial()
   handleCommand()
   if (wii.state['acc'][1] != targetTurnRate and (handleCommand.state == ST_DRIVE or handleCommand.state == ST_AUTO)):

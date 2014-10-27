@@ -41,10 +41,10 @@ def say(phrase):
 
 class scriptPlayer:
   
-  def __init__(self, f, ledCtrlr):
+  def __init__(self, f, ledCtrlr, moveCtrlr):
     self.script = list(f)
     self.reset()
-    self.locals = {'ledCtrlr': ledCtrlr}
+    self.locals = {'ledCtrlr': ledCtrlr, 'moveCtrlr': moveCtrlr}
     self.globals = {'say' : say}
 
   def cue(self):
