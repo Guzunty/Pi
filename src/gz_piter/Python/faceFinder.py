@@ -32,10 +32,10 @@ import time
 import threading
 import os
 
-class faceFinder(threading.Thread):
+class FaceFinder(threading.Thread):
 
   def __init__(self):
-    super(faceFinder, self).__init__()
+    super(FaceFinder, self).__init__()
     self.faces = []
     self.cap = cv2.VideoCapture()
     self.faceCascade = cv2.CascadeClassifier('lbpcascade_frontalface.xml')
