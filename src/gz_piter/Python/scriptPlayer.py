@@ -39,12 +39,12 @@ def say(phrase):
   message = 'flite -voice slt -t "' + phrase.replace('\n', '').replace('\r', '') + '"&'
   os.system(message)
 
-class scriptPlayer:
+class ScriptPlayer:
   
-  def __init__(self, f, ledCtrlr, moveCtrlr):
+  def __init__(self, f, actCtrlr, moveCtrlr):
     self.script = list(f)
     self.reset()
-    self.locals = {'ledCtrlr': ledCtrlr, 'moveCtrlr': moveCtrlr}
+    self.locals = {'actionCtrlr': actCtrlr, 'moveCtrlr': moveCtrlr}
     self.globals = {'say' : say}
 
   def cue(self):
@@ -54,7 +54,10 @@ class scriptPlayer:
       lines = lines + self.script[self.curLine]
       self.curLine = self.curLine + 1
     if (len(lines) > 0):
-      exec lines in self.locals, self.globals
+      try:
+        exec lines in self.locals, self.globals
+      except Exception as e:
+        print("Error in user script: {0}".format(e))
 
   def reset(self):
     self.curLine = -1
