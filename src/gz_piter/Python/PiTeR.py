@@ -26,22 +26,21 @@
 #
 # Enables control with a Wii remote. See the startup message near 
 # the bottom of the script for button meanings.
-#  
 
 import cwiid
-import serial
 import time
 import struct
 import os
 import sys
 import random
-import GZ
 import copy
-import spidev
 import scriptPlayer
-import ledController
+import actionController
 import faceFinder
 import moveController
+import symbolFinder
+import symbolIdentifier
+import numpy as np
 
 def float2hex(f):
   return struct.pack('>f', f)
@@ -49,10 +48,12 @@ def float2hex(f):
 def hex2int(val):
   return struct.unpack('h', val)
 
-def setWiiMoteLEDs(value):
+def setWiiMoteLEDs(value, autoMode = False):
   ledValue = 1
   if (value < 4):
     ledValue = 1 << value
+    if (autoMode == True):
+      ledValue = ledValue + 8
   else:
     ledValue = 15 - (1 << (value - 4))
   wii.led = ledValue
@@ -77,23 +78,31 @@ def resetParameter(currentParameter):
   displayParameter(currentParameter)
 
 def writeParameter(currentParameter):
-  ser.write(parameters[currentParameter] + ':')
-  ser.write(float2hex(parmValue[currentParameter]))
-  ser.flush()
+  moveCtrl.ser.write(parameters[currentParameter] + ':')
+  moveCtrl.ser.write(float2hex(parmValue[currentParameter]))
+  moveCtrl.ser.flush()
 
 def displayParameter(currentParameter):
   output = parameters[currentParameter] + ": " + str(parmValue[currentParameter])
   print output
 
-def writePWM(addr, value):
-  spi.xfer([addr, value])
+def shutdown():
+  actionCtrl.resetLEDs()
+  finder.stop()
+  finder.join()
+  actionCtrl.stop()
+  actionCtrl.join()
+  moveCtrl.stop()
+  moveCtrl.join()
+  symFinder.stop()
+  symFinder.join()
 
 def dumpSettings():
   output = ""
   for i in range (0, 8):
     output = output + parameters[i] + ": " + str(parmValue[i]) + " "
   print output
-  output = "TWR: " + str(handleCommand.targetWheelRate) + " TTR: " + str(targetTurnRate) + " BSP: " + str(handleCommand.balanceSetPoint)
+  output = "TWR: " + str(handleCommand.targetWheelRate) + " TTR: " + str(handleCommand.targetTurnRate) + " BSP: " + str(handleCommand.balanceSetPoint)
   print output
   output = "MOS: " + str(handleCommand.motorOffset) + " STA: " + str(handleCommand.state) + " CPM: " + str(handleCommand.currentParameter)
   print output
@@ -101,31 +110,32 @@ def dumpSettings():
   print output
 
 def handleSerial():
-  while (ser.inWaiting() >=4):
-    frameType = ser.read(2)
+  #ser = moveCtrl.ser
+  while (moveCtrl.ser.inWaiting() >=4):
+    frameType = moveCtrl.ser.read(2)
     if (frameType == 'v:'):
-      voltage = hex2int(ser.read(2))
-      if (voltage[0] <= 740):
-        print("Warning: Low voltage.")   # We'd like to halt
-      #  os.system("sudo halt")          # eventually to protect
-      #  quit()                          # the LiPo.
+      voltage = hex2int(moveCtrl.ser.read(2))[0]
+      if (voltage <= 740):
+        print("Warning: Low voltage: " + str(voltage))
+      #  os.system("sudo halt")          # Eventually, we'd like to halt
+      #  quit()                          # to protect the LiPo.
     elif (frameType == 'r:'):
-      wheelRate = hex2int(ser.read(2))
-      #print "Wheel rate: " + str(wheelRate[0])
+      wheelRate = hex2int(moveCtrl.ser.read(2))
     elif (frameType == 'd:'):
-      distance = hex2int(ser.read(2))
-      #print "Distance: " + str(distance[0])
+      distance = hex2int(moveCtrl.ser.read(2))
     elif (frameType == 'a:'):
-      handleSerial.angle = ((handleSerial.angle + hex2int(ser.read(2))[0]) / 2.0)
+      handleSerial.angle = ((handleSerial.angle + hex2int(moveCtrl.ser.read(2))[0]) / 2.0)
       if (abs(handleSerial.angle) < 20.0):
         tilt = handleCommand.headTilt - int(handleSerial.angle)
         if (tilt < 0):
           tilt = 0
         if (tilt > 63):
           tilt = 63
-        writePWM(1, tilt)
+        print("Tilt: " + str(tilt))
+        actionCtrl.newServoAction(1, tilt, 0)
     else:
-      ser.flushInput()
+      print("Unexpected serial input: " + frameType)
+      moveCtrl.ser.flushInput()
 handleSerial.angle = 0.0
 
 # Commands
@@ -203,13 +213,7 @@ def handleCommand():
     wii.rumble = 1
     time.sleep(0.25)
     wii.rumble = 0
-    ledCtrl.resetLEDs()
-    finder.stop()
-    finder.join()
-    ledCtrl.stop()
-    ledCtrl.join()
-    moveCtrl.stop()
-    moveCtrl.join()
+    shutdown()
     exit(wii)  
 
   if (command == CMD_SHUTDOWN):
@@ -218,13 +222,7 @@ def handleCommand():
     wii.rumble = 1
     time.sleep(0.5)
     wii.rumble = 0
-    ledCtrl.resetLEDs()
-    finder.stop()
-    finder.join()
-    ledCtrl.stop()
-    ledCtrl.join()
-    moveCtrl.stop()
-    moveCtrl.join()
+    shutdown()
     os.system("sudo halt")
     exit(wii)  
 
@@ -239,9 +237,10 @@ def handleCommand():
           tilt = 0
         if (tilt > 63):
           tilt = 63
-        writePWM(1, tilt)
+        actionCtrl.newServoAction(1, tilt, 0)
         handleCommand.throttle[CMD_DOWN] = 25
     elif (handleCommand.state == ST_BAL):
+      ser = moveCtrl.ser
       handleCommand.balanceSetPoint = handleCommand.balanceSetPoint - 0.1
       ser.write('b:')
       ser.write(float2hex(handleCommand.balanceSetPoint))
@@ -263,9 +262,10 @@ def handleCommand():
           tilt = 0
         if (tilt > 63):
           tilt = 63
-        writePWM(1, tilt)
+        actionCtrl.newServoAction(1, tilt, 0)
         handleCommand.throttle[CMD_UP] = 25
     elif (handleCommand.state == ST_BAL):
+      ser = moveCtrl.ser
       handleCommand.balanceSetPoint = handleCommand.balanceSetPoint + 0.1
       ser.write('b:')
       ser.write(float2hex(handleCommand.balanceSetPoint))
@@ -280,9 +280,10 @@ def handleCommand():
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headPan < 63):
         handleCommand.headPan = handleCommand.headPan + 1
-        writePWM(0, handleCommand.headPan)
+        actionCtrl.newServoAction(0, handleCommand.headPan, 0)
         handleCommand.throttle[CMD_LEFT] = 25
     elif (handleCommand.state == ST_BAL):
+      ser = moveCtrl.ser
       handleCommand.motorOffset = handleCommand.motorOffset + 0.05
       ser.write('l:')
       ser.write(float2hex(1.0 + handleCommand.motorOffset))
@@ -299,9 +300,10 @@ def handleCommand():
     if (handleCommand.state == ST_DRIVE):
       if (handleCommand.headPan > 0):
         handleCommand.headPan = handleCommand.headPan - 1
-        writePWM(0, handleCommand.headPan)
+        actionCtrl.newServoAction(0, handleCommand.headPan, 0)
         handleCommand.throttle[CMD_RIGHT] = 25
     elif (handleCommand.state == ST_BAL):
+      ser = moveCtrl.ser
       handleCommand.motorOffset = handleCommand.motorOffset - 0.05
       ser.write('l:')
       ser.write(float2hex(1.0 + handleCommand.motorOffset))
@@ -314,37 +316,46 @@ def handleCommand():
       resetParameter(handleCommand.currentParameter)
       handleCommand.throttle[CMD_RIGHT] = 250
 
+  if (handleCommand.targetTurnRate != (wii.state['acc'][1] - 121.0) and (handleCommand.state == ST_DRIVE or handleCommand.state == ST_AUTO)):
+    handleCommand.targetTurnRate = wii.state['acc'][1] - 121.0
+    if (coasting == True and handleCommand.targetWheelRate == 0.0):
+      # If we're not moving and there was no change to our desired
+      # speed, command an 'in place' turn. Use the current drive rate
+      # in case we're being driven automatically.
+      moveCtrl.newUserTurnAction(moveCtrl.getCurrentRate(), 0, handleCommand.targetTurnRate)
+
   if (command == CMD_BRAKE and handleCommand.throttle[CMD_BRAKE] == 0):
     if (handleCommand.targetWheelRate > -30.0):
       if (handleCommand.targetWheelRate > 0.1):
         handleCommand.targetWheelRate = handleCommand.targetWheelRate * 0.5
       else:
         handleCommand.targetWheelRate = handleCommand.targetWheelRate - 0.5
-      ser.write('w:')
-      ser.write(float2hex(handleCommand.targetWheelRate))
-      ser.flush()
+      moveCtrl.newDriveAction(handleCommand.targetWheelRate, 0, handleCommand.targetTurnRate)
     handleCommand.throttle[CMD_BRAKE] = 50
 
   if (command == CMD_ACCEL and handleCommand.throttle[CMD_ACCEL] == 0):
     if (handleCommand.targetWheelRate < 40.0):
       handleCommand.targetWheelRate = handleCommand.targetWheelRate + 1.5
-      ser.write('w:')
-      ser.write(float2hex(handleCommand.targetWheelRate))
-      ser.flush()
+      moveCtrl.newDriveAction(handleCommand.targetWheelRate, 0, handleCommand.targetTurnRate)
     handleCommand.throttle[CMD_ACCEL] = 50
 
   if (command == CMD_AUTO and handleCommand.throttle[CMD_AUTO] == 0):
     if (handleCommand.state == ST_DRIVE):
       finder.enable()
-      print("Entering Auto mode")
+      handleCommand.currentParameter = 0;
+      setWiiMoteLEDs(handleCommand.currentParameter, True)
       handleCommand.state = ST_AUTO
     elif (handleCommand.state == ST_AUTO):
-      finder.disable()
-      print("Leaving Auto mode")
+      if (handleCommand.currentParameter == 0):
+        finder.disable()
+      elif (handleCommand.currentParameter == 1):
+        symFinder.disable()
       handleCommand.headTilt = 35
-      writePWM(1, handleCommand.headTilt)
+      actionCtrl.newServoAction(1, handleCommand.headTilt, 0)
       handleCommand.headPan = 30
-      writePWM(0, handleCommand.headPan)
+      actionCtrl.newServoAction(0, handleCommand.headPan, 0)
+      handleCommand.currentParameter = 0;
+      wii.led = 0
       handleCommand.state = ST_DRIVE
     handleCommand.throttle[CMD_AUTO] = 250
 
@@ -357,22 +368,21 @@ def handleCommand():
     handleCommand.throttle[CMD_CUE] = 500
 
   if (command == CMD_NXTST and handleCommand.throttle[CMD_NXTST] == 0):
-    handleCommand.state = handleCommand.state + 1
-    if (handleCommand.state == ST_BAL):
-      # Turning is disabled in this state, so centre the robot.
-      targetTurnRate = 121.0
-      ser.write('t:')
-      ser.write(float2hex(targetTurnRate - 121.0))
-      ser.flush()
-    if (handleCommand.state == ST_TUNE):
-      handleCommand.currentParameter = 0;
-      setWiiMoteLEDs(handleCommand.currentParameter)
-    if (handleCommand.state == ST_TUNE + 1):
-      wii.led = 0
-      handleCommand.state = ST_DRIVE           
-    wii.rumble = 1
-    time.sleep(0.25)
-    wii.rumble = 0
+    if (handleCommand.state != ST_AUTO):
+      handleCommand.state = handleCommand.state + 1
+      if (handleCommand.state == ST_BAL):
+        # Turning is disabled in this state, so centre the robot.
+        handleCommand.targetTurnRate = 0.0
+        moveCtrl.newDriveAction(0.0, 0, 0.0)
+      if (handleCommand.state == ST_TUNE):
+        handleCommand.currentParameter = 0;
+        setWiiMoteLEDs(handleCommand.currentParameter)
+      if (handleCommand.state == ST_TUNE + 1):
+        wii.led = 0
+        handleCommand.state = ST_DRIVE           
+      wii.rumble = 1
+      time.sleep(0.25)
+      wii.rumble = 0
     handleCommand.throttle[CMD_NXTST] = 50
     
   if (command == CMD_PREV and handleCommand.throttle[CMD_PREV] == 0):
@@ -381,6 +391,18 @@ def handleCommand():
       if (handleCommand.currentParameter == -1):
         handleCommand.currentParameter = 7
       setWiiMoteLEDs(handleCommand.currentParameter)
+    elif (handleCommand.state == ST_AUTO):
+      handleCommand.currentParameter = handleCommand.currentParameter - 1
+      if (handleCommand.currentParameter == -1):
+        handleCommand.currentParameter = 2
+      setWiiMoteLEDs(handleCommand.currentParameter, True)
+      if (handleCommand.currentParameter == 0):
+        symFinder.disable()
+        finder.enable()
+      elif (handleCommand.currentParameter == 1):
+        symFinder.enable()
+      elif (handleCommand.currentParameter == 2):
+        finder.disable()
     handleCommand.throttle[CMD_PREV] = 250
     
   if (command == CMD_NEXT and handleCommand.throttle[CMD_NEXT] == 0):
@@ -389,6 +411,18 @@ def handleCommand():
       if (handleCommand.currentParameter == 8):
         handleCommand.currentParameter = 0
       setWiiMoteLEDs(handleCommand.currentParameter)
+    elif (handleCommand.state == ST_AUTO):
+      handleCommand.currentParameter = handleCommand.currentParameter + 1
+      if (handleCommand.currentParameter == 3):
+        handleCommand.currentParameter = 0
+      setWiiMoteLEDs(handleCommand.currentParameter, True)
+      if (handleCommand.currentParameter == 0):
+        finder.enable()
+      elif (handleCommand.currentParameter == 1):
+        finder.disable()
+        symFinder.enable()
+      elif (handleCommand.currentParameter == 2):
+        symFinder.disable()
     handleCommand.throttle[CMD_NEXT] = 250
 
   if (coasting and handleCommand.targetWheelRate != 0.0):
@@ -396,9 +430,7 @@ def handleCommand():
     handleCommand.targetWheelRate = handleCommand.targetWheelRate * 0.95
     if (abs(handleCommand.targetWheelRate) < 0.2):
       handleCommand.targetWheelRate = 0.0
-    ser.write('w:')
-    ser.write(float2hex(handleCommand.targetWheelRate))
-    ser.flush()
+    moveCtrl.newDriveAction(handleCommand.targetWheelRate, 0, handleCommand.targetTurnRate)
 handleCommand.state = ST_DRIVE
 handleCommand.headTilt = 35
 handleCommand.headPan = 30
@@ -406,39 +438,31 @@ handleCommand.balanceSetPoint = 0.0
 handleCommand.motorOffset = 0.0
 handleCommand.currentParameter = 0
 handleCommand.targetWheelRate = 0.0
+handleCommand.targetTurnRate = 0.0
 handleCommand.throttle = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 handleCommand.lastTime = 0
 handleCommand.curUtterance = 0
 
-targetTurnRate = 121.0
-
-GZ.clock_ena(GZ.GZ_CLK_5MHz, 180)
-spi = spidev.SpiDev()
-spi.open(0,1)
+actionCtrl = actionController.ActionController()
+actionCtrl.start()
+moveCtrl = moveController.MoveController()
+moveCtrl.start()
 
 # Centre the servos
-writePWM(0, handleCommand.headPan)
-writePWM(1, handleCommand.headTilt)
-
-# Initialise the serial port
-try:
-  ser = serial.Serial('/dev/ttyAMA0', 115200, timeout=1)
-  ser.open()
-except RuntimeError:
-  print "Error opening serial port"
-  quit()
-
-ledCtrl = ledController.ledController(spi)
-ledCtrl.start()
-moveCtrl = moveController.moveController(ser)
-moveCtrl.start()
+actionCtrl.newServoAction(0, handleCommand.headPan, 0)
+actionCtrl.newServoAction(1, handleCommand.headTilt, 0)
 
 path = os.path.dirname(os.path.realpath(sys.argv[0]))
 f = open(path + '/script.py')
-actor = scriptPlayer.scriptPlayer(f, ledCtrl, moveCtrl)
+actor = scriptPlayer.ScriptPlayer(f, actionCtrl, moveCtrl)
 
-finder = faceFinder.faceFinder()
+finder = faceFinder.FaceFinder()
 finder.start()
+
+symFinder = symbolFinder.SymbolFinder()
+symFinder.start()
+
+symIdentifier = symbolIdentifier.SymbolIdentifier(path + '/symbols')
 
 print 'Press 1 + 2 on your Wii Remote now ...'
 time.sleep(1)
@@ -470,39 +494,48 @@ wii.rumble = 1
 time.sleep(1)
 wii.rumble = 0
 
-ledCtrl.newLEDAction(0, 0x25, 0)
-ledCtrl.newLEDAction(0, 0x00, 250)
-ledCtrl.newLEDAction(1, 0x25, 250)
-ledCtrl.newLEDAction(1, 0x00, 500)
+actionCtrl.newLEDAction(0, 0x25, 0)
+actionCtrl.newLEDAction(0, 0x00, 250)
+actionCtrl.newLEDAction(1, 0x25, 250)
+actionCtrl.newLEDAction(1, 0x00, 500)
 
 os.system("v4l2-ctl -p 4")
 
-while True:
-  handleSerial()
-  handleCommand()
-  if (wii.state['acc'][1] != targetTurnRate and (handleCommand.state == ST_DRIVE or handleCommand.state == ST_AUTO)):
-    targetTurnRate = wii.state['acc'][1]
-    ser.write('t:')
-    ser.write(float2hex(targetTurnRate - 121.0))
-    ser.flush()
-  if (finder.dataReady == True):
-    faces = finder.getFaces()
-    if (len(faces) != 0):
-      face = faces[random.randint(0, len(faces) - 1)]
-      x = face[0] + face[2]/2
-      y = face[1] + face[3]/2
-      if (x > 165 or x < 155):
-        handleCommand.headPan = handleCommand.headPan - int((x - 160.0) / 30.0)
-        if (handleCommand.headPan > 63):
-          handleCommand.headPan = 63
-        if (handleCommand.headPan < 0):
-          handleCommand.headPan = 0
-        handleCommand.headPan = 31 - int(((x - 160)/5.0))
-        writePWM(0, handleCommand.headPan)
-      if (y > 125 or y < 115):
-        handleCommand.headTilt = handleCommand.headTilt + int((y - 120.0) / 15.0)
-        if (handleCommand.headTilt > 63):
-          handleCommand.headTilt = 63
-        if (handleCommand.headTilt < 0):
-          handleCommand.headTilt = 0
-        writePWM(1, handleCommand.headTilt)
+try:
+  while True:
+    handleSerial()
+    handleCommand()
+    if (finder.dataReady == True):
+      faces = finder.getFaces()
+      if (len(faces) != 0):
+        face = faces[random.randint(0, len(faces) - 1)]
+        x = face[0] + face[2]/2
+        y = face[1] + face[3]/2
+        if (x > 165 or x < 155):
+          handleCommand.headPan = handleCommand.headPan - int((x - 160.0) / 30.0)
+          if (handleCommand.headPan > 63):
+            handleCommand.headPan = 63
+          if (handleCommand.headPan < 0):
+            handleCommand.headPan = 0
+          handleCommand.headPan = 31 - int(((x - 160)/5.0))
+          actionCtrl.newServoAction(0, handleCommand.headPan, 0)
+        if (y > 125 or y < 115):
+          handleCommand.headTilt = handleCommand.headTilt + int((y - 120.0) / 15.0)
+          if (handleCommand.headTilt > 63):
+            handleCommand.headTilt = 63
+          if (handleCommand.headTilt < 0):
+            handleCommand.headTilt = 0
+          actionCtrl.newServoAction(1, handleCommand.headTilt, 0)
+    if (symFinder.dataReady == True):
+      patch, frame = symFinder.getPatch()
+      if (patch[2] * patch[3] > 9000):
+        result = symIdentifier.computeBestMatch(frame, patch)
+        if (result != ""):
+          print("Symbol found: " + result)
+except Exception as e:
+  print ("Fatal error in PiTeR main loop: {0}".format(e))
+  exc_type, exc_obj, exc_tb = sys.exc_info()
+  fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+  print(exc_type, fname, exc_tb.tb_lineno)
+  shutdown()
+  quit(wii)
