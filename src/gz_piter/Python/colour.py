@@ -92,4 +92,6 @@ else:
       if (cv2.waitKey(1) == 27):
         break
     cap.release()
+    print("    self.low = (" + str(lowH) + ", " + str(lowS) + ", " + str(lowV) + ")")
+    print("    self.high = (" + str(highH) + ", " + str(highS) + ", " + str(highV) + ")")
 cv2.destroyAllWindows()
