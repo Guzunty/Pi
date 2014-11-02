@@ -22,13 +22,14 @@
 #  
 #  
 import cv2
+import numpy as np
 
 def noOp(x):
   pass
 
 cap = cv2.VideoCapture(-1)
 lowH = 20
-highH = 59;
+highH = 59
 
 lowS = 170
 highS = 255
@@ -77,7 +78,7 @@ else:
 
         imgHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         
-        imgThresholded = cv2.inRange(imgHSV, (lowH, lowS, lowV), (highH, highS, highV))
+        imgThresholded = cv2.inRange(imgHSV, np.array([lowH, lowS, lowV]), np.array([highH, highS, highV]))
 
         cv2.imshow("Ranged Image", imgThresholded)
 

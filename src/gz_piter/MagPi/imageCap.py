@@ -27,6 +27,8 @@ cap = cv2.VideoCapture(-1)
 if (not cap.isOpened()):
   print("Cannot open camera")
 else:
+  cap.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 320)
+  cap.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 240)
   while True:
     success, frame = cap.read()
     cv2.imshow("Captured:", frame)
