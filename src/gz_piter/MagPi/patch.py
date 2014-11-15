@@ -1,27 +1,6 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  patch.py
-#  
-#  Copyright 2014  <guzunty@gmail.com>
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#  
-#  
 import cv2
+import sys, getopt
+import numpy as np
 
 cap = cv2.VideoCapture(-1)
 
@@ -35,13 +14,13 @@ else:
   maskMorph = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (10, 10))  
 
   lowH = 20
-  highH = 59;
+  highH = 69
 
-  lowS = 150
+  lowS = 120
   highS = 255
 
-  lowV = 0
-  highV = 120
+  lowV = 50
+  highV = 185
 
   while(1):
     frameCount = 0
@@ -54,7 +33,7 @@ else:
     else:
       imgHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         
-      mask = cv2.inRange(imgHSV, (lowH, lowS, lowV), (highH, highS, highV))
+      mask = cv2.inRange(imgHSV, np.array([lowH, lowS, lowV]), np.array([highH, highS, highV]))
 
       # Remove spots in image        
       mask = cv2.erode(mask, spotFilter)
@@ -79,7 +58,7 @@ else:
         x, y, w, h = cv2.boundingRect(contour)
 
       cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 2)
-      cv2.imshow("Patch area", frame)
+      cv2.imshow("Camera View", frame)
     if(cv2.waitKey(1) == 27):
       break
   cap.release()

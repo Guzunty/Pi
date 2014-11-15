@@ -41,6 +41,7 @@ import moveController
 import symbolFinder
 import symbolIdentifier
 import numpy as np
+import cv2
 
 def float2hex(f):
   return struct.pack('>f', f)
@@ -131,7 +132,6 @@ def handleSerial():
           tilt = 0
         if (tilt > 63):
           tilt = 63
-        print("Tilt: " + str(tilt))
         actionCtrl.newServoAction(1, tilt, 0)
     else:
       print("Unexpected serial input: " + frameType)
@@ -160,6 +160,9 @@ ST_DRIVE =     0
 ST_BAL =       1
 ST_TUNE =      2
 ST_AUTO =      3
+
+PAN  =        20
+TILT =        35
 
 def getCommand():
   coasting = True
@@ -350,9 +353,10 @@ def handleCommand():
         finder.disable()
       elif (handleCommand.currentParameter == 1):
         symFinder.disable()
-      handleCommand.headTilt = 35
+        moveCtrl.enableUserInPlaceTurn()
+      handleCommand.headTilt = TILT
       actionCtrl.newServoAction(1, handleCommand.headTilt, 0)
-      handleCommand.headPan = 30
+      handleCommand.headPan = PAN
       actionCtrl.newServoAction(0, handleCommand.headPan, 0)
       handleCommand.currentParameter = 0;
       wii.led = 0
@@ -398,9 +402,11 @@ def handleCommand():
       setWiiMoteLEDs(handleCommand.currentParameter, True)
       if (handleCommand.currentParameter == 0):
         symFinder.disable()
+        moveCtrl.enableUserInPlaceTurn()
         finder.enable()
       elif (handleCommand.currentParameter == 1):
         symFinder.enable()
+        moveCtrl.disableUserInPlaceTurn()
       elif (handleCommand.currentParameter == 2):
         finder.disable()
     handleCommand.throttle[CMD_PREV] = 250
@@ -421,8 +427,10 @@ def handleCommand():
       elif (handleCommand.currentParameter == 1):
         finder.disable()
         symFinder.enable()
+        moveCtrl.disableUserInPlaceTurn()
       elif (handleCommand.currentParameter == 2):
         symFinder.disable()
+        moveCtrl.enableUserInPlaceTurn()
     handleCommand.throttle[CMD_NEXT] = 250
 
   if (coasting and handleCommand.targetWheelRate != 0.0):
@@ -432,8 +440,8 @@ def handleCommand():
       handleCommand.targetWheelRate = 0.0
     moveCtrl.newDriveAction(handleCommand.targetWheelRate, 0, handleCommand.targetTurnRate)
 handleCommand.state = ST_DRIVE
-handleCommand.headTilt = 35
-handleCommand.headPan = 30
+handleCommand.headTilt = TILT
+handleCommand.headPan = PAN
 handleCommand.balanceSetPoint = 0.0
 handleCommand.motorOffset = 0.0
 handleCommand.currentParameter = 0
@@ -500,7 +508,10 @@ actionCtrl.newLEDAction(1, 0x25, 250)
 actionCtrl.newLEDAction(1, 0x00, 500)
 
 os.system("v4l2-ctl -p 4")
-
+lastResult = ""
+resultConsensus = 0
+CONS_THRESHOLD = 8
+backupSteeringBias = 5.0
 try:
   while True:
     handleSerial()
@@ -528,10 +539,45 @@ try:
           actionCtrl.newServoAction(1, handleCommand.headTilt, 0)
     if (symFinder.dataReady == True):
       patch, frame = symFinder.getPatch()
-      if (patch[2] * patch[3] > 9000):
+      patchArea = patch[2] * patch[3]
+      if (patchArea > 6000):
+        # We're right in front of the patch, now identify the symbol
         result = symIdentifier.computeBestMatch(frame, patch)
-        if (result != ""):
-          print("Symbol found: " + result)
+        if (result != "" and result == lastResult):
+          consensus = consensus + 1
+          if (consensus >= CONS_THRESHOLD):
+            # Perform the required action
+            lastResult = ""
+            resultConsensus = 0
+            if ( "home" in result):
+              scriptPlayer.say("I'm at home camp")
+            elif ("left" in result):
+              scriptPlayer.say("turning left")
+            elif ("right" in result):
+              scriptPlayer.say("turning right")
+            elif ("not_this_way"):
+              scriptPlayer.say("turning around")
+            else:
+              print("Unknown symbol found: " + result)
+        else:
+          if (result != ""):
+            lastResult = result
+            consensus = 0
+      if (patchArea > 500):
+        print("Approaching symbol")
+        driveToPatch = (7500.0 - patchArea) / 1000.0
+        centrePatchInX = (160.0 - (patch[0] + (patch[2]/2.0))) / 30.0
+        if (driveToPatch > 10.0):
+          driveToPatch = 10.0
+        if (driveToPatch < -5.0):
+          driveToPatch = - 5.0
+        moveCtrl.newDriveAction(driveToPatch, 0, centrePatchInX)
+      else:
+        # We lost sight of our patch, back up scanning back and forth
+        print("Backing up")
+        moveCtrl.newDriveAction(-4.0, 0, backupSteeringBias)
+        moveCtrl.newDriveAction(-0.0, 1000)
+        backupSteeringBias = -backupSteeringBias
 except Exception as e:
   print ("Fatal error in PiTeR main loop: {0}".format(e))
   exc_type, exc_obj, exc_tb = sys.exc_info()

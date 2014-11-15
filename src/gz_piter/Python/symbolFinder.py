@@ -39,7 +39,6 @@ class SymbolFinder(threading.Thread):
   def __init__(self):
     super(SymbolFinder, self).__init__()
     self.cap = cv2.VideoCapture()
-    self.faceCascade = cv2.CascadeClassifier('lbpcascade_frontalface.xml')
     self.active = True
     self.dataReady = False
     self.patch = None

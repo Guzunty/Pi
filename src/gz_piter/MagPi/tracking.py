@@ -43,7 +43,7 @@ else:
     else:
       imgHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         
-      mask = cv2.inRange(imgHSV, (lowH, lowS, lowV), (highH, highS, highV))
+      mask = cv2.inRange(imgHSV, np.array([lowH, lowS, lowV]), np.array([highH, highS, highV]))
 
       # Remove spots in image        
       mask = cv2.erode(mask, spotFilter)
