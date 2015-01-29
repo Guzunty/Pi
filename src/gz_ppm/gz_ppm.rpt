@@ -1,51 +1,52 @@
  
 cpldfit:  version P.40xd                            Xilinx Inc.
                                   Fitter Report
-Design Name: gz_ppm                              Date:  7- 6-2013, 12:35PM
-Device Used: XC9572XL-5-PC44
+Design Name: gz_ppm                              Date:  1-29-2015,  7:01PM
+Device Used: XC9572XL-10-PC44
 Fitting Status: Successful
 
 *************************  Mapped Resource Summary  **************************
 
 Macrocells     Product Terms    Function Block   Registers      Pins           
 Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
-52 /72  ( 72%) 226 /360  ( 63%) 91 /216 ( 42%)   51 /72  ( 71%) 15 /34  ( 44%)
+68 /72  ( 94%) 241 /360  ( 67%) 128/216 ( 59%)   46 /72  ( 64%) 15 /34  ( 44%)
 
 ** Function Block Resources **
 
 Function    Mcells      FB Inps     Pterms      IO          
 Block       Used/Tot    Used/Tot    Used/Tot    Used/Tot    
-FB1          12/18       24/54       90/90*      4/ 9
-FB2          15/18       23/54       44/90       2/ 9
-FB3          18/18*      18/54       59/90       5/ 9
-FB4           7/18       26/54       33/90       4/ 6
+FB1          17/18       38/54       73/90       7/ 9
+FB2          15/18       38/54       85/90       4/ 9
+FB3          18/18*      28/54       50/90       3/ 9
+FB4          18/18*      24/54       33/90       1/ 7
              -----       -----       -----      -----    
-             52/72       91/216     226/360     15/33 
+             68/72      128/216     241/360     15/34 
 
 * - Resource is exhausted
 
 ** Global Control Resources **
 
-Signal 'ppm_clk' mapped onto global clock net GCK1.
-Global output enable net(s) unused.
+Signal 'ppm_clk_i' mapped onto global clock net GCK1.
+Signal 'sclk_i' mapped onto global clock net GCK2.
+Signal 'sel_i' mapped onto global output enable net GTS2.
 Global set/reset net(s) unused.
 
 ** Pin Resources **
 
 Signal Type    Required     Mapped  |  Pin Type            Used    Total 
 ------------------------------------|------------------------------------
-Input         :    3           3    |  I/O              :    14      28
-Output        :   11          11    |  GCK/IO           :     1       3
-Bidirectional :    0           0    |  GTS/IO           :     0       2
-GCK           :    1           1    |  GSR/IO           :     0       1
-GTS           :    0           0    |
+Input         :    1           1    |  I/O              :    12      28
+Output        :   11          11    |  GCK/IO           :     2       3
+Bidirectional :    0           0    |  GTS/IO           :     1       2
+GCK           :    2           2    |  GSR/IO           :     0       1
+GTS           :    1           1    |
 GSR           :    0           0    |
                  ----        ----
         Total     15          15
 
 ** Power Data **
 
-There are 52 macrocells in high performance mode (MCHP).
+There are 68 macrocells in high performance mode (MCHP).
 There are 0 macrocells in low power mode (MCLP).
 End of Mapped Resource Summary
 **************************  Errors and Warnings  ***************************
@@ -56,77 +57,93 @@ WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
 
 ** 11 Outputs **
 
-Signal                   Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
-Name                     Pts   Inps          No.  Type    Use     Mode Rate State
-sync                     9     18    FB1_5   2    I/O     O       STD  FAST SET
-pwms<2>                  3     8     FB1_15  8    I/O     O       STD  FAST RESET
-pwms<5>                  3     7     FB2_2   35   I/O     O       STD  FAST RESET
-pwms<7>                  3     7     FB2_8   38   I/O     O       STD  FAST RESET
-pwms<0>                  4     8     FB3_2   11   I/O     O       STD  FAST RESET
-pwms<1>                  3     7     FB3_8   13   I/O     O       STD  FAST RESET
-pwms<3>                  3     7     FB3_11  18   I/O     O       STD  FAST RESET
-pwms<4>                  3     8     FB3_14  19   I/O     O       STD  FAST RESET
-pwms<6>                  3     8     FB3_17  22   I/O     O       STD  FAST RESET
-ppm_int_req              1     4     FB4_2   25   I/O     O       STD  FAST 
-miso                     18    22    FB4_17  34   I/O     O       STD  FAST RESET
+Signal                                                                  Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
+Name                                                                    Pts   Inps          No.  Type    Use     Mode Rate State
+miso_o                                                                  16    20    FB1_2   1    I/O     O       STD  FAST 
+pwms_o<2>                                                               1     7     FB1_5   2    I/O     O       STD  FAST 
+pwms_o<3>                                                               1     7     FB1_6   3    I/O     O       STD  FAST 
+pwms_o<4>                                                               1     7     FB1_8   4    I/O     O       STD  FAST 
+pwms_o<5>                                                               1     7     FB1_15  8    I/O     O       STD  FAST 
+pwms_o<0>                                                               1     7     FB2_6   37   I/O     O       STD  FAST 
+pwms_o<1>                                                               1     7     FB2_15  43   I/O     O       STD  FAST 
+sync_o                                                                  10    19    FB2_17  44   I/O     O       STD  FAST RESET
+ppm_irq_o                                                               3     3     FB3_2   11   I/O     O       STD  FAST RESET
+pwms_o<6>                                                               1     7     FB3_9   14   I/O     O       STD  FAST 
+pwms_o<7>                                                               1     7     FB3_15  20   I/O     O       STD  FAST 
 
-** 41 Buried Nodes **
+** 57 Buried Nodes **
 
-Signal                   Total Total Loc     Pwr  Reg Init
-Name                     Pts   Inps          Mode State
-inter_frame              17    18    FB1_2   STD  RESET
-pulse_width_counter<6>   8     17    FB1_4   STD  RESET
-pulse_width_counter<7>   9     17    FB1_7   STD  RESET
-pulse_width_counter<8>   8     17    FB1_9   STD  RESET
-pulse_width_counter<9>   7     17    FB1_12  STD  RESET
-pulse_width_counter<5>   7     17    FB1_13  STD  RESET
-pulse_width_counter<10>  6     17    FB1_14  STD  RESET
-pulse_width_counter<4>   6     17    FB1_16  STD  RESET
-pulse_width_counter<11>  5     17    FB1_17  STD  RESET
-pulse_width_counter<3>   5     17    FB1_18  STD  RESET
-reset                    2     2     FB2_5   STD  RESET
-pulse_width_counter<14>  2     17    FB2_6   STD  RESET
-pulse_width_counter<0>   2     17    FB2_7   STD  RESET
-pulse_width_counter<1>   3     17    FB2_9   STD  RESET
-pulse_width_counter<13>  3     17    FB2_10  STD  RESET
-output_register<9>       3     3     FB2_11  STD  SET
-output_register<8>       3     3     FB2_12  STD  SET
-output_register<7>       3     3     FB2_13  STD  SET
-output_register<6>       3     3     FB2_14  STD  SET
-output_register<5>       3     3     FB2_15  STD  SET
-output_register<4>       3     3     FB2_16  STD  SET
-pulse_width_counter<2>   4     17    FB2_17  STD  RESET
-pulse_width_counter<12>  4     17    FB2_18  STD  RESET
-pulse_counter<2>         3     5     FB3_1   STD  RESET
-pulse_counter<1>         3     4     FB3_3   STD  RESET
-pulse_counter<0>         3     6     FB3_4   STD  RESET
-output_register<3>       3     3     FB3_5   STD  SET
-output_register<2>       3     3     FB3_6   STD  SET
-output_register<1>       3     3     FB3_7   STD  SET
-output_register<11>      3     3     FB3_9   STD  SET
-output_register<10>      3     3     FB3_10  STD  SET
-interframe_overrun       3     6     FB3_12  STD  RESET
-pulse_counter<3>         4     6     FB3_13  STD  RESET
-output_register<15>      4     7     FB3_15  STD  SET
-output_register<14>      4     7     FB3_16  STD  SET
-output_register<13>      4     7     FB3_18  STD  SET
-bit_cnt<0>               2     2     FB4_11  STD  SET
-output_register<0>       3     3     FB4_12  STD  SET
-bit_cnt<3>               3     5     FB4_13  STD  SET
-bit_cnt<2>               3     4     FB4_14  STD  SET
+Signal                                                                  Total Total Loc     Pwr  Reg Init
+Name                                                                    Pts   Inps          Mode State
+output_register<14>                                                     2     5     FB1_1   STD  RESET
+output_register<13>                                                     2     5     FB1_4   STD  RESET
+output_register<12>                                                     2     5     FB1_7   STD  RESET
+channel_counter<0>                                                      3     6     FB1_9   STD  RESET
+output_register<3>                                                      5     12    FB1_10  STD  RESET
+output_register<1>                                                      5     9     FB1_11  STD  RESET
+output_register<0>                                                      5     8     FB1_12  STD  RESET
+channel_counter<1>                                                      5     7     FB1_13  STD  RESET
+output_register<5>                                                      6     10    FB1_14  STD  RESET
+output_register<2>                                                      6     10    FB1_16  STD  RESET
+channel_counter<3>                                                      6     8     FB1_17  STD  RESET
+channel_counter<2>                                                      6     8     FB1_18  STD  RESET
+ppm_irq_o_OBUF/ppm_irq_o_OBUF_RSTF                                      1     2     FB2_1   STD  
+reset                                                                   29    23    FB2_4   STD  RESET
+bit_cnt<0>                                                              1     1     FB2_7   STD  SET
+pulse_width<3>                                                          4     8     FB2_8   STD  RESET
+BUF_pulse_width<7>                                                      4     9     FB2_9   STD  
+pulse_width<14>                                                         5     9     FB2_10  STD  RESET
+pulse_width<13>                                                         5     8     FB2_11  STD  RESET
+pulse_width<11>                                                         5     6     FB2_12  STD  RESET
+output_register<11>                                                     6     10    FB2_13  STD  RESET
+output_register<10>                                                     6     9     FB2_14  STD  RESET
+BUF_pulse_width<12>                                                     6     7     FB2_16  STD  
+sync_cmp_eq0000/sync_cmp_eq0000_D2                                      1     16    FB2_18  STD  
+Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2  1     6     FB3_1   STD  
+BUF_irq_deassert                                                        1     3     FB3_3   STD  
+output_register<9>                                                      2     5     FB3_4   STD  RESET
+output_register<8>                                                      2     5     FB3_5   STD  RESET
+output_register<7>                                                      2     5     FB3_6   STD  RESET
+output_register<6>                                                      2     5     FB3_7   STD  RESET
+output_register<4>                                                      2     5     FB3_8   STD  RESET
+irq_assert                                                              2     5     FB3_10  STD  RESET
+BUF_ppm                                                                 2     5     FB3_11  STD  
+pulse_width<1>                                                          4     5     FB3_12  STD  RESET
+pulse_width<0>                                                          4     4     FB3_13  STD  RESET
+pulse_width<5>                                                          5     6     FB3_14  STD  RESET
+pulse_width<2>                                                          5     6     FB3_16  STD  RESET
+BUF_pulse_width<4>                                                      5     5     FB3_17  STD  
+BUF_pulse_width<6>                                                      6     7     FB3_18  STD  
+pulse_width<9>                                                          1     1     FB4_1   STD  RESET
 
-Signal                   Total Total Loc     Pwr  Reg Init
-Name                     Pts   Inps          Mode State
-bit_cnt<1>               3     3     FB4_18  STD  SET
+Signal                                                                  Total Total Loc     Pwr  Reg Init
+Name                                                                    Pts   Inps          Mode State
+pulse_width<8>                                                          1     1     FB4_2   STD  RESET
+pulse_width<7>                                                          1     1     FB4_3   STD  RESET
+pulse_width<6>                                                          1     1     FB4_4   STD  RESET
+pulse_width<4>                                                          1     1     FB4_5   STD  RESET
+pulse_width<12>                                                         1     1     FB4_6   STD  RESET
+ppm                                                                     1     1     FB4_7   STD  RESET
+irq_deassert                                                            1     1     FB4_8   STD  RESET
+Q1                                                                      1     1     FB4_9   STD  RESET
+Q0                                                                      1     1     FB4_10  STD  RESET
+Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2  1     4     FB4_11  STD  
+Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2  1     5     FB4_12  STD  
+bit_cnt<3>                                                              2     4     FB4_13  STD  SET
+bit_cnt<2>                                                              2     3     FB4_14  STD  SET
+bit_cnt<1>                                                              2     2     FB4_15  STD  SET
+pulse_width<10>                                                         5     5     FB4_16  STD  RESET
+BUF_output_register<9>                                                  5     6     FB4_17  STD  
+BUF_output_register<8>                                                  5     5     FB4_18  STD  
 
 ** 4 Inputs **
 
-Signal                   Loc     Pin  Pin     Pin     
-Name                             No.  Type    Use     
-ppm_in                   FB1_2   1    I/O     I
-ppm_clk                  FB1_9   5~   GCK/I/O GCK
-sclk                     FB4_11  28   I/O     I
-sel                      FB4_15  33   I/O     I
+Signal                                                                  Loc     Pin  Pin     Pin     
+Name                                                                            No.  Type    Use     
+ppm_clk_i                                                               FB1_9   5~   GCK/I/O GCK
+sclk_i                                                                  FB1_11  6~   GCK/I/O GCK
+sel_i                                                                   FB2_11  40~  GTS/I/O GTS/I
+ppm_i                                                                   FB4_17  34   I/O     I
 
 Legend:
 Pin No. - ~ - User Assigned
@@ -144,236 +161,249 @@ Pin Type/Use - I  - Input             GCK - Global Clock
 X            - Signal used as input to the macrocell logic.
 Pin No.      - ~  - User Assigned
 *********************************** FB1  ***********************************
+Number of function block inputs used/remaining:               38/16
+Number of signals used by logic mapping into function block:  38
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+output_register<14>   2       0   \/3   0     FB1_1         (b)     (b)
+miso_o               16      11<-   0   0     FB1_2   1     I/O     O
+(unused)              0       0   /\5   0     FB1_3         (b)     (b)
+output_register<13>   2       0   /\3   0     FB1_4         (b)     (b)
+pwms_o<2>             1       0     0   4     FB1_5   2     I/O     O
+pwms_o<3>             1       0     0   4     FB1_6   3     I/O     O
+output_register<12>   2       0     0   3     FB1_7         (b)     (b)
+pwms_o<4>             1       0     0   4     FB1_8   4     I/O     O
+channel_counter<0>    3       0   \/1   1     FB1_9   5     GCK/I/O GCK
+output_register<3>    5       1<- \/1   0     FB1_10        (b)     (b)
+output_register<1>    5       1<- \/1   0     FB1_11  6     GCK/I/O GCK
+output_register<0>    5       1<- \/1   0     FB1_12        (b)     (b)
+channel_counter<1>    5       1<- \/1   0     FB1_13        (b)     (b)
+output_register<5>    6       1<-   0   0     FB1_14  7     GCK/I/O (b)
+pwms_o<5>             1       0   \/3   1     FB1_15  8     I/O     O
+output_register<2>    6       3<- \/2   0     FB1_16        (b)     (b)
+channel_counter<3>    6       2<- \/1   0     FB1_17  9     I/O     (b)
+channel_counter<2>    6       1<-   0   0     FB1_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: BUF_irq_deassert                                                        14: output_register<0>   27: output_register<8> 
+  2: BUF_ppm                                                                 15: output_register<10>  28: output_register<9> 
+  3: Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2  16: output_register<11>  29: ppm_i 
+  4: Q0                                                                      17: output_register<12>  30: pulse_width<0> 
+  5: Q1                                                                      18: output_register<13>  31: pulse_width<1> 
+  6: bit_cnt<0>                                                              19: output_register<14>  32: pulse_width<2> 
+  7: bit_cnt<1>                                                              20: output_register<1>   33: pulse_width<3> 
+  8: bit_cnt<2>                                                              21: output_register<2>   34: pulse_width<4> 
+  9: bit_cnt<3>                                                              22: output_register<3>   35: pulse_width<5> 
+ 10: channel_counter<0>                                                      23: output_register<4>   36: reset 
+ 11: channel_counter<1>                                                      24: output_register<5>   37: sync_cmp_eq0000/sync_cmp_eq0000_D2 
+ 12: channel_counter<2>                                                      25: output_register<6>   38: sync_o 
+ 13: channel_counter<3>                                                      26: output_register<7>  
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+output_register<14>  ...XX......X................X......X.... 5
+miso_o               .....XXXX....XXXXXXXXXXXXXXXX........... 20
+output_register<13>  ...XX.....X.................X......X.... 5
+pwms_o<2>            .........XXXX...............X......X.X.. 7
+pwms_o<3>            .........XXXX...............X......X.X.. 7
+output_register<12>  ...XX....X..................X......X.... 5
+pwms_o<4>            .........XXXX...............X......X.X.. 7
+channel_counter<0>   ...XX....X..X...............X......X.... 6
+output_register<3>   XXXXX.......................XXXXX..XX... 12
+output_register<1>   XX.XX.......................XXX....XX... 9
+output_register<0>   XX.XX.......................XX.....XX... 8
+channel_counter<1>   ...XX....XX.X...............X......X.... 7
+output_register<5>   XXXXX.......................X....XXXX... 10
+pwms_o<5>            .........XXXX...............X......X.X.. 7
+output_register<2>   XX.XX.......................XXXX...XX... 10
+channel_counter<3>   ...XX....XXXX...............X......X.... 8
+channel_counter<2>   ...XX....XXXX...............X......X.... 8
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB2  ***********************************
+Number of function block inputs used/remaining:               38/16
+Number of signals used by logic mapping into function block:  38
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+ppm_irq_o_OBUF/ppm_irq_o_OBUF_RSTF
+                      1       0   \/4   0     FB2_1         (b)     (b)
+(unused)              0       0   \/5   0     FB2_2   35    I/O     (b)
+(unused)              0       0   \/5   0     FB2_3         (b)     (b)
+reset                29      24<-   0   0     FB2_4         (b)     (b)
+(unused)              0       0   /\5   0     FB2_5   36    I/O     (b)
+pwms_o<0>             1       1<- /\5   0     FB2_6   37    I/O     O
+bit_cnt<0>            1       0   /\1   3     FB2_7         (b)     (b)
+pulse_width<3>        4       0   \/1   0     FB2_8   38    I/O     (b)
+BUF_pulse_width<7>    4       1<- \/2   0     FB2_9   39    GSR/I/O (b)
+pulse_width<14>       5       2<- \/2   0     FB2_10        (b)     (b)
+pulse_width<13>       5       2<- \/2   0     FB2_11  40    GTS/I/O GTS/I
+pulse_width<11>       5       2<- \/2   0     FB2_12        (b)     (b)
+output_register<11>   6       2<- \/1   0     FB2_13        (b)     (b)
+output_register<10>   6       1<-   0   0     FB2_14  42    GTS/I/O (b)
+pwms_o<1>             1       0   \/2   2     FB2_15  43    I/O     O
+BUF_pulse_width<12>   6       2<- \/1   0     FB2_16        (b)     (b)
+sync_o               10       5<-   0   0     FB2_17  44    I/O     O
+sync_cmp_eq0000/sync_cmp_eq0000_D2
+                      1       0   /\4   0     FB2_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: BUF_irq_deassert                                                        14: channel_counter<0>  27: pulse_width<2> 
+  2: BUF_output_register<8>                                                  15: channel_counter<1>  28: pulse_width<3> 
+  3: BUF_output_register<9>                                                  16: channel_counter<2>  29: pulse_width<4> 
+  4: BUF_ppm                                                                 17: channel_counter<3>  30: pulse_width<5> 
+  5: BUF_pulse_width<12>                                                     18: irq_deassert        31: pulse_width<6> 
+  6: BUF_pulse_width<4>                                                      19: ppm_i               32: pulse_width<7> 
+  7: BUF_pulse_width<6>                                                      20: pulse_width<0>      33: pulse_width<8> 
+  8: BUF_pulse_width<7>                                                      21: pulse_width<10>     34: pulse_width<9> 
+  9: Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2  22: pulse_width<11>     35: reset 
+ 10: Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2  23: pulse_width<12>     36: sel_i 
+ 11: Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2  24: pulse_width<13>     37: sync_cmp_eq0000/sync_cmp_eq0000_D2 
+ 12: Q0                                                                      25: pulse_width<14>     38: sync_o 
+ 13: Q1                                                                      26: pulse_width<1>     
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+ppm_irq_o_OBUF/ppm_irq_o_OBUF_RSTF 
+                     .................X.................X.... 2
+reset                X.XXXXXXXXX.........XXXXX.XXXX..XXX.X... 23
+pwms_o<0>            .............XXXX.X...............X..X.. 7
+bit_cnt<0>           ...................................X.... 1
+pulse_width<3>       X..X....X..........X.....XXX........X... 8
+BUF_pulse_width<7>   X..X....XX..................XXXX....X... 9
+pulse_width<14>      X..X......X.........XXXXX...........X... 9
+pulse_width<13>      X..X......X.........XXXX............X... 8
+pulse_width<11>      X..X......X.........XX..............X... 6
+output_register<11>  X..X......XXX.....X.XX............X.X... 10
+output_register<10>  X..X......XXX.....X.X.............X.X... 9
+pwms_o<1>            .............XXXX.X...............X..X.. 7
+BUF_pulse_width<12>  X..X......X.........XXX.............X... 7
+sync_o               XXXX.....XX.........XXXXX.XXXXXX....XX.. 19
+sync_cmp_eq0000/sync_cmp_eq0000_D2 
+                     X..................XXXXXXXXXXXXXXX...... 16
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB3  ***********************************
+Number of function block inputs used/remaining:               28/26
+Number of signals used by logic mapping into function block:  28
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2
+                      1       0   /\1   3     FB3_1         (b)     (b)
+ppm_irq_o             3       0     0   2     FB3_2   11    I/O     O
+BUF_irq_deassert      1       0     0   4     FB3_3         (b)     (b)
+output_register<9>    2       0     0   3     FB3_4         (b)     (b)
+output_register<8>    2       0     0   3     FB3_5   12    I/O     (b)
+output_register<7>    2       0     0   3     FB3_6         (b)     (b)
+output_register<6>    2       0     0   3     FB3_7         (b)     (b)
+output_register<4>    2       0     0   3     FB3_8   13    I/O     (b)
+pwms_o<6>             1       0     0   4     FB3_9   14    I/O     O
+irq_assert            2       0     0   3     FB3_10        (b)     (b)
+BUF_ppm               2       0     0   3     FB3_11  18    I/O     (b)
+pulse_width<1>        4       0     0   1     FB3_12        (b)     (b)
+pulse_width<0>        4       0     0   1     FB3_13        (b)     (b)
+pulse_width<5>        5       0     0   0     FB3_14  19    I/O     (b)
+pwms_o<7>             1       0     0   4     FB3_15  20    I/O     O
+pulse_width<2>        5       0     0   0     FB3_16  24    I/O     (b)
+BUF_pulse_width<4>    5       0     0   0     FB3_17  22    I/O     (b)
+BUF_pulse_width<6>    6       1<-   0   0     FB3_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: BUF_irq_deassert                                                        11: channel_counter<0>                  20: pulse_width<1> 
+  2: BUF_output_register<8>                                                  12: channel_counter<1>                  21: pulse_width<2> 
+  3: BUF_output_register<9>                                                  13: channel_counter<2>                  22: pulse_width<4> 
+  4: BUF_ppm                                                                 14: channel_counter<3>                  23: pulse_width<5> 
+  5: BUF_pulse_width<4>                                                      15: irq_assert                          24: pulse_width<6> 
+  6: BUF_pulse_width<6>                                                      16: ppm                                 25: pulse_width<7> 
+  7: BUF_pulse_width<7>                                                      17: ppm_i                               26: reset 
+  8: Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2  18: ppm_irq_o_OBUF/ppm_irq_o_OBUF_RSTF  27: sync_cmp_eq0000/sync_cmp_eq0000_D2 
+  9: Q0                                                                      19: pulse_width<0>                      28: sync_o 
+ 10: Q1                                                                     
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2 
+                     X......X.............XXXX............... 6
+ppm_irq_o            ..............X..X.........X............ 3
+BUF_irq_deassert     ........XX......X....................... 3
+output_register<9>   ..X.....XX......X........X.............. 5
+output_register<8>   .X......XX......X........X.............. 5
+output_register<7>   ......X.XX......X........X.............. 5
+output_register<6>   .....X..XX......X........X.............. 5
+output_register<4>   ....X...XX......X........X.............. 5
+pwms_o<6>            ..........XXXX..X........X.X............ 7
+irq_assert           ........XX....X.X........X.............. 5
+BUF_ppm              X.......XX.....XX....................... 5
+pulse_width<1>       X..X..............XX......X............. 5
+pulse_width<0>       X..X..............X.......X............. 4
+pulse_width<5>       X..X...X.............XX...X............. 6
+pwms_o<7>            ..........XXXX..X........X.X............ 7
+pulse_width<2>       X..X..............XXX.....X............. 6
+BUF_pulse_width<4>   X..X...X.............X....X............. 5
+BUF_pulse_width<6>   X..X...X.............XXX..X............. 7
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB4  ***********************************
 Number of function block inputs used/remaining:               24/30
 Number of signals used by logic mapping into function block:  24
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
-(unused)              0       0   \/5   0     FB1_1         (b)     (b)
-inter_frame          17      12<-   0   0     FB1_2   1     I/O     I
-(unused)              0       0   /\5   0     FB1_3         (b)     (b)
-pulse_width_counter<6>
-                      8       4<- /\1   0     FB1_4         (b)     (b)
-sync                  9       8<- /\4   0     FB1_5   2     I/O     O
-(unused)              0       0   /\5   0     FB1_6   3     I/O     (b)
-pulse_width_counter<7>
-                      9       7<- /\3   0     FB1_7         (b)     (b)
-(unused)              0       0   /\5   0     FB1_8   4     I/O     (b)
-pulse_width_counter<8>
-                      8       5<- /\2   0     FB1_9   5     GCK/I/O GCK
-(unused)              0       0   /\5   0     FB1_10        (b)     (b)
-(unused)              0       0   \/5   0     FB1_11  6     GCK/I/O (b)
-pulse_width_counter<9>
-                      7       5<- \/3   0     FB1_12        (b)     (b)
-pulse_width_counter<5>
-                      7       3<- \/1   0     FB1_13        (b)     (b)
-pulse_width_counter<10>
-                      6       1<-   0   0     FB1_14  7     GCK/I/O (b)
-pwms<2>               3       0   \/2   0     FB1_15  8     I/O     O
-pulse_width_counter<4>
-                      6       2<- \/1   0     FB1_16        (b)     (b)
-pulse_width_counter<11>
-                      5       1<- \/1   0     FB1_17  9     I/O     (b)
-pulse_width_counter<3>
-                      5       1<- \/1   0     FB1_18        (b)     (b)
+pulse_width<9>        1       0     0   4     FB4_1         (b)     (b)
+pulse_width<8>        1       0     0   4     FB4_2   25    I/O     (b)
+pulse_width<7>        1       0     0   4     FB4_3         (b)     (b)
+pulse_width<6>        1       0     0   4     FB4_4         (b)     (b)
+pulse_width<4>        1       0     0   4     FB4_5   26    I/O     (b)
+pulse_width<12>       1       0     0   4     FB4_6         (b)     (b)
+ppm                   1       0     0   4     FB4_7         (b)     (b)
+irq_deassert          1       0     0   4     FB4_8   27    I/O     (b)
+Q1                    1       0     0   4     FB4_9         (b)     (b)
+Q0                    1       0     0   4     FB4_10        (b)     (b)
+Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2
+                      1       0     0   4     FB4_11  28    I/O     (b)
+Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2
+                      1       0     0   4     FB4_12        (b)     (b)
+bit_cnt<3>            2       0     0   3     FB4_13        (b)     (b)
+bit_cnt<2>            2       0     0   3     FB4_14  29    I/O     (b)
+bit_cnt<1>            2       0     0   3     FB4_15  33    I/O     (b)
+pulse_width<10>       5       0     0   0     FB4_16        (b)     (b)
+BUF_output_register<9>
+                      5       0     0   0     FB4_17  34    I/O     I
+BUF_output_register<8>
+                      5       0     0   0     FB4_18        (b)     (b)
 
 Signals Used by Logic in Function Block
-  1: inter_frame               9: pulse_width_counter<11>  17: pulse_width_counter<5> 
-  2: ppm_in                   10: pulse_width_counter<12>  18: pulse_width_counter<6> 
-  3: pulse_counter<0>         11: pulse_width_counter<13>  19: pulse_width_counter<7> 
-  4: pulse_counter<1>         12: pulse_width_counter<14>  20: pulse_width_counter<8> 
-  5: pulse_counter<2>         13: pulse_width_counter<1>   21: pulse_width_counter<9> 
-  6: pulse_counter<3>         14: pulse_width_counter<2>   22: pwms<2> 
-  7: pulse_width_counter<0>   15: pulse_width_counter<3>   23: reset 
-  8: pulse_width_counter<10>  16: pulse_width_counter<4>   24: sync 
+  1: BUF_irq_deassert         9: Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2  17: pulse_width<10> 
+  2: BUF_output_register<8>  10: Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2  18: pulse_width<1> 
+  3: BUF_output_register<9>  11: Q0                                                                      19: pulse_width<2> 
+  4: BUF_ppm                 12: bit_cnt<0>                                                              20: pulse_width<3> 
+  5: BUF_pulse_width<12>     13: bit_cnt<1>                                                              21: pulse_width<8> 
+  6: BUF_pulse_width<4>      14: bit_cnt<2>                                                              22: pulse_width<9> 
+  7: BUF_pulse_width<6>      15: ppm_i                                                                   23: sel_i 
+  8: BUF_pulse_width<7>      16: pulse_width<0>                                                          24: sync_cmp_eq0000/sync_cmp_eq0000_D2 
 
 Signal                        1         2         3         4 FB
 Name                0----+----0----+----0----+----0----+----0 Inputs
-inter_frame          XX....XXXXXXXXXXXXXXX.X................. 18
-pulse_width_counter<6> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-sync                 .X....XXXXXXXXXXXXXXX.XX................ 18
-pulse_width_counter<7> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-pulse_width_counter<8> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-pulse_width_counter<9> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-pulse_width_counter<5> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-pulse_width_counter<10> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-pwms<2>              XXXXXX...............X.X................ 8
-pulse_width_counter<4> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-pulse_width_counter<11> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-pulse_width_counter<3> 
-                     .X....XXXXXXXXXXXXXXX.X................. 17
-                    0----+----1----+----2----+----3----+----4
-                              0         0         0         0
-*********************************** FB2  ***********************************
-Number of function block inputs used/remaining:               23/31
-Number of signals used by logic mapping into function block:  23
-Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
-Name                Pt      Pt    Pt  Pt               #    Type    Use
-(unused)              0       0     0   5     FB2_1         (b)     
-pwms<5>               3       0     0   2     FB2_2   35    I/O     O
-(unused)              0       0     0   5     FB2_3         (b)     
-(unused)              0       0     0   5     FB2_4         (b)     
-reset                 2       0     0   3     FB2_5   36    I/O     (b)
-pulse_width_counter<14>
-                      2       0     0   3     FB2_6   37    I/O     (b)
-pulse_width_counter<0>
-                      2       0     0   3     FB2_7         (b)     (b)
-pwms<7>               3       0     0   2     FB2_8   38    I/O     O
-pulse_width_counter<1>
-                      3       0     0   2     FB2_9   39    GSR/I/O (b)
-pulse_width_counter<13>
-                      3       0     0   2     FB2_10        (b)     (b)
-output_register<9>    3       0     0   2     FB2_11  40    GTS/I/O (b)
-output_register<8>    3       0     0   2     FB2_12        (b)     (b)
-output_register<7>    3       0     0   2     FB2_13        (b)     (b)
-output_register<6>    3       0     0   2     FB2_14  42    GTS/I/O (b)
-output_register<5>    3       0     0   2     FB2_15  43    I/O     (b)
-output_register<4>    3       0     0   2     FB2_16        (b)     (b)
-pulse_width_counter<2>
-                      4       0     0   1     FB2_17  44    I/O     (b)
-pulse_width_counter<12>
-                      4       0     0   1     FB2_18        (b)     (b)
-
-Signals Used by Logic in Function Block
-  1: inter_frame               9: pulse_width_counter<11>  17: pulse_width_counter<5> 
-  2: ppm_in                   10: pulse_width_counter<12>  18: pulse_width_counter<6> 
-  3: pulse_counter<0>         11: pulse_width_counter<13>  19: pulse_width_counter<7> 
-  4: pulse_counter<1>         12: pulse_width_counter<14>  20: pulse_width_counter<8> 
-  5: pulse_counter<2>         13: pulse_width_counter<1>   21: pulse_width_counter<9> 
-  6: pulse_counter<3>         14: pulse_width_counter<2>   22: reset 
-  7: pulse_width_counter<0>   15: pulse_width_counter<3>   23: sync 
-  8: pulse_width_counter<10>  16: pulse_width_counter<4>  
-
-Signal                        1         2         3         4 FB
-Name                0----+----0----+----0----+----0----+----0 Inputs
-pwms<5>              XXXXXX................X................. 7
-reset                .X...................X.................. 2
-pulse_width_counter<14> 
-                     .X....XXXXXXXXXXXXXXXX.................. 17
-pulse_width_counter<0> 
-                     .X....XXXXXXXXXXXXXXXX.................. 17
-pwms<7>              XXXXXX................X................. 7
-pulse_width_counter<1> 
-                     .X....XXXXXXXXXXXXXXXX.................. 17
-pulse_width_counter<13> 
-                     .X....XXXXXXXXXXXXXXXX.................. 17
-output_register<9>   XX..................X................... 3
-output_register<8>   XX.................X.................... 3
-output_register<7>   XX................X..................... 3
-output_register<6>   XX...............X...................... 3
-output_register<5>   XX..............X....................... 3
-output_register<4>   XX.............X........................ 3
-pulse_width_counter<2> 
-                     .X....XXXXXXXXXXXXXXXX.................. 17
-pulse_width_counter<12> 
-                     .X....XXXXXXXXXXXXXXXX.................. 17
-                    0----+----1----+----2----+----3----+----4
-                              0         0         0         0
-*********************************** FB3  ***********************************
-Number of function block inputs used/remaining:               18/36
-Number of signals used by logic mapping into function block:  18
-Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
-Name                Pt      Pt    Pt  Pt               #    Type    Use
-pulse_counter<2>      3       0     0   2     FB3_1         (b)     (b)
-pwms<0>               4       0     0   1     FB3_2   11    I/O     O
-pulse_counter<1>      3       0     0   2     FB3_3         (b)     (b)
-pulse_counter<0>      3       0     0   2     FB3_4         (b)     (b)
-output_register<3>    3       0     0   2     FB3_5   12    I/O     (b)
-output_register<2>    3       0     0   2     FB3_6         (b)     (b)
-output_register<1>    3       0     0   2     FB3_7         (b)     (b)
-pwms<1>               3       0     0   2     FB3_8   13    I/O     O
-output_register<11>   3       0     0   2     FB3_9   14    I/O     (b)
-output_register<10>   3       0     0   2     FB3_10        (b)     (b)
-pwms<3>               3       0     0   2     FB3_11  18    I/O     O
-interframe_overrun    3       0     0   2     FB3_12        (b)     (b)
-pulse_counter<3>      4       0     0   1     FB3_13        (b)     (b)
-pwms<4>               3       0     0   2     FB3_14  19    I/O     O
-output_register<15>   4       0     0   1     FB3_15  20    I/O     (b)
-output_register<14>   4       0     0   1     FB3_16  24    I/O     (b)
-pwms<6>               3       0     0   2     FB3_17  22    I/O     O
-output_register<13>   4       0     0   1     FB3_18        (b)     (b)
-
-Signals Used by Logic in Function Block
-  1: inter_frame           7: pulse_counter<1>         13: pulse_width_counter<2> 
-  2: output_register<13>   8: pulse_counter<2>         14: pulse_width_counter<3> 
-  3: output_register<14>   9: pulse_counter<3>         15: pwms<0> 
-  4: output_register<15>  10: pulse_width_counter<10>  16: pwms<4> 
-  5: ppm_in               11: pulse_width_counter<11>  17: pwms<6> 
-  6: pulse_counter<0>     12: pulse_width_counter<1>   18: sync 
-
-Signal                        1         2         3         4 FB
-Name                0----+----0----+----0----+----0----+----0 Inputs
-pulse_counter<2>     X...XXXX................................ 5
-pwms<0>              X...XXXXX.....X..X...................... 8
-pulse_counter<1>     X...XXX................................. 4
-pulse_counter<0>     X...XXXXX............................... 6
-output_register<3>   X...X........X.......................... 3
-output_register<2>   X...X.......X........................... 3
-output_register<1>   X...X......X............................ 3
-pwms<1>              X...XXXXX........X...................... 7
-output_register<11>  X...X.....X............................. 3
-output_register<10>  X...X....X.............................. 3
-pwms<3>              X...XXXXX........X...................... 7
-interframe_overrun   X...XXXXX............................... 6
-pulse_counter<3>     X...XXXXX............................... 6
-pwms<4>              X...XXXXX......X.X...................... 8
-output_register<15>  X..XXXXXX............................... 7
-output_register<14>  X.X.XXXXX............................... 7
-pwms<6>              X...XXXXX.......XX...................... 8
-output_register<13>  XX..XXXXX............................... 7
-                    0----+----1----+----2----+----3----+----4
-                              0         0         0         0
-*********************************** FB4  ***********************************
-Number of function block inputs used/remaining:               26/28
-Number of signals used by logic mapping into function block:  26
-Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
-Name                Pt      Pt    Pt  Pt               #    Type    Use
-(unused)              0       0     0   5     FB4_1         (b)     
-ppm_int_req           1       0     0   4     FB4_2   25    I/O     O
-(unused)              0       0     0   5     FB4_3         (b)     
-(unused)              0       0     0   5     FB4_4         (b)     
-(unused)              0       0     0   5     FB4_5   26    I/O     
-(unused)              0       0     0   5     FB4_6         (b)     
-(unused)              0       0     0   5     FB4_7         (b)     
-(unused)              0       0     0   5     FB4_8   27    I/O     
-(unused)              0       0     0   5     FB4_9         (b)     
-(unused)              0       0     0   5     FB4_10        (b)     
-bit_cnt<0>            2       0     0   3     FB4_11  28    I/O     I
-output_register<0>    3       0     0   2     FB4_12        (b)     (b)
-bit_cnt<3>            3       0     0   2     FB4_13        (b)     (b)
-bit_cnt<2>            3       0   \/1   1     FB4_14        (b)     (b)
-(unused)              0       0   \/5   0     FB4_15  33    I/O     I
-(unused)              0       0   \/5   0     FB4_16        (b)     (b)
-miso                 18      13<-   0   0     FB4_17  34    I/O     O
-bit_cnt<1>            3       0   /\2   0     FB4_18        (b)     (b)
-
-Signals Used by Logic in Function Block
-  1: bit_cnt<0>           10: output_register<13>  19: output_register<7> 
-  2: bit_cnt<1>           11: output_register<14>  20: output_register<8> 
-  3: bit_cnt<2>           12: output_register<15>  21: output_register<9> 
-  4: bit_cnt<3>           13: output_register<1>   22: ppm_in 
-  5: inter_frame          14: output_register<2>   23: pulse_width_counter<0> 
-  6: interframe_overrun   15: output_register<3>   24: sclk 
-  7: output_register<0>   16: output_register<4>   25: sel 
-  8: output_register<10>  17: output_register<5>   26: sync 
-  9: output_register<11>  18: output_register<6>  
-
-Signal                        1         2         3         4 FB
-Name                0----+----0----+----0----+----0----+----0 Inputs
-ppm_int_req          ....XX...............X...X.............. 4
-bit_cnt<0>           .......................XX............... 2
-output_register<0>   ....X................XX................. 3
-bit_cnt<3>           XXX....................XX............... 5
-bit_cnt<2>           XX.....................XX............... 4
-miso                 XXXX..XXXXXXXXXXXXXXX..XXX.............. 22
-bit_cnt<1>           X......................XX............... 3
+pulse_width<9>       ..X..................................... 1
+pulse_width<8>       .X...................................... 1
+pulse_width<7>       .......X................................ 1
+pulse_width<6>       ......X................................. 1
+pulse_width<4>       .....X.................................. 1
+pulse_width<12>      ....X................................... 1
+ppm                  ...X.................................... 1
+irq_deassert         X....................................... 1
+Q1                   ..........X............................. 1
+Q0                   ..............X......................... 1
+Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2 
+                     X.......X...........XX.................. 4
+Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2 
+                     X..............X.XXX.................... 5
+bit_cnt<3>           ...........XXX........X................. 4
+bit_cnt<2>           ...........XX.........X................. 3
+bit_cnt<1>           ...........X..........X................. 2
+pulse_width<10>      X..X.....X......X......X................ 5
+BUF_output_register<9> 
+                     X..X....X...........XX.X................ 6
+BUF_output_register<8> 
+                     X..X....X...........X..X................ 5
                     0----+----1----+----2----+----3----+----4
                               0         0         0         0
 *******************************  Equations  ********************************
@@ -381,6 +411,84 @@ bit_cnt<1>           X......................XX............... 3
 ********** Mapped Logic **********
 
 
+BUF_irq_deassert <= (ppm_i AND Q0 AND NOT Q1);
+
+
+BUF_output_register(8) <= ((NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(8) AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2)
+	OR (BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2)
+	OR (pulse_width(8) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(8) AND NOT BUF_irq_deassert AND 
+	NOT Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2 AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2));
+
+
+BUF_output_register(9) <= ((NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(8) AND pulse_width(9) AND 
+	NOT BUF_irq_deassert AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(9) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(9) AND NOT BUF_irq_deassert AND 
+	NOT Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2 AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(8) AND NOT pulse_width(9) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2));
+
+
+BUF_ppm <= ((NOT ppm AND NOT BUF_irq_deassert)
+	OR (NOT ppm_i AND NOT Q0 AND Q1 AND NOT BUF_irq_deassert));
+
+
+BUF_pulse_width(4) <= ((NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(4) AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2)
+	OR (BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2)
+	OR (pulse_width(4) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(4) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2));
+
+
+BUF_pulse_width(6) <= ((pulse_width(4) AND pulse_width(5) AND NOT pulse_width(6) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(4) AND pulse_width(6) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (NOT pulse_width(5) AND pulse_width(6) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (pulse_width(6) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(6) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2));
+
+
+BUF_pulse_width(7) <= ((pulse_width(4) AND pulse_width(5) AND pulse_width(6) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2 AND 
+	Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(7) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(7) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2));
+
+
+BUF_pulse_width(12) <= ((pulse_width(12) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(10) AND pulse_width(11) AND 
+	NOT pulse_width(12) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(10) AND pulse_width(12) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (NOT pulse_width(11) AND pulse_width(12) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (pulse_width(12) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2));
 
 
 
@@ -391,482 +499,435 @@ bit_cnt<1>           X......................XX............... 3
 
 
 
+Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2 <= (pulse_width(0) AND pulse_width(1) AND pulse_width(2) AND 
+	pulse_width(3) AND NOT BUF_irq_deassert);
 
 
+Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2 <= (pulse_width(4) AND pulse_width(5) AND pulse_width(6) AND 
+	pulse_width(7) AND NOT BUF_irq_deassert AND 
+	Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2);
 
 
+Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2 <= (pulse_width(8) AND pulse_width(9) AND 
+	NOT BUF_irq_deassert AND 
+	Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2);
 
-FTCPE_bit_cnt0: FTCPE port map (bit_cnt(0),'1',NOT sclk,'0',sel);
+FDCPE_Q0: FDCPE port map (Q0,ppm_i,ppm_clk_i,'0','0');
 
-FTCPE_bit_cnt1: FTCPE port map (bit_cnt(1),bit_cnt(0),NOT sclk,'0',sel);
+FDCPE_Q1: FDCPE port map (Q1,Q0,ppm_clk_i,'0','0');
 
-FTCPE_bit_cnt2: FTCPE port map (bit_cnt(2),bit_cnt_T(2),NOT sclk,'0',sel);
+FTCPE_bit_cnt0: FTCPE port map (bit_cnt(0),'1',NOT sclk_i,'0',sel_i);
+
+FTCPE_bit_cnt1: FTCPE port map (bit_cnt(1),bit_cnt(0),NOT sclk_i,'0',sel_i);
+
+FTCPE_bit_cnt2: FTCPE port map (bit_cnt(2),bit_cnt_T(2),NOT sclk_i,'0',sel_i);
 bit_cnt_T(2) <= (NOT bit_cnt(1) AND NOT bit_cnt(0));
 
-FTCPE_bit_cnt3: FTCPE port map (bit_cnt(3),bit_cnt_T(3),NOT sclk,'0',sel);
+FTCPE_bit_cnt3: FTCPE port map (bit_cnt(3),bit_cnt_T(3),NOT sclk_i,'0',sel_i);
 bit_cnt_T(3) <= (NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0));
 
-FDCPE_inter_frame: FDCPE port map (inter_frame,inter_frame_D,ppm_clk,'0','0');
-inter_frame_D <= ((pulse_width_counter(3).EXP)
-	OR (pulse_width_counter(11) AND NOT pulse_width_counter(12) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND ppm_in)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(10) AND 
-	NOT pulse_width_counter(6) AND NOT pulse_width_counter(9) AND pulse_width_counter(12) AND 
-	NOT pulse_width_counter(8) AND NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND 
-	ppm_in)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(10) AND 
-	NOT pulse_width_counter(6) AND NOT pulse_width_counter(9) AND pulse_width_counter(12) AND 
-	NOT pulse_width_counter(8) AND NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND 
-	reset)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(10) AND 
-	NOT pulse_width_counter(7) AND NOT pulse_width_counter(9) AND pulse_width_counter(12) AND 
-	NOT pulse_width_counter(8) AND NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND 
-	ppm_in)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(10) AND 
-	NOT pulse_width_counter(7) AND NOT pulse_width_counter(9) AND pulse_width_counter(12) AND 
-	NOT pulse_width_counter(8) AND NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND 
-	reset)
-	OR (pulse_width_counter(6).EXP)
-	OR (NOT pulse_width_counter(1) AND NOT pulse_width_counter(11) AND 
-	NOT pulse_width_counter(5) AND NOT pulse_width_counter(10) AND NOT pulse_width_counter(4) AND 
-	NOT pulse_width_counter(9) AND pulse_width_counter(12) AND NOT pulse_width_counter(8) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND ppm_in)
-	OR (NOT pulse_width_counter(1) AND NOT pulse_width_counter(11) AND 
-	NOT pulse_width_counter(5) AND NOT pulse_width_counter(10) AND NOT pulse_width_counter(4) AND 
-	NOT pulse_width_counter(9) AND pulse_width_counter(12) AND NOT pulse_width_counter(8) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND reset)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(2) AND 
-	NOT pulse_width_counter(5) AND NOT pulse_width_counter(10) AND NOT pulse_width_counter(4) AND 
-	NOT pulse_width_counter(9) AND pulse_width_counter(12) AND NOT pulse_width_counter(8) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND ppm_in)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(2) AND 
-	NOT pulse_width_counter(5) AND NOT pulse_width_counter(10) AND NOT pulse_width_counter(4) AND 
-	NOT pulse_width_counter(9) AND pulse_width_counter(12) AND NOT pulse_width_counter(8) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND reset)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(3) AND 
-	NOT pulse_width_counter(5) AND NOT pulse_width_counter(10) AND NOT pulse_width_counter(4) AND 
-	NOT pulse_width_counter(9) AND pulse_width_counter(12) AND NOT pulse_width_counter(8) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND reset)
-	OR (NOT ppm_in AND NOT inter_frame AND NOT reset)
-	OR (NOT pulse_width_counter(12) AND NOT pulse_width_counter(13) AND 
-	NOT pulse_width_counter(14) AND NOT inter_frame)
-	OR (pulse_width_counter(11) AND NOT pulse_width_counter(12) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND reset)
-	OR (pulse_width_counter(10) AND NOT pulse_width_counter(12) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND ppm_in)
-	OR (pulse_width_counter(10) AND NOT pulse_width_counter(12) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND reset));
+FTCPE_channel_counter0: FTCPE port map (channel_counter(0),channel_counter_T(0),ppm_clk_i,'0','0',channel_counter_CE(0));
+channel_counter_T(0) <= ((NOT ppm_i AND NOT channel_counter(0) AND channel_counter(3) AND 
+	NOT Q0 AND Q1)
+	OR (NOT ppm_i AND NOT channel_counter(0) AND reset AND NOT Q0 AND Q1));
+channel_counter_CE(0) <= (NOT ppm_i AND NOT Q0 AND Q1);
 
-FDCPE_interframe_overrun: FDCPE port map (interframe_overrun,interframe_overrun_D,NOT ppm_in,'0','0',NOT inter_frame);
-interframe_overrun_D <= (NOT pulse_counter(0) AND NOT pulse_counter(1) AND 
-	NOT pulse_counter(2) AND pulse_counter(3));
+FDCPE_channel_counter1: FDCPE port map (channel_counter(1),channel_counter_D(1),ppm_clk_i,'0','0',channel_counter_CE(1));
+channel_counter_D(1) <= ((NOT ppm_i AND channel_counter(3) AND NOT Q0 AND Q1)
+	OR (channel_counter(0) AND channel_counter(1))
+	OR (NOT channel_counter(0) AND NOT channel_counter(1))
+	OR (NOT ppm_i AND reset AND NOT Q0 AND Q1));
+channel_counter_CE(1) <= (NOT ppm_i AND NOT Q0 AND Q1);
 
-FDCPE_miso: FDCPE port map (miso_I,miso,sclk,'0','0');
-miso <= ((EXP12_.EXP)
-	OR (sync AND bit_cnt(3) AND bit_cnt(2) AND NOT bit_cnt(1) AND 
-	NOT bit_cnt(0))
+FDCPE_channel_counter2: FDCPE port map (channel_counter(2),channel_counter_D(2),ppm_clk_i,'0','0',channel_counter_CE(2));
+channel_counter_D(2) <= ((NOT ppm_i AND channel_counter(3) AND NOT Q0 AND Q1)
+	OR (NOT channel_counter(0) AND NOT channel_counter(2))
+	OR (NOT channel_counter(1) AND NOT channel_counter(2))
+	OR (channel_counter(0) AND channel_counter(1) AND 
+	channel_counter(2))
+	OR (NOT ppm_i AND reset AND NOT Q0 AND Q1));
+channel_counter_CE(2) <= (NOT ppm_i AND NOT Q0 AND Q1);
+
+FTCPE_channel_counter3: FTCPE port map (channel_counter(3),channel_counter_T(3),ppm_clk_i,'0','0',channel_counter_CE(3));
+channel_counter_T(3) <= ((NOT ppm_i AND channel_counter(3) AND NOT Q0 AND Q1)
+	OR (channel_counter(0) AND channel_counter(1) AND 
+	channel_counter(2) AND NOT reset)
+	OR (ppm_i AND channel_counter(0) AND channel_counter(1) AND 
+	channel_counter(2))
+	OR (channel_counter(0) AND channel_counter(1) AND 
+	channel_counter(2) AND Q0)
+	OR (channel_counter(0) AND channel_counter(1) AND 
+	channel_counter(2) AND NOT Q1));
+channel_counter_CE(3) <= (NOT ppm_i AND NOT Q0 AND Q1);
+
+FDCPE_irq_assert: FDCPE port map (irq_assert,irq_assert_D,ppm_clk_i,'0','0');
+irq_assert_D <= ((NOT ppm_i AND NOT reset AND NOT Q0 AND Q1)
+	OR (NOT ppm_i AND irq_assert AND NOT Q0 AND Q1));
+
+FDCPE_irq_deassert: FDCPE port map (irq_deassert,BUF_irq_deassert,ppm_clk_i,'0','0');
+
+
+miso_o_I <= ((ppm_i AND bit_cnt(3) AND bit_cnt(2) AND bit_cnt(1) AND 
+	bit_cnt(0))
+	OR (NOT bit_cnt(3) AND bit_cnt(2) AND bit_cnt(1) AND 
+	bit_cnt(0) AND output_register(7))
+	OR (NOT bit_cnt(3) AND NOT bit_cnt(2) AND bit_cnt(1) AND 
+	bit_cnt(0) AND output_register(3))
+	OR (output_register(13).EXP)
 	OR (bit_cnt(3) AND bit_cnt(2) AND bit_cnt(1) AND 
 	NOT bit_cnt(0) AND output_register(14))
-	OR (bit_cnt(3) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
-	NOT bit_cnt(0) AND output_register(8))
-	OR (NOT bit_cnt(3) AND bit_cnt(2) AND NOT bit_cnt(1) AND 
-	NOT bit_cnt(0) AND output_register(4))
-	OR (NOT bit_cnt(3) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
-	NOT bit_cnt(0) AND output_register(0))
-	OR (bit_cnt(3) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
-	bit_cnt(0) AND output_register(9))
-	OR (NOT bit_cnt(3) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
-	bit_cnt(0) AND output_register(1))
 	OR (bit_cnt(3) AND NOT bit_cnt(2) AND bit_cnt(1) AND 
 	NOT bit_cnt(0) AND output_register(10))
 	OR (NOT bit_cnt(3) AND bit_cnt(2) AND bit_cnt(1) AND 
 	NOT bit_cnt(0) AND output_register(6))
 	OR (NOT bit_cnt(3) AND NOT bit_cnt(2) AND bit_cnt(1) AND 
-	NOT bit_cnt(0) AND output_register(2)));
-miso <= miso_I when miso_OE = '1' else 'Z';
-miso_OE <= NOT sel;
+	NOT bit_cnt(0) AND output_register(2))
+	OR (NOT bit_cnt(3) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+	bit_cnt(0) AND output_register(1))
+	OR (bit_cnt(3) AND bit_cnt(2) AND NOT bit_cnt(1) AND 
+	NOT bit_cnt(0) AND output_register(12))
+	OR (bit_cnt(3) AND NOT bit_cnt(2) AND bit_cnt(1) AND 
+	bit_cnt(0) AND output_register(11))
+	OR (bit_cnt(3) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+	NOT bit_cnt(0) AND output_register(8))
+	OR (NOT bit_cnt(3) AND bit_cnt(2) AND NOT bit_cnt(1) AND 
+	NOT bit_cnt(0) AND output_register(4))
+	OR (NOT bit_cnt(3) AND NOT bit_cnt(2) AND NOT bit_cnt(1) AND 
+	NOT bit_cnt(0) AND output_register(0)));
+miso_o <= miso_o_I when sel_i = '1' else 'Z';
 
-FDCPE_output_register0: FDCPE port map (output_register(0),pulse_width_counter(0),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register0: FDCPE port map (output_register(0),output_register_D(0),ppm_clk_i,'0','0',output_register_CE(0));
+output_register_D(0) <= ((pulse_width(0) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(0) AND BUF_ppm)
+	OR (BUF_irq_deassert AND BUF_ppm)
+	OR (BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2));
+output_register_CE(0) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register1: FDCPE port map (output_register(1),pulse_width_counter(1),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register1: FDCPE port map (output_register(1),output_register_D(1),ppm_clk_i,'0','0',output_register_CE(1));
+output_register_D(1) <= ((pulse_width(1) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(0) AND NOT pulse_width(1) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (NOT pulse_width(0) AND pulse_width(1) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm));
+output_register_CE(1) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register2: FDCPE port map (output_register(2),pulse_width_counter(2),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register2: FDCPE port map (output_register(2),output_register_D(2),ppm_clk_i,'0','0',output_register_CE(2));
+output_register_D(2) <= ((NOT pulse_width(0) AND pulse_width(2) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (pulse_width(2) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(0) AND pulse_width(1) AND NOT pulse_width(2) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(1) AND pulse_width(2) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm));
+output_register_CE(2) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register3: FDCPE port map (output_register(3),pulse_width_counter(3),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register3: FDCPE port map (output_register(3),output_register_D(3),ppm_clk_i,'0','0',output_register_CE(3));
+output_register_D(3) <= ((pulse_width(0) AND pulse_width(1) AND pulse_width(2) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(3) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(3) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2));
+output_register_CE(3) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register4: FDCPE port map (output_register(4),pulse_width_counter(4),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register4: FDCPE port map (output_register(4),BUF_pulse_width(4),ppm_clk_i,'0','0',output_register_CE(4));
+output_register_CE(4) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register5: FDCPE port map (output_register(5),pulse_width_counter(5),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register5: FDCPE port map (output_register(5),output_register_D(5),ppm_clk_i,'0','0',output_register_CE(5));
+output_register_D(5) <= ((pulse_width(4) AND NOT pulse_width(5) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(4) AND pulse_width(5) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (pulse_width(5) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(5) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2));
+output_register_CE(5) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register6: FDCPE port map (output_register(6),pulse_width_counter(6),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register6: FDCPE port map (output_register(6),BUF_pulse_width(6),ppm_clk_i,'0','0',output_register_CE(6));
+output_register_CE(6) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register7: FDCPE port map (output_register(7),pulse_width_counter(7),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register7: FDCPE port map (output_register(7),BUF_pulse_width(7),ppm_clk_i,'0','0',output_register_CE(7));
+output_register_CE(7) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register8: FDCPE port map (output_register(8),pulse_width_counter(8),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register8: FDCPE port map (output_register(8),BUF_output_register(8),ppm_clk_i,'0','0',output_register_CE(8));
+output_register_CE(8) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register9: FDCPE port map (output_register(9),pulse_width_counter(9),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register9: FDCPE port map (output_register(9),BUF_output_register(9),ppm_clk_i,'0','0',output_register_CE(9));
+output_register_CE(9) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register10: FDCPE port map (output_register(10),pulse_width_counter(10),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register10: FDCPE port map (output_register(10),output_register_D(10),ppm_clk_i,'0','0',output_register_CE(10));
+output_register_D(10) <= ((pulse_width(10) AND NOT BUF_irq_deassert AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(10) AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (pulse_width(10) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2));
+output_register_CE(10) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register11: FDCPE port map (output_register(11),pulse_width_counter(11),NOT ppm_in,'0','0',NOT inter_frame);
+FDCPE_output_register11: FDCPE port map (output_register(11),output_register_D(11),ppm_clk_i,'0','0',output_register_CE(11));
+output_register_D(11) <= ((NOT pulse_width(10) AND pulse_width(11) AND 
+	NOT BUF_irq_deassert AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(10) AND NOT pulse_width(11) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(11) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(11) AND NOT BUF_irq_deassert AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2));
+output_register_CE(11) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register13: FDCPE port map (output_register(13),output_register_D(13),NOT ppm_in,'0','0');
-output_register_D(13) <= ((inter_frame AND output_register(13))
-	OR (NOT inter_frame AND pulse_counter(0))
-	OR (output_register(13) AND NOT pulse_counter(1) AND 
-	NOT pulse_counter(2) AND pulse_counter(3)));
+FDCPE_output_register12: FDCPE port map (output_register(12),channel_counter(0),ppm_clk_i,'0','0',output_register_CE(12));
+output_register_CE(12) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register14: FDCPE port map (output_register(14),output_register_D(14),NOT ppm_in,'0','0');
-output_register_D(14) <= ((inter_frame AND output_register(14))
-	OR (NOT inter_frame AND pulse_counter(1))
-	OR (output_register(14) AND NOT pulse_counter(0) AND 
-	NOT pulse_counter(2) AND pulse_counter(3)));
+FDCPE_output_register13: FDCPE port map (output_register(13),channel_counter(1),ppm_clk_i,'0','0',output_register_CE(13));
+output_register_CE(13) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
 
-FDCPE_output_register15: FDCPE port map (output_register(15),output_register_D(15),NOT ppm_in,'0','0');
-output_register_D(15) <= ((inter_frame AND output_register(15))
-	OR (NOT inter_frame AND pulse_counter(2))
-	OR (output_register(15) AND NOT pulse_counter(0) AND 
-	NOT pulse_counter(1) AND pulse_counter(3)));
+FDCPE_output_register14: FDCPE port map (output_register(14),channel_counter(2),ppm_clk_i,'0','0',output_register_CE(14));
+output_register_CE(14) <= (NOT ppm_i AND NOT reset AND NOT Q0 AND Q1);
+
+FDCPE_ppm: FDCPE port map (ppm,BUF_ppm,ppm_clk_i,'0','0');
+
+FDCPE_ppm_irq_o: FDCPE port map (ppm_irq_o,sync_o,irq_assert,NOT ppm_irq_o_OBUF/ppm_irq_o_OBUF_RSTF,'0');
 
 
-ppm_int_req <= (NOT ppm_in AND sync AND NOT inter_frame AND 
-	NOT interframe_overrun);
+ppm_irq_o_OBUF/ppm_irq_o_OBUF_RSTF <= (sel_i AND NOT irq_deassert);
 
-FTCPE_pulse_counter0: FTCPE port map (pulse_counter(0),pulse_counter_T(0),NOT ppm_in,'0','0');
-pulse_counter_T(0) <= ((inter_frame AND NOT pulse_counter(0))
-	OR (NOT pulse_counter(0) AND NOT pulse_counter(1) AND 
-	NOT pulse_counter(2) AND pulse_counter(3)));
+FDCPE_pulse_width0: FDCPE port map (pulse_width(0),pulse_width_D(0),ppm_clk_i,'0','0');
+pulse_width_D(0) <= ((NOT pulse_width(0) AND BUF_ppm)
+	OR (BUF_irq_deassert AND BUF_ppm)
+	OR (BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(0) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2));
 
-FDCPE_pulse_counter1: FDCPE port map (pulse_counter(1),pulse_counter_D(1),NOT ppm_in,'0','0');
-pulse_counter_D(1) <= ((NOT inter_frame AND pulse_counter(0) AND 
-	NOT pulse_counter(1))
-	OR (NOT inter_frame AND NOT pulse_counter(0) AND 
-	pulse_counter(1)));
+FDCPE_pulse_width1: FDCPE port map (pulse_width(1),pulse_width_D(1),ppm_clk_i,'0','0');
+pulse_width_D(1) <= ((NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(0) AND NOT pulse_width(1) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (NOT pulse_width(0) AND pulse_width(1) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (pulse_width(1) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2));
 
-FTCPE_pulse_counter2: FTCPE port map (pulse_counter(2),pulse_counter_T(2),NOT ppm_in,'0','0');
-pulse_counter_T(2) <= ((inter_frame AND pulse_counter(2))
-	OR (NOT inter_frame AND pulse_counter(0) AND 
-	pulse_counter(1)));
+FDCPE_pulse_width2: FDCPE port map (pulse_width(2),pulse_width_D(2),ppm_clk_i,'0','0');
+pulse_width_D(2) <= ((NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(0) AND pulse_width(2) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (NOT pulse_width(1) AND pulse_width(2) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (pulse_width(2) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(0) AND pulse_width(1) AND NOT pulse_width(2) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm));
 
-FTCPE_pulse_counter3: FTCPE port map (pulse_counter(3),pulse_counter_T(3),NOT ppm_in,'0','0');
-pulse_counter_T(3) <= ((inter_frame AND pulse_counter(3))
-	OR (NOT inter_frame AND pulse_counter(0) AND 
-	pulse_counter(1) AND pulse_counter(2))
-	OR (NOT pulse_counter(0) AND NOT pulse_counter(1) AND 
-	NOT pulse_counter(2) AND pulse_counter(3)));
+FDCPE_pulse_width3: FDCPE port map (pulse_width(3),pulse_width_D(3),ppm_clk_i,'0','0');
+pulse_width_D(3) <= ((NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(3) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(3) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2)
+	OR (pulse_width(0) AND pulse_width(1) AND pulse_width(2) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2));
 
-FTCPE_pulse_width_counter0: FTCPE port map (pulse_width_counter(0),pulse_width_counter_T(0),ppm_clk,pulse_width_counter_CLR(0),'0');
-pulse_width_counter_T(0) <= (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(12) AND pulse_width_counter(8) AND pulse_width_counter(13) AND 
-	pulse_width_counter(14));
-pulse_width_counter_CLR(0) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width4: FDCPE port map (pulse_width(4),BUF_pulse_width(4),ppm_clk_i,'0','0');
 
-FTCPE_pulse_width_counter1: FTCPE port map (pulse_width_counter(1),pulse_width_counter_T(1),ppm_clk,pulse_width_counter_CLR(1),'0');
-pulse_width_counter_T(1) <= ((NOT pulse_width_counter(0))
-	OR (pulse_width_counter(1) AND pulse_width_counter(11) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(9) AND pulse_width_counter(12) AND 
-	pulse_width_counter(8) AND pulse_width_counter(13) AND pulse_width_counter(14)));
-pulse_width_counter_CLR(1) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width5: FDCPE port map (pulse_width(5),pulse_width_D(5),ppm_clk_i,'0','0');
+pulse_width_D(5) <= ((NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(4) AND pulse_width(5) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm)
+	OR (pulse_width(5) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(5) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2)
+	OR (pulse_width(4) AND NOT pulse_width(5) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0002/Madd_pulse_width_add0000__and0002_D2));
 
-FTCPE_pulse_width_counter2: FTCPE port map (pulse_width_counter(2),pulse_width_counter_T(2),ppm_clk,pulse_width_counter_CLR(2),'0');
-pulse_width_counter_T(2) <= ((NOT pulse_width_counter(0))
-	OR (NOT pulse_width_counter(1))
-	OR (pulse_width_counter(11) AND pulse_width_counter(2) AND 
-	pulse_width_counter(3) AND pulse_width_counter(5) AND pulse_width_counter(10) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	pulse_width_counter(9) AND pulse_width_counter(12) AND pulse_width_counter(8) AND 
-	pulse_width_counter(13) AND pulse_width_counter(14)));
-pulse_width_counter_CLR(2) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width6: FDCPE port map (pulse_width(6),BUF_pulse_width(6),ppm_clk_i,'0','0');
 
-FTCPE_pulse_width_counter3: FTCPE port map (pulse_width_counter(3),pulse_width_counter_T(3),ppm_clk,pulse_width_counter_CLR(3),'0');
-pulse_width_counter_T(3) <= ((NOT pulse_width_counter(0))
-	OR (NOT pulse_width_counter(1))
-	OR (NOT pulse_width_counter(2))
-	OR (pulse_width_counter(11) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(12) AND pulse_width_counter(8) AND pulse_width_counter(13) AND 
-	pulse_width_counter(14)));
-pulse_width_counter_CLR(3) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width7: FDCPE port map (pulse_width(7),BUF_pulse_width(7),ppm_clk_i,'0','0');
 
-FTCPE_pulse_width_counter4: FTCPE port map (pulse_width_counter(4),pulse_width_counter_T(4),ppm_clk,pulse_width_counter_CLR(4),'0');
-pulse_width_counter_T(4) <= ((NOT pulse_width_counter(0))
-	OR (NOT pulse_width_counter(1))
-	OR (NOT pulse_width_counter(2))
-	OR (NOT pulse_width_counter(3))
-	OR (pulse_width_counter(11) AND pulse_width_counter(5) AND 
-	pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(9) AND pulse_width_counter(12) AND 
-	pulse_width_counter(8) AND pulse_width_counter(13) AND pulse_width_counter(14)));
-pulse_width_counter_CLR(4) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width8: FDCPE port map (pulse_width(8),BUF_output_register(8),ppm_clk_i,'0','0');
 
-FTCPE_pulse_width_counter5: FTCPE port map (pulse_width_counter(5),pulse_width_counter_T(5),ppm_clk,pulse_width_counter_CLR(5),'0');
-pulse_width_counter_T(5) <= ((NOT pulse_width_counter(0))
-	OR (NOT pulse_width_counter(1))
-	OR (NOT pulse_width_counter(2))
-	OR (NOT pulse_width_counter(3))
-	OR (NOT pulse_width_counter(4))
-	OR (pulse_width_counter(11) AND pulse_width_counter(5) AND 
-	pulse_width_counter(10) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	pulse_width_counter(9) AND pulse_width_counter(12) AND pulse_width_counter(8) AND 
-	pulse_width_counter(13) AND pulse_width_counter(14)));
-pulse_width_counter_CLR(5) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width9: FDCPE port map (pulse_width(9),BUF_output_register(9),ppm_clk_i,'0','0');
 
-FTCPE_pulse_width_counter6: FTCPE port map (pulse_width_counter(6),pulse_width_counter_T(6),ppm_clk,pulse_width_counter_CLR(6),'0');
-pulse_width_counter_T(6) <= ((NOT pulse_width_counter(0))
-	OR (NOT pulse_width_counter(1))
-	OR (NOT pulse_width_counter(2))
-	OR (NOT pulse_width_counter(3))
-	OR (NOT pulse_width_counter(5))
-	OR (NOT pulse_width_counter(4))
-	OR (pulse_width_counter(11) AND pulse_width_counter(10) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(12) AND pulse_width_counter(8) AND pulse_width_counter(13) AND 
-	pulse_width_counter(14)));
-pulse_width_counter_CLR(6) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width10: FDCPE port map (pulse_width(10),pulse_width_D(10),ppm_clk_i,'0','0');
+pulse_width_D(10) <= ((NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(10) AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (pulse_width(10) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(10) AND NOT BUF_irq_deassert AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2));
 
-FTCPE_pulse_width_counter7: FTCPE port map (pulse_width_counter(7),pulse_width_counter_T(7),ppm_clk,pulse_width_counter_CLR(7),'0');
-pulse_width_counter_T(7) <= ((pulse_width_counter(8).EXP)
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	NOT pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(4) AND pulse_width_counter(6))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	NOT pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND NOT pulse_width_counter(9))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND NOT pulse_width_counter(12))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND NOT pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND NOT pulse_width_counter(7)));
-pulse_width_counter_CLR(7) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width11: FDCPE port map (pulse_width(11),pulse_width_D(11),ppm_clk_i,'0','0');
+pulse_width_D(11) <= ((NOT pulse_width(10) AND pulse_width(11) AND 
+	NOT BUF_irq_deassert AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(10) AND NOT pulse_width(11) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(11) AND NOT BUF_irq_deassert AND BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(11) AND NOT BUF_irq_deassert AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2));
 
-FTCPE_pulse_width_counter8: FTCPE port map (pulse_width_counter(8),pulse_width_counter_T(8),ppm_clk,pulse_width_counter_CLR(8),'0');
-pulse_width_counter_T(8) <= ((pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	NOT pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	NOT pulse_width_counter(9))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	NOT pulse_width_counter(12))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	NOT pulse_width_counter(13))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	NOT pulse_width_counter(14))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	NOT pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	NOT pulse_width_counter(8)));
-pulse_width_counter_CLR(8) <= (NOT ppm_in AND NOT reset);
+FDCPE_pulse_width12: FDCPE port map (pulse_width(12),BUF_pulse_width(12),ppm_clk_i,'0','0');
 
-FTCPE_pulse_width_counter9: FTCPE port map (pulse_width_counter(9),pulse_width_counter_T(9),ppm_clk,pulse_width_counter_CLR(9),'0');
-pulse_width_counter_T(9) <= ((pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	NOT pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	NOT pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	NOT pulse_width_counter(12) AND pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	pulse_width_counter(8) AND NOT pulse_width_counter(13))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	pulse_width_counter(8) AND NOT pulse_width_counter(14))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	NOT pulse_width_counter(9) AND pulse_width_counter(8)));
-pulse_width_counter_CLR(9) <= (NOT ppm_in AND NOT reset);
+FTCPE_pulse_width13: FTCPE port map (pulse_width(13),pulse_width_T(13),ppm_clk_i,'0','0');
+pulse_width_T(13) <= ((pulse_width(10) AND pulse_width(11) AND 
+	pulse_width(12) AND pulse_width(13) AND NOT BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (pulse_width(10) AND pulse_width(11) AND 
+	pulse_width(12) AND NOT pulse_width(13) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (pulse_width(13) AND BUF_irq_deassert AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(13) AND BUF_ppm AND 
+	sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(13) AND NOT BUF_ppm AND 
+	sync_cmp_eq0000/sync_cmp_eq0000_D2));
 
-FTCPE_pulse_width_counter10: FTCPE port map (pulse_width_counter(10),pulse_width_counter_T(10),ppm_clk,pulse_width_counter_CLR(10),'0');
-pulse_width_counter_T(10) <= ((pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	pulse_width_counter(9) AND pulse_width_counter(8) AND NOT pulse_width_counter(14))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	NOT pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(9) AND pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	NOT pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(9) AND pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	pulse_width_counter(9) AND NOT pulse_width_counter(12) AND pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(4) AND pulse_width_counter(6) AND pulse_width_counter(7) AND 
-	pulse_width_counter(9) AND pulse_width_counter(8) AND NOT pulse_width_counter(13)));
-pulse_width_counter_CLR(10) <= (NOT ppm_in AND NOT reset);
+FTCPE_pulse_width14: FTCPE port map (pulse_width(14),pulse_width_T(14),ppm_clk_i,'0','0');
+pulse_width_T(14) <= ((pulse_width(10) AND pulse_width(11) AND 
+	pulse_width(12) AND pulse_width(13) AND pulse_width(14) AND NOT BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (pulse_width(10) AND pulse_width(11) AND 
+	pulse_width(12) AND pulse_width(13) AND NOT pulse_width(14) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (pulse_width(14) AND BUF_irq_deassert AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(14) AND BUF_ppm AND 
+	sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(14) AND NOT BUF_ppm AND 
+	sync_cmp_eq0000/sync_cmp_eq0000_D2));
 
-FTCPE_pulse_width_counter11: FTCPE port map (pulse_width_counter(11),pulse_width_counter_T(11),ppm_clk,pulse_width_counter_CLR(11),'0');
-pulse_width_counter_T(11) <= ((pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(9) AND pulse_width_counter(8) AND 
-	NOT pulse_width_counter(14))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	NOT pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(9) AND NOT pulse_width_counter(12) AND 
-	pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(2) AND pulse_width_counter(3) AND pulse_width_counter(5) AND 
-	pulse_width_counter(10) AND pulse_width_counter(4) AND pulse_width_counter(6) AND 
-	pulse_width_counter(7) AND pulse_width_counter(9) AND pulse_width_counter(8) AND 
-	NOT pulse_width_counter(13)));
-pulse_width_counter_CLR(11) <= (NOT ppm_in AND NOT reset);
 
-FTCPE_pulse_width_counter12: FTCPE port map (pulse_width_counter(12),pulse_width_counter_T(12),ppm_clk,pulse_width_counter_CLR(12),'0');
-pulse_width_counter_T(12) <= ((pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	NOT pulse_width_counter(12) AND pulse_width_counter(8))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(8) AND NOT pulse_width_counter(13))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(8) AND NOT pulse_width_counter(14)));
-pulse_width_counter_CLR(12) <= (NOT ppm_in AND NOT reset);
+pwms_o(0) <= (ppm_i AND sync_o AND NOT channel_counter(0) AND 
+	NOT channel_counter(3) AND NOT channel_counter(1) AND NOT channel_counter(2) AND NOT reset);
 
-FTCPE_pulse_width_counter13: FTCPE port map (pulse_width_counter(13),pulse_width_counter_T(13),ppm_clk,pulse_width_counter_CLR(13),'0');
-pulse_width_counter_T(13) <= ((pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(12) AND pulse_width_counter(8) AND NOT pulse_width_counter(13))
-	OR (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(12) AND pulse_width_counter(8) AND NOT pulse_width_counter(14)));
-pulse_width_counter_CLR(13) <= (NOT ppm_in AND NOT reset);
 
-FTCPE_pulse_width_counter14: FTCPE port map (pulse_width_counter(14),pulse_width_counter_T(14),ppm_clk,pulse_width_counter_CLR(14),'0');
-pulse_width_counter_T(14) <= (pulse_width_counter(0) AND pulse_width_counter(1) AND 
-	pulse_width_counter(11) AND pulse_width_counter(2) AND pulse_width_counter(3) AND 
-	pulse_width_counter(5) AND pulse_width_counter(10) AND pulse_width_counter(4) AND 
-	pulse_width_counter(6) AND pulse_width_counter(7) AND pulse_width_counter(9) AND 
-	pulse_width_counter(12) AND pulse_width_counter(8) AND pulse_width_counter(13) AND 
-	NOT pulse_width_counter(14));
-pulse_width_counter_CLR(14) <= (NOT ppm_in AND NOT reset);
+pwms_o(1) <= (ppm_i AND sync_o AND channel_counter(0) AND 
+	NOT channel_counter(3) AND NOT channel_counter(1) AND NOT channel_counter(2) AND NOT reset);
 
-FTCPE_pwms0: FTCPE port map (pwms(0),pwms_T(0),NOT ppm_in,'0','0');
-pwms_T(0) <= ((sync AND inter_frame AND NOT pwms(0))
-	OR (sync AND NOT pwms(0) AND pulse_counter(0) AND 
-	pulse_counter(1) AND pulse_counter(2) AND pulse_counter(3))
-	OR (sync AND NOT inter_frame AND pwms(0) AND NOT pulse_counter(0) AND 
-	NOT pulse_counter(1) AND NOT pulse_counter(2) AND NOT pulse_counter(3)));
 
-FDCPE_pwms1: FDCPE port map (pwms(1),pwms_D(1),NOT ppm_in,'0','0',pwms_CE(1));
-pwms_D(1) <= (sync AND NOT pulse_counter(0) AND NOT pulse_counter(1) AND 
-	NOT pulse_counter(2) AND NOT pulse_counter(3));
-pwms_CE(1) <= (sync AND NOT inter_frame AND NOT pulse_counter(1) AND 
-	NOT pulse_counter(2) AND NOT pulse_counter(3));
+pwms_o(2) <= (ppm_i AND sync_o AND NOT channel_counter(0) AND 
+	NOT channel_counter(3) AND channel_counter(1) AND NOT channel_counter(2) AND NOT reset);
 
-FTCPE_pwms2: FTCPE port map (pwms(2),pwms_T(2),NOT ppm_in,'0','0');
-pwms_T(2) <= ((sync AND NOT inter_frame AND pwms(2) AND NOT pulse_counter(0) AND 
-	pulse_counter(1) AND NOT pulse_counter(2) AND NOT pulse_counter(3))
-	OR (sync AND NOT inter_frame AND NOT pwms(2) AND pulse_counter(0) AND 
-	NOT pulse_counter(1) AND NOT pulse_counter(2) AND NOT pulse_counter(3)));
 
-FDCPE_pwms3: FDCPE port map (pwms(3),pwms_D(3),NOT ppm_in,'0','0',pwms_CE(3));
-pwms_D(3) <= (sync AND NOT pulse_counter(0) AND pulse_counter(1) AND 
-	NOT pulse_counter(2) AND NOT pulse_counter(3));
-pwms_CE(3) <= (sync AND NOT inter_frame AND pulse_counter(1) AND 
-	NOT pulse_counter(2) AND NOT pulse_counter(3));
+pwms_o(3) <= (ppm_i AND sync_o AND channel_counter(0) AND 
+	NOT channel_counter(3) AND channel_counter(1) AND NOT channel_counter(2) AND NOT reset);
 
-FTCPE_pwms4: FTCPE port map (pwms(4),pwms_T(4),NOT ppm_in,'0','0');
-pwms_T(4) <= ((sync AND NOT inter_frame AND pwms(4) AND NOT pulse_counter(0) AND 
-	NOT pulse_counter(1) AND pulse_counter(2) AND NOT pulse_counter(3))
-	OR (sync AND NOT inter_frame AND NOT pwms(4) AND pulse_counter(0) AND 
-	pulse_counter(1) AND NOT pulse_counter(2) AND NOT pulse_counter(3)));
 
-FDCPE_pwms5: FDCPE port map (pwms(5),pwms_D(5),NOT ppm_in,'0','0',pwms_CE(5));
-pwms_D(5) <= (sync AND NOT pulse_counter(0) AND NOT pulse_counter(1) AND 
-	pulse_counter(2) AND NOT pulse_counter(3));
-pwms_CE(5) <= (sync AND NOT inter_frame AND NOT pulse_counter(1) AND 
-	pulse_counter(2) AND NOT pulse_counter(3));
+pwms_o(4) <= (ppm_i AND sync_o AND NOT channel_counter(0) AND 
+	NOT channel_counter(3) AND NOT channel_counter(1) AND channel_counter(2) AND NOT reset);
 
-FTCPE_pwms6: FTCPE port map (pwms(6),pwms_T(6),NOT ppm_in,'0','0');
-pwms_T(6) <= ((sync AND NOT inter_frame AND pwms(6) AND NOT pulse_counter(0) AND 
-	pulse_counter(1) AND pulse_counter(2) AND NOT pulse_counter(3))
-	OR (sync AND NOT inter_frame AND NOT pwms(6) AND pulse_counter(0) AND 
-	NOT pulse_counter(1) AND pulse_counter(2) AND NOT pulse_counter(3)));
 
-FDCPE_pwms7: FDCPE port map (pwms(7),pwms_D(7),NOT ppm_in,'0','0',pwms_CE(7));
-pwms_D(7) <= (sync AND NOT pulse_counter(0) AND pulse_counter(1) AND 
-	pulse_counter(2) AND NOT pulse_counter(3));
-pwms_CE(7) <= (sync AND NOT inter_frame AND pulse_counter(1) AND 
-	pulse_counter(2) AND NOT pulse_counter(3));
+pwms_o(5) <= (ppm_i AND sync_o AND channel_counter(0) AND 
+	NOT channel_counter(3) AND NOT channel_counter(1) AND channel_counter(2) AND NOT reset);
 
-FDCPE_reset: FDCPE port map (reset,'0',ppm_clk,'0',reset_PRE,ppm_in);
-reset_PRE <= (NOT ppm_in AND NOT reset);
 
-FDCPE_sync: FDCPE port map (sync,sync_D,ppm_clk,'0','0');
-sync_D <= ((pulse_width_counter(7).EXP)
-	OR (NOT pulse_width_counter(12) AND NOT pulse_width_counter(13) AND 
-	NOT pulse_width_counter(14) AND NOT sync)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(10) AND 
-	NOT pulse_width_counter(6) AND NOT pulse_width_counter(9) AND NOT pulse_width_counter(8) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND NOT sync)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(10) AND 
-	NOT pulse_width_counter(7) AND NOT pulse_width_counter(9) AND NOT pulse_width_counter(8) AND 
-	NOT pulse_width_counter(13) AND NOT pulse_width_counter(14) AND NOT sync)
-	OR (NOT pulse_width_counter(1) AND NOT pulse_width_counter(11) AND 
-	NOT pulse_width_counter(5) AND NOT pulse_width_counter(10) AND NOT pulse_width_counter(4) AND 
-	NOT pulse_width_counter(9) AND NOT pulse_width_counter(8) AND NOT pulse_width_counter(13) AND 
-	NOT pulse_width_counter(14) AND NOT sync)
-	OR (NOT pulse_width_counter(11) AND NOT pulse_width_counter(2) AND 
-	NOT pulse_width_counter(5) AND NOT pulse_width_counter(10) AND NOT pulse_width_counter(4) AND 
-	NOT pulse_width_counter(9) AND NOT pulse_width_counter(8) AND NOT pulse_width_counter(13) AND 
-	NOT pulse_width_counter(14) AND NOT sync)
-	OR (NOT ppm_in AND NOT sync AND NOT reset));
+pwms_o(6) <= (ppm_i AND sync_o AND NOT channel_counter(0) AND 
+	NOT channel_counter(3) AND channel_counter(1) AND channel_counter(2) AND NOT reset);
+
+
+pwms_o(7) <= (ppm_i AND sync_o AND channel_counter(0) AND 
+	NOT channel_counter(3) AND channel_counter(1) AND channel_counter(2) AND NOT reset);
+
+FDCPE_reset: FDCPE port map (reset,reset_D,ppm_clk_i,'0','0');
+reset_D <= ((EXP7_.EXP)
+	OR (reset AND BUF_ppm)
+	OR (reset AND sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(10) AND pulse_width(14) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT pulse_width(11) AND pulse_width(14) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(13) AND NOT pulse_width(14) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pwms_o_0_OBUF.EXP)
+	OR (NOT BUF_ppm AND sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	NOT BUF_output_register(9))
+	OR (NOT BUF_ppm AND NOT BUF_output_register(9) AND 
+	BUF_pulse_width(4) AND BUF_pulse_width(12))
+	OR (NOT pulse_width(13) AND pulse_width(14) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(12) AND pulse_width(9) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2 AND NOT BUF_pulse_width(6))
+	OR (NOT pulse_width(2) AND pulse_width(3) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND NOT BUF_output_register(9) AND 
+	BUF_pulse_width(12))
+	OR (NOT pulse_width(12) AND pulse_width(13) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (pulse_width(13) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (pulse_width(10) AND pulse_width(12) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2 AND NOT BUF_pulse_width(4))
+	OR (pulse_width(12) AND NOT pulse_width(14) AND 
+	NOT BUF_irq_deassert AND NOT BUF_ppm AND NOT sync_cmp_eq0000/sync_cmp_eq0000_D2 AND 
+	BUF_pulse_width(4))
+	OR (pulse_width(10) AND pulse_width(11) AND 
+	pulse_width(12) AND NOT pulse_width(14) AND NOT BUF_irq_deassert AND NOT BUF_ppm AND 
+	NOT BUF_output_register(9)));
+
+
+sync_cmp_eq0000/sync_cmp_eq0000_D2 <= (pulse_width(0) AND pulse_width(10) AND 
+	pulse_width(11) AND pulse_width(12) AND pulse_width(13) AND 
+	pulse_width(14) AND pulse_width(1) AND pulse_width(2) AND pulse_width(3) AND 
+	pulse_width(4) AND pulse_width(5) AND pulse_width(6) AND pulse_width(7) AND 
+	pulse_width(8) AND pulse_width(9) AND NOT BUF_irq_deassert);
+
+FDCPE_sync_o: FDCPE port map (sync_o,sync_o_D,ppm_clk_i,'0','0');
+sync_o_D <= ((sync_cmp_eq0000/sync_cmp_eq0000_D2)
+	OR (NOT sync_o AND NOT pulse_width(11) AND NOT pulse_width(12) AND 
+	NOT pulse_width(13) AND NOT pulse_width(14))
+	OR (NOT sync_o AND NOT pulse_width(10) AND NOT pulse_width(12) AND 
+	NOT pulse_width(13) AND NOT pulse_width(14))
+	OR (NOT sync_o AND NOT pulse_width(12) AND NOT pulse_width(13) AND 
+	NOT pulse_width(14) AND NOT BUF_output_register(8) AND NOT BUF_output_register(9))
+	OR (NOT sync_o AND pulse_width(10) AND pulse_width(11) AND 
+	pulse_width(12) AND pulse_width(13) AND pulse_width(14) AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (NOT sync_o AND pulse_width(10) AND pulse_width(11) AND 
+	pulse_width(12) AND NOT pulse_width(13) AND NOT pulse_width(14) AND 
+	NOT Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2 AND 
+	Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (NOT sync_o AND BUF_irq_deassert)
+	OR (NOT sync_o AND BUF_ppm)
+	OR (NOT sync_o AND NOT pulse_width(12) AND NOT pulse_width(13) AND 
+	NOT pulse_width(14) AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2)
+	OR (NOT sync_o AND NOT pulse_width(10) AND NOT pulse_width(11) AND 
+	NOT pulse_width(13) AND NOT pulse_width(14) AND NOT pulse_width(2) AND 
+	NOT pulse_width(3) AND NOT pulse_width(4) AND NOT pulse_width(5) AND NOT pulse_width(6) AND 
+	NOT pulse_width(7) AND NOT BUF_output_register(8) AND 
+	NOT Madd_pulse_width_add0000__and0006/Madd_pulse_width_add0000__and0006_D2 AND NOT BUF_output_register(9) AND 
+	NOT Madd_pulse_width_add0000__and0008/Madd_pulse_width_add0000__and0008_D2));
 
 Register Legend:
  FDCPE (Q,D,C,CLR,PRE,CE); 
@@ -875,7 +936,7 @@ Register Legend:
 
 ******************************  Device Pin Out *****************************
 
-Device : XC9572XL-5-PC44
+Device : XC9572XL-10-PC44
 
 
    --------------------------------  
@@ -884,7 +945,7 @@ Device : XC9572XL-5-PC44
  | 8                             38 | 
  | 9                             37 | 
  | 10                            36 | 
- | 11        XC9572XL-5-PC44     35 | 
+ | 11       XC9572XL-10-PC44     35 | 
  | 12                            34 | 
  | 13                            33 | 
  | 14                            32 | 
@@ -897,28 +958,28 @@ Device : XC9572XL-5-PC44
 
 Pin Signal                         Pin Signal                        
 No. Name                           No. Name                          
-  1 ppm_in                           23 GND                           
-  2 sync                             24 KPR                           
-  3 KPR                              25 ppm_int_req                   
-  4 KPR                              26 KPR                           
-  5 ppm_clk                          27 KPR                           
-  6 KPR                              28 sclk                          
-  7 KPR                              29 PROHIBITED                    
-  8 pwms<2>                          30 TDO                           
+  1 miso_o                           23 GND                           
+  2 pwms_o<2>                        24 KPR                           
+  3 pwms_o<3>                        25 KPR                           
+  4 pwms_o<4>                        26 KPR                           
+  5 ppm_clk_i                        27 KPR                           
+  6 sclk_i                           28 KPR                           
+  7 KPR                              29 KPR                           
+  8 pwms_o<5>                        30 TDO                           
   9 KPR                              31 GND                           
  10 GND                              32 VCC                           
- 11 pwms<0>                          33 sel                           
- 12 KPR                              34 miso                          
- 13 pwms<1>                          35 pwms<5>                       
- 14 KPR                              36 KPR                           
- 15 TDI                              37 KPR                           
- 16 TMS                              38 pwms<7>                       
+ 11 ppm_irq_o                        33 KPR                           
+ 12 KPR                              34 ppm_i                         
+ 13 KPR                              35 KPR                           
+ 14 pwms_o<6>                        36 KPR                           
+ 15 TDI                              37 pwms_o<0>                     
+ 16 TMS                              38 KPR                           
  17 TCK                              39 KPR                           
- 18 pwms<3>                          40 KPR                           
- 19 pwms<4>                          41 VCC                           
- 20 KPR                              42 KPR                           
- 21 VCC                              43 KPR                           
- 22 pwms<6>                          44 KPR                           
+ 18 KPR                              40 sel_i                         
+ 19 KPR                              41 VCC                           
+ 20 pwms_o<7>                        42 KPR                           
+ 21 VCC                              43 pwms_o<1>                     
+ 22 KPR                              44 sync_o                        
 
 
 Legend :  NC  = Not Connected, unbonded pin
@@ -936,8 +997,8 @@ Legend :  NC  = Not Connected, unbonded pin
 
 Following is a list of all global compiler options used by the fitter run.
 
-Device(s) Specified                         : xc9572xl-5-PC44
-Optimization Method                         : SPEED
+Device(s) Specified                         : xc9572xl-10-PC44
+Optimization Method                         : DENSITY
 Multi-Level Logic Optimization              : ON
 Ignore Timing Specifications                : OFF
 Default Register Power Up Value             : LOW
@@ -949,8 +1010,8 @@ Slew Rate                                   : FAST
 Power Mode                                  : STD
 Ground on Unused IOs                        : OFF
 Set I/O Pin Termination                     : KEEPER
-Global Clock Optimization                   : OFF
-Global Set/Reset Optimization               : OFF
-Global Ouput Enable Optimization            : OFF
+Global Clock Optimization                   : ON
+Global Set/Reset Optimization               : ON
+Global Ouput Enable Optimization            : ON
 Input Limit                                 : 54
-Pterm Limit                                 : 25
+Pterm Limit                                 : 90
