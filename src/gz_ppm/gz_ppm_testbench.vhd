@@ -63,7 +63,7 @@ ARCHITECTURE behavior OF gz_ppm_testbench IS
 		
    procedure normal_frame(signal ppm_in: out std_logic; max: time; min: time) is
 	variable center: time := ((max - min) / 2) + min ;
-	constant w: time := 0.3 ms; -- ppm pulse width
+	constant w: time := 0.4 ms; -- ppm pulse width
 	begin
 		ppm_in <= '0';   -- frame start
 		wait for w;

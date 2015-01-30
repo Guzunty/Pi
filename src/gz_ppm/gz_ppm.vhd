@@ -93,7 +93,7 @@ begin
       else
         if ppm = '1' then
           pulse_width := pulse_width + 1;
-          if pulse_width > 4100 then
+          if pulse_width > 4200 then
             reset <= '1';
             sync <= '1';
           else
@@ -105,10 +105,6 @@ begin
         if reset = '1' then
           channel_counter <= (others => '0');
         else
-		    output_register(15) <= '0';            -- register bit not used
-          output_register(14 downto 12) <= std_logic_vector(channel_counter(2 downto 0));
-          output_register(11 downto 0) <= std_logic_vector(pulse_width(11 downto 0));
-          irq_assert <= '1';
 			 -- If we are on the 8th pulse, we are hitting the FrSky case where
           -- the interframe pulse is indistinguishable from a servo pulse. By
 			 -- resetting the counter, we will continue to output pulses and
@@ -117,6 +113,10 @@ begin
 			 -- saturates, synchronisation is restored within one frame in any
 			 -- case.
           if channel_counter < 8 then
+		      output_register(15) <= '0';            -- register bit not used
+            output_register(14 downto 12) <= std_logic_vector(channel_counter(2 downto 0));
+            output_register(11 downto 0) <= std_logic_vector(pulse_width(11 downto 0));
+            irq_assert <= '1';
             channel_counter <= channel_counter + 1;
           else
             channel_counter <= (others => '0');
