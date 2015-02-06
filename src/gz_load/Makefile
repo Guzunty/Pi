@@ -8,7 +8,7 @@ INCLUDE	= -I/usr/local/include
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe -fPIC -DDEBUG_MODE
 
 LDFLAGS	= -L/usr/local/lib
-LIBS    = -lbcm2835 -lrt
+LIBS    = -lrt
 
 SRC	=	lenval.c micro.c ports.c
 
