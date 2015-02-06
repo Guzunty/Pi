@@ -24,8 +24,6 @@
 
 #define byte unsigned char
 
-#include<bcm2835.h>
-
 int gz_spi_set(int bit_to_set);
 int gz_spi_reset(int bit_to_reset);
 int gz_spi_write(byte* to_write);

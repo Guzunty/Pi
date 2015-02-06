@@ -24,7 +24,7 @@ DEBUG	= -g -O0
 CC	= gcc
 INCLUDE	= -I/usr/local/include
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe -fPIC -DDEBUG_MODE
-LIBS    = -lgz -lbcm2835 -lrt
+LIBS    = -lgz -lrt
 
 SRC	=	gz_test.c
 

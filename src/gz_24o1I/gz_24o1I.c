@@ -26,12 +26,12 @@
 #include <time.h>
 #include <stdint.h>
 #include <ncurses.h>
+#include <gz_gpio.h>
 #include <gz_spi.h>
-#include <bcm2835.h>
 #include <stdio.h>
 
 // Input on RPi pin GPIO 04 (Pin 7)
-#define PIN RPI_GPIO_P1_07
+#define PIN 4
 
 void exercise_outputs(uint32_t a, uint32_t b) {
   unsigned char output[3];
@@ -56,7 +56,7 @@ void display_input() {
 
   mvprintw(start_y, center_x - 8, "Input bit status");
   start_y++;
-  uint8_t value = bcm2835_gpio_lev(PIN);
+  uint8_t value = GET_GPIO(PIN);
 
   if (value) {
     mvprintw(center_y, center_x, "1");
@@ -115,13 +115,11 @@ int main(int argc, char* argv[])
   if (key == 'n') {
     erase();
     curs_set(0);                      // Hide the cursor
-    if (!bcm2835_init()) {
-      return 1;
-    }
     // Set RPI pin P1-07 to be an input
-    bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_INPT);
+    INP_GPIO(PIN);
     //  with a pullup
-    bcm2835_gpio_set_pud(PIN, BCM2835_GPIO_PUD_UP);
+    GPIO_PULL = 2;
+    GPIO_PULLCLK0 = 1 << PIN;
     printw("Reading input.\n");
     printw("Press any key to stop.\n");
     while(1) {

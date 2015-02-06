@@ -21,7 +21,7 @@
 from distutils.core import setup, Extension
 
 gz_module = Extension('GZ', sources =  ['gz_libpy.c'],
-                            libraries = ['gz', 'bcm2835', 'rt'])
+                            libraries = ['gz', 'rt'])
 
 setup (name = 'GZ',
        version = '1.1',
