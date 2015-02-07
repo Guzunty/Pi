@@ -29,6 +29,7 @@
 char                gpio_initialized = 0;
 __off_t             peri_base = BCM2708_PERI_BASE;
 volatile unsigned * gpio_base;
+volatile unsigned * clock_base;
 
 void initialize_peripherals() {
   if (!gpio_initialized) {
@@ -41,7 +42,7 @@ void initialize_peripherals() {
     }
 
     if ((proc_fd = open("/proc/device-tree/model", O_RDONLY|O_SYNC) ) >= 0) {
-	  // if we can read the device tree, we may be dealing with a more
+	  // if we can read the device tree, we may be running in a more
 	  // recent Raspberry Pi model which has a different peripheral
 	  // memory address.
 	  int i = 0;
@@ -64,12 +65,26 @@ void initialize_peripherals() {
       GPIO_BASE         //Offset to GPIO peripheral
     );
 
+    void *clock_map = mmap(
+      NULL,             //Any address in our space will do
+      MAP_BLOCK_SIZE,       //Map length
+      PROT_READ|PROT_WRITE,// Enable reading & writting to mapped memory
+      MAP_SHARED,       //Shared with other processes
+      mem_fd,           //File to map
+      CLOCK_BASE         //Offset to hardware clock peripheral
+    );
+
     close(mem_fd); //No need to keep mem_fd open after mmap
     if (gpio_map == MAP_FAILED) {
-      printf("mmap error %d\n", (int)gpio_map);//errno also set!
+      printf("error mapping gpio%d\n", (int)gpio_map);//errno also set!
+      exit(-1);
+    }
+    if (clock_map == MAP_FAILED) {
+      printf("error mapping clocks%d\n", (int)clock_map);//errno also set!
       exit(-1);
     }
     gpio_base = (volatile unsigned *)gpio_map;
+    clock_base = (volatile unsigned *)clock_map;
     gpio_initialized = 1;
   }
 }
@@ -86,4 +101,11 @@ volatile unsigned * get_gpio_base() {
     initialize_peripherals();
   }
   return gpio_base;
+}
+
+volatile unsigned * get_clock_base() {
+  if (!gpio_initialized) {
+    initialize_peripherals();
+  }
+  return clock_base;
 }

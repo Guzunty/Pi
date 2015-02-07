@@ -24,13 +24,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>
-#include<gz_gpio.h>
-#include<gz_clk.h>
+#include <gz_gpio.h>
+#include <gz_clk.h>
 
 #define GZ_CLK_BUSY    (1 << 7)
-#define CLOCK_BASE(g)  (g + 0x101000) /* Clocks */
-#define GP_CLK0_CTL *(clk + 0x1C)
-#define GP_CLK0_DIV *(clk + 0x1D)
+#define GP_CLK0_CTL *(get_clock_base() + 0x1C)
+#define GP_CLK0_DIV *(get_clock_base() + 0x1D)
 
 void *clk_map;
 volatile unsigned * clk;
@@ -44,30 +43,22 @@ int gz_clock_ena(int speed, int divisor) {
   }
   if (speed < GZ_CLK_5MHz || speed > GZ_CLK_125MHz) {
     printf("gz_clock_ena: Unsupported clock speed selected.\n");
-    printf("Supported speeds: GZ_CLK_5MHz (0) and GZ_CLK_125MHz (1).");
+    printf("Supported speeds: GZ_CLK_5MHz (0) and GZ_CLK_125MHz (1).\n");
     exit(-1);
   }
   if (speed == 0) {
     speed_id = 1;
   }
   if (divisor < 2) {
-    printf("gz_clock_ena: Minimum divisor value is 2.");
+    printf("gz_clock_ena: Minimum divisor value is 2.\n");
     exit(-1);
   }
   if (divisor > 0xfff) {
-    printf("gz_clock_ena: Maximum divisor value is %d.", 0xfff);
+    printf("gz_clock_ena: Maximum divisor value is %d.\n", 0xfff);
     exit(-1);
   }
-  clk_map = (unsigned char *)mmap(
-      NULL,
-      MAP_BLOCK_SIZE,
-      PROT_READ|PROT_WRITE,
-      MAP_SHARED|MAP_FIXED,
-      mem_fd,
-      (__off_t)CLOCK_BASE(get_gpio_base())
-  );
-  clk = (volatile unsigned *)clk_map;
-
+  close(mem_fd); //No need to keep mem_fd open after mmap
+  usleep(1000);
   INP_GPIO(4);
   SET_GPIO_ALT(4,0);
   GP_CLK0_CTL = 0x5A000000 | speed_id;    // GPCLK0 off

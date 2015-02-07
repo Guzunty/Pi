@@ -24,6 +24,7 @@
 #define BCM2708_PERI_BASE        0x20000000
 #define BCM2709_PERI_BASE        0x3f000000
 #define GPIO_BASE                (peri_base + 0x200000) /* GPIO controller */
+#define CLOCK_BASE               (peri_base + 0x101000) /* Clocks */
 
 #define MAP_BLOCK_SIZE (4*1024)
 
@@ -42,3 +43,4 @@
 
 __off_t get_peripheral_base();
 volatile unsigned * get_gpio_base();
+volatile unsigned * get_clock_base();

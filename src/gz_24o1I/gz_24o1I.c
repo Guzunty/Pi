@@ -117,9 +117,13 @@ int main(int argc, char* argv[])
     curs_set(0);                      // Hide the cursor
     // Set RPI pin P1-07 to be an input
     INP_GPIO(PIN);
-    //  with a pullup
+    //  with a pullup -- see BCM2835 ARM Peripherals page 101
     GPIO_PULL = 2;
+    usleep(1);
     GPIO_PULLCLK0 = 1 << PIN;
+    usleep(1);
+    GPIO_PULL = 0;
+    GPIO_PULLCLK0 = 0;
     printw("Reading input.\n");
     printw("Press any key to stop.\n");
     while(1) {

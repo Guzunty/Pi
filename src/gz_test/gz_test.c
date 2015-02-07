@@ -1,7 +1,7 @@
 /*
  * gz_test.c
  * 
- * Copyright 2013  guzunty
+ * Copyright 2015  guzunty
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 {
   char aChar;
   
-    gz_clock_ena(GZ_CLK_5MHz, 0x07f); // Turn on a slow clock
+    gz_clock_ena(GZ_CLK_5MHz, 0x00f); // Turn on a slow clock
     printf("\nPress any key to stop test.");
     scanf("%c", &aChar);
     gz_clock_dis();
