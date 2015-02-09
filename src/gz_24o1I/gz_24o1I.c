@@ -83,6 +83,8 @@ int main(int argc, char* argv[])
       break;
     }
   }
+  gz_spi_close();
+  usleep(200000);
   if (key == 'n') {
     erase();
     printw("Toggling alternate outputs.\n");
@@ -95,6 +97,8 @@ int main(int argc, char* argv[])
       }
     }
   }
+  gz_spi_close();
+  usleep(200000);
   if (key == 'n') {
     erase();
     printw("Walking outputs.\n");
@@ -112,6 +116,8 @@ int main(int argc, char* argv[])
       }
     }
   }
+  gz_spi_close();
+  usleep(200000);
   if (key == 'n') {
     erase();
     curs_set(0);                      // Hide the cursor
