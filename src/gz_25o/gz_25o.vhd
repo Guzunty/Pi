@@ -30,67 +30,35 @@ entity gz_25o is
 end gz_25o;
 
 architecture RTL of gz_25o is
-signal bit_cnt: std_logic_vector (2 downto 0) := (others => '1');
+signal bit_cnt: natural range 7 downto 0 := 7;
+signal byte_cnt: natural range 3 downto 0 := 0;
 begin
   process (sclk, sel) is
-    variable next_bit: std_logic_vector(2 downto 0);
-	 variable byte_cnt: std_logic_vector(1 downto 0) := "00";
   begin
-	 if (sel = '0') then
-	   if (rising_edge(sclk)) then
-	     if (byte_cnt = "00") then
-          outputs(to_integer(unsigned(bit_cnt))) <= mosi;
-   	  else -- loading upper byte of set
-	       if (byte_cnt = "01") then
-            outputs(8 + to_integer(unsigned(bit_cnt))) <= mosi;
-   	    else -- loading upper byte of set
-	         if (byte_cnt = "10") then
-              outputs(16 + to_integer(unsigned(bit_cnt))) <= mosi;
-   	      else -- loading upper byte of set
-	           if (byte_cnt = "11") then
-				    if (bit_cnt = "000") then
-                  outputs(24) <= mosi;
-					 end if;
-		        end if;
-		      end if;
-		    end if;
-		  end if;
-	   end if;
-		if (falling_edge(sclk)) then
-	     if (bit_cnt = "000") then
-		    next_bit := (others => '1');
-			 -- increment byte_cnt
-			 if (byte_cnt = "00") then
-			   byte_cnt := "01";
-			 else
-			   if (byte_cnt = "01") then
-			     byte_cnt := "10";
-			   else
-			     if (byte_cnt = "10") then
-			       byte_cnt := "11";
-			     else -- must be "11"
-			       byte_cnt := "00";
-			     end if;
-			   end if;
+	 if sel = '0' then
+	   if rising_edge(sclk) then
+		  if byte_cnt < 3 then
+          outputs((byte_cnt * 8) + bit_cnt) <= mosi;
+		  else -- byte_cnt is 3
+		    if byte_cnt = 3 and bit_cnt = 0 then
+            outputs(24) <= mosi;
 			 end if;
-		  else
-          next_bit := std_logic_vector(unsigned(bit_cnt) - 1);
 		  end if;
-		  bit_cnt <= next_bit;
       end if;
+		if falling_edge(sclk) then
+	     if (bit_cnt = 0) then
+		    bit_cnt <= 7;
+			 byte_cnt <= byte_cnt + 1;
+        else
+		    bit_cnt <= bit_cnt - 1;
+        end if;
+      end if;
+		miso <= '0';
     else
-	   bit_cnt <= (others => '1');
-		byte_cnt := "00";
+	   bit_cnt <= 7;
+		byte_cnt <= 0;
+		miso <= 'Z';
     end if;
-  end process;
-
-  process (sel, bit_cnt) is
-  begin
-	 if (sel = '0') then
-	   miso <= '0';
-	 else 
-      miso <= 'Z';
-	 end if;
   end process;
 
 end RTL;
