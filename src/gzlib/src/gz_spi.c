@@ -174,6 +174,7 @@ byte* transfer(byte* data, int delay) {
   for(; i < width; i++) {
     outbuf[i] = data[i];
   }
+  memset(&spi,0,sizeof(spi));
   spi.tx_buf        = (unsigned long)&outbuf;
   spi.rx_buf        = (unsigned long)&inbuf;
   spi.len           = width;
