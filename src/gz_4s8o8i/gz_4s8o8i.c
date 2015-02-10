@@ -77,7 +77,7 @@ void display_inputs() {
   int start_x = center_x - 16;
   mvprintw(start_y, center_x - 8, "Input bit status");
   start_y++;
-  mvprintw(start_y, start_x, "F E D C B A 9 8 7 6 5 4 3 2 1 0");
+  mvprintw(start_y, start_x + 8, "7 6 5 4 3 2 1 0");
   gz_spi_read(inputs);
   unsigned char mask = 0x01;
   int i = 0;
@@ -87,10 +87,10 @@ void display_inputs() {
       cur_byte = 1;
     }
     if (inputs[cur_byte] & mask) {
-      mvprintw(center_y, start_x + 30 - (2 * i), "1");
+      mvprintw(center_y, start_x + 22 - (2 * i), "1");
     }
     else {
-      mvprintw(center_y, start_x + 30 - (2 * i), "0");
+      mvprintw(center_y, start_x + 22 - (2 * i), "0");
     }
     mask = mask << 1;
     if (i == 7) {
@@ -119,6 +119,7 @@ int main(int argc, char* argv[])
     }
   }
   if (key == 'n') {
+    erase();
     printw("Toggling all outputs.\n");
     printw("Press 'n' for next test, any other key to stop.\n");
     while(1) {
