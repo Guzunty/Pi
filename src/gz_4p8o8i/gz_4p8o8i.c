@@ -119,6 +119,7 @@ int main(int argc, char* argv[])
     }
   }
   if (key == 'n') {
+    erase();
     printw("Toggling all outputs.\n");
     printw("Press 'n' for next test, any other key to stop.\n");
     while(1) {
