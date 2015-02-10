@@ -93,6 +93,7 @@ extern const char* xsvf_pzErrorName[];
 #define PAGE_SIZE (4*1024)
 #define BLOCK_SIZE (4*1024)
 
+int  brd_rev = 1;
 int  mem_fd;
 void *gpio_map;
 
@@ -177,7 +178,6 @@ void setPort(short p,short val)
       }
       if (p==TCK) {
         GPIO_SET = 1 << JTAG_TCK;
-       // usleep(1);
       }
     }
     else { // val == 0
@@ -189,7 +189,9 @@ void setPort(short p,short val)
       }
       if (p==TCK) {
         GPIO_CLR = 1 << JTAG_TCK;
-        //usleep(1);
+        if (brd_rev == 1) {
+          usleep(1);
+        }
       }
 #ifdef DEBUG_MODE
     //    printf( "TCK = %d;  TMS = %d;  TDI = %d\n", g_iTCK, g_iTMS, g_iTDI );
@@ -347,6 +349,7 @@ void setup_io()
       len = read(proc_fd, proc_model, sizeof proc_model);
       for (i = 0; i < len; i++) {
 		if (proc_model[i] == '2') {  // Yes this is a rev 2 Pi ...
+			brd_rev = 2;
 			peri_base = BCM2709_PERI_BASE;
 			break;
 	    }
