@@ -1,7 +1,7 @@
  
 cpldfit:  version P.40xd                            Xilinx Inc.
                                   Fitter Report
-Design Name: gz_25o                              Date:  1- 7-2013,  9:29PM
+Design Name: gz_25o                              Date:  2- 9-2015,  3:35PM
 Device Used: XC9572XL-5-PC44
 Fitting Status: Successful
 
@@ -9,18 +9,18 @@ Fitting Status: Successful
 
 Macrocells     Product Terms    Function Block   Registers      Pins           
 Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
-33 /72  ( 46%) 100 /360  ( 28%) 33 /216 ( 15%)   32 /72  ( 44%) 29 /34  ( 85%)
+31 /72  ( 43%) 91  /360  ( 25%) 32 /216 ( 15%)   30 /72  ( 42%) 29 /34  ( 85%)
 
 ** Function Block Resources **
 
 Function    Mcells      FB Inps     Pterms      IO          
 Block       Used/Tot    Used/Tot    Used/Tot    Used/Tot    
-FB1          15/18       10/54       48/90       8/ 9
+FB1          13/18        8/54       39/90       8/ 9
 FB2           6/18        8/54       18/90       6/ 9
 FB3           9/18        8/54       27/90       9/ 9*
-FB4           3/18        7/54        7/90       6/ 7
+FB4           3/18        8/54        7/90       6/ 7
              -----       -----       -----      -----    
-             33/72       33/216     100/360     29/34 
+             31/72       32/216      91/360     29/34 
 
 * - Resource is exhausted
 
@@ -45,7 +45,7 @@ GSR           :    0           0    |
 
 ** Power Data **
 
-There are 33 macrocells in high performance mode (MCHP).
+There are 31 macrocells in high performance mode (MCHP).
 There are 0 macrocells in low power mode (MCLP).
 End of Mapped Resource Summary
 **************************  Errors and Warnings  ***************************
@@ -56,54 +56,52 @@ WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
 
 ** 26 Outputs **
 
-Signal              Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
-Name                Pts   Inps          No.  Type    Use     Mode Rate State
-outputs<0>          3     7     FB1_2   1    I/O     O       STD  FAST RESET
-outputs<1>          3     7     FB1_5   2    I/O     O       STD  FAST RESET
-outputs<2>          3     7     FB1_6   3    I/O     O       STD  FAST RESET
-outputs<3>          3     7     FB1_8   4    I/O     O       STD  FAST RESET
-outputs<23>         3     7     FB1_11  6~   GCK/I/O O       STD  FAST RESET
-outputs<24>         3     7     FB1_14  7~   GCK/I/O O       STD  FAST RESET
-outputs<4>          3     7     FB1_15  8    I/O     O       STD  FAST RESET
-outputs<5>          3     7     FB1_17  9    I/O     O       STD  FAST RESET
-outputs<6>          3     7     FB2_2   35   I/O     O       STD  FAST RESET
-outputs<7>          3     7     FB2_5   36   I/O     O       STD  FAST RESET
-outputs<8>          3     7     FB2_6   37   I/O     O       STD  FAST RESET
-outputs<9>          3     7     FB2_8   38   I/O     O       STD  FAST RESET
-outputs<10>         3     7     FB2_15  43   I/O     O       STD  FAST RESET
-outputs<11>         3     7     FB2_17  44   I/O     O       STD  FAST RESET
-outputs<12>         3     7     FB3_2   11   I/O     O       STD  FAST RESET
-outputs<13>         3     7     FB3_5   12   I/O     O       STD  FAST RESET
-outputs<14>         3     7     FB3_8   13   I/O     O       STD  FAST RESET
-outputs<15>         3     7     FB3_9   14   I/O     O       STD  FAST RESET
-outputs<16>         3     7     FB3_11  18   I/O     O       STD  FAST RESET
-outputs<17>         3     7     FB3_14  19   I/O     O       STD  FAST RESET
-outputs<18>         3     7     FB3_15  20   I/O     O       STD  FAST RESET
-outputs<19>         3     7     FB3_16  24   I/O     O       STD  FAST RESET
-outputs<20>         3     7     FB3_17  22   I/O     O       STD  FAST RESET
-outputs<21>         3     7     FB4_2   25   I/O     O       STD  FAST RESET
-outputs<22>         3     7     FB4_5   26   I/O     O       STD  FAST RESET
-miso                1     1     FB4_17  34   I/O     O       STD  FAST 
+Signal                                          Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
+Name                                            Pts   Inps          No.  Type    Use     Mode Rate State
+outputs<0>                                      3     8     FB1_2   1~   I/O     O       STD  FAST RESET
+outputs<1>                                      3     8     FB1_5   2~   I/O     O       STD  FAST RESET
+outputs<2>                                      3     8     FB1_6   3~   I/O     O       STD  FAST RESET
+outputs<3>                                      3     8     FB1_8   4~   I/O     O       STD  FAST RESET
+outputs<23>                                     3     8     FB1_11  6~   GCK/I/O O       STD  FAST RESET
+outputs<24>                                     3     8     FB1_14  7~   GCK/I/O O       STD  FAST RESET
+outputs<4>                                      3     8     FB1_15  8~   I/O     O       STD  FAST RESET
+outputs<5>                                      3     8     FB1_17  9~   I/O     O       STD  FAST RESET
+outputs<6>                                      3     8     FB2_2   35~  I/O     O       STD  FAST RESET
+outputs<7>                                      3     8     FB2_5   36~  I/O     O       STD  FAST RESET
+outputs<8>                                      3     8     FB2_6   37~  I/O     O       STD  FAST RESET
+outputs<9>                                      3     8     FB2_8   38~  I/O     O       STD  FAST RESET
+outputs<10>                                     3     8     FB2_15  43~  I/O     O       STD  FAST RESET
+outputs<11>                                     3     8     FB2_17  44~  I/O     O       STD  FAST RESET
+outputs<12>                                     3     8     FB3_2   11~  I/O     O       STD  FAST RESET
+outputs<13>                                     3     8     FB3_5   12~  I/O     O       STD  FAST RESET
+outputs<14>                                     3     8     FB3_8   13~  I/O     O       STD  FAST RESET
+outputs<15>                                     3     8     FB3_9   14~  I/O     O       STD  FAST RESET
+outputs<16>                                     3     8     FB3_11  18~  I/O     O       STD  FAST RESET
+outputs<17>                                     3     8     FB3_14  19~  I/O     O       STD  FAST RESET
+outputs<18>                                     3     8     FB3_15  20~  I/O     O       STD  FAST RESET
+outputs<19>                                     3     8     FB3_16  24~  I/O     O       STD  FAST RESET
+outputs<20>                                     3     8     FB3_17  22~  I/O     O       STD  FAST RESET
+outputs<21>                                     3     8     FB4_2   25~  I/O     O       STD  FAST RESET
+outputs<22>                                     3     8     FB4_5   26~  I/O     O       STD  FAST RESET
+miso                                            1     1     FB4_17  34~  I/O     O       STD  FAST 
 
-** 7 Buried Nodes **
+** 5 Buried Nodes **
 
-Signal              Total Total Loc     Pwr  Reg Init
-Name                Pts   Inps          Mode State
-bit_cnt<0>          2     2     FB1_7   STD  SET
-bit_cnt<2>          3     4     FB1_9   STD  SET
-bit_cnt<1>          3     3     FB1_10  STD  SET
-byte_cnt_FSM_FFd4   4     6     FB1_12  STD  SET
-byte_cnt_FSM_FFd3   4     6     FB1_13  STD  RESET
-byte_cnt_FSM_FFd2   4     6     FB1_16  STD  RESET
-byte_cnt_FSM_FFd1   4     6     FB1_18  STD  RESET
+Signal                                          Total Total Loc     Pwr  Reg Init
+Name                                            Pts   Inps          Mode State
+bit_cnt<0>                                      2     2     FB1_10  STD  SET
+byte_cnt<0>                                     3     5     FB1_12  STD  RESET
+Madd_outputs_7_add0000_Mxor_Result<2>__xor0000  3     4     FB1_13  STD  SET
+Madd_outputs_7_add0000_Mxor_Result<1>__xor0000  3     3     FB1_16  STD  SET
+byte_cnt<1>                                     4     6     FB1_18  STD  RESET
 
 ** 3 Inputs **
 
-Signal              Loc     Pin  Pin     Pin     
-Name                        No.  Type    Use     
-sclk                FB4_11  28   I/O     I
-mosi                FB4_14  29   I/O     I
-sel                 FB4_15  33   I/O     I
+Signal                                          Loc     Pin  Pin     Pin     
+Name                                                    No.  Type    Use     
+sclk                                            FB4_11  28~  I/O     I
+mosi                                            FB4_14  29~  I/O     I
+sel                                             FB4_15  33~  I/O     I
 
 Legend:
 Pin No. - ~ - User Assigned
@@ -121,52 +119,53 @@ Pin Type/Use - I  - Input             GCK - Global Clock
 X            - Signal used as input to the macrocell logic.
 Pin No.      - ~  - User Assigned
 *********************************** FB1  ***********************************
-Number of function block inputs used/remaining:               10/44
-Number of signals used by logic mapping into function block:  10
+Number of function block inputs used/remaining:               8/46
+Number of signals used by logic mapping into function block:  8
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB1_1         (b)     
-outputs<0>            3       0     0   2     FB1_2   1     I/O     O
+outputs<0>            3       0     0   2     FB1_2   1~    I/O     O
 (unused)              0       0     0   5     FB1_3         (b)     
 (unused)              0       0     0   5     FB1_4         (b)     
-outputs<1>            3       0     0   2     FB1_5   2     I/O     O
-outputs<2>            3       0     0   2     FB1_6   3     I/O     O
-bit_cnt<0>            2       0     0   3     FB1_7         (b)     (b)
-outputs<3>            3       0     0   2     FB1_8   4     I/O     O
-bit_cnt<2>            3       0     0   2     FB1_9   5     GCK/I/O (b)
-bit_cnt<1>            3       0     0   2     FB1_10        (b)     (b)
+outputs<1>            3       0     0   2     FB1_5   2~    I/O     O
+outputs<2>            3       0     0   2     FB1_6   3~    I/O     O
+(unused)              0       0     0   5     FB1_7         (b)     
+outputs<3>            3       0     0   2     FB1_8   4~    I/O     O
+(unused)              0       0     0   5     FB1_9   5     GCK/I/O 
+bit_cnt<0>            2       0     0   3     FB1_10        (b)     (b)
 outputs<23>           3       0     0   2     FB1_11  6~    GCK/I/O O
-byte_cnt_FSM_FFd4     4       0     0   1     FB1_12        (b)     (b)
-byte_cnt_FSM_FFd3     4       0     0   1     FB1_13        (b)     (b)
+byte_cnt<0>           3       0     0   2     FB1_12        (b)     (b)
+Madd_outputs_7_add0000_Mxor_Result<2>__xor0000
+                      3       0     0   2     FB1_13        (b)     (b)
 outputs<24>           3       0     0   2     FB1_14  7~    GCK/I/O O
-outputs<4>            3       0     0   2     FB1_15  8     I/O     O
-byte_cnt_FSM_FFd2     4       0     0   1     FB1_16        (b)     (b)
-outputs<5>            3       0     0   2     FB1_17  9     I/O     O
-byte_cnt_FSM_FFd1     4       0     0   1     FB1_18        (b)     (b)
+outputs<4>            3       0     0   2     FB1_15  8~    I/O     O
+Madd_outputs_7_add0000_Mxor_Result<1>__xor0000
+                      3       0     0   2     FB1_16        (b)     (b)
+outputs<5>            3       0     0   2     FB1_17  9~    I/O     O
+byte_cnt<1>           4       0     0   1     FB1_18        (b)     (b)
 
 Signals Used by Logic in Function Block
-  1: bit_cnt<0>          5: byte_cnt_FSM_FFd2   8: mosi 
-  2: bit_cnt<1>          6: byte_cnt_FSM_FFd3   9: sclk 
-  3: bit_cnt<2>          7: byte_cnt_FSM_FFd4  10: sel 
-  4: byte_cnt_FSM_FFd1 
+  1: Madd_outputs_7_add0000_Mxor_Result<1>__xor0000   4: byte_cnt<0>        7: sclk 
+  2: Madd_outputs_7_add0000_Mxor_Result<2>__xor0000   5: byte_cnt<1>        8: sel 
+  3: bit_cnt<0>                                       6: mosi             
 
 Signal                        1         2         3         4 FB
 Name                0----+----0----+----0----+----0----+----0 Inputs
-outputs<0>           XXX...XXXX.............................. 7
-outputs<1>           XXX...XXXX.............................. 7
-outputs<2>           XXX...XXXX.............................. 7
-bit_cnt<0>           ........XX.............................. 2
-outputs<3>           XXX...XXXX.............................. 7
-bit_cnt<2>           XX......XX.............................. 4
-bit_cnt<1>           X.......XX.............................. 3
-outputs<23>          XXX.X..XXX.............................. 7
-byte_cnt_FSM_FFd4    XXXX....XX.............................. 6
-byte_cnt_FSM_FFd3    XXX...X.XX.............................. 6
-outputs<24>          XXXX...XXX.............................. 7
-outputs<4>           XXX...XXXX.............................. 7
-byte_cnt_FSM_FFd2    XXX..X..XX.............................. 6
-outputs<5>           XXX...XXXX.............................. 7
-byte_cnt_FSM_FFd1    XXX.X...XX.............................. 6
+outputs<0>           XXXXXXXX................................ 8
+outputs<1>           XXXXXXXX................................ 8
+outputs<2>           XXXXXXXX................................ 8
+outputs<3>           XXXXXXXX................................ 8
+bit_cnt<0>           ......XX................................ 2
+outputs<23>          XXXXXXXX................................ 8
+byte_cnt<0>          XXX...XX................................ 5
+Madd_outputs_7_add0000_Mxor_Result<2>__xor0000 
+                     X.X...XX................................ 4
+outputs<24>          XXXXXXXX................................ 8
+outputs<4>           XXXXXXXX................................ 8
+Madd_outputs_7_add0000_Mxor_Result<1>__xor0000 
+                     ..X...XX................................ 3
+outputs<5>           XXXXXXXX................................ 8
+byte_cnt<1>          XXXX..XX................................ 6
                     0----+----1----+----2----+----3----+----4
                               0         0         0         0
 *********************************** FB2  ***********************************
@@ -175,37 +174,37 @@ Number of signals used by logic mapping into function block:  8
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB2_1         (b)     
-outputs<6>            3       0     0   2     FB2_2   35    I/O     O
+outputs<6>            3       0     0   2     FB2_2   35~   I/O     O
 (unused)              0       0     0   5     FB2_3         (b)     
 (unused)              0       0     0   5     FB2_4         (b)     
-outputs<7>            3       0     0   2     FB2_5   36    I/O     O
-outputs<8>            3       0     0   2     FB2_6   37    I/O     O
+outputs<7>            3       0     0   2     FB2_5   36~   I/O     O
+outputs<8>            3       0     0   2     FB2_6   37~   I/O     O
 (unused)              0       0     0   5     FB2_7         (b)     
-outputs<9>            3       0     0   2     FB2_8   38    I/O     O
+outputs<9>            3       0     0   2     FB2_8   38~   I/O     O
 (unused)              0       0     0   5     FB2_9   39    GSR/I/O 
 (unused)              0       0     0   5     FB2_10        (b)     
 (unused)              0       0     0   5     FB2_11  40    GTS/I/O 
 (unused)              0       0     0   5     FB2_12        (b)     
 (unused)              0       0     0   5     FB2_13        (b)     
 (unused)              0       0     0   5     FB2_14  42    GTS/I/O 
-outputs<10>           3       0     0   2     FB2_15  43    I/O     O
+outputs<10>           3       0     0   2     FB2_15  43~   I/O     O
 (unused)              0       0     0   5     FB2_16        (b)     
-outputs<11>           3       0     0   2     FB2_17  44    I/O     O
+outputs<11>           3       0     0   2     FB2_17  44~   I/O     O
 (unused)              0       0     0   5     FB2_18        (b)     
 
 Signals Used by Logic in Function Block
-  1: bit_cnt<0>         4: byte_cnt_FSM_FFd3   7: sclk 
-  2: bit_cnt<1>         5: byte_cnt_FSM_FFd4   8: sel 
-  3: bit_cnt<2>         6: mosi              
+  1: Madd_outputs_7_add0000_Mxor_Result<1>__xor0000   4: byte_cnt<0>        7: sclk 
+  2: Madd_outputs_7_add0000_Mxor_Result<2>__xor0000   5: byte_cnt<1>        8: sel 
+  3: bit_cnt<0>                                       6: mosi             
 
 Signal                        1         2         3         4 FB
 Name                0----+----0----+----0----+----0----+----0 Inputs
-outputs<6>           XXX.XXXX................................ 7
-outputs<7>           XXX.XXXX................................ 7
-outputs<8>           XXXX.XXX................................ 7
-outputs<9>           XXXX.XXX................................ 7
-outputs<10>          XXXX.XXX................................ 7
-outputs<11>          XXXX.XXX................................ 7
+outputs<6>           XXXXXXXX................................ 8
+outputs<7>           XXXXXXXX................................ 8
+outputs<8>           XXXXXXXX................................ 8
+outputs<9>           XXXXXXXX................................ 8
+outputs<10>          XXXXXXXX................................ 8
+outputs<11>          XXXXXXXX................................ 8
                     0----+----1----+----2----+----3----+----4
                               0         0         0         0
 *********************************** FB3  ***********************************
@@ -214,52 +213,52 @@ Number of signals used by logic mapping into function block:  8
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB3_1         (b)     
-outputs<12>           3       0     0   2     FB3_2   11    I/O     O
+outputs<12>           3       0     0   2     FB3_2   11~   I/O     O
 (unused)              0       0     0   5     FB3_3         (b)     
 (unused)              0       0     0   5     FB3_4         (b)     
-outputs<13>           3       0     0   2     FB3_5   12    I/O     O
+outputs<13>           3       0     0   2     FB3_5   12~   I/O     O
 (unused)              0       0     0   5     FB3_6         (b)     
 (unused)              0       0     0   5     FB3_7         (b)     
-outputs<14>           3       0     0   2     FB3_8   13    I/O     O
-outputs<15>           3       0     0   2     FB3_9   14    I/O     O
+outputs<14>           3       0     0   2     FB3_8   13~   I/O     O
+outputs<15>           3       0     0   2     FB3_9   14~   I/O     O
 (unused)              0       0     0   5     FB3_10        (b)     
-outputs<16>           3       0     0   2     FB3_11  18    I/O     O
+outputs<16>           3       0     0   2     FB3_11  18~   I/O     O
 (unused)              0       0     0   5     FB3_12        (b)     
 (unused)              0       0     0   5     FB3_13        (b)     
-outputs<17>           3       0     0   2     FB3_14  19    I/O     O
-outputs<18>           3       0     0   2     FB3_15  20    I/O     O
-outputs<19>           3       0     0   2     FB3_16  24    I/O     O
-outputs<20>           3       0     0   2     FB3_17  22    I/O     O
+outputs<17>           3       0     0   2     FB3_14  19~   I/O     O
+outputs<18>           3       0     0   2     FB3_15  20~   I/O     O
+outputs<19>           3       0     0   2     FB3_16  24~   I/O     O
+outputs<20>           3       0     0   2     FB3_17  22~   I/O     O
 (unused)              0       0     0   5     FB3_18        (b)     
 
 Signals Used by Logic in Function Block
-  1: bit_cnt<0>         4: byte_cnt_FSM_FFd2   7: sclk 
-  2: bit_cnt<1>         5: byte_cnt_FSM_FFd3   8: sel 
-  3: bit_cnt<2>         6: mosi              
+  1: Madd_outputs_7_add0000_Mxor_Result<1>__xor0000   4: byte_cnt<0>        7: sclk 
+  2: Madd_outputs_7_add0000_Mxor_Result<2>__xor0000   5: byte_cnt<1>        8: sel 
+  3: bit_cnt<0>                                       6: mosi             
 
 Signal                        1         2         3         4 FB
 Name                0----+----0----+----0----+----0----+----0 Inputs
-outputs<12>          XXX.XXXX................................ 7
-outputs<13>          XXX.XXXX................................ 7
-outputs<14>          XXX.XXXX................................ 7
-outputs<15>          XXX.XXXX................................ 7
-outputs<16>          XXXX.XXX................................ 7
-outputs<17>          XXXX.XXX................................ 7
-outputs<18>          XXXX.XXX................................ 7
-outputs<19>          XXXX.XXX................................ 7
-outputs<20>          XXXX.XXX................................ 7
+outputs<12>          XXXXXXXX................................ 8
+outputs<13>          XXXXXXXX................................ 8
+outputs<14>          XXXXXXXX................................ 8
+outputs<15>          XXXXXXXX................................ 8
+outputs<16>          XXXXXXXX................................ 8
+outputs<17>          XXXXXXXX................................ 8
+outputs<18>          XXXXXXXX................................ 8
+outputs<19>          XXXXXXXX................................ 8
+outputs<20>          XXXXXXXX................................ 8
                     0----+----1----+----2----+----3----+----4
                               0         0         0         0
 *********************************** FB4  ***********************************
-Number of function block inputs used/remaining:               7/47
-Number of signals used by logic mapping into function block:  7
+Number of function block inputs used/remaining:               8/46
+Number of signals used by logic mapping into function block:  8
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB4_1         (b)     
-outputs<21>           3       0     0   2     FB4_2   25    I/O     O
+outputs<21>           3       0     0   2     FB4_2   25~   I/O     O
 (unused)              0       0     0   5     FB4_3         (b)     
 (unused)              0       0     0   5     FB4_4         (b)     
-outputs<22>           3       0     0   2     FB4_5   26    I/O     O
+outputs<22>           3       0     0   2     FB4_5   26~   I/O     O
 (unused)              0       0     0   5     FB4_6         (b)     
 (unused)              0       0     0   5     FB4_7         (b)     
 (unused)              0       0     0   5     FB4_8   27    I/O     
@@ -271,43 +270,40 @@ outputs<22>           3       0     0   2     FB4_5   26    I/O     O
 (unused)              0       0     0   5     FB4_14  29    I/O     I
 (unused)              0       0     0   5     FB4_15  33    I/O     I
 (unused)              0       0     0   5     FB4_16        (b)     
-miso                  1       0     0   4     FB4_17  34    I/O     O
+miso                  1       0     0   4     FB4_17  34~   I/O     O
 (unused)              0       0     0   5     FB4_18        (b)     
 
 Signals Used by Logic in Function Block
-  1: bit_cnt<0>         4: byte_cnt_FSM_FFd2   6: sclk 
-  2: bit_cnt<1>         5: mosi                7: sel 
-  3: bit_cnt<2>       
+  1: Madd_outputs_7_add0000_Mxor_Result<1>__xor0000   4: byte_cnt<0>        7: sclk 
+  2: Madd_outputs_7_add0000_Mxor_Result<2>__xor0000   5: byte_cnt<1>        8: sel 
+  3: bit_cnt<0>                                       6: mosi             
 
 Signal                        1         2         3         4 FB
 Name                0----+----0----+----0----+----0----+----0 Inputs
-outputs<21>          XXXXXXX................................. 7
-outputs<22>          XXXXXXX................................. 7
-miso                 ......X................................. 1
+outputs<21>          XXXXXXXX................................ 8
+outputs<22>          XXXXXXXX................................ 8
+miso                 .......X................................ 1
                     0----+----1----+----2----+----3----+----4
                               0         0         0         0
 *******************************  Equations  ********************************
 
 ********** Mapped Logic **********
 
+FTCPE_Madd_outputs_7_add0000_Mxor_Result1__xor0000: FTCPE port map (Madd_outputs_7_add0000_Mxor_Result(1)__xor0000,bit_cnt(0),NOT sclk,'0',sel);
+
+FTCPE_Madd_outputs_7_add0000_Mxor_Result2__xor0000: FTCPE port map (Madd_outputs_7_add0000_Mxor_Result(2)__xor0000,Madd_outputs_7_add0000_Mxor_Result_T(2)__xor0000,NOT sclk,'0',sel);
+Madd_outputs_7_add0000_Mxor_Result_T(2)__xor0000 <= (NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000);
+
 FTCPE_bit_cnt0: FTCPE port map (bit_cnt(0),'1',NOT sclk,'0',sel);
 
-FTCPE_bit_cnt1: FTCPE port map (bit_cnt(1),bit_cnt(0),NOT sclk,'0',sel);
+FTCPE_byte_cnt0: FTCPE port map (byte_cnt(0),'1',NOT sclk,sel,'0',byte_cnt_CE(0));
+byte_cnt_CE(0) <= (NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
-FTCPE_bit_cnt2: FTCPE port map (bit_cnt(2),bit_cnt_T(2),NOT sclk,'0',sel);
-bit_cnt_T(2) <= (NOT bit_cnt(0) AND NOT bit_cnt(1));
-
-FDCPE_byte_cnt_FSM_FFd1: FDCPE port map (byte_cnt_FSM_FFd1,byte_cnt_FSM_FFd2,NOT sclk,sel,'0',byte_cnt_FSM_FFd1_CE);
-byte_cnt_FSM_FFd1_CE <= (NOT bit_cnt(0) AND NOT bit_cnt(1) AND NOT bit_cnt(2));
-
-FDCPE_byte_cnt_FSM_FFd2: FDCPE port map (byte_cnt_FSM_FFd2,byte_cnt_FSM_FFd3,NOT sclk,sel,'0',byte_cnt_FSM_FFd2_CE);
-byte_cnt_FSM_FFd2_CE <= (NOT bit_cnt(0) AND NOT bit_cnt(1) AND NOT bit_cnt(2));
-
-FDCPE_byte_cnt_FSM_FFd3: FDCPE port map (byte_cnt_FSM_FFd3,byte_cnt_FSM_FFd4,NOT sclk,sel,'0',byte_cnt_FSM_FFd3_CE);
-byte_cnt_FSM_FFd3_CE <= (NOT bit_cnt(0) AND NOT bit_cnt(1) AND NOT bit_cnt(2));
-
-FDCPE_byte_cnt_FSM_FFd4: FDCPE port map (byte_cnt_FSM_FFd4,byte_cnt_FSM_FFd1,NOT sclk,'0',sel,byte_cnt_FSM_FFd4_CE);
-byte_cnt_FSM_FFd4_CE <= (NOT bit_cnt(0) AND NOT bit_cnt(1) AND NOT bit_cnt(2));
+FTCPE_byte_cnt1: FTCPE port map (byte_cnt(1),byte_cnt(0),NOT sclk,sel,'0',byte_cnt_CE(1));
+byte_cnt_CE(1) <= (NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 
 miso_I <= '0';
@@ -315,104 +311,104 @@ miso <= miso_I when miso_OE = '1' else 'Z';
 miso_OE <= NOT sel;
 
 FDCPE_outputs0: FDCPE port map (outputs(0),mosi,sclk,'0','0',outputs_CE(0));
-outputs_CE(0) <= (NOT sel AND byte_cnt_FSM_FFd4 AND NOT bit_cnt(0) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(0) <= (NOT sel AND NOT byte_cnt(0) AND NOT byte_cnt(1) AND NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs1: FDCPE port map (outputs(1),mosi,sclk,'0','0',outputs_CE(1));
-outputs_CE(1) <= (NOT sel AND byte_cnt_FSM_FFd4 AND bit_cnt(0) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(1) <= (NOT sel AND NOT byte_cnt(0) AND NOT byte_cnt(1) AND bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs2: FDCPE port map (outputs(2),mosi,sclk,'0','0',outputs_CE(2));
-outputs_CE(2) <= (NOT sel AND byte_cnt_FSM_FFd4 AND NOT bit_cnt(0) AND 
-	bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(2) <= (NOT sel AND NOT byte_cnt(0) AND NOT byte_cnt(1) AND NOT bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs3: FDCPE port map (outputs(3),mosi,sclk,'0','0',outputs_CE(3));
-outputs_CE(3) <= (NOT sel AND byte_cnt_FSM_FFd4 AND bit_cnt(0) AND 
-	bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(3) <= (NOT sel AND NOT byte_cnt(0) AND NOT byte_cnt(1) AND bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs4: FDCPE port map (outputs(4),mosi,sclk,'0','0',outputs_CE(4));
-outputs_CE(4) <= (NOT sel AND byte_cnt_FSM_FFd4 AND NOT bit_cnt(0) AND 
-	NOT bit_cnt(1) AND bit_cnt(2));
+outputs_CE(4) <= (NOT sel AND NOT byte_cnt(0) AND NOT byte_cnt(1) AND NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs5: FDCPE port map (outputs(5),mosi,sclk,'0','0',outputs_CE(5));
-outputs_CE(5) <= (NOT sel AND byte_cnt_FSM_FFd4 AND bit_cnt(0) AND 
-	NOT bit_cnt(1) AND bit_cnt(2));
+outputs_CE(5) <= (NOT sel AND NOT byte_cnt(0) AND NOT byte_cnt(1) AND bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs6: FDCPE port map (outputs(6),mosi,sclk,'0','0',outputs_CE(6));
-outputs_CE(6) <= (NOT sel AND byte_cnt_FSM_FFd4 AND NOT bit_cnt(0) AND 
-	bit_cnt(1) AND bit_cnt(2));
+outputs_CE(6) <= (NOT sel AND NOT byte_cnt(0) AND NOT byte_cnt(1) AND NOT bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs7: FDCPE port map (outputs(7),mosi,sclk,'0','0',outputs_CE(7));
-outputs_CE(7) <= (NOT sel AND byte_cnt_FSM_FFd4 AND bit_cnt(0) AND 
-	bit_cnt(1) AND bit_cnt(2));
+outputs_CE(7) <= (NOT sel AND NOT byte_cnt(0) AND NOT byte_cnt(1) AND bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs8: FDCPE port map (outputs(8),mosi,sclk,'0','0',outputs_CE(8));
-outputs_CE(8) <= (NOT sel AND byte_cnt_FSM_FFd3 AND NOT bit_cnt(0) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(8) <= (NOT sel AND byte_cnt(0) AND NOT byte_cnt(1) AND NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs9: FDCPE port map (outputs(9),mosi,sclk,'0','0',outputs_CE(9));
-outputs_CE(9) <= (NOT sel AND byte_cnt_FSM_FFd3 AND bit_cnt(0) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(9) <= (NOT sel AND byte_cnt(0) AND NOT byte_cnt(1) AND bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs10: FDCPE port map (outputs(10),mosi,sclk,'0','0',outputs_CE(10));
-outputs_CE(10) <= (NOT sel AND byte_cnt_FSM_FFd3 AND NOT bit_cnt(0) AND 
-	bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(10) <= (NOT sel AND byte_cnt(0) AND NOT byte_cnt(1) AND NOT bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs11: FDCPE port map (outputs(11),mosi,sclk,'0','0',outputs_CE(11));
-outputs_CE(11) <= (NOT sel AND byte_cnt_FSM_FFd3 AND bit_cnt(0) AND 
-	bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(11) <= (NOT sel AND byte_cnt(0) AND NOT byte_cnt(1) AND bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs12: FDCPE port map (outputs(12),mosi,sclk,'0','0',outputs_CE(12));
-outputs_CE(12) <= (NOT sel AND byte_cnt_FSM_FFd3 AND NOT bit_cnt(0) AND 
-	NOT bit_cnt(1) AND bit_cnt(2));
+outputs_CE(12) <= (NOT sel AND byte_cnt(0) AND NOT byte_cnt(1) AND NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs13: FDCPE port map (outputs(13),mosi,sclk,'0','0',outputs_CE(13));
-outputs_CE(13) <= (NOT sel AND byte_cnt_FSM_FFd3 AND bit_cnt(0) AND 
-	NOT bit_cnt(1) AND bit_cnt(2));
+outputs_CE(13) <= (NOT sel AND byte_cnt(0) AND NOT byte_cnt(1) AND bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs14: FDCPE port map (outputs(14),mosi,sclk,'0','0',outputs_CE(14));
-outputs_CE(14) <= (NOT sel AND byte_cnt_FSM_FFd3 AND NOT bit_cnt(0) AND 
-	bit_cnt(1) AND bit_cnt(2));
+outputs_CE(14) <= (NOT sel AND byte_cnt(0) AND NOT byte_cnt(1) AND NOT bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs15: FDCPE port map (outputs(15),mosi,sclk,'0','0',outputs_CE(15));
-outputs_CE(15) <= (NOT sel AND byte_cnt_FSM_FFd3 AND bit_cnt(0) AND 
-	bit_cnt(1) AND bit_cnt(2));
+outputs_CE(15) <= (NOT sel AND byte_cnt(0) AND NOT byte_cnt(1) AND bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs16: FDCPE port map (outputs(16),mosi,sclk,'0','0',outputs_CE(16));
-outputs_CE(16) <= (NOT sel AND byte_cnt_FSM_FFd2 AND NOT bit_cnt(0) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(16) <= (NOT sel AND NOT byte_cnt(0) AND byte_cnt(1) AND NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs17: FDCPE port map (outputs(17),mosi,sclk,'0','0',outputs_CE(17));
-outputs_CE(17) <= (NOT sel AND byte_cnt_FSM_FFd2 AND bit_cnt(0) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(17) <= (NOT sel AND NOT byte_cnt(0) AND byte_cnt(1) AND bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs18: FDCPE port map (outputs(18),mosi,sclk,'0','0',outputs_CE(18));
-outputs_CE(18) <= (NOT sel AND byte_cnt_FSM_FFd2 AND NOT bit_cnt(0) AND 
-	bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(18) <= (NOT sel AND NOT byte_cnt(0) AND byte_cnt(1) AND NOT bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs19: FDCPE port map (outputs(19),mosi,sclk,'0','0',outputs_CE(19));
-outputs_CE(19) <= (NOT sel AND byte_cnt_FSM_FFd2 AND bit_cnt(0) AND 
-	bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(19) <= (NOT sel AND NOT byte_cnt(0) AND byte_cnt(1) AND bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs20: FDCPE port map (outputs(20),mosi,sclk,'0','0',outputs_CE(20));
-outputs_CE(20) <= (NOT sel AND byte_cnt_FSM_FFd2 AND NOT bit_cnt(0) AND 
-	NOT bit_cnt(1) AND bit_cnt(2));
+outputs_CE(20) <= (NOT sel AND NOT byte_cnt(0) AND byte_cnt(1) AND NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs21: FDCPE port map (outputs(21),mosi,sclk,'0','0',outputs_CE(21));
-outputs_CE(21) <= (NOT sel AND byte_cnt_FSM_FFd2 AND bit_cnt(0) AND 
-	NOT bit_cnt(1) AND bit_cnt(2));
+outputs_CE(21) <= (NOT sel AND NOT byte_cnt(0) AND byte_cnt(1) AND bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs22: FDCPE port map (outputs(22),mosi,sclk,'0','0',outputs_CE(22));
-outputs_CE(22) <= (NOT sel AND byte_cnt_FSM_FFd2 AND NOT bit_cnt(0) AND 
-	bit_cnt(1) AND bit_cnt(2));
+outputs_CE(22) <= (NOT sel AND NOT byte_cnt(0) AND byte_cnt(1) AND NOT bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs23: FDCPE port map (outputs(23),mosi,sclk,'0','0',outputs_CE(23));
-outputs_CE(23) <= (NOT sel AND byte_cnt_FSM_FFd2 AND bit_cnt(0) AND 
-	bit_cnt(1) AND bit_cnt(2));
+outputs_CE(23) <= (NOT sel AND NOT byte_cnt(0) AND byte_cnt(1) AND bit_cnt(0) AND 
+	Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 FDCPE_outputs24: FDCPE port map (outputs(24),mosi,sclk,'0','0',outputs_CE(24));
-outputs_CE(24) <= (NOT sel AND byte_cnt_FSM_FFd1 AND NOT bit_cnt(0) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(2));
+outputs_CE(24) <= (NOT sel AND byte_cnt(0) AND byte_cnt(1) AND NOT bit_cnt(0) AND 
+	NOT Madd_outputs_7_add0000_Mxor_Result(1)__xor0000 AND NOT Madd_outputs_7_add0000_Mxor_Result(2)__xor0000);
 
 Register Legend:
  FDCPE (Q,D,C,CLR,PRE,CE); 

@@ -24,7 +24,7 @@ DEBUG	= -g -O0
 CC	= gcc
 INCLUDE	= -I/usr/local/include
 CFLAGS	= -pthread $(DEBUG) -Wall $(INCLUDE) -Winline -pipe -fPIC -DDEBUG_MODE
-LIBS    = -lgz -lbcm2835 -lrt -lncurses -lpthread
+LIBS    = -lgz -lrt -lncurses -lpthread
 SRC	=	gz_ppm.c
 
 BIN	=	gz_ppm

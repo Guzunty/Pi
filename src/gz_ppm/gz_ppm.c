@@ -22,6 +22,8 @@
 #include <ncurses.h>
 #include <gz_spi.h>
 #include <pthread.h>
+#include <unistd.h>
+
 
 #define GPIO_FN_MAXLEN 32
 #define POLL_TIMEOUT   1000

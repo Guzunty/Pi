@@ -19,50 +19,57 @@
  * MA 02110-1301, USA.
  * 
  */
-#include<gz_clk.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <gz_gpio.h>
+#include <gz_clk.h>
 
-#define GZ_CLK_BUSY (1 << 7)
+#define GZ_CLK_BUSY    (1 << 7)
+#define GP_CLK0_CTL *(get_clock_base() + 0x1C)
+#define GP_CLK0_DIV *(get_clock_base() + 0x1D)
+
+void *clk_map;
+volatile unsigned * clk;
 
 int gz_clock_ena(int speed, int divisor) {
   int speed_id = 6;
+  int mem_fd;
+  if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
+     printf("\rError initializing IO. Consider using sudo.\n");
+     exit(-1);
+  }
   if (speed < GZ_CLK_5MHz || speed > GZ_CLK_125MHz) {
     printf("gz_clock_ena: Unsupported clock speed selected.\n");
-    printf("Supported speeds: GZ_CLK_5MHz (0) and GZ_CLK_125MHz (1).");
+    printf("Supported speeds: GZ_CLK_5MHz (0) and GZ_CLK_125MHz (1).\n");
     exit(-1);
   }
   if (speed == 0) {
     speed_id = 1;
   }
   if (divisor < 2) {
-    printf("gz_clock_ena: Minimum divisor value is 2.");
+    printf("gz_clock_ena: Minimum divisor value is 2.\n");
     exit(-1);
   }
   if (divisor > 0xfff) {
-    printf("gz_clock_ena: Maximum divisor value is %d.", 0xfff);
+    printf("gz_clock_ena: Maximum divisor value is %d.\n", 0xfff);
     exit(-1);
   }
-  if (bcm2835_init() !=1) {
-    printf("gz_clock_ena: Failed to initialize I/O\n");
-    exit(-1);
-  }
-  usleep(5);
-  bcm2835_gpio_fsel(RPI_GPIO_P1_07, BCM2835_GPIO_FSEL_ALT0);
-  *(bcm2835_clk + 0x1C) = 0x5A000000 | speed_id;    // GPCLK0 off
-  while (*(bcm2835_clk + 0x1C) & GZ_CLK_BUSY) {}    // Wait for BUSY low
-  *(bcm2835_clk + 0x1D) = 0x5A002000 | (divisor << 12); // set DIVI
-  *(bcm2835_clk + 0x1C) = 0x5A000010 | speed_id;    // GPCLK0 on
+  close(mem_fd); //No need to keep mem_fd open after mmap
+  usleep(1000);
+  INP_GPIO(4);
+  SET_GPIO_ALT(4,0);
+  GP_CLK0_CTL = 0x5A000000 | speed_id;    // GPCLK0 off
+  while (GP_CLK0_CTL & GZ_CLK_BUSY) {}    // Wait for BUSY low
+  GP_CLK0_DIV = 0x5A002000 | (divisor << 12); // set DIVI
+  GP_CLK0_CTL = 0x5A000010 | speed_id;    // GPCLK0 on
   return 0;
   
 }
 
 int gz_clock_dis() {
-  if (bcm2835_init() !=1) {
-    printf("gz_clock_dis: Failed to initialize I/O\n");
-    exit(-1);
-  }
-  bcm2835_gpio_fsel(RPI_GPIO_P1_07, BCM2835_GPIO_FSEL_INPT);
+  INP_GPIO(4);
   return 0;
 }

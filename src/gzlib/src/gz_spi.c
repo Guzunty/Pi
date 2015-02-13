@@ -26,6 +26,8 @@
 #include <sys/ioctl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
+#include <string.h>
 
 #define SPI_MODE              SPI_MODE_0
 #define SPI_BITS_PER_WORD     8
@@ -166,19 +168,22 @@ int spi_open(char* dev) {
 byte* transfer(byte* data, int delay) {
   struct spi_ioc_transfer spi;
   byte outbuf[4];
+  int result;
 
   int i = 0;
   for(; i < width; i++) {
     outbuf[i] = data[i];
   }
+  memset(&spi,0,sizeof(spi));
   spi.tx_buf        = (unsigned long)&outbuf;
   spi.rx_buf        = (unsigned long)&inbuf;
   spi.len           = width;
   spi.delay_usecs   = delay;
   spi.speed_hz      = SPI_MAX_SPEED;
   spi.bits_per_word = SPI_BITS_PER_WORD;
-  if(ioctl(spi_fd, SPI_IOC_MESSAGE(1), &spi) < 0){
-        printf("ERROR while sending\n");
+  result = ioctl(spi_fd, SPI_IOC_MESSAGE(1), &spi);
+  if( result < 0){
+        printf("spi: ERROR while sending - %s\r\n", strerror(errno));
   }
   return inbuf;
 }

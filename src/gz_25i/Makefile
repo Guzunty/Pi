@@ -1,8 +1,8 @@
 #
 # Makefile:
-#       gz_led_dem0 - Guzunty test program
+#       gz_25i - Guzunty example program
 #
-#	 Copyright (c) 2013 campbellsan
+#	 Copyright (c) 2015 campbellsan
 ########################################################################
 #
 #    Guzunty is free software: you can redistribute it and/or modify
@@ -26,9 +26,9 @@ INCLUDE	= -I/usr/local/include
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe -fPIC -DDEBUG_MODE
 LIBS    = -lgz -lrt -lncurses
 
-SRC	=	gz_4s8o8i.c
+SRC	=	gz_25i.c
 
-BIN	=	gz_4s8o8i
+BIN	=	gz_25i
 
 all:
 	$(CC) $(CFLAGS) $(SRC) -o $(BIN) $(LIBS) 

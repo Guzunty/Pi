@@ -10,7 +10,6 @@
 /*              Add print in setPort for xapp058_example.exe.*/
 /*******************************************************/
 #include "ports.h"
-#include <bcm2835.h>
 #include "uart.h"
 #include<stdio.h>
 #include<stdlib.h>
@@ -80,6 +79,43 @@ const char*   const xsvf_pzErrorName[]  =
 extern const char* xsvf_pzErrorName[];
 #endif
 
+//----------------------------------------------------------------------
+// Access from ARM Running Linux
+
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <time.h>
+
+#define BCM2708_PERI_BASE        0x20000000
+#define BCM2709_PERI_BASE        0x3f000000
+#define GPIO_BASE                (peri_base + 0x200000) /* GPIO controller */
+
+#define PAGE_SIZE (4*1024)
+#define BLOCK_SIZE (4*1024)
+
+int  mem_fd;
+void *gpio_map;
+
+// I/O access
+volatile unsigned *gpio;
+__off_t peri_base = BCM2708_PERI_BASE;
+
+// GPIO setup macros. Always use INP_GPIO(x) before using OUT_GPIO(x) or SET_GPIO_ALT(x,y)
+#define INP_GPIO(g) *(gpio+((g)/10)) &= ~(7<<(((g)%10)*3))
+#define OUT_GPIO(g) *(gpio+((g)/10)) |=  (1<<(((g)%10)*3))
+#define SET_GPIO_ALT(g,a) *(gpio+(((g)/10))) |= (((a)<=3?(a)+4:(a)==4?3:2)<<(((g)%10)*3))
+
+#define GPIO_SET *(gpio+7)  // sets   bits which are 1 ignores bits which are 0
+#define GPIO_CLR *(gpio+10) // clears bits which are 1 ignores bits which are 0
+
+#define GET_GPIO(g) (*(gpio+13)&(1<<g)) // 0 if LOW, (1<<g) if HIGH
+
+#define GPIO_PULL *(gpio+37) // Pull up/pull down
+#define GPIO_PULLCLK0 *(gpio+38) // Pull up/pull down clock
+
+void setup_io();
+
+//----------------------------------------------------------------------
 
 #define JTAG_TDI 23
 #define JTAG_TCK 17
@@ -88,18 +124,14 @@ extern const char* xsvf_pzErrorName[];
 
 void portsInitialize()
 {
-  if (!bcm2835_init()) {
-	printf("\nError initializing IO. Consider using sudo.\n");
-	exit(1);
-  }
-  bcm2835_gpio_fsel(JTAG_TDI, BCM2835_GPIO_FSEL_OUTP);
-  bcm2835_gpio_set_pud(JTAG_TDI, BCM2835_GPIO_PUD_OFF);
-  bcm2835_gpio_fsel(JTAG_TCK, BCM2835_GPIO_FSEL_OUTP);
-  bcm2835_gpio_set_pud(JTAG_TCK, BCM2835_GPIO_PUD_OFF);
-  bcm2835_gpio_fsel(JTAG_TMS, BCM2835_GPIO_FSEL_OUTP);
-  bcm2835_gpio_set_pud(JTAG_TMS, BCM2835_GPIO_PUD_OFF);
-  bcm2835_gpio_fsel(JTAG_TDO, BCM2835_GPIO_FSEL_INPT);
-  bcm2835_gpio_set_pud(JTAG_TDO, BCM2835_GPIO_PUD_OFF);
+  setup_io();
+  INP_GPIO(JTAG_TDI);
+  INP_GPIO(JTAG_TCK);
+  INP_GPIO(JTAG_TMS);
+  INP_GPIO(JTAG_TDO);
+  OUT_GPIO(JTAG_TDI);
+  OUT_GPIO(JTAG_TCK);
+  OUT_GPIO(JTAG_TMS);
 }
 
 
@@ -136,15 +168,28 @@ void setPort(short p,short val)
     /* Printing code for the xapp058_example.exe.  You must set the specified
        JTAG signal (p) to the new value (v).  See the above, old Win95 code
        as an implementation example. */
-    if (p==TMS) {
-        bcm2835_gpio_write(JTAG_TMS, val);
+    if (val == 1) {
+      if (p==TMS) {
+        GPIO_SET = 1 << JTAG_TMS;
+      }
+      if (p==TDI) {
+        GPIO_SET = 1 << JTAG_TDI;
+      }
+      if (p==TCK) {
+        GPIO_SET = 1 << JTAG_TCK;
+      }
     }
-    if (p==TDI) {
-        bcm2835_gpio_write(JTAG_TDI, val);
-    }
-    if (p==TCK) {
-        bcm2835_gpio_write(JTAG_TCK, val);
+    else { // val == 0
+      if (p==TMS) {
+        GPIO_CLR = 1 << JTAG_TMS;
+      }
+      if (p==TDI) {
+        GPIO_CLR = 1 << JTAG_TDI;
+      }
+      if (p==TCK) {
+        GPIO_CLR = 1 << JTAG_TCK;
         usleep(1);
+      }
 #ifdef DEBUG_MODE
     //    printf( "TCK = %d;  TMS = %d;  TDI = %d\n", g_iTCK, g_iTMS, g_iTDI );
 #endif
@@ -187,7 +232,7 @@ unsigned char readTDOBit()
         return( (unsigned char) 1 );
     }
 #endif
-	if(bcm2835_gpio_lev(JTAG_TDO) == HIGH)	{
+	if(GET_GPIO(JTAG_TDO))	{
 		return( (unsigned char) 1 );
 	}
 	else {
@@ -212,10 +257,15 @@ void output_error(int error_code) {
 /*                              requirement is also satisfied.               */
 void waitTime(long microsec)
 {
-    //static long tckCyclesPerMicrosec  = 4; /* must be at least 1 */
-    //long        tckCycles   = microsec * tckCyclesPerMicrosec;
-    //long        i;
-
+	struct timespec ts, dummy;
+	
+	//clock_gettime(CLOCK_REALTIME, &ts);
+	//long n_time = (ts.tv_sec * 1000000000) + ts.tv_nsec;
+	
+   //static long tckCyclesPerMicrosec  = 1; /* must be at least 1 */
+   //long        tckCycles   = microsec * tckCyclesPerMicrosec;
+   //long        i;
+    
     /* This implementation is highly recommended!!! */
     /* This implementation requires you to tune the tckCyclesPerMicrosec 
        variable (above) to match the performance of your embedded system
@@ -224,8 +274,20 @@ void waitTime(long microsec)
     //{
     //    pulseClock();
     //}
+	//clock_gettime(CLOCK_REALTIME, &ts);
+	//long n_now = (ts.tv_sec * 1000000000) + ts.tv_nsec;
+    //while (n_now - n_time < microsec * 1000) {
+	//	pulseClock();
+	//    clock_gettime(CLOCK_REALTIME, &ts);
+	//    n_now = (ts.tv_sec * 1000000000) + ts.tv_nsec;
+	//}
     setPort(TCK, 0);
-    usleep(microsec);
+    ts.tv_sec = 0;
+    ts.tv_nsec = microsec * 1000L;
+    nanosleep(&ts, &dummy);
+    //for (i = 0; i < tckCycles; i++) {
+	//	pulseClock();
+	//} 
 
 #if 0
     /* Alternate implementation */
@@ -262,3 +324,54 @@ void waitTime(long microsec)
     _sleep( ( microsec + 999L ) / 1000L );
 #endif
 }
+
+//
+// Set up a memory region to access GPIO
+//
+void setup_io()
+{
+	int proc_fd;
+	char proc_model[32];
+   if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
+      printf("\rError initializing IO. Consider using sudo.\n");
+      exit(-1);
+   }
+
+   if ((proc_fd = open("/proc/device-tree/model", O_RDONLY|O_SYNC) ) >= 0) {
+	  // if we can read the device tree, we may be dealing with a more
+	  // recent Raspberry Pi model which has a different peripheral
+	  // memory address.
+	  int i = 0;
+	  int len = 0;
+      len = read(proc_fd, proc_model, sizeof proc_model);
+      for (i = 0; i < len; i++) {
+		if (proc_model[i] == '2') {  // Yes this is a rev 2 Pi ...
+			peri_base = BCM2709_PERI_BASE;
+			break;
+	    }
+      }
+   }
+
+   /* memory map the GPIO */
+   gpio_map = mmap(
+      NULL,             //Any address in our space will do
+      BLOCK_SIZE,       //Map length
+      PROT_READ|PROT_WRITE,// Enable reading & writting to mapped memory
+      MAP_SHARED,       //Shared with other processes
+      mem_fd,           //File to map
+      GPIO_BASE         //Offset to GPIO peripheral
+   );
+
+   close(mem_fd); //No need to keep mem_fd open after mmap
+
+   if (gpio_map == MAP_FAILED) {
+      printf("mmap error %d\n", (int)gpio_map);//errno also set!
+      exit(-1);
+   }
+
+   // Always use volatile pointer!
+   gpio = (volatile unsigned *)gpio_map;
+
+
+} // setup_io
+

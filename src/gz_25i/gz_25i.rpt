@@ -1,7 +1,7 @@
  
 cpldfit:  version P.40xd                            Xilinx Inc.
                                   Fitter Report
-Design Name: gz_25i                              Date:  1-13-2013,  2:01PM
+Design Name: gz_25i                              Date:  2- 9-2015,  9:40PM
 Device Used: XC9572XL-5-PC44
 Fitting Status: Successful
 
@@ -9,36 +9,36 @@ Fitting Status: Successful
 
 Macrocells     Product Terms    Function Block   Registers      Pins           
 Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
-6  /72  (  8%) 35  /360  ( 10%) 35 /216 ( 16%)   5  /72  (  7%) 28 /34  ( 82%)
+6  /72  (  8%) 41  /360  ( 11%) 37 /216 ( 17%)   5  /72  (  7%) 28 /34  ( 82%)
 
 ** Function Block Resources **
 
 Function    Mcells      FB Inps     Pterms      IO          
 Block       Used/Tot    Used/Tot    Used/Tot    Used/Tot    
-FB1           5/18        5/54       10/90       7/ 9
-FB2           0/18        0/54        0/90       7/ 9
-FB3           1/18       30/54       25/90       7/ 9
-FB4           0/18        0/54        0/90       7/ 7*
+FB1           5/18        6/54       15/90       8/ 9
+FB2           0/18        0/54        0/90       6/ 9
+FB3           0/18        0/54        0/90       9/ 9*
+FB4           1/18       31/54       26/90       5/ 7
              -----       -----       -----      -----    
-              6/72       35/216      35/360     28/34 
+              6/72       37/216      41/360     28/34 
 
 * - Resource is exhausted
 
 ** Global Control Resources **
 
-Signal 'sclk' mapped onto global clock net GCK1.
-Signal 'sel' mapped onto global output enable net GTS2.
+Global clock net(s) unused.
+Global output enable net(s) unused.
 Global set/reset net(s) unused.
 
 ** Pin Resources **
 
 Signal Type    Required     Mapped  |  Pin Type            Used    Total 
 ------------------------------------|------------------------------------
-Input         :   25          25    |  I/O              :    25      28
+Input         :   27          27    |  I/O              :    26      28
 Output        :    1           1    |  GCK/IO           :     2       3
-Bidirectional :    0           0    |  GTS/IO           :     1       2
-GCK           :    1           1    |  GSR/IO           :     0       1
-GTS           :    1           1    |
+Bidirectional :    0           0    |  GTS/IO           :     0       2
+GCK           :    0           0    |  GSR/IO           :     0       1
+GTS           :    0           0    |
 GSR           :    0           0    |
                  ----        ----
         Total     28          28
@@ -56,51 +56,51 @@ WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
 
 ** 1 Outputs **
 
-Signal              Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
-Name                Pts   Inps          No.  Type    Use     Mode Rate State
-miso                25    30    FB3_5   12   I/O     O       STD  FAST 
+Signal                                        Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
+Name                                          Pts   Inps          No.  Type    Use     Mode Rate State
+miso                                          26    31    FB4_17  34~  I/O     O       STD  FAST 
 
 ** 5 Buried Nodes **
 
-Signal              Total Total Loc     Pwr  Reg Init
-Name                Pts   Inps          Mode State
-bit_cnt<0>          1     1     FB1_14  STD  SET
-byte_cnt<0>         2     4     FB1_15  STD  RESET
-bit_cnt<2>          2     3     FB1_16  STD  SET
-bit_cnt<1>          2     2     FB1_17  STD  SET
-byte_cnt<1>         3     5     FB1_18  STD  RESET
+Signal                                        Total Total Loc     Pwr  Reg Init
+Name                                          Pts   Inps          Mode State
+bit_cnt<0>                                    2     2     FB1_14  STD  SET
+byte_cnt<0>                                   3     5     FB1_15  STD  RESET
+Madd_miso_addsub0000_Mxor_Result<2>__xor0000  3     4     FB1_16  STD  SET
+Madd_miso_addsub0000_Mxor_Result<1>__xor0000  3     3     FB1_17  STD  SET
+byte_cnt<1>                                   4     6     FB1_18  STD  RESET
 
 ** 27 Inputs **
 
-Signal              Loc     Pin  Pin     Pin     
-Name                        No.  Type    Use     
-inputs<3>           FB1_2   1    I/O     I
-inputs<15>          FB1_5   2    I/O     I
-inputs<16>          FB1_6   3    I/O     I
-sclk                FB1_9   5~   GCK/I/O GCK
-inputs<20>          FB1_14  7    GCK/I/O I
-inputs<21>          FB1_15  8    I/O     I
-inputs<4>           FB1_17  9    I/O     I
-inputs<7>           FB2_2   35   I/O     I
-inputs<24>          FB2_5   36   I/O     I
-inputs<10>          FB2_6   37   I/O     I
-inputs<13>          FB2_8   38   I/O     I
-sel                 FB2_11  40~  GTS/I/O GTS/I
-inputs<12>          FB2_15  43   I/O     I
-inputs<9>           FB2_17  44   I/O     I
-inputs<6>           FB3_8   13   I/O     I
-inputs<5>           FB3_9   14   I/O     I
-inputs<22>          FB3_11  18   I/O     I
-inputs<1>           FB3_14  19   I/O     I
-inputs<19>          FB3_15  20   I/O     I
-inputs<17>          FB3_16  24   I/O     I
-inputs<14>          FB4_2   25   I/O     I
-inputs<8>           FB4_5   26   I/O     I
-inputs<11>          FB4_8   27   I/O     I
-inputs<23>          FB4_11  28   I/O     I
-inputs<2>           FB4_14  29   I/O     I
-inputs<18>          FB4_15  33   I/O     I
-inputs<0>           FB4_17  34   I/O     I
+Signal                                        Loc     Pin  Pin     Pin     
+Name                                                  No.  Type    Use     
+inputs<0>                                     FB1_2   1~   I/O     I
+inputs<1>                                     FB1_5   2~   I/O     I
+inputs<2>                                     FB1_6   3~   I/O     I
+inputs<3>                                     FB1_8   4~   I/O     I
+inputs<23>                                    FB1_11  6~   GCK/I/O I
+inputs<24>                                    FB1_14  7~   GCK/I/O I
+inputs<4>                                     FB1_15  8~   I/O     I
+inputs<5>                                     FB1_17  9~   I/O     I
+inputs<6>                                     FB2_2   35~  I/O     I
+inputs<7>                                     FB2_5   36~  I/O     I
+inputs<8>                                     FB2_6   37~  I/O     I
+inputs<9>                                     FB2_8   38~  I/O     I
+inputs<10>                                    FB2_15  43~  I/O     I
+inputs<11>                                    FB2_17  44~  I/O     I
+inputs<12>                                    FB3_2   11~  I/O     I
+inputs<13>                                    FB3_5   12~  I/O     I
+inputs<14>                                    FB3_8   13~  I/O     I
+inputs<15>                                    FB3_9   14~  I/O     I
+inputs<16>                                    FB3_11  18~  I/O     I
+inputs<17>                                    FB3_14  19~  I/O     I
+inputs<18>                                    FB3_15  20~  I/O     I
+inputs<19>                                    FB3_16  24~  I/O     I
+inputs<20>                                    FB3_17  22~  I/O     I
+inputs<21>                                    FB4_2   25~  I/O     I
+inputs<22>                                    FB4_5   26~  I/O     I
+sclk                                          FB4_11  28~  I/O     I
+sel                                           FB4_15  33~  I/O     I
 
 Legend:
 Pin No. - ~ - User Assigned
@@ -118,8 +118,8 @@ Pin Type/Use - I  - Input             GCK - Global Clock
 X            - Signal used as input to the macrocell logic.
 Pin No.      - ~  - User Assigned
 *********************************** FB1  ***********************************
-Number of function block inputs used/remaining:               5/49
-Number of signals used by logic mapping into function block:  5
+Number of function block inputs used/remaining:               6/48
+Number of signals used by logic mapping into function block:  6
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB1_1         (b)     
@@ -129,29 +129,33 @@ Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB1_5   2     I/O     I
 (unused)              0       0     0   5     FB1_6   3     I/O     I
 (unused)              0       0     0   5     FB1_7         (b)     
-(unused)              0       0     0   5     FB1_8   4     I/O     
-(unused)              0       0     0   5     FB1_9   5     GCK/I/O GCK
+(unused)              0       0     0   5     FB1_8   4     I/O     I
+(unused)              0       0     0   5     FB1_9   5     GCK/I/O 
 (unused)              0       0     0   5     FB1_10        (b)     
-(unused)              0       0     0   5     FB1_11  6     GCK/I/O 
+(unused)              0       0     0   5     FB1_11  6     GCK/I/O I
 (unused)              0       0     0   5     FB1_12        (b)     
 (unused)              0       0     0   5     FB1_13        (b)     
-bit_cnt<0>            1       0     0   4     FB1_14  7     GCK/I/O I
-byte_cnt<0>           2       0     0   3     FB1_15  8     I/O     I
-bit_cnt<2>            2       0     0   3     FB1_16        (b)     (b)
-bit_cnt<1>            2       0     0   3     FB1_17  9     I/O     I
-byte_cnt<1>           3       0     0   2     FB1_18        (b)     (b)
+bit_cnt<0>            2       0     0   3     FB1_14  7     GCK/I/O I
+byte_cnt<0>           3       0     0   2     FB1_15  8     I/O     I
+Madd_miso_addsub0000_Mxor_Result<2>__xor0000
+                      3       0     0   2     FB1_16        (b)     (b)
+Madd_miso_addsub0000_Mxor_Result<1>__xor0000
+                      3       0     0   2     FB1_17  9     I/O     I
+byte_cnt<1>           4       0     0   1     FB1_18        (b)     (b)
 
 Signals Used by Logic in Function Block
-  1: bit_cnt<0>         3: bit_cnt<2>         5: sel 
-  2: bit_cnt<1>         4: byte_cnt<0>      
+  1: Madd_miso_addsub0000_Mxor_Result<1>__xor0000   3: bit_cnt<0>         5: sclk 
+  2: Madd_miso_addsub0000_Mxor_Result<2>__xor0000   4: byte_cnt<0>        6: sel 
 
 Signal                        1         2         3         4 FB
 Name                0----+----0----+----0----+----0----+----0 Inputs
-bit_cnt<0>           ....X................................... 1
-byte_cnt<0>          XXX.X................................... 4
-bit_cnt<2>           XX..X................................... 3
-bit_cnt<1>           X...X................................... 2
-byte_cnt<1>          XXXXX................................... 5
+bit_cnt<0>           ....XX.................................. 2
+byte_cnt<0>          XXX.XX.................................. 5
+Madd_miso_addsub0000_Mxor_Result<2>__xor0000 
+                     X.X.XX.................................. 4
+Madd_miso_addsub0000_Mxor_Result<1>__xor0000 
+                     ..X.XX.................................. 3
+byte_cnt<1>          XXXXXX.................................. 6
                     0----+----1----+----2----+----3----+----4
                               0         0         0         0
 *********************************** FB2  ***********************************
@@ -169,7 +173,7 @@ Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB2_8   38    I/O     I
 (unused)              0       0     0   5     FB2_9   39    GSR/I/O 
 (unused)              0       0     0   5     FB2_10        (b)     
-(unused)              0       0     0   5     FB2_11  40    GTS/I/O GTS/I
+(unused)              0       0     0   5     FB2_11  40    GTS/I/O 
 (unused)              0       0     0   5     FB2_12        (b)     
 (unused)              0       0     0   5     FB2_13        (b)     
 (unused)              0       0     0   5     FB2_14  42    GTS/I/O 
@@ -178,17 +182,17 @@ Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB2_17  44    I/O     I
 (unused)              0       0     0   5     FB2_18        (b)     
 *********************************** FB3  ***********************************
-Number of function block inputs used/remaining:               30/24
-Number of signals used by logic mapping into function block:  30
+Number of function block inputs used/remaining:               0/54
+Number of signals used by logic mapping into function block:  0
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
 (unused)              0       0     0   5     FB3_1         (b)     
-(unused)              0       0     0   5     FB3_2   11    I/O     
-(unused)              0       0   \/5   0     FB3_3         (b)     (b)
-(unused)              0       0   \/5   0     FB3_4         (b)     (b)
-miso                 25      20<-   0   0     FB3_5   12    I/O     O
-(unused)              0       0   /\5   0     FB3_6         (b)     (b)
-(unused)              0       0   /\5   0     FB3_7         (b)     (b)
+(unused)              0       0     0   5     FB3_2   11    I/O     I
+(unused)              0       0     0   5     FB3_3         (b)     
+(unused)              0       0     0   5     FB3_4         (b)     
+(unused)              0       0     0   5     FB3_5   12    I/O     I
+(unused)              0       0     0   5     FB3_6         (b)     
+(unused)              0       0     0   5     FB3_7         (b)     
 (unused)              0       0     0   5     FB3_8   13    I/O     I
 (unused)              0       0     0   5     FB3_9   14    I/O     I
 (unused)              0       0     0   5     FB3_10        (b)     
@@ -198,49 +202,50 @@ miso                 25      20<-   0   0     FB3_5   12    I/O     O
 (unused)              0       0     0   5     FB3_14  19    I/O     I
 (unused)              0       0     0   5     FB3_15  20    I/O     I
 (unused)              0       0     0   5     FB3_16  24    I/O     I
-(unused)              0       0     0   5     FB3_17  22    I/O     
+(unused)              0       0     0   5     FB3_17  22    I/O     I
 (unused)              0       0     0   5     FB3_18        (b)     
-
-Signals Used by Logic in Function Block
-  1: bit_cnt<0>        11: inputs<14>        21: inputs<23> 
-  2: bit_cnt<1>        12: inputs<15>        22: inputs<24> 
-  3: bit_cnt<2>        13: inputs<16>        23: inputs<2> 
-  4: byte_cnt<0>       14: inputs<17>        24: inputs<3> 
-  5: byte_cnt<1>       15: inputs<18>        25: inputs<4> 
-  6: inputs<0>         16: inputs<19>        26: inputs<5> 
-  7: inputs<10>        17: inputs<1>         27: inputs<6> 
-  8: inputs<11>        18: inputs<20>        28: inputs<7> 
-  9: inputs<12>        19: inputs<21>        29: inputs<8> 
- 10: inputs<13>        20: inputs<22>        30: inputs<9> 
-
-Signal                        1         2         3         4 FB
-Name                0----+----0----+----0----+----0----+----0 Inputs
-miso                 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.......... 30
-                    0----+----1----+----2----+----3----+----4
-                              0         0         0         0
 *********************************** FB4  ***********************************
-Number of function block inputs used/remaining:               0/54
-Number of signals used by logic mapping into function block:  0
+Number of function block inputs used/remaining:               31/23
+Number of signals used by logic mapping into function block:  31
 Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
 Name                Pt      Pt    Pt  Pt               #    Type    Use
-(unused)              0       0     0   5     FB4_1         (b)     
-(unused)              0       0     0   5     FB4_2   25    I/O     I
+(unused)              0       0   /\5   0     FB4_1         (b)     (b)
+(unused)              0       0   /\1   4     FB4_2   25    I/O     I
 (unused)              0       0     0   5     FB4_3         (b)     
 (unused)              0       0     0   5     FB4_4         (b)     
 (unused)              0       0     0   5     FB4_5   26    I/O     I
 (unused)              0       0     0   5     FB4_6         (b)     
 (unused)              0       0     0   5     FB4_7         (b)     
-(unused)              0       0     0   5     FB4_8   27    I/O     I
+(unused)              0       0     0   5     FB4_8   27    I/O     
 (unused)              0       0     0   5     FB4_9         (b)     
 (unused)              0       0     0   5     FB4_10        (b)     
 (unused)              0       0     0   5     FB4_11  28    I/O     I
 (unused)              0       0     0   5     FB4_12        (b)     
 (unused)              0       0     0   5     FB4_13        (b)     
-(unused)              0       0     0   5     FB4_14  29    I/O     I
-(unused)              0       0     0   5     FB4_15  33    I/O     I
-(unused)              0       0     0   5     FB4_16        (b)     
-(unused)              0       0     0   5     FB4_17  34    I/O     I
-(unused)              0       0     0   5     FB4_18        (b)     
+(unused)              0       0     0   5     FB4_14  29    I/O     
+(unused)              0       0   \/5   0     FB4_15  33    I/O     I
+(unused)              0       0   \/5   0     FB4_16        (b)     (b)
+miso                 26      21<-   0   0     FB4_17  34~   I/O     O
+(unused)              0       0   /\5   0     FB4_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: Madd_miso_addsub0000_Mxor_Result<1>__xor0000  12: inputs<15>        22: inputs<24> 
+  2: Madd_miso_addsub0000_Mxor_Result<2>__xor0000  13: inputs<16>        23: inputs<2> 
+  3: bit_cnt<0>                                    14: inputs<17>        24: inputs<3> 
+  4: byte_cnt<0>                                   15: inputs<18>        25: inputs<4> 
+  5: byte_cnt<1>                                   16: inputs<19>        26: inputs<5> 
+  6: inputs<0>                                     17: inputs<1>         27: inputs<6> 
+  7: inputs<10>                                    18: inputs<20>        28: inputs<7> 
+  8: inputs<11>                                    19: inputs<21>        29: inputs<8> 
+  9: inputs<12>                                    20: inputs<22>        30: inputs<9> 
+ 10: inputs<13>                                    21: inputs<23>        31: sel 
+ 11: inputs<14>                                   
+
+Signal                        1         2         3         4 FB
+Name                0----+----0----+----0----+----0----+----0 Inputs
+miso                 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......... 31
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
 *******************************  Equations  ********************************
 
 ********** Mapped Logic **********
@@ -253,53 +258,71 @@ Name                Pt      Pt    Pt  Pt               #    Type    Use
 
 
 
+
+
+FTCPE_Madd_miso_addsub0000_Mxor_Result1__xor0000: FTCPE port map (Madd_miso_addsub0000_Mxor_Result(1)__xor0000,bit_cnt(0),NOT sclk,'0',sel);
+
+FTCPE_Madd_miso_addsub0000_Mxor_Result2__xor0000: FTCPE port map (Madd_miso_addsub0000_Mxor_Result(2)__xor0000,Madd_miso_addsub0000_Mxor_Result_T(2)__xor0000,NOT sclk,'0',sel);
+Madd_miso_addsub0000_Mxor_Result_T(2)__xor0000 <= (NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	NOT bit_cnt(0));
+
 FTCPE_bit_cnt0: FTCPE port map (bit_cnt(0),'1',NOT sclk,'0',sel);
 
-FTCPE_bit_cnt1: FTCPE port map (bit_cnt(1),bit_cnt(0),NOT sclk,'0',sel);
-
-FTCPE_bit_cnt2: FTCPE port map (bit_cnt(2),bit_cnt_T(2),NOT sclk,'0',sel);
-bit_cnt_T(2) <= (NOT bit_cnt(1) AND NOT bit_cnt(0));
-
 FTCPE_byte_cnt0: FTCPE port map (byte_cnt(0),'1',NOT sclk,sel,'0',byte_cnt_CE(0));
-byte_cnt_CE(0) <= (NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0));
+byte_cnt_CE(0) <= (NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND NOT bit_cnt(0));
 
 FTCPE_byte_cnt1: FTCPE port map (byte_cnt(1),byte_cnt(0),NOT sclk,sel,'0',byte_cnt_CE(1));
-byte_cnt_CE(1) <= (NOT bit_cnt(2) AND NOT bit_cnt(1) AND NOT bit_cnt(0));
+byte_cnt_CE(1) <= (NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND NOT bit_cnt(0));
 
 
-miso_I <= ((EXP6_.EXP)
-	OR (byte_cnt(1) AND NOT byte_cnt(0) AND bit_cnt(2) AND 
-	bit_cnt(1) AND NOT bit_cnt(0) AND inputs(22))
-	OR (byte_cnt(1) AND NOT byte_cnt(0) AND NOT bit_cnt(2) AND 
-	NOT bit_cnt(1) AND bit_cnt(0) AND inputs(17))
-	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND bit_cnt(2) AND 
-	bit_cnt(1) AND NOT bit_cnt(0) AND inputs(6))
-	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND bit_cnt(2) AND 
-	NOT bit_cnt(1) AND bit_cnt(0) AND inputs(5))
-	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND NOT bit_cnt(2) AND 
-	NOT bit_cnt(1) AND bit_cnt(0) AND inputs(1))
-	OR (EXP9_.EXP)
-	OR (byte_cnt(1) AND NOT byte_cnt(0) AND bit_cnt(2) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(0) AND inputs(20))
-	OR (byte_cnt(1) AND NOT byte_cnt(0) AND NOT bit_cnt(2) AND 
-	bit_cnt(1) AND NOT bit_cnt(0) AND inputs(18))
-	OR (byte_cnt(1) AND NOT byte_cnt(0) AND NOT bit_cnt(2) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(0) AND inputs(16))
-	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND NOT bit_cnt(2) AND 
-	bit_cnt(1) AND NOT bit_cnt(0) AND inputs(2))
-	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND NOT bit_cnt(2) AND 
-	NOT bit_cnt(1) AND NOT bit_cnt(0) AND inputs(0))
-	OR (byte_cnt(1) AND NOT byte_cnt(0) AND bit_cnt(2) AND 
-	bit_cnt(1) AND bit_cnt(0) AND inputs(23))
-	OR (byte_cnt(1) AND NOT byte_cnt(0) AND bit_cnt(2) AND 
-	NOT bit_cnt(1) AND bit_cnt(0) AND inputs(21))
-	OR (byte_cnt(1) AND NOT byte_cnt(0) AND NOT bit_cnt(2) AND 
-	bit_cnt(1) AND bit_cnt(0) AND inputs(19))
-	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND bit_cnt(2) AND 
-	bit_cnt(1) AND bit_cnt(0) AND inputs(7))
-	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND NOT bit_cnt(2) AND 
-	bit_cnt(1) AND bit_cnt(0) AND inputs(3)));
-miso <= miso_I when sel = '1' else 'Z';
+miso_I <= ((EXP8_.EXP)
+	OR (byte_cnt(1) AND NOT byte_cnt(0) AND 
+	Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	bit_cnt(0) AND inputs(23))
+	OR (byte_cnt(1) AND NOT byte_cnt(0) AND 
+	Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	NOT bit_cnt(0) AND inputs(20))
+	OR (byte_cnt(1) AND NOT byte_cnt(0) AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	bit_cnt(0) AND inputs(19))
+	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND 
+	Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	bit_cnt(0) AND inputs(7))
+	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	bit_cnt(0) AND inputs(3))
+	OR (EXP6_.EXP)
+	OR (byte_cnt(1) AND NOT byte_cnt(0) AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	NOT bit_cnt(0) AND inputs(18))
+	OR (byte_cnt(1) AND NOT byte_cnt(0) AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	NOT bit_cnt(0) AND inputs(16))
+	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND 
+	Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	NOT bit_cnt(0) AND inputs(4))
+	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	NOT bit_cnt(0) AND inputs(2))
+	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	NOT bit_cnt(0) AND inputs(0))
+	OR (byte_cnt(1) AND NOT byte_cnt(0) AND 
+	Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	bit_cnt(0) AND inputs(21))
+	OR (byte_cnt(1) AND NOT byte_cnt(0) AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	bit_cnt(0) AND inputs(17))
+	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND 
+	Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	bit_cnt(0) AND inputs(5))
+	OR (NOT byte_cnt(1) AND NOT byte_cnt(0) AND 
+	NOT Madd_miso_addsub0000_Mxor_Result(2)__xor0000 AND NOT Madd_miso_addsub0000_Mxor_Result(1)__xor0000 AND 
+	bit_cnt(0) AND inputs(1)));
+miso <= miso_I when miso_OE = '1' else 'Z';
+miso_OE <= NOT sel;
 
 Register Legend:
  FDCPE (Q,D,C,CLR,PRE,CE); 
@@ -330,28 +353,28 @@ Device : XC9572XL-5-PC44
 
 Pin Signal                         Pin Signal                        
 No. Name                           No. Name                          
-  1 inputs<3>                        23 GND                           
-  2 inputs<15>                       24 inputs<17>                    
-  3 inputs<16>                       25 inputs<14>                    
-  4 KPR                              26 inputs<8>                     
-  5 sclk                             27 inputs<11>                    
-  6 KPR                              28 inputs<23>                    
-  7 inputs<20>                       29 inputs<2>                     
-  8 inputs<21>                       30 TDO                           
-  9 inputs<4>                        31 GND                           
+  1 inputs<0>                        23 GND                           
+  2 inputs<1>                        24 inputs<19>                    
+  3 inputs<2>                        25 inputs<21>                    
+  4 inputs<3>                        26 inputs<22>                    
+  5 KPR                              27 KPR                           
+  6 inputs<23>                       28 sclk                          
+  7 inputs<24>                       29 KPR                           
+  8 inputs<4>                        30 TDO                           
+  9 inputs<5>                        31 GND                           
  10 GND                              32 VCC                           
- 11 KPR                              33 inputs<18>                    
- 12 miso                             34 inputs<0>                     
- 13 inputs<6>                        35 inputs<7>                     
- 14 inputs<5>                        36 inputs<24>                    
- 15 TDI                              37 inputs<10>                    
- 16 TMS                              38 inputs<13>                    
+ 11 inputs<12>                       33 sel                           
+ 12 inputs<13>                       34 miso                          
+ 13 inputs<14>                       35 inputs<6>                     
+ 14 inputs<15>                       36 inputs<7>                     
+ 15 TDI                              37 inputs<8>                     
+ 16 TMS                              38 inputs<9>                     
  17 TCK                              39 KPR                           
- 18 inputs<22>                       40 sel                           
- 19 inputs<1>                        41 VCC                           
- 20 inputs<19>                       42 KPR                           
- 21 VCC                              43 inputs<12>                    
- 22 KPR                              44 inputs<9>                     
+ 18 inputs<16>                       40 KPR                           
+ 19 inputs<17>                       41 VCC                           
+ 20 inputs<18>                       42 KPR                           
+ 21 VCC                              43 inputs<10>                    
+ 22 inputs<20>                       44 inputs<11>                    
 
 
 Legend :  NC  = Not Connected, unbonded pin

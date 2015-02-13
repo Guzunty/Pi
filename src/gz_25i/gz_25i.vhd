@@ -22,63 +22,40 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity gz_25i is
     Port ( inputs : in  STD_LOGIC_VECTOR (24 downto 0);
-           mosi : in  STD_LOGIC;
            sclk : in  STD_LOGIC;
            sel : in  STD_LOGIC;
            miso : out  STD_LOGIC);
 end gz_25i;
 
 architecture RTL of gz_25i is
-signal bit_cnt: natural range 0 to 7 := 7;
-signal byte_cnt: natural range 0 to 3 := 0;
+signal bit_cnt: natural range 7 downto 0 := 7;
+signal byte_cnt: natural range 3 downto 0 := 0;
 begin
-  process (sclk, sel) is
-    variable next_bit: natural range 0 to 7;
+  process (sclk, sel, byte_cnt, bit_cnt, inputs) is
   begin
-	 if (sel = '0') then
-		if (falling_edge(sclk)) then
+	 if sel = '0' then
+		if byte_cnt < 3 then
+        miso <= inputs((byte_cnt * 8) + bit_cnt);
+      else -- byte_cnt is 3
+        if byte_cnt = 3 and bit_cnt = 0 then
+          miso <= inputs(24);
+        else
+          miso <= '0';
+        end if;
+      end if;
+		if falling_edge(sclk) then
 	     if (bit_cnt = 0) then
-		    next_bit := 7;
-			 if (byte_cnt = 3) then
-			   byte_cnt <= 0;
-			 else
-			   byte_cnt <= byte_cnt + 1;
-			 end if;
-		  else
-          next_bit := bit_cnt - 1;
-		  end if;
-		  bit_cnt <= next_bit;
+		    bit_cnt <= 7;
+			 byte_cnt <= byte_cnt + 1;
+        else
+		    bit_cnt <= bit_cnt - 1;
+        end if;
       end if;
     else
 	   bit_cnt <= 7;
 		byte_cnt <= 0;
+		miso <= 'Z';
     end if;
   end process;
-	
-  process (sel, bit_cnt) is
-  begin
-	 if (sel = '0') then
-	   if (byte_cnt = 0) then
-	     miso <= inputs(bit_cnt);
-		else
-	     if (byte_cnt = 1) then
-	       miso <= inputs(8 + bit_cnt);
-		  else
-	       if (byte_cnt = 2) then
-	         miso <= inputs(16 + bit_cnt);
-			 else
-			   if (byte_cnt = 3) then
-				  if (bit_cnt = 0) then
-	             miso <= inputs(24);
-				  else
-				    miso <= '0';
-				  end if;
-				end if;
-		    end if;
-		  end if;
-		end if;
-	 else 
-      miso <= 'Z';
-	 end if;
-  end process;
+
 end RTL;

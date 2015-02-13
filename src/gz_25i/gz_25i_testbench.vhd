@@ -42,7 +42,6 @@ ARCHITECTURE behavior OF gz_25i_testbench IS
     COMPONENT gz_25i
     PORT(
          inputs : IN  std_logic_vector(24 downto 0);
-         mosi : IN  std_logic;
          sclk : IN  std_logic;
          sel : IN  std_logic;
          miso : OUT  std_logic
@@ -67,7 +66,6 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: gz_25i PORT MAP (
           inputs => inputs,
-          mosi => mosi,
           sclk => sclk,
           sel => sel,
           miso => miso

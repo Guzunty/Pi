@@ -26,11 +26,11 @@ INCLUDE	= -I/usr/local/include -I../include
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe -fPIC -DDEBUG_MODE
 
 LDFLAGS	= -L/usr/local/lib
-LIBS    = -lbcm2835 -lrt
+LIBS    = -lrt
 
-SRC	=	gz_clk.c gz_spi.c
+SRC	=	gz_clk.c gz_spi.c gz_gpio.c
 
-OBJ	=	gz_clk.o gz_spi.o
+OBJ	=	gz_clk.o gz_spi.o gz_gpio.o
 
 BIN	=	libgz.a
 
@@ -59,6 +59,7 @@ install:
 	@install -m 0755 -d /usr/local/include
 	@install -m 0644 ../include/gz_clk.h /usr/local/include
 	@install -m 0644 ../include/gz_spi.h /usr/local/include
+	@install -m 0644 ../include/gz_gpio.h /usr/local/include
 	@install -m 0644 libgz.a /usr/local/lib
 	@ldconfig
 
@@ -66,5 +67,6 @@ uninstall:
 	@echo [uninstall]
 	@rm -f /usr/local/include/gz_clk.h
 	@rm -f /usr/local/include/gz_spi.h
+	@rm -f /usr/local/include/gz_gpio.h
 	@rm -f /usr/local/lib/libgz.a
 	@ldconfig
