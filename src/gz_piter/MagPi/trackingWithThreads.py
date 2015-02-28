@@ -1,8 +1,8 @@
 import cv2
 import sys, getopt
-import os
 import numpy as np
 import time
+import symbolFinder
 
 accumulator = [0.0 for j in range(20)]
 count = 0.0
@@ -39,77 +39,21 @@ index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
 search_params = dict(checks = 50)
 matcher = cv2.FlannBasedMatcher(index_params, search_params)
 
-#os.system("v4l2-ctl --set-fmt-video=width=320,height=240,pixelformat=10")
-#os.system("v4l2-ctl -p 3")
+symFinder = symbolFinder.SymbolFinder()
+symFinder.start()
+symFinder.enable()
 
-cap = cv2.VideoCapture(-1)
-
-if(not cap.isOpened()):
-  print("Cannot open camera")
+if(not symFinder.active):
+  print("Cannot start Symbol Finder")
 else:
-  cap.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 320)
-  cap.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 240)
-  #cap.set(cv2.cv.CV_CAP_PROP_FPS, 3)
-  
-  spotFilter = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-  maskMorph = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (10, 10))  
-
-  lowH = 20
-  highH = 89
-
-  lowS = 120
-  highS = 255
-
-  lowV = 40
-  highV = 160
-
   now=time.time()
   start = now
   while(1):
-    frameCount = 0
-    acqTime = 0
-    while acqTime < 0.01:
+    if symFinder.dataReady == True:
       now = time.time()
-      success, frame = cap.read()
-      acqTime = time.time() - now
-    if (not success):
-      print("Cannot read a frame from the camera")
-    else:
-      now = time.time()
-      cycleStart = now
-      imgHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-      cvtTime = time.time() - now  
-      now=time.time()
-      mask = cv2.inRange(imgHSV, np.array([lowH, lowS, lowV]), np.array([highH, highS, highV]))
-      inRangeTime = time.time() - now
-      
-      # Remove spots in image        
-      now=time.time()
-      mask = cv2.erode(mask, spotFilter)
-      # Create mask
-      mask = cv2.dilate(mask, maskMorph)
-      maskTime = time.time() - now
-      
-      # Find the contours in the mask
-      now=time.time()
-      contours, hierarchy = cv2.findContours(mask, 1, 2)
-      contourTime = time.time() - now
-      
-      now=time.time()
-      # Find the contour with the greatest area
-      area = 0.0
-      contour = None
-      for candidateContour in contours:
-        candidateArea = cv2.contourArea(candidateContour)
-        if candidateArea > area:
-          area = candidateArea
-          contour = candidateContour
-
-      # Get the bounding rectangle for the contour
-      x = y = w = h = 0
-      if len(contours) > 0:
-        x, y, w, h = cv2.boundingRect(contour)
-
+      cycleTime = now
+      patch, frame, symTimes = symFinder.getPatch()
+      x, y, w, h = patch
       # Double size of rectangle
       x = x-(w/2)
       y = y-(h/2)
@@ -120,7 +64,6 @@ else:
         x = 0
       if y < 0:
         y = 0
-      rectTime = time.time() - now
       # Crop the frame to the rectangle found from the mask
       now = time.time()
       cpy = frame[y:y+h, x:x+w]
@@ -168,7 +111,7 @@ else:
       cv2.imshow("Camera View", frame)
       dispTime = time.time() - now
       now = time.time()
-      times = (acqTime, cvtTime, inRangeTime, maskTime, contourTime, rectTime, cropTime, histTime, detectTime, matchTime, decorateTime, dispTime, now - cycleStart, now - start)
+      times = symTimes + (cropTime, histTime, detectTime, matchTime, decorateTime, dispTime, now - cycleTime, now - start)
       avgs = avg(times)
       print "AVG -> AQU: %f, CVT: %f, IRG: %f, MSK: %f, CTR: %f, RCT: %f, CRP: %f, HST: %f, DCT: %f, MCH %f, DEC: %f, DSP: %f, TTL: %f, SPF: %f" % avgs
       maxs = maximum(times)
@@ -178,6 +121,6 @@ else:
       start = now
     if(cv2.waitKey(1) == 27):
       break
-  cap.release()
+  symFinder.stop()
 cv2.destroyAllWindows()
 
