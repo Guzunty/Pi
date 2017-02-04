@@ -14,6 +14,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
+#include<string.h>
 
 #ifdef DEBUG_MODE
 #include "stdio.h"
@@ -331,26 +332,25 @@ void waitTime(long microsec)
 void setup_io()
 {
 	int proc_fd;
-	char proc_model[32];
+	char cpu_info[4096];
    if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
       printf("\rError initializing IO. Consider using sudo.\n");
       exit(-1);
    }
 
-   if ((proc_fd = open("/proc/device-tree/model", O_RDONLY|O_SYNC) ) >= 0) {
-	  // if we can read the device tree, we may be dealing with a more
-	  // recent Raspberry Pi model which has a different peripheral
-	  // memory address.
-	  int i = 0;
-	  int len = 0;
-      len = read(proc_fd, proc_model, sizeof proc_model);
-      for (i = 0; i < len; i++) {
-		if (proc_model[i] == '2') {  // Yes this is a rev 2 Pi ...
-			peri_base = BCM2709_PERI_BASE;
-			break;
-	    }
+   if ((proc_fd = open("/proc/cpuinfo", O_RDONLY|O_SYNC) ) >= 0) {
+      // if we can read the device tree, identify board type
+      // and select corresponding peripheral memory address
+      read(proc_fd, cpu_info, sizeof cpu_info);
+      if (strstr(cpu_info, "BCM2708")) {
+         peri_base = BCM2708_PERI_BASE;
+      } else if (strstr(cpu_info, "BCM2709")) {
+         peri_base = BCM2709_PERI_BASE;
+      } else {
+         printf("\rERROR: Could not identify Pi peripheral model.\n");
+         exit(-1);
       }
-   }
+   } // else use the default BCM2708_PERI_BASE
 
    /* memory map the GPIO */
    gpio_map = mmap(
