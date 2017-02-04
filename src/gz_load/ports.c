@@ -338,18 +338,19 @@ void setup_io()
    }
 
    if ((proc_fd = open("/proc/device-tree/model", O_RDONLY|O_SYNC) ) >= 0) {
-	  // if we can read the device tree, we may be dealing with a more
-	  // recent Raspberry Pi model which has a different peripheral
-	  // memory address.
-	  int i = 0;
-	  int len = 0;
-      len = read(proc_fd, proc_model, sizeof proc_model);
-      for (i = 0; i < len; i++) {
-		if (proc_model[i] == '2') {  // Yes this is a rev 2 Pi ...
-			peri_base = BCM2709_PERI_BASE;
-			break;
-	    }
-      }
+	  // if we can read the device tree, identify board type and select corresponding peripheral
+	  // memory address (only Pi2 and Pi Zero will be recognized)
+      read(proc_fd, proc_model, sizeof proc_model);
+	  if (strstr(proc_model, "Raspberry Pi Zero")) {
+		printf("\rIdentified Pi Zero\n");
+		peri_base = BCM2708_PERI_BASE;
+	  } else if (strstr(proc_model, "Raspberry Pi 2")) {
+		printf("\rIdentified Pi 2\n");
+		peri_base = BCM2709_PERI_BASE;
+	  } else {
+		printf("\rError could not identify Pi model.\n");
+		exit(-1);
+	  }
    }
 
    /* memory map the GPIO */
