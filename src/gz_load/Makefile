@@ -27,7 +27,7 @@ all: $(BIN)
 
 #%.bin: $(OBJS)
 $(BIN): $(OBJ)
-	$(CC) -o $@ -Wl $(OBJ) $(LDFLAGS) $(LIBS)
+	$(CC) -o $@ $(OBJ) $(LDFLAGS) $(LIBS)
 
 clean:
 	rm -f $(OBJ) *~ lenval uart micro ports main
